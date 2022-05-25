@@ -6,13 +6,16 @@
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
-		"prepare": "svelte-kit sync",
 		"test": "playwright test",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"prepare": "svelte-kit sync && npm run smui-theme-light && npm run smui-theme-dark",
+		"smui-theme-light": "smui-theme compile static/smui.css -i src/theme",
+		"smui-theme-dark": "smui-theme compile static/smui-dark.css -i src/theme/dark"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.21.0",
+		"@smui/button": "^6.0.0-beta.16",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"eslint": "^8.12.0",
@@ -20,6 +23,7 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
+		"smui-theme": "^6.0.0-beta.16",
 		"svelte": "^3.44.0"
 	},
 	"type": "module"
