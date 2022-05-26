@@ -28,8 +28,16 @@
 <Button on:click={() => {}} variant="raised">
 	<Label>Raised</Label>
 </Button>
+<div class='orange ma-4'>
+  totototot
+</div>
+<div class='orange ma-4'>
+   {@html markup}
+</div>
 
-{@html markup}
+<h1 class="text-3xl font-bold underline">
+  Hello world!
+</h1>
 
 {#if ready}
 	<math-field virtual-keyboard-mode="manual" />
