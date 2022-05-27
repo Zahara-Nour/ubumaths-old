@@ -15,7 +15,7 @@
 		Subtitle,
 		Scrim,
 	} from '@smui/drawer'
-	import { darkmode } from '../lib/stores'
+	import { darkmode, touchDevice } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 
@@ -36,7 +36,19 @@
 		showDrawer = false
 	}
 
-	onMount(() => setMiniWindow())
+	onMount(() => {
+		setMiniWindow()
+		// detects a touche screen device at the first touch
+		//  https://codeburst.io/the-only-way-to-detect-touch-with-javascript-7791a3346685
+		window.addEventListener(
+			'touchstart',
+			function onFirstTouch() {
+				touchDevice.set(true)
+				window.removeEventListener('touchstart', onFirstTouch, false)
+			},
+			false,
+		)
+	})
 </script>
 
 <svelte:window on:resize="{setMiniWindow}" />
