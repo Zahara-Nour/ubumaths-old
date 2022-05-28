@@ -1,5 +1,4 @@
 export default  [
-    {text:'Home', url:'/'},
-    {text:'AutoMaths', url:'/automaths'},
-    {text:'Blog', url:'/blog'}
+    {text:'AutoMaths', url:'/automaths', tooltip:'Travailler les automatismes'},
+    {text:'Blog', url:'/blog', tooltip:''}
 ]

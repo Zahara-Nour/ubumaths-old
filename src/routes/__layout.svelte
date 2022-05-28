@@ -2,10 +2,11 @@
 </script>
 
 <script>
-	import '../app.css'
+	import '../app.scss'
 	import links from './navlinks.js'
 	import TopAppBar, { Row, Section, Title as TitleBar } from '@smui/top-app-bar'
 	import IconButton from '@smui/icon-button'
+	import { Icon } from '@smui/common'
 	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list'
 	import Drawer, {
 		AppContent,
@@ -15,9 +16,13 @@
 		Subtitle,
 		Scrim,
 	} from '@smui/drawer'
-	import { darkmode, touchDevice } from '$lib/stores'
+	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
+	import Tooltip, { Wrapper } from '@smui/tooltip'
+	import { A, Svg } from '@smui/common/elements'
+	import { darkmode, touchDevice, toMarkup, fontSize } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
+	import { get } from 'svelte/store'
 
 	let active = links[0].text
 
@@ -48,15 +53,40 @@
 			},
 			false,
 		)
+
+		import('https://unpkg.com/mathlive/dist/mathlive.min.mjs')
+			.then((m) => {
+				toMarkup.set(m.convertLatexToMarkup)
+			})
+			.catch((e) => {
+				console.log('erreur', e)
+			})
 	})
+
+	function increase() {
+		const newSize = get(fontSize) + 1
+		fontSize.set(newSize)
+		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
+	}
+
+	function decrease() {
+		const newSize = get(fontSize) - 1
+		fontSize.set(newSize)
+		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
+	}
 </script>
 
 <svelte:window on:resize="{setMiniWindow}" />
 <svelte:head>
 	{#if $darkmode}
+		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui-dark.css" />
+		<link rel="stylesheet" href="/site-dark.css" />
 	{:else}
+		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui.css" />
+		<!-- Site Styles -->
+		<link rel="stylesheet" href="/site.css" />
 	{/if}
 </svelte:head>
 
@@ -93,22 +123,39 @@
 	>
 		<Row>
 			<Section>
-				<Title>Ubumaths</Title>
+				<TitleBar component="{A}" href="/" on:click="{() => {}}">
+					{miniWindow
+						? 'UbuMaths'
+						: 'UbuMaths - Les maths de la chandelle verte'}
+				</TitleBar>
 			</Section>
 			<Section>
 				{#if !miniWindow}
-					{#each links as link}
-						<a href="{link.url}">{link.text}</a>
-					{/each}
+					<div>
+						{#each links as link}
+							<a class="mx-2" href="{link.url}">{link.text}</a>
+						{/each}
+					</div>
 				{/if}
 			</Section>
 			<Section align="end" toolbar>
-				<IconButton class="material-icons" aria-label="Download"
-					>file_download</IconButton
-				>
-				<IconButton class="material-icons" aria-label="Print this page"
-					>print</IconButton
-				>
+				<Wrapper>
+					<IconButton on:click="{decrease}">
+						<Icon component="{Svg}" viewBox="0 0 24 24">
+							<path fill="currentColor" d="{mdiFormatFontSizeDecrease}"></path>
+						</Icon>
+					</IconButton>
+					<Tooltip>Diminuer la taille de la police</Tooltip>
+				</Wrapper>
+				<Wrapper>
+					<IconButton on:click="{increase}">
+						<Icon component="{Svg}" viewBox="0 0 24 24">
+							<path fill="currentColor" d="{mdiFormatFontSizeIncrease}"></path>
+						</Icon>
+					</IconButton>
+					<Tooltip>Diminuer la taille de la police</Tooltip>
+				</Wrapper>
+
 				{#if $darkmode}
 					<IconButton
 						class="material-icons"
@@ -124,13 +171,15 @@
 				{/if}
 				{#if miniWindow}
 					<IconButton on:click="{toggleDrawer}" class="material-icons"
-						>menu</IconButton
-					>
+						>menu
+					</IconButton>
 				{/if}
 			</Section>
 		</Row>
 	</TopAppBar>
-	<slot />
+	<div>
+		<slot />
+	</div>
 </AppContent>
 
 <style>
