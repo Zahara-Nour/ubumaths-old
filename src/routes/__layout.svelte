@@ -54,7 +54,7 @@
 			false,
 		)
 
-		import('mathlive/dist/mathlive.min.mjs')
+		import('tinymathlive/dist/mathlive.min.mjs')
 			.then((m) => {
 				toMarkup.set(m.convertLatexToMarkup)
 				const regex = /\$\$(.*?)\$\$/g
