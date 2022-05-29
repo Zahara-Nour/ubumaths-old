@@ -30,6 +30,7 @@ export default function generateQuestion(question, generateds = [], nbquestions 
 
 
   // les questions de la série déjà générées
+
   const generatedExpressions = generateds ? generateds.map((g) => g.expression) : []
   const generatedEnounces = generateds ? generateds.map((g) => g.enounce) : []
   const generatedEnounces2 = generateds ? generateds.map((g) => g.enounce2) : []

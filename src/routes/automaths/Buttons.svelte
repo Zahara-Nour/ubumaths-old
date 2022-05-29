@@ -39,7 +39,7 @@
 	<div class="grow"></div>
 
 	<Wrapper>
-		<Fab class="mx-1" color="primary" on:click="{copyLink}" mini>
+		<Fab class="mx-1" color="secondary" on:click="{copyLink}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiLink}"></path>
 			</Icon>
@@ -48,7 +48,7 @@
 	</Wrapper>
 
   <Wrapper >
-		<Fab class="mx-1" color="{classroom ? 'secondary' : 'primary'}" on:click="{toggleClassroom}" mini>
+		<Fab class="mx-1" color="{classroom ? 'primary' : 'secondary'}" on:click="{toggleClassroom}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiProjectorScreen}"></path>
 			</Icon>
@@ -57,7 +57,7 @@
 	</Wrapper>
 
   <Wrapper >
-		<Fab class="mx-1" color="{displayExemple ? 'secondary' : 'primary'}" on:click="{toggleExemple}" mini>
+		<Fab class="mx-1" color="{displayExemple ? 'primary' : 'secondary'}" on:click="{toggleExemple}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiHelp}"></path>
 			</Icon>
@@ -66,7 +66,7 @@
 	</Wrapper>
 
   <Wrapper>
-		<Fab class="mx-1" color="primary" on:click="{fillBasket}" mini>
+		<Fab class="mx-1" color="secondary" on:click="{fillBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiBasketPlus}"></path>
 			</Icon>
@@ -75,7 +75,7 @@
 	</Wrapper>
 
   <Wrapper>
-		<Fab class="mx-1" color="primary" on:click="{flushBasket}" mini>
+		<Fab class="mx-1" color="secondary" on:click="{flushBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiTrashCanOutline}"></path>
 			</Icon>
@@ -84,7 +84,7 @@
 	</Wrapper>
 
   <Wrapper>
-		<Fab class="mx-1" color="{showBasket ? 'secondary' : 'primary'}" on:click="{toggleBasket}" mini>
+		<Fab class="mx-1" color="{showBasket ? 'primary' : 'secondary'}" on:click="{toggleBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiBasket}"></path>
 			</Icon>
@@ -98,7 +98,7 @@
 	</Wrapper>
 
   <Wrapper>
-		<Fab class="mx-1" color="primary" on:click="{launchTest}" mini>
+		<Fab class="mx-1" color="secondary" on:click="{launchTest}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiRocketLaunchOutline}"></path>
 			</Icon>

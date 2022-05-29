@@ -2,7 +2,6 @@
   import {toMarkup} from '$lib/stores'
 
   export let question
-  export let size = 16
 
   let enounce
   let enounce2
@@ -10,7 +9,7 @@
   const replacement = (_, p1) => $toMarkup(p1)
   const formatLatex = (s) => s.replace(regex, replacement)
 
-
+console.log('question', question)
   $: showExp =
     question.expression_latex &&
     !(question.options && question.options.includes('no-exp'))
@@ -28,7 +27,7 @@
     : null
 
   $: expression2 = question.expression2_latex
-    ? $toMarkup(question.expression2_latex)
+    ? toMarkup(question.expression2_latex)
     : null
 
 
@@ -41,7 +40,6 @@
         <div
           id="enounce"
           class="mt-3 mb-3 text-center max-w-4xl leading-normal"
-          style="font-size:{size}px"
         >
           {@html enounce}
         </div>
@@ -51,12 +49,10 @@
         <div
           id="enounce2"
           class="mt-3 mb-3  text-center max-w-4xl"
-          style="font-size:{size}px"
         >
           {@html enounce2}
         </div>
        
-        <!-- {#if question.expression2 || !(question.options && question.options.includes('no-exp'))} -->
     {:else if element === 'enounce-image' && question.image }
      
         {#await question.imageBase64P}
@@ -79,11 +75,11 @@
           class="my-3 flex flex-col items-center justify-items-center"
         >
    
-          <div id="expression" class="my-3" style="font-size:{size + 8}px;">
+          <div id="expression" class="my-3">
             {@html expression}
           </div>
           {#if expression2}
-            <div id="expression2" class="mt-4" style="font-size:{size + 8}px;">
+            <div id="expression2" class="mt-4">
               {@html expression2}
             </div>
           {/if}

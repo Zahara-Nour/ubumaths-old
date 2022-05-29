@@ -3,6 +3,6 @@
  
 @include badge.badge-color(
   custom-green,
-  theme.$green-800,
-  theme.accessible-ink-color(theme.$green-800)
+  theme.$lime-500,
+  theme.accessible-ink-color(theme.$lime-500)
 );

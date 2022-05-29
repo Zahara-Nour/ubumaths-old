@@ -19,7 +19,7 @@
 	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
 	import Tooltip, { Wrapper } from '@smui/tooltip'
 	import { A, Svg } from '@smui/common/elements'
-	import { darkmode, touchDevice, toMarkup, fontSize } from '$lib/stores'
+	import { darkmode, touchDevice, toMarkup, fontSize, formatLatex, handleKeydown } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { get } from 'svelte/store'
@@ -54,9 +54,12 @@
 			false,
 		)
 
-		import('https://unpkg.com/mathlive/dist/mathlive.min.mjs')
+		import('mathlive/dist/mathlive.min.mjs')
 			.then((m) => {
 				toMarkup.set(m.convertLatexToMarkup)
+				const regex = /\$\$(.*?)\$\$/g
+				const replacement = (_, p1) => m.convertLatexToMarkup(p1)
+				formatLatex.set((s) => s && typeof s === 'string' ? s.replace(regex, replacement) :'')
 			})
 			.catch((e) => {
 				console.log('erreur', e)
@@ -75,12 +78,12 @@
 		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
 	}
 </script>
-
-<svelte:window on:resize="{setMiniWindow}" />
+<svelte:window on:resize="{setMiniWindow}" on:keydown={$handleKeydown} />
 <svelte:head>
 	{#if $darkmode}
 		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui-dark.css" />
+		<!-- Site Styles -->
 		<link rel="stylesheet" href="/site-dark.css" />
 	{:else}
 		<!-- SMUI Styles -->

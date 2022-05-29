@@ -18402,7 +18402,6 @@ const themes = Object.getOwnPropertyNames(questions)
 themes.forEach((theme, t_id) => {
   questionsWithID[theme] = {}
 
-
   let domains = Object.getOwnPropertyNames(questions[theme])
   domains.forEach((domain, d_id) => {
     questionsWithID[theme][domain] = {}
@@ -18422,11 +18421,14 @@ themes.forEach((theme, t_id) => {
 })
 
 
-// let data = JSON.stringify(questionsWithID, null, 2);
-// fs.writeFileSync('questionsWithID.json', data);
-
-// console.log('questionsWithID', questionsWithID)
-// console.log('ids', ids)
-
+export function getQuestion(theme, domain, subdomain, level) {
+  // on retourne une copie car on doit modifier les questions à la volée
+  return {
+    ...questionsWithID[theme][domain][subdomain].find(
+      (q) =>
+        questionsWithID[theme][domain][subdomain].indexOf(q) + 1 === parseInt(level, 10),
+    ),
+  }
+}
 
 export default { questions: questionsWithID, ids }

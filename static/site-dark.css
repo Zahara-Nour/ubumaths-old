@@ -6,10 +6,11 @@ body {
 
 a {
   text-decoration: none;
+  color: #fff;
 }
 
 :root {
-  --mdc-theme-primary: #9c27b0;
+  --mdc-theme-primary: #ffc107;
   --mdc-theme-secondary: #5d5d78;
   --mdc-theme-background: #000;
   --mdc-theme-surface: #212125;
@@ -36,9 +37,9 @@ a {
 }
 
 .mdc-theme--primary {
-  color: #9c27b0  !important;
+  color: #ffc107  !important;
   /* @alternate */
-  color: var(--mdc-theme-primary, #9c27b0) !important;
+  color: var(--mdc-theme-primary, #ffc107) !important;
 }
 
 .mdc-theme--secondary {
@@ -180,9 +181,9 @@ a {
 }
 
 .mdc-theme--primary-bg {
-  background-color: #9c27b0  !important;
+  background-color: #ffc107  !important;
   /* @alternate */
-  background-color: var(--mdc-theme-primary, #9c27b0) !important;
+  background-color: var(--mdc-theme-primary, #ffc107) !important;
 }
 
 .mdc-theme--secondary-bg {
@@ -404,9 +405,9 @@ a {
 }
 
 .smui-badge.smui-badge--color-primary {
-  background-color: #9c27b0;
+  background-color: #ffc107;
   /* @alternate */
-  background-color: var(--mdc-theme-primary, #9c27b0);
+  background-color: var(--mdc-theme-primary, #ffc107);
   color: #fff;
   /* @alternate */
   color: var(--mdc-theme-on-primary, #fff);
@@ -422,6 +423,6 @@ a {
 }
 
 .smui-badge.smui-badge--color-custom-green {
-  background-color: #2e7d32;
-  color: white;
+  background-color: #cddc39;
+  color: rgba(0, 0, 0, 0.87);
 }

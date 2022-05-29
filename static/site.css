@@ -423,6 +423,6 @@ a {
 }
 
 .smui-badge.smui-badge--color-custom-green {
-  background-color: #2e7d32;
-  color: white;
+  background-color: #cddc39;
+  color: rgba(0, 0, 0, 0.87);
 }

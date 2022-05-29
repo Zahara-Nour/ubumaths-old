@@ -1,29 +1,30 @@
 <script>
-	import Button, { Label } from '@smui/button'
 	import { toMarkup } from '$lib/stores'
+	import QuestionCard from '$lib/components/QuestionCard.svelte'
+	import data, { getQuestion } from './automaths/questions'
+  import generate from './automaths/generateQuestion'
+  import {page} from '$app/stores'
 	let markup = ''
 	let ready
 
+	const qs = data.questions
+	const ids = data.ids
+	const { theme, domain, subdomain, level } = ids['0031']
+	const q = getQuestion(theme, domain, subdomain, level)
+	console.log('q', q)
 	$: markup = $toMarkup('\\frac{3}{4}')
+
+  console.log('page', $page.url)
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
-
-<Button on:click="{() => {}}" variant="raised">
-	<Label>Raised</Label>
-</Button>
-<div class="m-3 bg-midnight text-red-600">totototot</div>
 <div class="orange ma-4">
 	{@html markup}
 </div>
 
-<h1 class="m-15 p-15 text-purple-600 text-3xl font-bold underline">
-	Hello world!
-</h1>
 
-{#if ready}
+
+
 	<math-field virtual-keyboard-mode="manual"></math-field>
-{/if}
+
+
+<QuestionCard card={generate(q)} flashcard description/>
