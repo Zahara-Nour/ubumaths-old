@@ -7,6 +7,6 @@ node_modules
 .env.*
 !.env.example
 
-/src/lib/private/
+# /src/lib/private/
 .vercel
 .vercel_build_output
