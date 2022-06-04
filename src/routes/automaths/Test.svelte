@@ -11,7 +11,7 @@
 	import virtualKeyboard from './virtualKeyboard'
 	import { getLogger, shuffle } from '$lib/utils'
 	import { page } from '$app/stores'
-	import { handleKeydown } from '$lib/stores'
+	import { handleKeydown, mathliveReady } from '$lib/stores'
 
 	import math from 'tinycas'
 	import Exemple from './Exemple.svelte'
@@ -19,6 +19,7 @@
 	import { fetchImage } from '$lib/images'
 	import { flip } from 'svelte/animate'
 	import { fly } from 'svelte/transition'
+	import Correction from './Correction.svelte'
 
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
@@ -87,18 +88,17 @@
 
 	function initMathField() {
 		console.log('init mathfield', mf)
-		// mf.setOptions({
-		// 	// virtualKeyboardMode: 'onfocus',
-		// 	decimalSeparator: ',',
-		// 	virtualKeyboardMode: 'auto',
-		// 	...virtualKeyboard,
-		// 	// onKeystroke,
-		// 	inlineShortcuts: {
-		// 		xx: {},
-		// 	},
-		// })
-		// mf.addEventListener('keystroke', onKeystroke)
-		// if (!mf.hasFocus) mf.focus()
+		mf.setOptions({
+			// virtualKeyboardMode: 'onfocus',
+			decimalSeparator: ',',
+			virtualKeyboardMode: 'manual',
+			...virtualKeyboard,
+			// onKeystroke,
+			inlineShortcuts: {
+				xx: {},
+			},
+		})
+		if (!mf.hasFocus) mf.focus()
 	}
 
 	function initTest() {
@@ -209,19 +209,21 @@
 	}
 
 	function onKeystroke(ev) {
-		const allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
+		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
+		const key_allowed2 = [
+			'Backspace',
+			'ArrowLeft',
+			'ArrowRight',
+			'ArrowDown',
+			'ArrowUp',
+		]
+		const keystroke_allowed = ['[Enter]', '[NumpadEnter]']
+
 		const keystroke = ev.detail.keystroke
 		const key = ev.detail.event.key
 		trace('keystroke', keystroke)
 		trace('key', key)
-		// if (keystroke === '[Enter]' || keystroke === '[NumpadEnter]') {
-		//   trace('answer :' + answer + '!')
-		//   if (answer !== '') {
-		//     trace('going to commit')
-		//     commit()
-		//   }
-		//   return false
-		// } else
+	
 		if (
 			keystroke === '[Space]' &&
 			!(
@@ -230,37 +232,30 @@
 				answer_latex.slice(answer_latex.length - 2) === '\\,'
 			)
 		) {
+			ev.preventDefault()
 			mf.insert('\\,')
-			return false
 		} else if (key === '%') {
+			ev.preventDefault()
 			mf.insert('\\%')
-			return false
 		} else if (key === 'r') {
+			ev.preventDefault()
 			mf.insert('\\sqrt')
-			return false
 		} else if (key === '*') {
-			ev.stopPropagation()
+			ev.preventDefault()
 			mf.insert('\\times ')
-			return false
 		} else if (key === ':') {
+			ev.preventDefault()
 			mf.insert('\\div ')
-			return false
 		} else if (key === '<') {
+			ev.preventDefault()
 			mf.insert('<')
-			return false
 		} else if (
-			key === 'Backspace' ||
-			key === 'ArrowLeft' ||
-			key === 'ArrowRight' ||
-			key === 'ArrowDown' ||
-			key === 'ArrowUp'
+			!key_allowed.includes(key) &&
+			!key_allowed2.includes(key) &&
+			!keystroke_allowed.includes(keystroke)
 		) {
-			return true
-		} else if (!allowed.includes(key)) {
-			return false
+			ev.preventDefault()
 		}
-
-		return true
 	}
 
 	function onChangeMathField(e) {
@@ -284,7 +279,7 @@
 		}
 		if (cards.length > 1) {
 			if (mf) {
-				mf.setValue('toto')
+				mf.setValue('')
 				// if (!mf.hasFocus()) mf.focus()
 			}
 			answer = ''
@@ -343,10 +338,11 @@
 		<Fab
 			class="m-2"
 			color="primary"
-			on:click="{() =>
-				(generatedExemple = generate(
+			on:click="{() => {
+				generatedExemple = generate(
 					getQuestion(theme, domain, subdomain, level),
-				))}"
+				)
+			}}"
 			mini
 		>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
@@ -361,7 +357,20 @@
 	</div>
 {:else if finish}
 	{#if showCorrection}
-		Correction
+		<Correction
+			questions="{generateds}"
+			answers="{answers}"
+			answers_latex="{answers_latex}"
+			answers_choice="{answers_choice}"
+			times="{times}"
+			query="{location.search}"
+			classroom="{classroom}"
+			bind:restart
+			theme="{theme}"
+			domain="{domain}"
+			subdomain="{subdomain}"
+			level="{level}"
+		/>
 	{:else}
 		<div style="height:90vh" class="flex justify-center items-center">
 			<Button
@@ -451,30 +460,33 @@
 				</div>
 			{/if}
 
-			<div class="d-flex align-center justify-center" style="width:100%">
+			<div class="flex items-center justify-center w-full">
 				{#if !card.choices && !classroom}
-					<div class="d-flex align-center justify-center " style="width:80%">
+					<div class="flex items-center justify-center " style="width:80%">
 						<span class="mr-4">Ta réponse:</span>
 						<div class="flex-grow-1" style="width:70%">
-							<math-field
-								virtual-keyboard-mode="manual"
-								on:keystroke="{onKeystroke}"
-								keypress-vibration="off"
-								remove-extraneous-parentheses="off"
-								smart-fence="off"
-								smart-superscript="off"
-								style="width:100%;"
-								class="{correct
-									? 'pa-2 light-green lighten-5'
-									: 'pa-2 deep-orange lighten-5'}"
-								virtual-keyboard-theme="apple"
-								on:input="{onChangeMathField}"
-								on:change="{() => {
-									if (answer !== '') commit()
-								}}"
-								bind:this="{mf}"
-							>
-							</math-field>
+							{#if $mathliveReady}
+								<math-field
+									virtual-keyboard-mode="manual"
+									decimal-separator=","
+									on:keystroke="{onKeystroke}"
+									keypress-vibration="off"
+									remove-extraneous-parentheses="off"
+									smart-fence="off"
+									smart-superscript="off"
+									style="width:100%;"
+									class="{correct
+										? 'pa-2 light-green lighten-5'
+										: 'pa-2 deep-orange lighten-5'}"
+									virtual-keyboard-theme="apple"
+									on:input="{onChangeMathField}"
+									on:change="{() => {
+										if (answer !== '') commit()
+									}}"
+									bind:this="{mf}"
+								>
+								</math-field>
+							{/if}
 						</div>
 					</div>
 				{/if}

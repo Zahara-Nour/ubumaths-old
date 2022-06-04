@@ -19,7 +19,7 @@
 	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
 	import Tooltip, { Wrapper } from '@smui/tooltip'
 	import { A, Svg } from '@smui/common/elements'
-	import { darkmode, touchDevice, toMarkup, fontSize, formatLatex, handleKeydown } from '$lib/stores'
+	import { darkmode, touchDevice, toMarkup, fontSize, formatLatex, handleKeydown, mathliveReady } from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { get } from 'svelte/store'
@@ -56,6 +56,7 @@
 
 		import('tinymathlive/dist/mathlive.min.mjs')
 			.then((m) => {
+				mathliveReady.set(true)
 				toMarkup.set(m.convertLatexToMarkup)
 				const regex = /\$\$(.*?)\$\$/g
 				const replacement = (_, p1) => m.convertLatexToMarkup(p1)

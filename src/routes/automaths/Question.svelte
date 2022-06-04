@@ -1,13 +1,12 @@
 <script>
   import {toMarkup} from '$lib/stores'
+  import {formatLatex} from '$lib/utils'
 
   export let question
 
   let enounce
   let enounce2
-  const regex = /\$\$(.*?)\$\$/g
-  const replacement = (_, p1) => $toMarkup(p1)
-  const formatLatex = (s) => s.replace(regex, replacement)
+  
 
 console.log('question', question)
   $: showExp =
@@ -27,10 +26,10 @@ console.log('question', question)
     : null
 
   $: expression2 = question.expression2_latex
-    ? toMarkup(question.expression2_latex)
+    ? $toMarkup(question.expression2_latex)
     : null
 
-
+$: console.log('enounce', enounce)
 </script>
 
 <div class="flex flex-col items-center">
@@ -72,7 +71,7 @@ console.log('question', question)
       {#if showExp}
         <div
           id="expressions"
-          class="my-3 flex flex-col items-center justify-items-center"
+          class="my-3 flex flex-col items-center justify-center"
         >
    
           <div id="expression" class="my-3">

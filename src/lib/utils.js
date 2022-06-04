@@ -1,4 +1,4 @@
-
+import {toMarkup} from '$lib/stores'
 
 const loggers = {}
 function getLogger(name, level = 'info') {
@@ -105,4 +105,14 @@ export function isTouchScreendevice() {
   return 'ontouchstart' in window || navigator.maxTouchPoints(navigator.msMaxTouchPoints > 0) || window.matchMedia("(pointer: coarse)").matches
 };
 
-export { getLogger, shuffle, isEmpty, getPropertyName, lexicoSort, cleanString }
+
+const regex = /\$\$(.*?)\$\$/g
+
+let formatLatex
+toMarkup.subscribe(f => {
+  const replacement = (_, p1) => f(p1)
+  formatLatex = (s) => s.replace(regex, replacement)
+})
+
+
+export { formatLatex, getLogger, shuffle, isEmpty, getPropertyName, lexicoSort, cleanString }

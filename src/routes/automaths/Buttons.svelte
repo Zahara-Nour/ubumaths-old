@@ -35,7 +35,7 @@
 	// $: isStudent = isLoggedIn && $user.roles.includes('student')
 </script>
 
-<div class="my-3 flex" style="{'position:sticky;top:10px;z-index:10'}">
+<div class="py-3 flex" style="{'position:sticky;top:0px;z-index:10; background:var(--mdc-theme-background)'}">
 	<div class="grow"></div>
 
 	<Wrapper>

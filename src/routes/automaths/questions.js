@@ -3190,7 +3190,7 @@ const questions = {
         {
           description: "Trouver le quadruple",
           subdescription: 'Nombre inférieur à 10',
-          enounces: ['Quel est le triple de $$&1$$ ?', 'Quel est le résultat de $$4*&1$$ ?'],
+          enounces: ['Quel est le quadruple de $$[°&1°]$$ ?', 'Quel est le résultat de $$[°4*&1°]$$ ?'],
           expressions: ['4*&1'],
           options: ['no-exp'],
           variables: [{ '&1': '$e[0;9]' }],
@@ -3207,7 +3207,7 @@ const questions = {
         {
           description: "Trouver le quadruple",
           subdescription: "Dizaines entières (jusqu'à 50)",
-          enounces: ['Quel est le quadruple de $$&2$$ ?', 'Quel est le résultat de $$4*&2$$ ?'],
+          enounces: ['Quel est le quadruple de $$[°&2°]$$ ?', 'Quel est le résultat de $$[°4*&2°]$$ ?'],
           expressions: ['4*&2'],
           options: ['no-exp'],
           variables: [{
@@ -3246,7 +3246,7 @@ const questions = {
         {
           description: "Trouver le quadruple",
           subdescription: "Nombres de 1 à 15, 25, 30, 40, 50 et 100",
-          enounces: ['Quel est le quadruple de $$&1$$ ?', 'Quel est le résultat de $$4*&1$$ ?'],
+          enounces: ['Quel est le quadruple de $$[°&1°]$$ ?', 'Quel est le résultat de $$[°4*&1°]$$ ?'],
           expressions: ['4*&1'],
           options: ['no-exp'],
           variables: [{
@@ -3265,7 +3265,7 @@ const questions = {
         {
           description: "Trouver le quadruple",
           subdescription: "Nombres de 1 à 20, 25, 30, 40, 50, 60 et 100",
-          enounces: ['Quel est le quadruple de $$&1$$ ?', 'Quel est le résultat de $$4*&1$$ ?'],
+          enounces: ['Quel est le quadruple de $$&1$$ ?', 'Quel est le résultat de $$[°4*&1°]$$ ?'],
           expressions: ['4*&1'],
           options: ['no-exp'],
           variables: [{

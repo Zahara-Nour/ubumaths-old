@@ -16,6 +16,7 @@
 	import {fetchImage} from '$lib/images'
 	import {page} from '$app/stores'
 	import {goto} from '$app/navigation'
+	
 
 	const questions = data.questions
 
@@ -136,7 +137,7 @@
 			questions = basket
 		} else {
 			const q = getQuestion(theme, domain, subdomain, level)
-			questions.push({id:q.id, count:1})
+			questions.push({id:q.id, count:10})
 		}
 
 		let href = '/automaths/Test/?questions='

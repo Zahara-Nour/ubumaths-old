@@ -4,7 +4,7 @@
 
 	// import { menuFontSize, classroomFontSize } from '../../app/stores'
 	let menuFontSize = 12
-  let classroomFontSize = 32 
+	let classroomFontSize = 32
 
 	import Question from './Question.svelte'
 
@@ -36,7 +36,7 @@
 
 <Paper elevation="12" class="mt-2" style="{classroom ? 'height:60vh;' : ''}">
 	{#if !classroom}
-		<div class="flex items-center justify-items-start">
+		<div class="flex items-center justify-start">
 			<Title>{question.id} {@html description}</Title>
 			<span class="p-1 m-1">{question.grade}</span>
 		</div>
@@ -55,9 +55,7 @@
 			/>
 
 			{#if choices}
-				<div
-					class="mt-3 flex flex-wrap justify-around w-full"
-				>
+				<div class="mt-3 flex flex-wrap justify-around w-full">
 					{#each choices as choice, i}
 						<!-- <Button size="x-large" class="ml-3 mr-3" on:click="{() => onChoice(i)}"> -->
 

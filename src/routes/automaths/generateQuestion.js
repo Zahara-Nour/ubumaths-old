@@ -87,7 +87,7 @@ export default function generateQuestion(question, generateds = [], nbquestions 
     if (e.string === 'Error') {
       throw new Error('Error while replacing', matched, p1)
     }
-    return e.toLatex({ implicit: true })
+    return e.toLatex()
   }
 
   function generateVariables() {
