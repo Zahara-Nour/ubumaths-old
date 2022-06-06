@@ -5,12 +5,13 @@
 	import { Icon } from '@smui/common'
 	import { Svg } from '@smui/common/elements'
 	import { onMount } from 'svelte'
-	import { mode } from '$lib/stores'
+	import { mode, toMarkup } from '$lib/stores'
 	import { assessItems } from './correction'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
 
 	import { getLogger } from '$lib/utils'
 	import { goto } from '$app/navigation'
+	import math from 'tinycas'
 
 	export let questions
 	export let answers
@@ -74,7 +75,6 @@
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiScanHelper}"></path>
 			</Icon>
-			
 		</Fab>
 	</div>
 
@@ -100,8 +100,11 @@
 	{/if}
 
 	{#if $mode !== 'classroom'}
-		<div class="{'flex items-center  justify-around'}" style="{`background:${colorResult}`}">
-			<div class="flex flex-col items-center justify-around h-full" >
+		<div
+			class="{'p-2 flex items-center  justify-around'}"
+			style="{`background:${colorResult}`}"
+		>
+			<div class="flex flex-col items-center justify-around h-full">
 				<Fab
 					class="mx-1 my-3"
 					color="{classroom ? 'primary' : 'secondary'}"
@@ -131,7 +134,11 @@
 					{messageResult}
 				</div>
 				<div class="my-2">
-					Score : {score}/{total}
+					Score : <span style="font-size:1.5em;font-family:'pacifico'"
+						>{math(score).toString({ comma: true })}</span
+					> <span style="font-size:1.5em;"> / </span><span
+						style="font-size:1.5em; font-family:'pacifico'">{total}</span
+					>
 				</div>
 			</div>
 			{#if percent === 1}

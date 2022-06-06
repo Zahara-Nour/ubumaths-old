@@ -71,25 +71,25 @@
 		{/if}
 		{#if displayDetails && item.correctionDetails}
 			{#each detailedCorrection as line}
-				<div class="mx-2 my-2" >
+				<div class="mb-1 z-0 relative" >
 					{@html line}
 				</div>
 			{/each}
 		{:else}
 			{#each correction as line}
-				<p class="mx-2  my-2 z-0 relative">
+				<div class=" mb-1 z-0 relative">
 					{@html line}
-				</p>
+				</div>
 			{/each}
 
 			{#if coms.length}
 				{#each coms as com}
-					<p
-						class="mx-2 my-2 z-0 relative"
+					<div
+						class=" mb-1 z-0 relative"
 						style="font-family: 'Handlee', cursive;"
 					>
 						{@html com}
-					</p>
+					</div>
 				{/each}
 			{/if}
 		{/if}

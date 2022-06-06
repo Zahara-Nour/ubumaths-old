@@ -8,16 +8,16 @@
 	import Select, { Option } from '@smui/select'
 	import data, { getQuestion } from './questions'
 	import { gradeMatchesClass, grades } from '$lib/grades'
-	import Exemple from './Exemple.svelte'
 	import generateQuestion from './generateQuestion'
 	import Buttons from './Buttons.svelte'
 	import Basket from './Basket.svelte'
-	import QuestionCard from '../../lib/components/QuestionCard.svelte'
-	import {fetchImage} from '$lib/images'
-	import {page} from '$app/stores'
-	import {goto} from '$app/navigation'
-	
+	import QuestionCard from '$lib/components/QuestionCard.svelte'
+	import { fetchImage } from '$lib/images'
+	import { goto } from '$app/navigation'
+	import { getLogger } from '$lib/utils'
+	import {darkmode} from '$lib/stores'
 
+	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
 
 	let domain
@@ -30,7 +30,7 @@
 	let availableLevels
 	let themes
 	let theme
-	let displayExemple = true
+	let displayExemple = false
 	let generated
 	let showBasket = false
 	let classroom = false
@@ -131,13 +131,12 @@
 	}
 
 	function launchTest() {
-
 		let questions = []
 		if (basket.length) {
 			questions = basket
 		} else {
 			const q = getQuestion(theme, domain, subdomain, level)
-			questions.push({id:q.id, count:10})
+			questions.push({ id: q.id, count: 2 })
 		}
 
 		let href = '/automaths/Test/?questions='
@@ -147,8 +146,30 @@
 	function fillBasket() {
 		addToBasket(theme, domain, subdomain, level, 1)
 	}
-	function flushBasket() {}
-	function copyLink() {}
+	function flushBasket() {
+		basket = []
+	}
+	function copyLink() {
+		let questions = []
+		if (basket.length) {
+			questions = basket
+		} else {
+			const q = getQuestion(theme, domain, subdomain, level)
+			questions.push({ id: q.id, count: 10 })
+		}
+
+		let href = 'http://localhost:3000/automaths/Test/?questions='
+		href += encodeURI(JSON.stringify(questions))
+		console.log('href', href)
+		navigator.clipboard
+			.writeText(href)
+			.then(function () {
+				info('copy test url to clipboard: ', href)
+			})
+			.catch(function () {
+				fail('failed to write exercice url to clipboard')
+			})
+	}
 
 	function addToBasket(theme, domain, subdomain, level, count, delay) {
 		let qs = questions[theme][domain][subdomain]
@@ -168,11 +189,9 @@
 			]
 		}
 	}
-
-	console.log('page', $page.url.searchParams.get("param1"))
 </script>
 
-<h1>Les automaths !</h1>
+<h3>Les automaths !</h3>
 
 <Buttons
 	bind:showBasket
@@ -185,12 +204,14 @@
 	flushBasket="{flushBasket}"
 />
 
-<Select variant="filled" bind:value="{grade}" label="Niveau">
-	<Option value="" />
-	{#each grades as grade}
-		<Option value="{grade}">{grade}</Option>
-	{/each}
-</Select>
+{#if !showBasket}
+	<Select variant="filled" bind:value="{grade}" label="Niveau">
+		<Option value="" />
+		{#each grades as grade}
+			<Option value="{grade}">{grade}</Option>
+		{/each}
+	</Select>
+{/if}
 
 {#if showBasket}
 	<!-- {#if isTeacher && showBasket} -->
@@ -261,8 +282,12 @@
 {/if}
 
 {#if displayExemple}
-	<div class=" px-2 py-5" style="{'position:sticky; bottom:0; z-index:2;'}">
-		<QuestionCard card="{generated}" flashcard description />
-		<!-- <Exemple question="{generated}" /> -->
+	<!-- <div class=" px-2 py-5" style="{'position:sticky; bottom:0; z-index:2;'}"> -->
+	<div class="flex items-center justify-center py-2" style="{`${$darkmode ? 'border-radius:5px;background:#fff' : ''};position:sticky; bottom:0; z-index:2;`}">
+		<div
+			style="{'width:95vw;'}"
+		>
+			<QuestionCard card="{generated}" flashcard="{true}" description />
+		</div>
 	</div>
 {/if}

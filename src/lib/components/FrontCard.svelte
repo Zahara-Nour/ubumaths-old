@@ -10,12 +10,12 @@
 
 	export let toggleFlip = () => {}
 	export let card
-	export let description
+	export let showDescription
 	export let flashcard
-
 	export let height
-
 	export let h
+	export let onChoice
+
 	let choices
   
 
@@ -35,16 +35,16 @@
 </script>
 
 <div bind:clientHeight="{h}">
-	<Paper elevation="{10}" style="{height ? `height:${height}px;` : ''}">
-		<div class="h-full flex flex-col justify-between">
-			{#if description}
+	<Paper elevation="{12}">
+		<div class="flex flex-col justify-between"  style="{height ? `height:${height-48}px;` : ''}">
+			{#if showDescription}
 				<div>
 					<Title>
-						{@html description}
+						<span class = 'z-0 relative' style={'color:var(--mdc-theme-primary'}>{@html $formatLatex(description)}</span>
 					</Title>
 					{#if subdescription}
 						<Subtitle>
-							{@html subdescription}
+							<span class = 'z-0 relative' style={'color:var(--mdc-theme-on-surface'}>{@html $formatLatex(subdescription)}</span>
 						</Subtitle>
 					{/if}
 				</div>
@@ -52,13 +52,13 @@
 			<Content>
 				<Question question="{card}" />
 				{#if choices}
-					<div class="mt-3 flex flex-wrap justify-around w-full">
+					<div class="mt-3 flex flex-wrap justify-around">
 						{#each choices as choice, i}
 
 							<button
 								class="rounded-lg  m-2 p-1"
-								style="border: 4px solid yellow;"
-								on:click="{() => {}}"
+								style='border: 4px solid var(--mdc-theme-primary);'
+								on:click="{() => onChoice(i)}"
 							>
 								{#if choice.image}
 									{#await choice.imageBase64P}
@@ -75,7 +75,7 @@
 									{/await}
 								{/if}
 								{#if choice.text}
-									<div class="text-base mdc-typography--body1">
+									<div class="text-base ">
 										{@html choice.text}
 									</div>
 								{/if}

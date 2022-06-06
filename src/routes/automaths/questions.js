@@ -196,7 +196,7 @@ const questions = {
           ],
           options: ['no-shuffle-choices'],
           type: 'choice',
-          defaultDelay: 10,
+          defaultDelay: 60,
           grade: CE1,
         },
         {

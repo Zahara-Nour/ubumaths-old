@@ -1,4 +1,5 @@
 import {toMarkup} from '$lib/stores'
+import { format } from 'prettier'
 
 const loggers = {}
 function getLogger(name, level = 'info') {
@@ -106,13 +107,4 @@ export function isTouchScreendevice() {
 };
 
 
-const regex = /\$\$(.*?)\$\$/g
-
-let formatLatex
-toMarkup.subscribe(f => {
-  const replacement = (_, p1) => f(p1)
-  formatLatex = (s) => s.replace(regex, replacement)
-})
-
-
-export { formatLatex, getLogger, shuffle, isEmpty, getPropertyName, lexicoSort, cleanString }
+export { getLogger, shuffle, isEmpty, getPropertyName, lexicoSort, cleanString }

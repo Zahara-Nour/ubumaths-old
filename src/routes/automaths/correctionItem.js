@@ -7,10 +7,9 @@ import {
 	STATUS_BAD_UNIT,
 } from './correction'
 import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
-import { toMarkup } from '$lib/stores'
+import { toMarkup, formatLatex } from '$lib/stores'
 import math from 'tinycas'
 import { get } from 'svelte/store'
-import { formatLatex } from '$lib/utils'
 
 function createSolutionsLatex(item) {
 	return item.solutions
@@ -66,7 +65,7 @@ export function createCorrection(item) {
 						.replace(
 							'&answer',
 							() =>
-								'<span style="color:green; border:2px solid green; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">' +
+								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
 								(item.type === 'choice'
 									? get(toMarkup)(item.choices[answer_choice].text)
 									: get(toMarkup)('$$' + answer_latex + '$$')) +
@@ -74,7 +73,7 @@ export function createCorrection(item) {
 						)
 						.replace(
 							new RegExp('&ans', 'g'),
-							'\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{' +
+							`\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
 								answer_latex +
 								'}}',
 						)
@@ -94,7 +93,7 @@ export function createCorrection(item) {
 						.replace(
 							'&solution',
 							() =>
-								'<span style="color:green; border:2px solid green; border-radius: 5px; margin:2px;padding:5px;display:inline-block">' +
+								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px; margin:2px;padding:5px;display:inline-block">` +
 								(item.type === 'choice'
 									? get(toMarkup)(item.choices[solutions[0]].text)
 									: get(toMarkup)('$$' + solutions_latex[0] + '$$')) +
@@ -104,7 +103,7 @@ export function createCorrection(item) {
 							new RegExp('&sol', 'g'),
 							item.type === 'choice'
 								? item.choices[solutions[0]].text
-								: '\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{' +
+								: `\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
 										solutions_latex[0] +
 										'}}',
 						)
@@ -118,7 +117,7 @@ export function createCorrection(item) {
 				if (correctionFormat.answer === 'image') {
 					let img = choices[answer_choice].imageBase64
 					item.coms.unshift(
-						`<img src='${img}' style="padding:2px; border: 2px solid red ;max-width:400px;max-height:40vh;" alt='toto'>`,
+						`<img src='${img}' style="padding:2px; border: 2px solid ${incorrect_color} ;max-width:400px;max-height:40vh;" alt='toto'>`,
 					)
 					item.coms.unshift('Ta réponse:')
 				} else {
@@ -151,7 +150,7 @@ export function createCorrection(item) {
 			case 'rewrite': {
 				line = `$$\\begin{align*}  ${expression_latex}`
 				if (status === STATUS_INCORRECT) {
-					line += `&= \\enclose{updiagonalstrike}[3px solid red]{${answer_latex}} \\\\`
+					line += `&= \\enclose{updiagonalstrike}[3px solid ${incorrect_color}]{${answer_latex}} \\\\`
 				} else if (status === STATUS_BAD_FORM || status === STATUS_BAD_UNIT) {
 					line += `&= \\textcolor{${incorrect_color}}{${answer_latex}} \\\\`
 				} else if (status === STATUS_UNOPTIMAL_FORM) {
@@ -274,10 +273,10 @@ export function createCorrection(item) {
 		}
 	}
 
-	lines = lines.map(formatLatex)
+	lines = lines.map(get(formatLatex))
 
 	item.coms = item.coms.map((com) =>
-		formatLatex(com).replace(/_COLORANSWER_/g, answerColor),
+		get(formatLatex)(com).replace(/_COLORANSWER_/g, answerColor),
 	)
 
 	return lines
@@ -320,6 +319,6 @@ export function createDetailedCorrection(item) {
 		}
 		lines.push(line)
 	})
-	lines = lines.map((line) => formatLatex(line))
+	lines = lines.map((line) => $(line))
 	return lines
 }

@@ -1,64 +1,91 @@
 <script>
-	import math from 'tinycas'
-
 	import BackCard from './BackCard.svelte'
 	import FrontCard from './FrontCard.svelte'
 	import { fontSize } from '$lib/stores'
 
 	export let card
 	export let flashcard = false
-	export let description = false
+	export let showDescription = false
+	export let onChoice = () => {}
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
-	$: if (card) flip = false
 
 	let hfront
-	let hback
+	let hback=0
 	let height
-	let init = false
+	let init
 
 	async function updateHeight() {
-		height = Math.max(hfront, hback) - 48
-		init=true
+		console.log('updateHeight')
+		height = Math.max(hfront, hback)
+		console.log('height', height)
 	}
 
+	$: if (card) {
+		console.log('changing card')
+		flip = false
 
-	$: if (hfront && hback && !init) {
+		// Kludge to trigger an updateHeight
+		// fontSize.update((size) => size + 1)
+		// fontSize.update((size) => size - 1)
+	}
+
+	$: console.log('hback', hback)
+	$: console.log('hfront', hfront)
+	$: console.log('height', height)
+	$: console.log('init', init)
+	$: if (flashcard && hfront && hback) {
+		updateHeight()
+	}
+
+	$: if (!flashcard && hfront) {
 		updateHeight()
 	}
 
 	$: if ($fontSize) {
-		init = false
-		hfront=0
-		hback=0
-		height=0
+		console.log('changing size')
+		height = 0
 	}
-
 </script>
 
-<div class="card" style="{height ? `height:${height+48}px` : ''}">
-	<div class="flipper" class:flip style="{height ? `height:${height+48}px` : ''}" >
-		<div class="front" style="{height ? `height:${height+48}px` : ''}">
+<div class="card" style="{height ? `height:${height}px` : ''}">
+	<div class="flipper" class:flip style="{height ? 'height:100%' : ''}">
+		<div class="front" style="{height ? 'height:100%' : ''}">
 			<FrontCard
 				card="{card}"
 				toggleFlip="{toggleFlip}"
 				flashcard="{flashcard}"
-				description="{description}"
-				bind:h={hfront}
+				showDescription="{showDescription}"
 				height="{height}"
+				onChoice="{onChoice}"
 			/>
 		</div>
-		<div class="back">
-			<BackCard
-				card="{card}"
-				toggleFlip="{toggleFlip}"
-				flashcard="{flashcard}"
-				bind:h={hback}
-				height="{height}"
-			/>
-		</div>
+		{#if flashcard}
+			<div class="back">
+				<BackCard
+					card="{card}"
+					toggleFlip="{toggleFlip}"
+					flashcard="{flashcard}"
+					height="{height}"
+				/>
+			</div>
+		{/if}
 	</div>
+</div>
+
+<div class="absolute" style="{'width:95vw;left:-100000%;'}">
+<!-- <div > -->
+	<FrontCard
+		card="{card}"
+		flashcard="{flashcard}"
+		showDescription="{showDescription}"
+		bind:h="{hfront}"
+	/>
+
+	{#if flashcard}
+		<BackCard card="{card}" bind:h="{hback}" />
+	{/if}
 </div>
 
 <style>

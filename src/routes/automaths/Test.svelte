@@ -3,7 +3,6 @@
 	import Slider from '@smui/slider'
 	import { Svg } from '@smui/common/elements'
 	import Button, { Label } from '@smui/button'
-	import Question from './Question.svelte'
 	import generate from './generateQuestion'
 	import CircularProgress from '$lib/components/CircularProgress.svelte'
 	import { onDestroy, onMount } from 'svelte'
@@ -14,12 +13,12 @@
 	import { handleKeydown, mathliveReady } from '$lib/stores'
 
 	import math from 'tinycas'
-	import Exemple from './Exemple.svelte'
 	import { mdiRocketLaunchOutline, mdiRestart } from '@mdi/js'
 	import { fetchImage } from '$lib/images'
 	import { flip } from 'svelte/animate'
 	import { fly } from 'svelte/transition'
 	import Correction from './Correction.svelte'
+	import QuestionCard from '$lib/components/QuestionCard.svelte'
 
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
@@ -223,7 +222,7 @@
 		const key = ev.detail.event.key
 		trace('keystroke', keystroke)
 		trace('key', key)
-	
+
 		if (
 			keystroke === '[Space]' &&
 			!(
@@ -333,7 +332,6 @@
 </script>
 
 {#if showExemple}
-	<Exemple question="{generatedExemple}" classroom="{true}" />
 	<div class="mt-2 flex justify-end">
 		<Fab
 			class="m-2"
@@ -415,44 +413,7 @@
 								out:fly="{{ x: -500, duration: cards.length > 1 ? 700 : 0 }}"
 							>
 								<div class=" p-2 elevation-{4} rounded-lg">
-									<Question question="{card}" />
-									{#if card.choices}
-										<div class="mt-3 flex flex-wrap justify-around w-full">
-											{#each card.choices as choice, i}
-												<!-- <Button size="x-large" class="ml-3 mr-3" on:click="{() => onChoice(i)}"> -->
-
-												<button
-													class="rounded-lg  ma-3 pa-3"
-													style="border: 5px solid yellow;"
-													on:click="{() => {
-														if (!classroom) onChoice(i)
-													}}"
-												>
-													{#if choice.image}
-														{#await choice.imageBase64P}
-															loading image
-														{:then base64}
-															<img
-																class="white"
-																src="{base64}"
-																style="max-width:400px;max-height:40vh;"
-																alt="{`choice ${i}`}"
-															/>
-														{:catch error}
-															{error}
-														{/await}
-													{/if}
-													{#if choice.markup}
-														<div>
-															{@html choice.markup}
-														</div>
-													{/if}
-												</button>
-
-												<!-- </Button> -->
-											{/each}
-										</div>
-									{/if}
+									<QuestionCard card="{card}" onChoice="{onChoice}" />
 								</div>
 							</div>
 						{/each}
@@ -460,37 +421,35 @@
 				</div>
 			{/if}
 
-			<div class="flex items-center justify-center w-full">
-				{#if !card.choices && !classroom}
-					<div class="flex items-center justify-center " style="width:80%">
-						<span class="mr-4">Ta réponse:</span>
-						<div class="flex-grow-1" style="width:70%">
-							{#if $mathliveReady}
-								<math-field
-									virtual-keyboard-mode="manual"
-									decimal-separator=","
-									on:keystroke="{onKeystroke}"
-									keypress-vibration="off"
-									remove-extraneous-parentheses="off"
-									smart-fence="off"
-									smart-superscript="off"
-									style="width:100%;"
-									class="{correct
-										? 'pa-2 light-green lighten-5'
-										: 'pa-2 deep-orange lighten-5'}"
-									virtual-keyboard-theme="apple"
-									on:input="{onChangeMathField}"
-									on:change="{() => {
-										if (answer !== '') commit()
-									}}"
-									bind:this="{mf}"
-								>
-								</math-field>
-							{/if}
-						</div>
+			{#if !card.choices && !classroom}
+				<div class="flex items-center justify-center " style="width:80%">
+					<span class="mr-4">Ta réponse:</span>
+					<div class="flex-grow-1" style="width:70%">
+						{#if $mathliveReady}
+							<math-field
+								virtual-keyboard-mode="manual"
+								decimal-separator=","
+								on:keystroke="{onKeystroke}"
+								keypress-vibration="off"
+								remove-extraneous-parentheses="off"
+								smart-fence="off"
+								smart-superscript="off"
+								style="width:100%;"
+								class="{correct
+									? 'pa-2 light-green lighten-5'
+									: 'pa-2 deep-orange lighten-5'}"
+								virtual-keyboard-theme="apple"
+								on:input="{onChangeMathField}"
+								on:change="{() => {
+									if (answer !== '') commit()
+								}}"
+								bind:this="{mf}"
+							>
+							</math-field>
+						{/if}
 					</div>
-				{/if}
-			</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 {:else}

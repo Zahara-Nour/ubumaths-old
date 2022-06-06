@@ -19,7 +19,15 @@
 	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
 	import Tooltip, { Wrapper } from '@smui/tooltip'
 	import { A, Svg } from '@smui/common/elements'
-	import { darkmode, touchDevice, toMarkup, fontSize, formatLatex, handleKeydown, mathliveReady } from '$lib/stores'
+	import {
+		darkmode,
+		touchDevice,
+		toMarkup,
+		fontSize,
+		formatLatex,
+		handleKeydown,
+		mathliveReady,
+	} from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { get } from 'svelte/store'
@@ -60,7 +68,21 @@
 				toMarkup.set(m.convertLatexToMarkup)
 				const regex = /\$\$(.*?)\$\$/g
 				const replacement = (_, p1) => m.convertLatexToMarkup(p1)
-				formatLatex.set((s) => s && typeof s === 'string' ? s.replace(regex, replacement) :'')
+				const _formatLatex = (o) => {
+					if (!o) {
+						return ""
+					}
+					if (Array.isArray(o)) {
+						return o.map((elmt) => _formatLatex(elmt))
+					} else if (o.text) {
+						return { ...o, text: _formatLatex(o.text) }
+					} else if (typeof o === 'string') {
+						return o.replace(regex, replacement)
+					} else {
+						return o
+					}
+				}
+				formatLatex.set(_formatLatex)
 			})
 			.catch((e) => {
 				console.log('erreur', e)
@@ -79,7 +101,8 @@
 		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
 	}
 </script>
-<svelte:window on:resize="{setMiniWindow}" on:keydown={$handleKeydown} />
+
+<svelte:window on:resize="{setMiniWindow}" on:keydown="{$handleKeydown}" />
 <svelte:head>
 	{#if $darkmode}
 		<!-- SMUI Styles -->
@@ -163,13 +186,13 @@
 				{#if $darkmode}
 					<IconButton
 						class="material-icons"
-						aria-label="Bookmark this page"
+						aria-label="Switch to light mode"
 						on:click="{switchTheme}">light_mode</IconButton
 					>
 				{:else}
 					<IconButton
 						class="material-icons"
-						aria-label="Bookmark this page"
+						aria-label="switch to dark mode"
 						on:click="{switchTheme}">dark_mode</IconButton
 					>
 				{/if}

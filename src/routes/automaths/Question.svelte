@@ -1,6 +1,6 @@
 <script>
   import {toMarkup} from '$lib/stores'
-  import {formatLatex} from '$lib/utils'
+  import {formatLatex} from '$lib/stores'
 
   export let question
 
@@ -14,11 +14,11 @@ console.log('question', question)
     !(question.options && question.options.includes('no-exp'))
 
   $: enounce = question.enounce
-    ? formatLatex(question.enounce)
+    ? $formatLatex(question.enounce)
     : null
   
   $: enounce2 = question.enounce2
-    ? formatLatex(question.enounce2)
+    ? $formatLatex(question.enounce2)
     : null
 
   $: expression = question.expression_latex

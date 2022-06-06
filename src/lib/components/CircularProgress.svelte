@@ -71,7 +71,7 @@
   $: color=gradient[Math.floor((100-percentage)/100*40)]
 </script>
 
-<div  style=" --theme-color: {color};position: relative;display: inline-block;text-align: center;">
+<div  style=" --theme-color: {color};position: relative;display: inline-block;text-align: center;color:black;">
   <svg width={sqSize} height={sqSize}>
     <circle class={pulse ? "pulse" : 'nopulse'}  cx = "50%" cy = "50%" r = "{radius}"></circle>
     <circle
@@ -97,7 +97,7 @@
     </circle>
   </svg>
   <div
-    style="{`font-size: ${fontSize}px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -55%);`}"
+    style="{`font-size: ${fontSize}px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -70%);font-family:'pacifico'`}"
   >
     {number}
   </div>
