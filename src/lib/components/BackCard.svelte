@@ -8,6 +8,7 @@
 	import { onMount, afterUpdate } from 'svelte'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
+	import { createDetailedCorrection } from '../../routes/automaths/correctionItem'
 
 	export let card
 	export let toggleFlip = () => {}
@@ -15,19 +16,35 @@
 	export let h
 	export let height
 
-	$: answer = $formatLatex('$$' + math(card.solutions[0]).toLatex() + '$$')
-	$: details = $formatLatex(card.correctionDetails)
-</script>
+	function getSolution(card) {
+		
+		let s = card.solutions[0]
+		if (card.choices) {
+			s = $formatLatex(card.choices[s])
+			if (s.text) {
+				s = s.text
+			} else if (s.image) {
+				s = `<img src=${s.image}>`
+			}
+		} else {
+			s = $formatLatex('$$' + math(s).latex + '$$')
+		}
+		console.log(s)
+		return s
+	}
 
+	$: solution = getSolution(card)
+	$: details = card.correctionDetails ? createDetailedCorrection(card) : null
+</script>
 <div bind:clientHeight="{h}">
-	<Paper elevation="{12}" style="{height ? `height:${height-48}px;` : ''}">
+	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
 		<div class="h-full flex flex-col justify-between">
 			<Content class="h-full">
 				<div class="h-full flex flex-col items-center justify-around">
-					<div style="{` color:${mdc_colors['lime-500']}`}">
-						Réponse :
+					<div style="{` color:${mdc_colors['lime-500']}`}">Réponse :</div>
+					<div class="my-5 z-O relative" style="font-size:2em;">
+						{@html solution}
 					</div>
-					<div class="my-5 z-O relative" style="font-size:2em;">{@html answer}</div>
 					{#if details}
 						<div class="my-2 z-0 relative">
 							{#each details as detail}

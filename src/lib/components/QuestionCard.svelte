@@ -12,7 +12,7 @@
 	const toggleFlip = () => (flip = !flip)
 
 	let hfront
-	let hback=0
+	let hback = 0
 	let height
 	let init
 
@@ -62,7 +62,7 @@
 			/>
 		</div>
 		{#if flashcard}
-			<div class="back">
+			<div class="back" style="{height ? 'height:100%' : ''}">
 				<BackCard
 					card="{card}"
 					toggleFlip="{toggleFlip}"
@@ -74,8 +74,8 @@
 	</div>
 </div>
 
-<div class="absolute" style="{'width:95vw;left:-100000%;'}">
-<!-- <div > -->
+<div class="absolute" style="{'width:95vw;top:-100%;left:-100000%;'}">
+	<!-- <div > -->
 	<FrontCard
 		card="{card}"
 		flashcard="{flashcard}"

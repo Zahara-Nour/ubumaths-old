@@ -3,6 +3,7 @@
 
 <script>
 	import '../app.scss'
+	import { mdc_colors } from '$lib/colors'
 	import links from './navlinks.js'
 	import TopAppBar, { Row, Section, Title as TitleBar } from '@smui/top-app-bar'
 	import IconButton from '@smui/icon-button'
@@ -17,7 +18,6 @@
 		Scrim,
 	} from '@smui/drawer'
 	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
-	import Tooltip, { Wrapper } from '@smui/tooltip'
 	import { A, Svg } from '@smui/common/elements'
 	import {
 		darkmode,
@@ -70,7 +70,7 @@
 				const replacement = (_, p1) => m.convertLatexToMarkup(p1)
 				const _formatLatex = (o) => {
 					if (!o) {
-						return ""
+						return ''
 					}
 					if (Array.isArray(o)) {
 						return o.map((elmt) => _formatLatex(elmt))
@@ -104,6 +104,7 @@
 
 <svelte:window on:resize="{setMiniWindow}" on:keydown="{$handleKeydown}" />
 <svelte:head>
+	<title>UbuMaths - Les maths de la chandelle verte</title>
 	{#if $darkmode}
 		<!-- SMUI Styles -->
 		<link rel="stylesheet" href="/smui-dark.css" />
@@ -151,9 +152,7 @@
 		<Row>
 			<Section>
 				<TitleBar component="{A}" href="/" on:click="{() => {}}">
-					{miniWindow
-						? 'UbuMaths'
-						: 'UbuMaths - Les maths de la chandelle verte'}
+					UbuMaths
 				</TitleBar>
 			</Section>
 			<Section>
@@ -166,22 +165,16 @@
 				{/if}
 			</Section>
 			<Section align="end" toolbar>
-				<Wrapper>
-					<IconButton on:click="{decrease}">
-						<Icon component="{Svg}" viewBox="0 0 24 24">
-							<path fill="currentColor" d="{mdiFormatFontSizeDecrease}"></path>
-						</Icon>
-					</IconButton>
-					<Tooltip>Diminuer la taille de la police</Tooltip>
-				</Wrapper>
-				<Wrapper>
-					<IconButton on:click="{increase}">
-						<Icon component="{Svg}" viewBox="0 0 24 24">
-							<path fill="currentColor" d="{mdiFormatFontSizeIncrease}"></path>
-						</Icon>
-					</IconButton>
-					<Tooltip>Diminuer la taille de la police</Tooltip>
-				</Wrapper>
+				<IconButton on:click="{decrease}">
+					<Icon component="{Svg}" viewBox="0 0 24 24">
+						<path fill="currentColor" d="{mdiFormatFontSizeDecrease}"></path>
+					</Icon>
+				</IconButton>
+				<IconButton on:click="{increase}">
+					<Icon component="{Svg}" viewBox="0 0 24 24">
+						<path fill="currentColor" d="{mdiFormatFontSizeIncrease}"></path>
+					</Icon>
+				</IconButton>
 
 				{#if $darkmode}
 					<IconButton
@@ -204,8 +197,25 @@
 			</Section>
 		</Row>
 	</TopAppBar>
-	<div>
+	<!-- <div p-2> -->
+	<!-- <div style="overflow:auto;"> -->
+	<div style="min-height: calc(100vh - 144px);">
+		<!-- to remove extra margin from child -->
+		<div style="height:1px"></div>
 		<slot />
+		<div style="height:1px"></div>
+	</div>
+	<div style="{`width:100vw;height:80px;background:${mdc_colors['grey-200']}`}">
+		<div class="h-full p-2 flex items-center justify-between">
+			<a style='height:100%' target="_blank" href="https://www.lyceevoltaire.org/">
+				<img
+					height="100%"
+					alt="logo lycée voltaire"
+					src="images/logo-voltaire.png"
+				/>
+			</a>
+			<span style="color:var(--mdc-theme-secondary)">D. Le Jolly</span>
+		</div>
 	</div>
 </AppContent>
 

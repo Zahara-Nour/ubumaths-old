@@ -302,7 +302,7 @@ export function createDetailedCorrection(item) {
 				.replace(
 					'&solution',
 					() =>
-						'<span style="color:green; border:2px solid green; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">' +
+						`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
 						(item.type === 'choice'
 							? get(toMarkup)(item.choices[solutions[0]].text)
 							: get(toMarkup)('$$' + solutions_latex[0] + '$$')) +
@@ -312,13 +312,13 @@ export function createDetailedCorrection(item) {
 					new RegExp('&sol', 'g'),
 					item.type === 'choice'
 						? item.choices[solutions[0]].text
-						: '\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{' +
+						: `\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
 								solutions_latex[0] +
 								'}}',
 				)
 		}
 		lines.push(line)
 	})
-	lines = lines.map((line) => $(line))
+	lines = lines.map(get(formatLatex))
 	return lines
 }

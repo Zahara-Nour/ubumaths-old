@@ -1,5 +1,5 @@
 import { CP, CM1, CM2, SIXIEME, SECONDE, CINQUIEME, QUATRIEME, CE1, CE2, TROISIEME } from '$lib/grades.js'
-
+import {color1, color2, color3} from '$lib/colors'
 const UNKNOWN = 'a determiner'
 
 // OPTIONS
@@ -1873,10 +1873,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &3+\\bold{\\textcolor{teal}{9}} &= &3+\\bold{\\textcolor{teal}{10-1}} \\\\ &= [_&3+10_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+9_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3+\\bold{\\textcolor{teal}{9}} &= &3+\\bold{\\textcolor{teal}{10-1}} \\\\ &= [_&3+10_]-1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{9}} + &3 &= \\bold{\\textcolor{teal}{10-1}} + &3\\\\ &= &3 + 10-1 \\\\ &= [_&3+10_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+9_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{9}} + &3 &= \\bold{\\textcolor{teal}{10-1}} + &3\\\\ &= &3 + 10-1 \\\\ &= [_&3+10_]-1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           variables: [{
@@ -1899,10 +1899,10 @@ const questions = {
 
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -1928,10 +1928,10 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &4+\\bold{\\textcolor{teal}{&5}} &= &4+\\bold{\\textcolor{teal}{[_&5+1_]-1}} \\\\ &= [_&4+&5+1_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4+&5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &4+\\bold{\\textcolor{teal}{&5}} &= &4+\\bold{\\textcolor{teal}{[_&5+1_]-1}} \\\\ &= [_&4+&5+1_]-1 \\\\ &= &sol\\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&5}} + &4 &= \\bold{\\textcolor{teal}{[_&5+1_]-1}} + &4\\\\ &= &4 + [_&5+1_]-1 \\\\ &= [_&4+&5+1_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4+5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&5}} + &4 &= \\bold{\\textcolor{teal}{[_&5+1_]-1}} + &4\\\\ &= &4 + [_&5+1_]-1 \\\\ &= [_&4+&5+1_]-1 \\\\ &= &sol\\end{align}$$' },
             ],
           ],
           
@@ -1948,10 +1948,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  &sol\\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_10-&1_]}} &= &2+\\bold{\\textcolor{teal}{10}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -1973,19 +1973,19 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}}+&3 &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}}+&3 &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+ &3 + \\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+ &3 + \\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+ &3 + \\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+ &3 + \\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &3 + \\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &3 + \\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 + \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 + \\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_10-&1_]}}+\\bold{\\textcolor{yellow}{&2}}+\\bold{\\textcolor{yellow}{[_10-&2_]}} &= \\bold{\\textcolor{teal}{10}}+\\bold{\\textcolor{yellow}{10}}+&3 \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
 
@@ -2004,10 +2004,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_100-&1_]}} &= &2+\\bold{\\textcolor{teal}{100}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_100-&1_]}} &= &2+\\bold{\\textcolor{teal}{100}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_100-&1_]}} &= &2+\\bold{\\textcolor{teal}{100}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_100-&1_]}} &= &2+\\bold{\\textcolor{teal}{100}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -2028,13 +2028,13 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&6}}+\\bold{\\textcolor{teal}{[_&1*10-&6_]}} + &7 &= \\bold{\\textcolor{teal}{[_&1*10_]}} + &7\\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&7+&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&6}}+\\bold{\\textcolor{teal}{[_&1*10-&6_]}} + &7 &= \\bold{\\textcolor{teal}{[_&1*10_]}} + &7\\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&6}}+ &7 + \\bold{\\textcolor{teal}{[_&1*10-&6_]}} &= &7+\\bold{\\textcolor{teal}{[_&1*10_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&7+&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&6}}+ &7 + \\bold{\\textcolor{teal}{[_&1*10-&6_]}} &= &7+\\bold{\\textcolor{teal}{[_&1*10_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &7+\\bold{\\textcolor{teal}{&6}}+\\bold{\\textcolor{teal}{[_&1*10-&6_]}} &= &7+\\bold{\\textcolor{teal}{[_&1*10_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&7+&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &7+\\bold{\\textcolor{teal}{&6}}+\\bold{\\textcolor{teal}{[_&1*10-&6_]}} &= &7+\\bold{\\textcolor{teal}{[_&1*10_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -2069,10 +2069,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &5+\\bold{\\textcolor{teal}{9}} &= &5+\\bold{\\textcolor{teal}{10-1}} \\\\ &= [_&5+10_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5+9_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &5+\\bold{\\textcolor{teal}{9}} &= &5+\\bold{\\textcolor{teal}{10-1}} \\\\ &= [_&5+10_]-1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &5+\\bold{\\textcolor{teal}{19}} &= &5+\\bold{\\textcolor{teal}{20-1}} \\\\ &= [_&5+20_]-1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5+19_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &5+\\bold{\\textcolor{teal}{19}} &= &5+\\bold{\\textcolor{teal}{20-1}} \\\\ &= [_&5+20_]-1 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -2090,10 +2090,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_1000-&1_]}} &= &2+\\bold{\\textcolor{teal}{1000}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+1000_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2+\\bold{\\textcolor{teal}{&1}}+\\bold{\\textcolor{teal}{[_1000-&1_]}} &= &2+\\bold{\\textcolor{teal}{1000}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_1000-&1_]}} &= &2+\\bold{\\textcolor{teal}{1000}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+1000_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}+ &2 + \\bold{\\textcolor{teal}{[_1000-&1_]}} &= &2+\\bold{\\textcolor{teal}{1000}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -2680,7 +2680,7 @@ const questions = {
 
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &3-\\bold{\\textcolor{teal}{9}} &= &3\\bold{\\textcolor{teal}{-10+1}} \\\\ &= [_&3-10_]+1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3-9_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3-\\bold{\\textcolor{teal}{9}} &= &3\\bold{\\textcolor{teal}{-10+1}} \\\\ &= [_&3-10_]+1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           variables: [{
@@ -2708,7 +2708,7 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &4-\\bold{\\textcolor{teal}{&5}} &= &4\\bold{\\textcolor{teal}{-[_&5+1_]+1}} \\\\ &= [_&4-&5-1_]+1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4-&5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &4-\\bold{\\textcolor{teal}{&5}} &= &4\\bold{\\textcolor{teal}{-[_&5+1_]+1}} \\\\ &= [_&4-&5-1_]+1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -2840,10 +2840,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{20}} &= &1 \\times \\bold{\\textcolor{teal}{2 \\times 10}}  \\\\ &= [_&1*2_] \\times 10 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{20}} &= &1 \\times \\bold{\\textcolor{teal}{2 \\times 10}}  \\\\ &= [_&1*2_] \\times 10 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{20}} \\times &1 &=  \\bold{\\textcolor{teal}{10 \\times 2}} \\times &1 \\\\ &= 10 \\times [_&1*2_]  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*20_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{20}} \\times &1 &=  \\bold{\\textcolor{teal}{10 \\times 2}} \\times &1 \\\\ &= 10 \\times [_&1*2_]  \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           defaultDelay: 20,
@@ -2871,7 +2871,7 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&3}} \\times \\bold{\\textcolor{yellow}{&4}} &= \\bold{\\textcolor{teal}{&1 \\times 10}} \\times \\bold{\\textcolor{yellow}{&2 \\times 10}} \\\\ &= &1 \\times &2 \\times 10 \\times 10 \\\\ &= [_&1*&2_] \\times 100 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&4_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&3}} \\times \\bold{\\textcolor{yellow}{&4}} &= \\bold{\\textcolor{teal}{&1 \\times 10}} \\times \\bold{\\textcolor{yellow}{&2 \\times 10}} \\\\ &= &1 \\times &2 \\times 10 \\times 10 \\\\ &= [_&1*&2_] \\times 100 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -2899,7 +2899,7 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&5}} \\times \\bold{\\textcolor{yellow}{&6}} &= \\bold{\\textcolor{teal}{&1 \\times [_10^&2_]}} \\times \\bold{\\textcolor{yellow}{&3 \\times [_10^&4_]}} \\\\ &= &1 \\times &3 \\times [_10^&2_] \\times [_10^&4_] \\\\ &= [_&1*&3_] \\times [_10^(&2+&4)_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5*&6_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&5}} \\times \\bold{\\textcolor{yellow}{&6}} &= \\bold{\\textcolor{teal}{&1 \\times [_10^&2_]}} \\times \\bold{\\textcolor{yellow}{&3 \\times [_10^&4_]}} \\\\ &= &1 \\times &3 \\times [_10^&2_] \\times [_10^&4_] \\\\ &= [_&1*&3_] \\times [_10^(&2+&4)_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3325,10 +3325,10 @@ const questions = {
           variables: [{ '&1': '$e[2;10]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*2+1_]}} \\times 50 &= \\bold{\\textcolor{teal}{(&1 \\times 2 + 1)}} \\times 50 \\\\ &= &1 \\times 2 \\times 50  + 50 \\\\ &= &1 \\times 100  + 50 \\\\ &=  [_&1*100_]  + 50 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100+50_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*2+1_]}} \\times 50 &= \\bold{\\textcolor{teal}{(&1 \\times 2 + 1)}} \\times 50 \\\\ &= &1 \\times 2 \\times 50  + 50 \\\\ &= &1 \\times 100  + 50 \\\\ &=  [_&1*100_]  + 50 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*2_]}} \\times 50 &= \\bold{\\textcolor{teal}{(&1 \\times 2)}} \\times 50 \\\\ &= &1 \\times 2 \\times 50 \\\\ &= &1 \\times 100 \\\\ &=  [_&1*100_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*2_]}} \\times 50 &= \\bold{\\textcolor{teal}{(&1 \\times 2)}} \\times 50 \\\\ &= &1 \\times 2 \\times 50 \\\\ &= &1 \\times 100 \\\\ &=  [_&1*100_] \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           defaultDelay: 20,
@@ -3347,10 +3347,10 @@ const questions = {
             }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*4+&2_]}} \\times 25 &= \\bold{\\textcolor{teal}{(&1 \\times 4 + &2)}} \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{4 \\times 25}}  + &2 \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{100}} + [_&2*25_] \\\\ &=  [_&1*100_]  + [_&2*25_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1*4+&2)*25_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*4+&2_]}} \\times 25 &= \\bold{\\textcolor{teal}{(&1 \\times 4 + &2)}} \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{4 \\times 25}}  + &2 \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{100}} + [_&2*25_] \\\\ &=  [_&1*100_]  + [_&2*25_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*4_]}} \\times 25 &= \\bold{\\textcolor{teal}{(&1 \\times 4)}} \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{4 \\times 25}} \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[_&1*4_]}} \\times 25 &= \\bold{\\textcolor{teal}{(&1 \\times 4)}} \\times 25 \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{4 \\times 25}} \\\\ &= &1 \\times \\bold{\\textcolor{yellow}{100}} \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3711,16 +3711,16 @@ const questions = {
           variables: [{ '&1': '$e[19;40]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{2}} \\times &1 \\times  \\bold{\\textcolor{teal}{5}} &= \\bold{\\textcolor{teal}{10}} \\times &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{2}} \\times &1 \\times  \\bold{\\textcolor{teal}{5}} &= \\bold{\\textcolor{teal}{10}} \\times &1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{5}} \\times &1 \\times  \\bold{\\textcolor{teal}{2}} &= \\bold{\\textcolor{teal}{10}} \\times &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{5}} \\times &1 \\times  \\bold{\\textcolor{teal}{2}} &= \\bold{\\textcolor{teal}{10}} \\times &1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{2}} \\times  \\bold{\\textcolor{teal}{5}} &= &1 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{2}} \\times  \\bold{\\textcolor{teal}{5}} &= &1 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{5}} \\times  \\bold{\\textcolor{teal}{2}} &=   &1 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &1 \\times \\bold{\\textcolor{teal}{5}} \\times  \\bold{\\textcolor{teal}{2}} &=   &1 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
 
 
@@ -3744,22 +3744,22 @@ const questions = {
           variables: [{ '&1': '$l{20;25;50}', '&2': '[_100:&1_]', '&3': '$e[11;99]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{&1}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{&1}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{&1}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{&1}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&1}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&1}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3780,16 +3780,16 @@ const questions = {
           variables: [{ '&1': '$e[3;19]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{20}} \\times [_2*&1_] \\times  \\bold{\\textcolor{teal}{0,5}} &= \\bold{\\textcolor{teal}{10}} \\times [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_2*&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{20}} \\times [_2*&1_] \\times  \\bold{\\textcolor{teal}{0,5}} &= \\bold{\\textcolor{teal}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,5}} \\times [_2*&1_] \\times  \\bold{\\textcolor{teal}{20}} &= \\bold{\\textcolor{teal}{10}} \\times [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_2*&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,5}} \\times [_2*&1_] \\times  \\bold{\\textcolor{teal}{20}} &= \\bold{\\textcolor{teal}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{teal}{20}} \\times  \\bold{\\textcolor{teal}{0,5}} &= [_2*&1_] \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_2*&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{teal}{20}} \\times  \\bold{\\textcolor{teal}{0,5}} &= [_2*&1_] \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{teal}{0,5}} \\times  \\bold{\\textcolor{teal}{20}} &=   [_2*&1_] \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_2*&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{teal}{0,5}} \\times  \\bold{\\textcolor{teal}{20}} &=   [_2*&1_] \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
 
 
@@ -3813,22 +3813,22 @@ const questions = {
           variables: [{ '&1': '$l{0,2;0,25;0,5}', '&2': '[_10:&1_]', '&3': '$e[3;19]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{[._&1_]}} \\times &3 &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{[._&1_]}} \\times &3 &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{[._&1_]}} &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{[._&1_]}} &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{10}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{[._&1_]}} &= &3 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{[._&1_]}} &= &3 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{[._&1_]}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{[._&1_]}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{10}} \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3847,7 +3847,7 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 12 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*12_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 12 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           defaultDelay: 20,
@@ -3861,7 +3861,7 @@ const questions = {
           variables: [{ '&1': '$e[0;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 13 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 3 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_3*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*13_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 13 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 3 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_3*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3877,7 +3877,7 @@ const questions = {
           variables: [{ '&1': '$e[0;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 21 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} +  \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*21_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 21 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} +  \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + &1 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3894,7 +3894,7 @@ const questions = {
           variables: [{ '&1': '$e[0;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 22 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*22_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 22 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3910,7 +3910,7 @@ const questions = {
           variables: [{ '&1': '$e[0;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 19 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*19_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 19 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - &1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -3925,7 +3925,7 @@ const questions = {
           variables: [{ '&1': '$e[0;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 18 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*18_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 18 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3941,7 +3941,7 @@ const questions = {
           variables: [{ '&1': '$e[13;45]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 11 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*11_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 11 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + &1 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3957,7 +3957,7 @@ const questions = {
           variables: [{ '&1': '$l{13;14;15;23;24;25;33;34;35;45}' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 12 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*12_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 12 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] + [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -3973,7 +3973,7 @@ const questions = {
           variables: [{ '&1': '$l{5;6;7;8;9;13;14;15;23;24;25;35;45}]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 21 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} +  \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*21_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 21 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} +  \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + &1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -3988,7 +3988,7 @@ const questions = {
           variables: [{ '&1': '$l{5;6;7;8;9;13;14;15;23;24;25;35;45}]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 22 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*22_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 22 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] + [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -4003,7 +4003,7 @@ const questions = {
           variables: [{ '&1': '$e[12;19]' }, { '&1': '$e[23;29]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 9 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] - &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*9_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 9 \\times \\bold{\\textcolor{teal}{&1}}  &= 10 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_10*&1_] - &1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -4018,7 +4018,7 @@ const questions = {
           variables: [{ '&1': '$e[13;19]' }, { '&1': '$e[5;9]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 19 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*19_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 19 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - &1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -4033,7 +4033,7 @@ const questions = {
           variables: [{ '&1': '$e[4;9]' }, { '&1': '$l{13;14;15;25}' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 18 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*18_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 18 \\times \\bold{\\textcolor{teal}{&1}}  &= 20 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_20*&1_] - [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4049,7 +4049,7 @@ const questions = {
           variables: [{ '&1': '$e[15;40]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 101 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*101_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 101 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] + &1 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4065,7 +4065,7 @@ const questions = {
           variables: [{ '&1': '$e[15;49]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 102 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] + [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*102_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 102 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} + 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] + [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4081,7 +4081,7 @@ const questions = {
           variables: [{ '&1': '$e[15;40]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 99 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] - &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*99_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 99 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} - \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] - &1 \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -4097,7 +4097,7 @@ const questions = {
           variables: [{ '&1': '$e[15;40]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} 98 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] - [_2*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*98_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 98 \\times \\bold{\\textcolor{teal}{&1}}  &= 100 \\times \\bold{\\textcolor{teal}{&1}} - 2 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_100*&1_] - [_2*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4118,16 +4118,16 @@ const questions = {
           variables: [{ '&1': '$e[23;99]', '&2': '$e[2;8]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + [_10-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + [_10-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{&1}} \\times &2+ \\bold{\\textcolor{teal}{&1}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{&1}} \\times &2+ \\bold{\\textcolor{teal}{&1}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4149,16 +4149,16 @@ const questions = {
           variables: [{ '&1': '$e[21;99]', '&2': '$e[2;98]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + [_100-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + [_100-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{teal}{&1}} &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{&1}} \\times &2+ \\bold{\\textcolor{teal}{&1}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{&1}} \\times &2+ \\bold{\\textcolor{teal}{&1}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{&1}}\\\\  &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4558,28 +4558,28 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) \\times &3  &=  [_&1+&2_] \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1+&2)*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) \\times &3  &=  [_&1+&2_] \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) &=  &3 \\times [_&1+&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1+&2)*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) &=  &3 \\times [_&1+&2_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) \\times &3  &=  [_&1-&2_] \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) \\times &3  &=  [_&1-&2_] \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) &=  &3 \\times [_&1-&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) &=  &3 \\times [_&1-&2_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\left( [_&1*&3_] \\bold{\\textcolor{teal}{\\large{+}}} [_&2*&3_] \\right) \\div &3  &=  [_(&1+&2)*&3_] \\div &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( [_&1*&3_] \\bold{\\textcolor{teal}{\\large{+}}} [_&2*&3_] \\right) \\div &3  &=  [_(&1+&2)*&3_] \\div &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\left( [_&1*&3_] \\bold{\\textcolor{teal}{\\large{-}}} [_&2*&3_] \\right) \\div &3  &=  [_(&1-&2)*&3_] \\div &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1-&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( [_&1*&3_] \\bold{\\textcolor{teal}{\\large{-}}} [_&2*&3_] \\right) \\div &3  &=  [_(&1-&2)*&3_] \\div &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_(&1+&2)*&3_] \\div \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) &= [_(&1+&2)*&3_] \\div [_&1+&2_]   \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_(&1+&2)*&3_] \\div \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) &= [_(&1+&2)*&3_] \\div [_&1+&2_]   \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} [_&1+&2+&3_] - \\left( &1\\bold{\\textcolor{teal}{\\large{+}}} &2 \\right)  &= [_&1+&2+&3_] - [_&1+&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [_&1+&2+&3_] - \\left( &1\\bold{\\textcolor{teal}{\\large{+}}} &2 \\right)  &= [_&1+&2+&3_] - [_&1+&2_] \\\\ &= &sol \\end{align}$$' },
             ],
 
 
@@ -4606,13 +4606,13 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) \\times \\left( &3 \\bold{\\textcolor{teal}{\\large{+}}} &4 \\right) &=  [_&1+&2_] \\times [_&3+&4_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1+&2)*(&3+&4)_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{+}}} &2 \\right) \\times \\left( &3 \\bold{\\textcolor{teal}{\\large{+}}} &4 \\right) &=  [_&1+&2_] \\times [_&3+&4_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) \\times \\left( &3 \\bold{\\textcolor{teal}{\\large{+}}} &4 \\right) &=  [_&1-&2_] \\times [_&3+&4_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)*(&3+&4)_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\left( &1 \\bold{\\textcolor{teal}{\\large{-}}} &2 \\right) \\times \\left( &3 \\bold{\\textcolor{teal}{\\large{+}}} &4 \\right) &=  [_&1-&2_] \\times [_&3+&4_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}   &4 \\times \\left( \\left([_&1*&3_] \\bold{\\textcolor{teal}{\\large{+}}} [_&2*&3_] \\right) \\div &3 \\right)  &= &4 \\times \\left( [_&1*&3+&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 \\right)   \\\\ &=  &4 \\times [_&1+&2_]  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1+&2)*&4_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}   &4 \\times \\left( \\left([_&1*&3_] \\bold{\\textcolor{teal}{\\large{+}}} [_&2*&3_] \\right) \\div &3 \\right)  &= &4 \\times \\left( [_&1*&3+&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 \\right)   \\\\ &=  &4 \\times [_&1+&2_]  \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -4643,22 +4643,22 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align}  &1 +  &2 \\bold{\\textcolor{teal}{\\large{\\times}}} &3 &=  &1 +  [_&2*&3_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &1 +  &2 \\bold{\\textcolor{teal}{\\large{\\times}}} &3 &=  &1 +  [_&2*&3_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  &2 \\bold{\\textcolor{teal}{\\large{\\times}}} &3 + &1 &=   [_&2*&3_] + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &2 \\bold{\\textcolor{teal}{\\large{\\times}}} &3 + &1 &=   [_&2*&3_] + &1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_&1*&2+&3_] - &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &=  [_&1*&2+&3_] - [_&1*&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&1*&2+&3_] - &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &=  [_&1*&2+&3_] - [_&1*&2_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_&2+&4_] - [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 &=  [_&2+&4_] - &2 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&4}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&2+&4_] - [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 &=  [_&2+&4_] - &2 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  &1+ [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 &=  &1 + &2 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &1+ [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 &=  &1 + &2 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}   [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 + &1 &=  &2 + &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}   [_&2*&3_] \\bold{\\textcolor{teal}{\\large{\\div}}} &3 + &1 &=  &2 + &1 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4680,10 +4680,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align}  [_&1*&2_] \\bold{\\textcolor{teal}{\\large{\\div}}} &1 \\times &3 &=  &2 \\times &3\\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&1*&2_] \\bold{\\textcolor{teal}{\\large{\\div}}} &1 \\times &3 &=  &2 \\times &3\\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  &3 \\bold{\\textcolor{teal}{\\large{-}}} &1 + &2  &=  [_&3-&1_] + &2 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3-&1+&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &3 \\bold{\\textcolor{teal}{\\large{-}}} &1 + &2  &=  [_&3-&1_] + &2 \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -4713,19 +4713,19 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align}  &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 + &3 \\bold{\\textcolor{teal}{\\large{\\times}}} &4 &=  [_&1*&2_] + [_&3*&4_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2+&3*&4_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 + &3 \\bold{\\textcolor{teal}{\\large{\\times}}} &4 &=  [_&1*&2_] + [_&3*&4_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 + [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 &= [_&1*&2_]+&3\\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2+&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 + [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 &= [_&1*&2_]+&3\\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 + &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &= &3+[_&1*&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2+&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 + &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &= &3+[_&1*&2_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 + [_&1*&2_]\\bold{\\textcolor{teal}{\\large{\\div}}} &2 &= &3+&1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&3_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&3*&4_] \\bold{\\textcolor{teal}{\\large{\\div}}} &4 + [_&1*&2_]\\bold{\\textcolor{teal}{\\large{\\div}}} &2 &= &3+&1 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  [_&1+1_] \\bold{\\textcolor{teal}{\\large{\\times}}} [_&2+1_] - &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &= [_(&1+1)*(&2+1)_]-[_&1*&2_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2+1_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  [_&1+1_] \\bold{\\textcolor{teal}{\\large{\\times}}} [_&2+1_] - &1 \\bold{\\textcolor{teal}{\\large{\\times}}} &2 &= [_(&1+1)*(&2+1)_]-[_&1*&2_] \\\\ &= &sol \\end{align}$$' },
             ],
 
 
@@ -5610,10 +5610,10 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&8_] +\\bold{\\textcolor{teal}{[._&5_]}} + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&8_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&8_] +\\bold{\\textcolor{teal}{[._&5_]}} + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&5_]}}+ [._&8_] + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&8_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&5_]}}+ [._&8_] + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -5645,7 +5645,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{[._&3_]}} + \\bold{\\textcolor{teal}{[._&4_]}} + \\bold{\\textcolor{orange}{[._&5_]}} + \\bold{\\textcolor{orange}{[._&6_]}} \
               &=  \\bold{\\textcolor{teal}{[._&3+&4_]}} + \\bold{\\textcolor{orange}{[._&5+&6_]}} \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&3+&4_]}} \
+              &=  &sol  \
               \\end{align}$$' },
             ],
             [
@@ -5653,7 +5653,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{[._&3_]}} + \\bold{\\textcolor{orange}{[._&5_]}} + \\bold{\\textcolor{teal}{[._&4_]}} + \\bold{\\textcolor{orange}{[._&6_]}} \
               &=  \\bold{\\textcolor{teal}{[._&3+&4_]}} + \\bold{\\textcolor{orange}{[._&5+&6_]}} \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&3+&4_]}} \
+              &=  &sol  \
               \\end{align}$$' },
             ],
             [
@@ -5661,7 +5661,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{[._&3_]}} + \\bold{\\textcolor{orange}{[._&5_]}} + \\bold{\\textcolor{orange}{[._&6_]}} + \\bold{\\textcolor{teal}{[._&4_]}} \
               &=  \\bold{\\textcolor{teal}{[._&3+&4_]}} + \\bold{\\textcolor{orange}{[._&5+&6_]}} \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&3+&4_]}} \
+              &=  &sol  \
               \\end{align}$$' },
             ]
 
@@ -5918,10 +5918,10 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&8_] +\\bold{\\textcolor{teal}{[._&5_]}} + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&8_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&8_] +\\bold{\\textcolor{teal}{[._&5_]}} + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&5_]}}+ [._&8_] + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&5+&6+&8_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&5_]}}+ [._&8_] + \\bold{\\textcolor{teal}{[._&6_]}} &= [._&8_] + \\bold{\\textcolor{teal}{[._&5+&6_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -6094,10 +6094,10 @@ const questions = {
           expressions: ['&1*0,5', '0,5*&1'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &1 \\times 0,5 &= &1 \\div 2 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1:2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &1 \\times 0,5 &= &1 \\div 2 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} 0,5 \\times &1 &= &1 \\div 2 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1:2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 0,5 \\times &1 &= &1 \\div 2 \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           
@@ -6119,10 +6119,10 @@ const questions = {
           expressions: ['&3*0,5', '0,5*&3'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&3_] \\times 0,5 &= [._&3_] \\div 2 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&3_] \\times 0,5 &= [._&3_] \\div 2 \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} 0,5 \\times [._&3_] &= [._&3_] \\div 2 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 0,5 \\times [._&3_] &= [._&3_] \\div 2 \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           
@@ -6142,10 +6142,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times 1,5 &= \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times 0,5 \\\\ &= &1 + [._0,5*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*1,5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times 1,5 &= \\bold{\\textcolor{teal}{&1}} + \\bold{\\textcolor{teal}{&1}} \\times 0,5 \\\\ &= &1 + [._0,5*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} 1,5 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{&1}} + 0,5 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= &1 + [._0,5*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*1,5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 1,5 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{&1}} + 0,5 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= &1 + [._0,5*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           'result-type': 'decimal',
@@ -6163,10 +6163,10 @@ const questions = {
           expressions: ['&1*2,5', '2,5*&1'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times 2,5 &= \\bold{\\textcolor{teal}{&1}} \\times 2 + \\bold{\\textcolor{teal}{&1}} \\times 0,5 \\\\ &= [_&1*2_] + [._0,5*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*2,5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}} \\times 2,5 &= \\bold{\\textcolor{teal}{&1}} \\times 2 + \\bold{\\textcolor{teal}{&1}} \\times 0,5 \\\\ &= [_&1*2_] + [._0,5*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} 2,5 \\times \\bold{\\textcolor{teal}{&1}} &= 2 \\times \\bold{\\textcolor{teal}{&1}} + 0,5 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_&1*2_] + [._0,5*&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*2,5_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 2,5 \\times \\bold{\\textcolor{teal}{&1}} &= 2 \\times \\bold{\\textcolor{teal}{&1}} + 0,5 \\times \\bold{\\textcolor{teal}{&1}} \\\\ &= [_&1*2_] + [._0,5*&1_] \\\\ &= &sol \\end{align}$$' },
             ],
           ],
           
@@ -6252,10 +6252,10 @@ const questions = {
           expressions: ['&2*0,1', '0,1*&2'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &1 \\bold{\\textcolor{teal}{\\times 0,1}} &= &1 \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1:10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &1 \\bold{\\textcolor{teal}{\\times 0,1}} &= &1 \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,1 \\times}} &1 &= &1 \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1:10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,1 \\times}} &1 &= &1 \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           
@@ -6277,10 +6277,10 @@ const questions = {
           expressions: ['&3*0,1', '0,1*&3'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,1}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,1}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,1 \\times}} [._&3_] &= [._&3_] \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,1 \\times}} [._&3_] &= [._&3_] \\bold{\\textcolor{teal}{\\div 10}} \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           
@@ -6303,10 +6303,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,01}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 100}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,01}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 100}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,01 \\times}} [._&3_] &= [._&3_] \\bold{\\textcolor{teal}{\\div 100}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{0,01 \\times}} [._&3_] &= [._&3_] \\bold{\\textcolor{teal}{\\div 100}} \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           'result-type': 'decimal',
@@ -6327,10 +6327,10 @@ const questions = {
           expressions: ['&3*0,001', '0,001*&3'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,001}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 1000}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:1000_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\times 0,001}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 1000}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} 0,001 \\bold{\\textcolor{teal}{\\times [._&3_]}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 1000}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:1000_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} 0,001 \\bold{\\textcolor{teal}{\\times [._&3_]}} &= [._&3_] \\bold{\\textcolor{teal}{\\div 1000}} \\\\ &=  &sol \\end{align}$$' },
             ],
           ],
           
@@ -6353,10 +6353,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._10^(-&1)_]}} \\times [._&2_] &= [._&2_] \\bold{\\textcolor{teal}{\\div [._10^&1_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&2*10^(-&1)_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._10^(-&1)_]}} \\times [._&2_] &= [._&2_] \\bold{\\textcolor{teal}{\\div [._10^&1_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} [._&2_] \\bold{\\textcolor{teal}{\\times [._10^(-&1)_]}} &= [._&2_] \\bold{\\textcolor{teal}{\\div [._10^&1_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&2*10^(-&1)_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&2_] \\bold{\\textcolor{teal}{\\times [._10^(-&1)_]}} &= [._&2_] \\bold{\\textcolor{teal}{\\div [._10^&1_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -6386,22 +6386,22 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  \\bold{\\textcolor{teal}{&2}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{&1}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  \\bold{\\textcolor{teal}{&1}} \\times &3 &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&2}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&1}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{&1}}  \\times  &3 \\times \\bold{\\textcolor{teal}{&2}} &= \\bold{\\textcolor{teal}{100}} \\times &3 \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{&1}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&2}} \\times \\bold{\\textcolor{teal}{&1}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&1}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\bold{\\textcolor{teal}{&1}} \\times \\bold{\\textcolor{teal}{&2}} &= &3 \\times \\bold{\\textcolor{teal}{100}} \\\\ &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -6426,16 +6426,16 @@ const questions = {
           variables: [{ '&1': '$d{1;1}', '&2': '$e[2;8]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + [_10-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + [_10-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + \\bold{\\textcolor{teal}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + \\bold{\\textcolor{teal}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{[._&1_]}} \\times &2+ \\bold{\\textcolor{teal}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*10_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{[._&1_]}} \\times &2+ \\bold{\\textcolor{teal}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -6457,16 +6457,16 @@ const questions = {
           variables: [{ '&1': '$d{$e[1;2];$e[1;2]}', '&2': '$e[2;98]' }],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + [_100-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + [_100-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} \\bold{\\textcolor{teal}{[._&1_]}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{teal}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + \\bold{\\textcolor{teal}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} &2 \\times \\bold{\\textcolor{teal}{[._&1_]}} + \\bold{\\textcolor{teal}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{[._&1_]}} \\times &2+ \\bold{\\textcolor{teal}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1*100_]}}\\end{align}$$' },
+              { text: '$$\\begin{align}  \\bold{\\textcolor{teal}{[._&1_]}} \\times &2+ \\bold{\\textcolor{teal}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{teal}{[._&1_]}}\\\\  &= &sol \\end{align}$$' },
             ],
 
           ],
@@ -6815,7 +6815,7 @@ const questions = {
           expressions: ['&3'],
           correctionDetails: [
             [
-              { text: '$$[._&1*&2/10_] \\div &2 = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3_]}}$$ car $$ [._&3_] \\times &2 = [._&1*&2/10_]$$' },
+              { text: '$$[._&1*&2/10_] \\div &2 = &sol $$ car $$ [._&3_] \\times &2 = [._&1*&2/10_]$$' },
             ],
 
 
@@ -6841,10 +6841,10 @@ const questions = {
           expressions: ['[._&3_]:&2', '&1:&2'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\div [._&2_]}} &= [._&3_] \\bold{\\textcolor{teal}{\\times [._1:&2_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&3:&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&3_] \\bold{\\textcolor{teal}{\\div [._&2_]}} &= [._&3_] \\bold{\\textcolor{teal}{\\times [._1:&2_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} [._&1_] \\bold{\\textcolor{teal}{\\div [._&2_]}} &= [._&1_] \\bold{\\textcolor{teal}{\\times [._1:&2_]}} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&1:&2_]}}\\end{align}$$' },
+              { text: '$$\\begin{align} [._&1_] \\bold{\\textcolor{teal}{\\div [._&2_]}} &= [._&1_] \\bold{\\textcolor{teal}{\\times [._1:&2_]}} \\\\ &=  &sol \\end{align}$$' },
             ],
 
           ],
@@ -6867,7 +6867,7 @@ const questions = {
           expressions: ['[._&1*&2*&3_]:[._&1*&3_]'],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} [._&1*&2*&3_] \\div [._&1*&3_] &= [._&1*&2_] \\div [._&1_] \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \\end{align}$$' },
+              { text: '$$\\begin{align} [._&1*&2*&3_] \\div [._&1*&3_] &= [._&1*&2_] \\div [._&1_] \\\\ &= &sol  \\end{align}$$' },
             ],
 
 
@@ -7629,10 +7629,10 @@ const questions = {
           type: 'trou',
           correctionDetails: [
             [
-              { text: "Dans $$&2 \\times \\cdots = &1$$, le nombre cherché est le résultat de $$&1 \\div &2$$ qui s'écrit $$\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{&1}{&2}}$$ car on ne peut pas le mettre sous forme décimale." },
+              { text: "Dans $$&2 \\times \\cdots = &1$$, le nombre cherché est le résultat de $$&1 \\div &2$$ qui s'écrit $$&sol $$ car on ne peut pas le mettre sous forme décimale." },
             ],
             [
-              { text: "Dans $$ \\cdots \\times &2 = &1$$, le nombre cherché est le résultat de $$&1 \\div &2$$ qui s'écrit $$\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{&1}{&2}}$$ car on ne peut pas le mettre sous forme décimale." },
+              { text: "Dans $$ \\cdots \\times &2 = &1$$, le nombre cherché est le résultat de $$&1 \\div &2$$ qui s'écrit $$&sol $$ car on ne peut pas le mettre sous forme décimale." },
             ],
           ],
           defaultDelay: 20,
@@ -7646,10 +7646,10 @@ const questions = {
           variables: [{ '&1': '$l{3;6;7;9;11;12;13}', '&2': '$e[2;10]\\{cd(&1)}' }],
           correctionDetails: [
             [
-              { text: "$$\\textcolor{teal}{\\dfrac{&2}{&1}} \\times &1=\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$ car $$\\textcolor{teal}{\\dfrac{&2}{&1}}$$ désigne le résultat de la division $$\\textcolor{teal}{&2 \\div &1}$$ et $$\\textcolor{teal}{&2 \\div &1} \\times &1 = &2$$. " },
+              { text: "$$\\textcolor{teal}{\\dfrac{&2}{&1}} \\times &1=&sol $$ désigne le résultat de la division $$\\textcolor{teal}{&2 \\div &1}$$ et $$\\textcolor{teal}{&2 \\div &1} \\times &1 = &2$$. " },
             ],
             [
-              { text: "$$&1 \\times \\textcolor{teal}{\\dfrac{&2}{&1}} =\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$ car $$\\textcolor{teal}{\\dfrac{&2}{&1}}$$ désigne le résultat de la division $$\\textcolor{teal}{&2 \\div &1}$$ et $$&1 \\times \\textcolor{teal}{&2 \\div &1} = &2$$. " },
+              { text: "$$&1 \\times \\textcolor{teal}{\\dfrac{&2}{&1}} =&sol $$ désigne le résultat de la division $$\\textcolor{teal}{&2 \\div &1}$$ et $$&1 \\times \\textcolor{teal}{&2 \\div &1} = &2$$. " },
             ],
           ],
           
@@ -7668,7 +7668,7 @@ const questions = {
           type: 'decomposition',
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2 + \\dfrac{&3}{&1}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -7685,7 +7685,7 @@ const questions = {
           solutions: [['&2+&3/&1']],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2 + \\dfrac{&3}{&1}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -7703,7 +7703,7 @@ const questions = {
           solutions: [['&2+&3/&1']],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2 + \\dfrac{&3}{&1}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&2+&3_]}{&1} &= \\dfrac{[_&1*&2_]}{&1} + \\dfrac{&3}{&1} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           options: ['no-penalty-for-non-reduced-fractions'],
@@ -7833,7 +7833,7 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&1_]}{&1} &= [_&2*&1_] \\div &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&1_]}{&1} &= [_&2*&1_] \\div &1 \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -7849,7 +7849,7 @@ const questions = {
           variables: [{ '&1': '$l{2;4;5;10}', '&2': '$e[1;&1+1]\\{&1}' }],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&2}{&1} &= &2 \\div &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[._&2/&1_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&2}{&1} &= &2 \\div &1 \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -7891,16 +7891,16 @@ const questions = {
           solutions: [['[_&2*&3_]'], ['[_&1*&3_]'], ['[_&2*&3_]'], ['[_&1*&3_]']],
           correctionDetails: [
             [
-              { text: "$$\\dfrac{&2}{&1} = \\dfrac{\\textcolor{green}{[_&2*&3_]}}{[_&1*&3_]}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$\\dfrac{&2}{&1} = \\dfrac{\\textcolor{green}{[_&2*&3_]}}{[_&1*&3_]}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{&2}{&1} = \\dfrac{[_&2*&3_]}{\\textcolor{green}{[_&1*&3_]}}$$ car $$&2 \\textcolor{teal}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3_]}}$$" },
+              { text: "$$\\dfrac{&2}{&1} = \\dfrac{[_&2*&3_]}{\\textcolor{green}{[_&1*&3_]}}$$ car $$&2 \\textcolor{teal}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{\\textcolor{green}{[_&2*&3_]}}{[_&1*&3_]} = \\dfrac{&2}{&1}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$\\dfrac{\\textcolor{green}{[_&2*&3_]}}{[_&1*&3_]} = \\dfrac{&2}{&1}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{[_&2*&3_]}{\\textcolor{green}{[_&1*&3_]}}  = \\dfrac{&2}{&1}$$ car $$&2 \\textcolor{teal}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3_]}}$$" },
+              { text: "$$\\dfrac{[_&2*&3_]}{\\textcolor{green}{[_&1*&3_]}}  = \\dfrac{&2}{&1}$$ car $$&2 \\textcolor{teal}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
 
           ],
@@ -7943,16 +7943,16 @@ const questions = {
           solutions: [['&2'], ['&1'], ['&2'], ['&1']],
           correctionDetails: [
             [
-              { text: "$$\\dfrac{[_&2*&3_]}{[_&1*&3_]} = \\dfrac{\\textcolor{green}{&2}}{&1}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$\\dfrac{[_&2*&3_]}{[_&1*&3_]} = \\dfrac{\\textcolor{green}{&2}}{&1}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{[_&2*&3_]}{[_&1*&3_]} = \\dfrac{&2}{\\textcolor{green}{&1}}$$ car $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1}}$$" },
+              { text: "$$\\dfrac{[_&2*&3_]}{[_&1*&3_]} = \\dfrac{&2}{\\textcolor{green}{&1}}$$ car $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{\\textcolor{green}{&2}}{&1}  = \\dfrac{[_&2*&3_]}{[_&1*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$\\dfrac{\\textcolor{green}{&2}}{&1}  = \\dfrac{[_&2*&3_]}{[_&1*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{&2}{\\textcolor{green}{&1}}  = \\dfrac{[_&2*&3_]}{[_&1*&3_]}$$ car $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1}}$$" },
+              { text: "$$\\dfrac{&2}{\\textcolor{green}{&1}}  = \\dfrac{[_&2*&3_]}{[_&1*&3_]}$$ car $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
 
           ],
@@ -7982,16 +7982,16 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\dfrac{&1}{[_&1*&3_]} = \\dfrac{&2}{\\textcolor{green}{[_&2*&3_]}}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$\\dfrac{&1}{[_&1*&3_]} = \\dfrac{&2}{\\textcolor{green}{[_&2*&3_]}}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$ \\dfrac{[_&1*&3_]}{&1}  = \\dfrac{\\textcolor{green}{[_&2*&3_]}}{&2}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$ \\dfrac{[_&1*&3_]}{&1}  = \\dfrac{\\textcolor{green}{[_&2*&3_]}}{&2}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{&2}{\\textcolor{green}{[_&2*&3_]}}  = \\dfrac{&1}{[_&1*&3_]}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$\\dfrac{&2}{\\textcolor{green}{[_&2*&3_]}}  = \\dfrac{&1}{[_&1*&3_]}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
             [
-              { text: "$$ \\dfrac{\\textcolor{green}{[_&2*&3_]}}{&2} = \\dfrac{[_&1*&3_]}{&1}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3_]}}$$" },
+              { text: "$$ \\dfrac{\\textcolor{green}{[_&2*&3_]}}{&2} = \\dfrac{[_&1*&3_]}{&1}$$ car $$&1 \\textcolor{teal}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{teal}{\\times &3} = &sol $$" },
             ],
 
           ],
@@ -8021,16 +8021,16 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\dfrac{&1}{[_&1*&3_]} = \\dfrac{\\textcolor{green}{&2}}{[_&2*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$\\dfrac{&1}{[_&1*&3_]} = \\dfrac{\\textcolor{green}{&2}}{[_&2*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$ \\dfrac{[_&1*&3_]}{&1}  = \\dfrac{[_&2*&3_]}{\\textcolor{green}{&2}}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$ \\dfrac{[_&1*&3_]}{&1}  = \\dfrac{[_&2*&3_]}{\\textcolor{green}{&2}}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$\\dfrac{\\textcolor{green}{&2}}{[_&2*&3_]}  = \\dfrac{&1}{[_&1*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$\\dfrac{\\textcolor{green}{&2}}{[_&2*&3_]}  = \\dfrac{&1}{[_&1*&3_]}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
             [
-              { text: "$$ \\dfrac{[_&2*&3_]}{\\textcolor{green}{&2}}  = \\dfrac{[_&1*&3_]}{&1}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}}$$" },
+              { text: "$$ \\dfrac{[_&2*&3_]}{\\textcolor{green}{&2}}  = \\dfrac{[_&1*&3_]}{&1}$$ car $$[_&1*&3_] \\textcolor{teal}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{teal}{\\div &3} = &sol $$" },
             ],
 
           ],
@@ -8055,7 +8055,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&3_]}{[_&2*&4_]} &= \\dfrac{[_&1*&3_] \\textcolor{teal}{\\div [_mini(&1;&2)_]}}{[_&2*&4_] \\textcolor{teal}{\\div [_mini(&1;&2)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3/(&2*&4)_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&3_]}{[_&2*&4_]} &= \\dfrac{[_&1*&3_] \\textcolor{teal}{\\div [_mini(&1;&2)_]}}{[_&2*&4_] \\textcolor{teal}{\\div [_mini(&1;&2)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8075,7 +8075,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&2_]}{[_&1*&3_]} &= \\dfrac{[_&1*&2_] \\textcolor{teal}{\\div &1}}{[_&1*&3_] \\textcolor{teal}{\\div &1}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&3_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&2_]}{[_&1*&3_]} &= \\dfrac{[_&1*&2_] \\textcolor{teal}{\\div &1}}{[_&1*&3_] \\textcolor{teal}{\\div &1}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8096,7 +8096,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&2_]}{[_&1*&3_]} &= \\dfrac{[_&1*&2_] \\textcolor{teal}{\\div &1}}{[_&1*&3_] \\textcolor{teal}{\\div &1}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&3_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&2_]}{[_&1*&3_]} &= \\dfrac{[_&1*&2_] \\textcolor{teal}{\\div &1}}{[_&1*&3_] \\textcolor{teal}{\\div &1}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8111,7 +8111,7 @@ const questions = {
           variables: [{ '&1': '$e[2;9]', '&2': '$e[1;9]\\{&1}', '&3': '$e[2;9]' }],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{[_&1*&3_]} &= \\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{[_&1*&3_]} &= \\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8143,13 +8143,13 @@ const questions = {
           variables: [{ '&1': '$e[2;9]', '&2': '$e[1;9]\\{&1}', '&3': '$e[2;9]' }],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{-[_&2*&3_]}{[_&1*&3_]} &= -\\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{-[_&2/&1_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{-[_&2*&3_]}{[_&1*&3_]} &= -\\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{-[_&1*&3_]} &= -\\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{-[_&2/&1_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{-[_&1*&3_]} &= -\\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{-[_&2*&3_]}{-[_&1*&3_]} &= \\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{-[_&2*&3_]}{-[_&1*&3_]} &= \\dfrac{[_&2*&3_] \\textcolor{teal}{\\div [_&3*pgcd(&1;&2)_]}}{[_&1*&3_] \\textcolor{teal}{\\div  [_&3*pgcd(&1;&2)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8312,13 +8312,13 @@ const questions = {
           correctionDetails: [
             [
               {
-                text: "@@ &5<&6 ?? $$\\frac{&2}{&3} = \\frac{&2 \\textcolor{teal}{\\times &1}}{&3 \\textcolor{teal}{\\times &1}} = \\frac{[_&2*&1_]}{[_&3*&1_]}$$ et $$\\frac{[_&2*&1_]}{[_&3*&1_]}<\\frac{&4}{[_&3*&1_]}$$, donc $$\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&2}{&3}}}<\\frac{&4}{[_&3*&1_]$$@@ \
-              @@ &5>&6 ?? $$\\frac{&2}{&3} = \\frac{&2 \\textcolor{teal}{\\times &1}}{&3 \\textcolor{teal}{\\times &1}} = \\frac{[_&2*&1_]}{[_&3*&1_]}$$ et $$\\frac{[_&2*&1_]}{[_&3*&1_]}>\\frac{&4}{[_&3*&1_]}$$, donc $$\\frac{&2}{&3}>\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&4}{[_&3*&1_]}}$$@@" },
+                text: "@@ &5<&6 ?? $$\\frac{&2}{&3} = \\frac{&2 \\textcolor{teal}{\\times &1}}{&3 \\textcolor{teal}{\\times &1}} = \\frac{[_&2*&1_]}{[_&3*&1_]}$$ et $$\\frac{[_&2*&1_]}{[_&3*&1_]}<\\frac{&4}{[_&3*&1_]}$$, donc $$&sol <\\frac{&4}{[_&3*&1_]$$@@ \
+              @@ &5>&6 ?? $$\\frac{&2}{&3} = \\frac{&2 \\textcolor{teal}{\\times &1}}{&3 \\textcolor{teal}{\\times &1}} = \\frac{[_&2*&1_]}{[_&3*&1_]}$$ et $$\\frac{[_&2*&1_]}{[_&3*&1_]}>\\frac{&4}{[_&3*&1_]}$$, donc $$\\frac{&2}{&3}>&sol $$@@" },
             ],
             [
               {
-                text: "@@ &5<&6 ?? $$\\frac{&3}{&2} = \\frac{&3 \\textcolor{teal}{\\times &1}}{&2 \\textcolor{teal}{\\times &1}} = \\frac{[_&3*&1_]}{[_&2*&1_]}$$ et $$\\frac{[_&3*&1_]}{[_&2*&1_]}<\\frac{&4}{[_&2*&1_]}$$, donc $$\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&3}{&2}}}<\\frac{&4}{[_&2*&1_]$$@@ \
-              @@ &5>&6 ?? $$\\frac{&3}{&2} = \\frac{&3 \\textcolor{teal}{\\times &1}}{&2 \\textcolor{teal}{\\times &1}} = \\frac{[_&3*&1_]}{[_&2*&1_]}$$ et $$\\frac{[_&3*&1_]}{[_&2*&1_]}>\\frac{&4}{[_&2*&1_]}$$, donc $$\\frac{&3}{&2}>\\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&4}{[_&2*&1_]}}$$@@" },
+                text: "@@ &5<&6 ?? $$\\frac{&3}{&2} = \\frac{&3 \\textcolor{teal}{\\times &1}}{&2 \\textcolor{teal}{\\times &1}} = \\frac{[_&3*&1_]}{[_&2*&1_]}$$ et $$\\frac{[_&3*&1_]}{[_&2*&1_]}<\\frac{&4}{[_&2*&1_]}$$, donc $$&sol <\\frac{&4}{[_&2*&1_]$$@@ \
+              @@ &5>&6 ?? $$\\frac{&3}{&2} = \\frac{&3 \\textcolor{teal}{\\times &1}}{&2 \\textcolor{teal}{\\times &1}} = \\frac{[_&3*&1_]}{[_&2*&1_]}$$ et $$\\frac{[_&3*&1_]}{[_&2*&1_]}>\\frac{&4}{[_&2*&1_]}$$, donc $$\\frac{&3}{&2}>&sol $$@@" },
             ],
           ],
 
@@ -8488,13 +8488,13 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{10}}+\\dfrac{&2}{\\textcolor{teal}{10}} &= \\dfrac{&1+&2}{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{10}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{10}}+\\dfrac{&2}{\\textcolor{teal}{10}} &= \\dfrac{&1+&2}{\\textcolor{teal}{10}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{10}}+\\dfrac{&2}{\\textcolor{teal}{10}}+\\dfrac{&3}{\\textcolor{teal}{10}} &= \\dfrac{&1+&2+&3}{\\textcolor{teal}{10}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2+&3_]}{10}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{10}}+\\dfrac{&2}{\\textcolor{teal}{10}}+\\dfrac{&3}{\\textcolor{teal}{10}} &= \\dfrac{&1+&2+&3}{\\textcolor{teal}{10}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{100}}+\\dfrac{&2}{\\textcolor{teal}{100}} &= \\dfrac{&1+&2}{\\textcolor{teal}{100}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{100}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{100}}+\\dfrac{&2}{\\textcolor{teal}{100}} &= \\dfrac{&1+&2}{\\textcolor{teal}{100}} \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -8517,7 +8517,7 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}+\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{&3}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}+\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
 
@@ -8545,10 +8545,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}+\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{&3}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}+\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}-\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1-&2}{\\textcolor{teal}{&3}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1-&2_]}{&3}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{\\textcolor{teal}{&3}}-\\dfrac{&2}{\\textcolor{teal}{&3}} &= \\dfrac{&1-&2}{\\textcolor{teal}{&3}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           defaultDelay: 30,
@@ -8581,13 +8581,13 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} + \\dfrac{&2}{[_&3*&4_]} &= \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} + \\dfrac{&2}{[_&3*&4_]} \\\\ &= \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} + \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{[_&1*&4_]+&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1*&4+&2_]}{[_&3*&4_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} + \\dfrac{&2}{[_&3*&4_]} &= \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} + \\dfrac{&2}{[_&3*&4_]} \\\\ &= \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} + \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{[_&1*&4_]+&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&2}{[_&3*&4_]} + \\dfrac{&1}{&3} &= \\dfrac{&2}{[_&3*&4_]} + \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} + \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{&2+[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1*&4+&2_]}{[_&3*&4_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&2}{[_&3*&4_]} + \\dfrac{&1}{&3} &= \\dfrac{&2}{[_&3*&4_]} + \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} + \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{&2+[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} - \\dfrac{&2}{[_&3*&4_]} &= \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} - \\dfrac{&2}{[_&3*&4_]} \\\\ &= \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} - \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{[_&1*&4_]-&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1*&4-&2_]}{[_&3*&4_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} - \\dfrac{&2}{[_&3*&4_]} &= \\dfrac{&1\\textcolor{orange}{\\times &4}}{&3\\textcolor{orange}{\\times &4}} - \\dfrac{&2}{[_&3*&4_]} \\\\ &= \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&3*&4_]}} - \\dfrac{&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= \\dfrac{[_&1*&4_]-&2}{\\textcolor{teal}{[_&3*&4_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
 
 
@@ -8613,10 +8613,10 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} + \\dfrac{[_&2*&4_]}{[_&3*&4_]} &= \\dfrac{&1}{&3} + \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div &4}}{[_&3*&4_]\\textcolor{orange}{\\div &4}} \\\\ &= \\dfrac{&1}{\\textcolor{teal}{&3}} + \\dfrac{&2}{\\textcolor{teal}{&3}} \\\\ &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{&3}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} + \\dfrac{[_&2*&4_]}{[_&3*&4_]} &= \\dfrac{&1}{&3} + \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div &4}}{[_&3*&4_]\\textcolor{orange}{\\div &4}} \\\\ &= \\dfrac{&1}{\\textcolor{teal}{&3}} + \\dfrac{&2}{\\textcolor{teal}{&3}} \\\\ &= \\dfrac{&1+&2}{\\textcolor{teal}{&3}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&4_]}{[_&3*&4_]} + \\dfrac{&1}{&3} &= \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div &4}}{[_&3*&4_]\\textcolor{orange}{\\div &4}} + \\dfrac{&1}{&3} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{&3}} + \\dfrac{&1}{\\textcolor{teal}{&3}} \\\\ &= \\dfrac{&2+&1}{\\textcolor{teal}{&3}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1+&2_]}{&3}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&4_]}{[_&3*&4_]} + \\dfrac{&1}{&3} &= \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div &4}}{[_&3*&4_]\\textcolor{orange}{\\div &4}} + \\dfrac{&1}{&3} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{&3}} + \\dfrac{&1}{\\textcolor{teal}{&3}} \\\\ &= \\dfrac{&2+&1}{\\textcolor{teal}{&3}} \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -8639,10 +8639,10 @@ const questions = {
 
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&2}{&1} + &3 &= \\dfrac{&2}{&1} + \\dfrac{&3\\textcolor{orange}{\\times &1}}{\\textcolor{orange}{&1}} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{&1}} + \\dfrac{[_&3*&1_]}{\\textcolor{teal}{&1}} \\\\ &= \\dfrac{&2+[_&3*&1_]}{\\textcolor{teal}{[_&1_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&3*&1+&2_]}{&1}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&2}{&1} + &3 &= \\dfrac{&2}{&1} + \\dfrac{&3\\textcolor{orange}{\\times &1}}{\\textcolor{orange}{&1}} \\\\ &= \\dfrac{&2}{\\textcolor{teal}{&1}} + \\dfrac{[_&3*&1_]}{\\textcolor{teal}{&1}} \\\\ &= \\dfrac{&2+[_&3*&1_]}{\\textcolor{teal}{[_&1_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} &3 + \\dfrac{&2}{&1} &= \\dfrac{&3\\textcolor{orange}{\\times &1}}{\\textcolor{orange}{&1}} + \\dfrac{&2}{&1} \\\\ &= \\dfrac{[_&3*&1_]}{\\textcolor{teal}{&1}} + \\dfrac{&2}{\\textcolor{teal}{&1}} \\\\ &= \\dfrac{[_&3*&1_]+&2}{\\textcolor{teal}{[_&1_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&3*&1+&2_]}{&1}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &3 + \\dfrac{&2}{&1} &= \\dfrac{&3\\textcolor{orange}{\\times &1}}{\\textcolor{orange}{&1}} + \\dfrac{&2}{&1} \\\\ &= \\dfrac{[_&3*&1_]}{\\textcolor{teal}{&1}} + \\dfrac{&2}{\\textcolor{teal}{&1}} \\\\ &= \\dfrac{[_&3*&1_]+&2}{\\textcolor{teal}{[_&1_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8661,10 +8661,10 @@ const questions = {
 
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&4_]}{\\textcolor{teal}{[_&1*&3_]}} + \\dfrac{[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&1*&3_]}} &= \\dfrac{[_&2*&4_]+[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&1*&3_]}} \\\\ &= \\dfrac{[_&1*&4_]}{[_&1*&3_]} \\\\ &=  \\dfrac{[_&1*&4_]\\textcolor{orange}{\\div [_pgcd(&1*&3;&1*&4)_]}}{[_&1*&3_]\\textcolor{orange}{\\div [_pgcd(&1*&3;&1*&4)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&4/(&1*&3)_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&4_]}{\\textcolor{teal}{[_&1*&3_]}} + \\dfrac{[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&1*&3_]}} &= \\dfrac{[_&2*&4_]+[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&1*&3_]}} \\\\ &= \\dfrac{[_&1*&4_]}{[_&1*&3_]} \\\\ &=  \\dfrac{[_&1*&4_]\\textcolor{orange}{\\div [_pgcd(&1*&3;&1*&4)_]}}{[_&1*&3_]\\textcolor{orange}{\\div [_pgcd(&1*&3;&1*&4)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&2*&3_]}} - \\dfrac{[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&2*&3_]}} &= \\dfrac{[_&1*&4_]-[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&2*&3_]}} \\\\ &= \\dfrac{[_&2*&4_]}{[_&2*&3_]} \\\\ &=  \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div [_pgcd(&2*&3;&2*&4)_]}}{[_&2*&3_]\\textcolor{orange}{\\div [_pgcd(&2*&3;&2*&4)_]}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&4/(&2*&3)_]}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&1*&4_]}{\\textcolor{teal}{[_&2*&3_]}} - \\dfrac{[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&2*&3_]}} &= \\dfrac{[_&1*&4_]-[_(&1-&2)*&4_]}{\\textcolor{teal}{[_&2*&3_]}} \\\\ &= \\dfrac{[_&2*&4_]}{[_&2*&3_]} \\\\ &=  \\dfrac{[_&2*&4_]\\textcolor{orange}{\\div [_pgcd(&2*&3;&2*&4)_]}}{[_&2*&3_]\\textcolor{orange}{\\div [_pgcd(&2*&3;&2*&4)_]}} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           variables: [
@@ -8813,7 +8813,7 @@ const questions = {
           }],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}} \\text{ de } [_&1*&3_] &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\times &2 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}} \\text{ de } [_&1*&3_] &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\times &2 \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -8830,10 +8830,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}} \\times [_&1*&3_] &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\textcolor{teal}{\\times &2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}} \\times [_&1*&3_] &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\textcolor{teal}{\\times &2} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} [_&1*&3_] \\times \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}}  &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\textcolor{teal}{\\times &2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} [_&1*&3_] \\times \\dfrac{\\textcolor{teal}{&2}}{\\textcolor{orange}{&3}}  &= [_&1*&3_]\\textcolor{orange}{\\div &3} \\textcolor{teal}{\\times &2} \\\\ &= &1 \\textcolor{teal}{\\times &2} \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -8851,11 +8851,11 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{&3} \\times &1 &= [_&2*&3_] \\div &3 \\times &1 \\\\ &= &2 \\times &1 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{[_&2*&3_]}{&3} \\times &1 &= [_&2*&3_] \\div &3 \\times &1 \\\\ &= &2 \\times &1 \\\\ &= &sol  \\end{align}$$" },
             ],
 
             [
-              { text: "$$\\begin{align} &1 \\times \\dfrac{[_&2*&3_]}{&3} &= &1 \\times \\left([_&2*&3_] \\div &3 \\right) \\\\ &= &1 \\times &2 \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &1 \\times \\dfrac{[_&2*&3_]}{&3} &= &1 \\times \\left([_&2*&3_] \\div &3 \\right) \\\\ &= &1 \\times &2 \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -8877,10 +8877,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} &1 \\times \\dfrac{1}{&2} &= \\dfrac{&1 \\times 1}{&2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &1 \\times \\dfrac{1}{&2} &= \\dfrac{&1 \\times 1}{&2} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{1}{&2} \\times &1 &= \\dfrac{1 \\times &1}{&2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{1}{&2} \\times &1 &= \\dfrac{1 \\times &1}{&2} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
 
@@ -8901,10 +8901,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} &1 \\times \\dfrac{&3}{&2} &= \\dfrac{&1 \\times &3}{&2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &1 \\times \\dfrac{&3}{&2} &= \\dfrac{&1 \\times &3}{&2} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&3}{&2} \\times &1 &= \\dfrac{&3 \\times &1}{&2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&3}{&2} \\times &1 &= \\dfrac{&3 \\times &1}{&2} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
 
@@ -8926,7 +8926,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\times \\dfrac{&2}{&4} &= \\dfrac{&1 \\times &2}{&3 \\times &4} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\dfrac{[_&1* &2_]}{[_&3*&4_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\times \\dfrac{&2}{&4} &= \\dfrac{&1 \\times &2}{&3 \\times &4} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -8947,10 +8947,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\times \\dfrac{&2}{&1} &= \\dfrac{\\enclose{updiagonalstrike}[3px solid orange]{&1}}{&3} \\times \\dfrac{&2}{\\enclose{updiagonalstrike}[3px solid orange]{&1}} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\times \\dfrac{&2}{&1} &= \\dfrac{&sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\dfrac{&3}{&1} \\times \\dfrac{&1}{&2} &= \\dfrac{&3}{\\enclose{updiagonalstrike}[3px solid orange]{&1}} \\times \\dfrac{\\enclose{updiagonalstrike}[3px solid orange]{&1}}{&2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/&2_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&3}{&1} \\times \\dfrac{&1}{&2} &= \\dfrac{&3}{&sol  \\end{align}$$" },
             ],
 
           ],
@@ -9061,7 +9061,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&4}{&2}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{&2}{&4}} \\\\ &= \\dfrac{&1 \\times &2}{&3 \\times &4}  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2/(&3*&4)_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&4}{&2}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{&2}{&4}} \\\\ &= \\dfrac{&1 \\times &2}{&3 \\times &4}  \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -9083,7 +9083,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\textcolor{teal}{\\div &2} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&2}{1}} \\\\ &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{1}{&2}} \\\\&= \\dfrac{&1 \\times 1}{&3 \\times &2}  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/(&3*&2)_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{&1}{&3} \\textcolor{teal}{\\div &2} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&2}{1}} \\\\ &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{1}{&2}} \\\\&= \\dfrac{&1 \\times 1}{&3 \\times &2}  \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -9105,7 +9105,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{\\dfrac{&1}{&3}}{\\textcolor{teal}{\\dfrac{&4}{&2}}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{&2}{&4}} \\\\ &= \\dfrac{&1 \\times &2}{&3 \\times &4}  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2/(&3*&4)_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{\\dfrac{&1}{&3}}{\\textcolor{teal}{\\dfrac{&4}{&2}}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{&2}{&4}} \\\\ &= \\dfrac{&1 \\times &2}{&3 \\times &4}  \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9125,7 +9125,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\dfrac{\\dfrac{&1}{&3}}{\\textcolor{teal}{&2}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&2}{1}} \\\\ &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{1}{&2}} \\\\ &= \\dfrac{&1 \\times 1}{&3 \\times &2}  \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1/(&2*&3)_]}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\dfrac{\\dfrac{&1}{&3}}{\\textcolor{teal}{&2}} &= \\dfrac{&1}{&3} \\textcolor{teal}{\\div \\dfrac{&2}{1}} \\\\ &= \\dfrac{&1}{&3} \\textcolor{teal}{\\times \\dfrac{1}{&2}} \\\\ &= \\dfrac{&1 \\times 1}{&3 \\times &2}  \\\\ &= &sol  \\end{align}$$" },
             ],
 
           ],
@@ -9235,7 +9235,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} 10^&2 \\times 10^&3 &= 10^{&2+&3} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&2+&3_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} 10^&2 \\times 10^&3 &= 10^{&2+&3} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           // bug de mathlive sur les puissances
@@ -9263,7 +9263,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} &1^&2 \\times &1^&3 &= &1^{&2+&3} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2+&3_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &1^&2 \\times &1^&3 &= &1^{&2+&3} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           // bug de mathlive sur les puissances
@@ -9290,7 +9290,7 @@ const questions = {
           conditions: ['abs(&1+(&2))>1'],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} 10^{&1} \\times 10^{&2} &= 10^{&1[+_&2_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1+(&2)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} 10^{&1} \\times 10^{&2} &= 10^{&1[+_&2_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           // bug de mathlive sur les puissances
@@ -9319,7 +9319,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} &1^{&2} \\times &1^{&3} &= &1^{&2[+_&3_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2+(&3)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} &1^{&2} \\times &1^{&3} &= &1^{&2[+_&3_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9348,7 +9348,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\frac{10^{&1}}{10^{&2}} &= 10^{&1[+_-&2_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1-(&2)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\frac{10^{&1}}{10^{&2}} &= 10^{&1[+_-&2_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9373,7 +9373,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\frac{&1^{&2}}{&1^{&3}} &= &1^{&2[+_-&3_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2-(&3)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\frac{&1^{&2}}{&1^{&3}} &= &1^{&2[+_-&3_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9399,7 +9399,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\frac{10^{&1}}{10^{&2}} &= 10^{&1[+_-(&2)_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1-(&2)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\frac{10^{&1}}{10^{&2}} &= 10^{&1[+_-(&2)_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9424,7 +9424,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\frac{&1^{&2}}{&1^{&3}} &= &1^{&2[+_-(&3)_]} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2-(&3)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\frac{&1^{&2}}{&1^{&3}} &= &1^{&2[+_-(&3)_]} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9449,7 +9449,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\left(10^&1\\right)^&2 &= 10^{&1 \\times &2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1*&2_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(10^&1\\right)^&2 &= 10^{&1 \\times &2} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           // bug de mathlive sur les puissances
@@ -9476,7 +9476,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\left(&1^&2\\right)^&3 &= &1^{&2 \\times &3} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2*&3_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(&1^&2\\right)^&3 &= &1^{&2 \\times &3} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           // bug de mathlive sur les puissances
@@ -9510,10 +9510,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\left(10^{&1}\\right)^{&2} &= 10^{&1 \\times &2} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1*&2_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(10^{&1}\\right)^{&2} &= 10^{&1 \\times &2} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\left(10^{&1}\\right)^{&2} &= 10^{&1 \\times (&2)} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{10^{[_&1*(&2)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(10^{&1}\\right)^{&2} &= 10^{&1 \\times (&2)} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -9546,10 +9546,10 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: "$$\\begin{align} \\left(&1^{&2}\\right)^{&3} &= &1^{&2 \\times &3} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2*&3_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(&1^{&2}\\right)^{&3} &= &1^{&2 \\times &3} \\\\ &= &sol  \\end{align}$$" },
             ],
             [
-              { text: "$$\\begin{align} \\left(&1^{&2}\\right)^{&3} &= &1^{&2 \\times (&3)} \\\\ &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1^{[_&2*(&3)_]}}}}} \\end{align}$$" },
+              { text: "$$\\begin{align} \\left(&1^{&2}\\right)^{&3} &= &1^{&2 \\times (&3)} \\\\ &= &sol  \\end{align}$$" },
             ],
           ],
           
@@ -12098,7 +12098,7 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\sqrt{[_&1*&1*&2_]} &= \\sqrt{[_&1*&1_] \\times &2} \\\\ &= \\sqrt{[_&1*&1_]} \\times \\sqrt{&2} \\\\  &= &1 \\times \\sqrt{&2} \\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1 \\sqrt{&2}}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} \\sqrt{[_&1*&1*&2_]} &= \\sqrt{[_&1*&1_] \\times &2} \\\\ &= \\sqrt{[_&1*&1_]} \\times \\sqrt{&2} \\\\  &= &1 \\times \\sqrt{&2} \\\\  &= &sol  \\\\ \\end{align}$$' },
             ],
           ],
           options: ['penalty-for-factors-permutation'],
@@ -12119,7 +12119,7 @@ const questions = {
               \\sqrt{[_&1*&1*&3_]} + \\sqrt{[_&2*&2*&3_]} &= \\sqrt{[_&1*&1_]} \\times \\sqrt{&3} + \\sqrt{[_&2*&2_]} \\times \\sqrt{&3} \\\\ \
               &= &1 \\times \\textcolor{teal}{\\sqrt{&3}} + &2 \\times \\textcolor{teal}{\\sqrt{&3}} \\\\ \
               &= &1 \\textcolor{teal}{\\sqrt{&3}} + &2 \\textcolor{teal}{\\sqrt{&3}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2_] \\sqrt{&3}}} \\\\ \
+              &= &sol  \\\\ \
               \\end{align}$$' },
             ],
           ],
@@ -12164,7 +12164,7 @@ const questions = {
           ],
           correctionDetails: [
             [
-              { text: '$$\\begin{align} \\sqrt{[_&1*&1*&2_]} &= \\sqrt{[_&1*&1_] \\times &2} \\\\ &= \\sqrt{[_&1*&1_]} \\times \\sqrt{&2} \\\\  &= &1 \\times \\sqrt{&2} \\\\  &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1 \\sqrt{&2}}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} \\sqrt{[_&1*&1*&2_]} &= \\sqrt{[_&1*&1_] \\times &2} \\\\ &= \\sqrt{[_&1*&1_]} \\times \\sqrt{&2} \\\\  &= &1 \\times \\sqrt{&2} \\\\  &= &sol  \\\\ \\end{align}$$' },
             ],
           ],
 
@@ -12211,7 +12211,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\left(&2\\sqrt{&1}\\right)^2 &= &2^2 \\times \\left(\\sqrt{&1}\\right)^2 \\\\ \
                &= [_&2^2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2^2*&1_]}} \\\\ \
+              &= &sol  \\\\ \
               \\end{align}$$'
               }
             ],
@@ -12220,7 +12220,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\left(&2\\sqrt{&1}\\right)^2 &= &2^2 \\times \\left(\\sqrt{&1}\\right)^2 \\\\ \
                &= [_&2^2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2^2*&1_]}} \\\\ \
+              &= &sol  \\\\ \
               \\end{align}$$'
               }
             ],
@@ -14526,16 +14526,16 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &3 \\times \\textcolor{teal}{&1} &= &3 \\times \\textcolor{teal}{&2} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\times \\textcolor{teal}{&1} &= &3 \\times \\textcolor{teal}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\textcolor{teal}{&1} \\times &3 &= \\textcolor{teal}{&2} \\times &3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} \\textcolor{teal}{&1} \\times &3 &= \\textcolor{teal}{&2} \\times &3 \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &3 + \\textcolor{teal}{&1} &= &3 + \\textcolor{teal}{&2} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &3 + \\textcolor{teal}{&1} &= &3 + \\textcolor{teal}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} \\textcolor{teal}{&1} + &3 &= \\textcolor{teal}{&2} + &3 \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} \\textcolor{teal}{&1} + &3 &= \\textcolor{teal}{&2} + &3 \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
           ],
           defaultDelay: 30,
@@ -14565,11 +14565,11 @@ const questions = {
           
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &3 \\textcolor{teal}{&1} &= &3 \\times \\textcolor{teal}{&2} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\textcolor{teal}{&1} &= &3 \\times \\textcolor{teal}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
 
             [
-              { text: '$$\\begin{align} &3 + \\textcolor{teal}{&1} &= &3 + \\textcolor{teal}{&2} \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3+&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &3 + \\textcolor{teal}{&1} &= &3 + \\textcolor{teal}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
 
           ],
@@ -14606,13 +14606,13 @@ const questions = {
 
           correctionDetails: [
             [
-              { text: '$$\\begin{align} &3 \\textcolor{teal}{&1} + &4 &= &3 \\times \\textcolor{teal}{&2} + &4 \\\\ &= [_&3*&2_] + &4  \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2+&4_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &3 \\textcolor{teal}{&1} + &4 &= &3 \\times \\textcolor{teal}{&2} + &4 \\\\ &= [_&3*&2_] + &4  \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &4 + &3 \\textcolor{teal}{&1} &= &4 + &3 \\times \\textcolor{teal}{&2} \\\\ &= &4 + [_&3*&2_]  \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2+&4_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &4 + &3 \\textcolor{teal}{&1} &= &4 + &3 \\times \\textcolor{teal}{&2} \\\\ &= &4 + [_&3*&2_]  \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
-              { text: '$$\\begin{align} &4 \\textcolor{orange}{&5} + &3 \\textcolor{teal}{&1} &= &4 \\times \\textcolor{orange}{&6} + &3 \\times \\textcolor{teal}{&2} \\\\ &= [_&4*&6_] + [_&3*&2_]  \\\\ &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*&6+&3*&2_]}} \\\\ \\end{align}$$' },
+              { text: '$$\\begin{align} &4 \\textcolor{orange}{&5} + &3 \\textcolor{teal}{&1} &= &4 \\times \\textcolor{orange}{&6} + &3 \\times \\textcolor{teal}{&2} \\\\ &= [_&4*&6_] + [_&3*&2_]  \\\\ &=  &sol  \\\\ \\end{align}$$' },
             ],
 
           ],
@@ -14699,7 +14699,7 @@ const questions = {
               &3 \\textcolor{teal}{&1} [+_&4_] \
               &= &3 \\times \\textcolor{teal}{&2} [+_&4_] \\\\ \
               &= [_&3*(&2)_] [+_&4_]  \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2+(&4)_]}} \\\\ \
+              &=  &sol  \\\\ \
               \\end{align}$$' },
             ],
             [
@@ -14708,7 +14708,7 @@ const questions = {
               &3 \\textcolor{teal}{&1} [+_&4_] \
               &= &3 \\times  \\textcolor{teal}{\\left( &2 \\right) } [+_&4_] \\\\ \
               &= [_&3*(&2)_] [+_&4_]  \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*(&2)+(&4)_]}} \\\\ \
+              &=  &sol  \\\\ \
               \\end{align}$$' },
             ],
             [
@@ -14717,7 +14717,7 @@ const questions = {
               &4 [+_&3_] \\textcolor{teal}{&1} \
               &= &4 [+_&3_] \\times \\textcolor{teal}{&2} \\\\\ \
               &= &4  [+_&3*&2_]  \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2+(&4)_]}} \\\\ \\end{align}$$' },
+              &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
               {
@@ -14725,7 +14725,7 @@ const questions = {
               &4 [+_&3_] \\textcolor{teal}{&1} \
               &= &4 [+_&3_] \\times  \\textcolor{teal}{\\left( &2 \\right)}  \\\\\ \
               &= &4 [+_&3*(&2)_]  \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*(&2)+(&4)_]}} \\\\ \\end{align}$$' },
+              &=  &sol  \\\\ \\end{align}$$' },
             ],
             [
               {
@@ -14733,7 +14733,7 @@ const questions = {
               &4 \\textcolor{orange}{&5}  [+_&3_] \\textcolor{teal}{&1} \
               &= &4 \\times \\textcolor{orange}{&6} [+_&3_] \\times \\textcolor{teal}{&2} \\\\ \
               &= [_&4*&6_] [+_&3*&2_]  \\\\ \
-              &=  \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*&6+(&3)*&2_]}} \\\\ \
+              &=  &sol  \\\\ \
               \\end{align}$$' },
             ],
 
@@ -14871,7 +14871,7 @@ const questions = {
               [_&2&1_]+[_&3&1_] \
               &= (&2+&3) \\times &1 \\\\ \
               &= [_&2+&3_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+&3)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14880,7 +14880,7 @@ const questions = {
               [_&3&1_]-[_&2&1_] \
               &= (&3-&2) \\times &1 \\\\ \
               &= [_&3-&2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-&2)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -14947,7 +14947,7 @@ const questions = {
               &4+[_&2&1_]+[_&3&1_] \
               &= &4 + (&2+&3) \\times &1 \\\\ \
               &= &4 + [_&2+&3_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&4 + [_(&2+&3)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14956,7 +14956,7 @@ const questions = {
               [_&2&1_]+&4+[_&3&1_] \
               &= &4 + (&2+&3) \\times &1 \\\\ \
               &= &4 + [_&2+&3_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&4 + [_(&2+&3)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14965,7 +14965,7 @@ const questions = {
               [_&2&1_]+[_&3&1_] + &4\
               &= (&2+&3) \\times &1 + &4\\\\ \
               &= [_&2+&3_] \\times &1  + &4 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+&3)&1_]  + &4}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14974,7 +14974,7 @@ const questions = {
               &4+[_&3&1_]-[_&2&1_] \
               &= &4 + (&3-&2) \\times &1 \\\\ \
               &= &4 + [_&3-&2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4 + (&3-&2)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14983,7 +14983,7 @@ const questions = {
               [_&3&1_] + &4 -[_&2&1_] \
               &= &4 + (&3-&2) \\times &1 \\\\ \
               &= &4 + [_&3-&2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4 + (&3-&2)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -14992,7 +14992,7 @@ const questions = {
               [_&3&1_]-[_&2&1_] + &4\
               &= (&3-&2) \\times &1  + &4 \\\\ \
               &= [_&3-&2_] \\times &1  + &4 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4 + (&3-&2)&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15029,7 +15029,7 @@ const questions = {
               &2\\textcolor{teal}{&1}+&3\\textcolor{teal}{&1}+&5\\textcolor{orange}{&4}+&6\\textcolor{orange}{&4} \
               &= (&2+&3) \\times \\textcolor{teal}{&1} + (&5+&6) \\times \\textcolor{orange}{&4} \\\\ \
               &= [_&2+&3_] \\times \\textcolor{teal}{&1} + [_&5+&6_] \\times \\textcolor{orange}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+&3_]&1 + [_&5+&6_]&4}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15038,7 +15038,7 @@ const questions = {
               &2\\textcolor{teal}{&1} + &5\\textcolor{orange}{&4} + &3\\textcolor{teal}{&1}+&6\\textcolor{orange}{&4} \
               &= (&2+&3) \\times \\textcolor{teal}{&1} + (&5+&6) \\times \\textcolor{orange}{&4} \\\\ \
               &= [_&2+&3_] \\times \\textcolor{teal}{&1} + [_&5+&6_] \\times \\textcolor{orange}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+&3_]&1 + [_&5+&6_]&4}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15047,7 +15047,7 @@ const questions = {
               &2\\textcolor{teal}{&1} + &5\\textcolor{orange}{&4} + &6\\textcolor{orange}{&4} + &3\\textcolor{teal}{&1} \
               &= (&2+&3) \\times \\textcolor{teal}{&1} + (&5+&6) \\times \\textcolor{orange}{&4} \\\\ \
               &= [_&2+&3_] \\times \\textcolor{teal}{&1} + [_&5+&6_] \\times \\textcolor{orange}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+&3_]&1 + [_&5+&6_]&4}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15083,7 +15083,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &1 \\times &2 \\times &3 \
               &= &1 \\times [_&2*&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15092,7 +15092,7 @@ const questions = {
               &2 \\times &1 \\times &3 \
               &= &2 \\times &3 \\times &1 \\\\ \
               &= [_&3*&2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15100,7 +15100,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &3 \\times &2 \\times &1 \
               &= [_&3*&2_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&3*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15109,7 +15109,7 @@ const questions = {
               &1 \\times &2 \\times &1 \
               &= &2 \\times &1 \\times &1 \\\\ \
               &= &2 \\times &1^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15117,7 +15117,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &1 \\times &1 \\times &2 \
               &= &1^2 \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15125,7 +15125,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &2 \\times &1 \\times &1 \
               &= &2 \\times &1^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15155,7 +15155,7 @@ const questions = {
               [_&2&1_][+_&3&1_] \
               &= (&2[+_&3_]) \\times &1 \\\\ \
               &= [_&2+(&3)_] \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+(&3))&1_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15196,7 +15196,7 @@ const questions = {
               [_&2&1_][+_&3&1_][+_&5&4_][+_&6&4_] \
               &= (&2[+_&3_]) \\times &1 + (&5[+_&6_]) \\times &4 \\\\ \
               &= [_&2+(&3)_] \\times &1 [+_&5+(&6)_] \\times &4 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+(&3))&1+ (&5+(&6))&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15205,7 +15205,7 @@ const questions = {
               [_&2&1_][+_&3&4_][+_&5&1_][+_&6&4_] \
               &= (&2[+_&5_]) \\times &1 + (&3[+_&6_]) \\times &4 \\\\ \
               &= [_&2+(&5)_] \\times &1 [+_&3+(&6)_] \\times &4 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+(&5))&1 + (&3+(&6))&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15214,7 +15214,7 @@ const questions = {
               [_&2&1_][+_&3&4_][+_&5&4_][+_&6&1_] \
               &= (&2[+_&6_]) \\times &1 + (&3[+_&5_]) \\times &4 \\\\ \
               &= [_&2+(&6)_] \\times &1 [+_&3+(&5)_] \\times &4 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+(&6))&1 +(&3+(&5))&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15262,7 +15262,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &1 \\times \\bold{\\textcolor{teal}{(-&2) \\times &3}} \
               &= &1 \\times \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15271,7 +15271,7 @@ const questions = {
               (-&2) \\times &1 \\times &3 \
               &= \\bold{\\textcolor{teal}{(-&2) \\times &3}} \\times &1 \\\\ \
               &=  \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15279,7 +15279,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{&3 \\times (-&2)}} \\times &1 \
               &=  \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15287,7 +15287,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &1 \\times \\bold{\\textcolor{teal}{&2 \\times (-&3)}} \
               &= &1 \\times \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15296,7 +15296,7 @@ const questions = {
               &2 \\times &1 \\times (-&3) \
               &= \\bold{\\textcolor{teal}{&2 \\times (-&3)}} \\times &1 \\\\ \
               &=  \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15304,7 +15304,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{(-&3) \\times &2}} \\times &1 \
               &=  \\bold{\\textcolor{teal}{(-[_&2*&3_])}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15312,7 +15312,7 @@ const questions = {
                 text: '$$\\begin{align} \
               &1 \\times \\bold{\\textcolor{teal}{(-&2) \\times (-&3)}} \
               &= &1 \\times \\bold{\\textcolor{teal}{[_&2*&3_]}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15321,7 +15321,7 @@ const questions = {
               (-&2) \\times &1 \\times (-&3) \
               &=  \\bold{\\textcolor{teal}{(-&2) \\times (-&3)}} \\times &1 \\\\ \
               &=  \\bold{\\textcolor{teal}{[_&2*&3_]}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15329,7 +15329,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{(-&3) \\times (-&2)}} \\times &1 \
               &=  \\bold{\\textcolor{teal}{[_&2*&3_]}} \\times &1 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15337,7 +15337,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (-&1) \\times \\bold{\\textcolor{teal}{(-&2) \\times &3}} \
               &=  (-&1) \\times \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15346,7 +15346,7 @@ const questions = {
               (-&2) \\times (-&1) \\times &3 \
               &=  \\bold{\\textcolor{teal}{(-&2) \\times &3}} \\times (-&1) \\\\ \
               &=  \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15354,7 +15354,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{&3 \\times (-&2)}} \\times (-&1) \
               &=  \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15362,7 +15362,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (-&1) \\times \\bold{\\textcolor{teal}{&2 \\times (-&3)}} \
               &=  (-&1) \\times \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15371,7 +15371,7 @@ const questions = {
               &2 \\times (-&1) \\times (-&3) \
               &=  \\bold{\\textcolor{teal}{&2 \\times (-&3)}} \\times (-&1) \\\\ \
               &=  \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15379,7 +15379,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{(-&3) \\times &2}} \\times (-&1) \
               &=  \\bold{\\textcolor{teal}{([_-&2*&3_])}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15387,7 +15387,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (-&1) \\times \\bold{\\textcolor{teal}{(-&2) \\times (-&3)}} \
               &=  (-&1) \\times  \\bold{\\textcolor{teal}{[_&2*&3_]}} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15396,7 +15396,7 @@ const questions = {
               (-&2) \\times (-&1) \\times (-&3) \
               &=  \\bold{\\textcolor{teal}{(-&2) \\times (-&3)}} \\times (-&1) \\\\ \
               &=  \\bold{\\textcolor{teal}{[_&2*&3_]}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15404,7 +15404,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\bold{\\textcolor{teal}{(-&3) \\times (-&2)}} \\times (-&1) \
               &=  \\bold{\\textcolor{teal}{[_&2*&3_]}} \\times (-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*&2*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15443,7 +15443,7 @@ const questions = {
               [_&2&1^2_][+_&3&1_][+_&4_][+_&5&1^2_][+_&6&1_][+_&7_] \
               &= (&2[+_&5_]) \\times &1^2 + (&3[+_&6_]) \\times &1 [+_&4_] [+_&7_] \\\\ \
               &= [_&2+(&5)_] \\times &1^2  [+_&3+(&6)_] \\times &1 [+_&4+(&7)_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2+(&5))*&1^2 + (&3+(&6))*&1 +(&4) +(&7)_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15452,7 +15452,7 @@ const questions = {
               [_&2&1_][+_&3&1^2_][+_&4_][+_&5&1^2_][+_&6&1_][+_&7_] \
               &= (&3[+_&5_]) \\times &1^2 + (&2[+_&6_]) \\times &1 [+_&4_] [+_&7_] \\\\ \
               &= [_&3+(&5)_] \\times &1^2  [+_&2+(&6)_] \\times &1 [+_&4+(&7)_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3+(&5))*&1^2 + (&2+(&6))*&1 +(&4) +(&7)_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15461,7 +15461,7 @@ const questions = {
               [_&2&1_][+_&3_][+_&4^2_][+_&5&1^2_][+_&6&1_][+_&7_] \
               &= (&4[+_&5_]) \\times &1^2 + (&2[+_&6_]) \\times &1 [+_&3_] [+_&7_] \\\\ \
               &= [_&4+(&5)_] \\times &1^2  [+_&2+(&6)_] \\times &1 [+_&3+(&7)_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&4+(&5))*&1^2 + (&2+(&6))*&1 +(&3) +(&7)_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15604,7 +15604,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&2+&3) \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1} \\times &3 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]+&1&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15612,7 +15612,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&3+&2) \
               &= \\textcolor{teal}{&1} \\times &3 + \\textcolor{teal}{&1} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1&3+[_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15620,7 +15620,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2+&3) \\times \\textcolor{teal}{&1} \
               &= &2 \\times \\textcolor{teal}{&1} + &3 \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]+&1&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15628,7 +15628,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&3+&2) \\times \\textcolor{teal}{&1} \
               &= &3 \\times \\textcolor{teal}{&1} + &2 \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1&3+[_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15636,7 +15636,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&2-&3) \
               &= \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} \\times &3 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]-&1&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15644,7 +15644,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&3-&2) \
               &= \\textcolor{teal}{&1} \\times &3 - \\textcolor{teal}{&1} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1&3-[_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15652,7 +15652,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2-&3) \\times \\textcolor{teal}{&1} \
               &= &2 \\times \\textcolor{teal}{&1} - &3 \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]-&1&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15660,7 +15660,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&3-&2) \\times \\textcolor{teal}{&1} \
               &= &3 \\times \\textcolor{teal}{&1} - &2 \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1&3-[_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15727,7 +15727,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&2+[_&3&4_]) \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1} \\times [_&3&4_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]+[_&1*&3&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15735,7 +15735,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}([_&3&4_]+&2) \
               &= \\textcolor{teal}{&1} \\times [_&3&4_] + \\textcolor{teal}{&1} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3&4_] + [_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15743,7 +15743,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2+[_&3&4_]) \\times \\textcolor{teal}{&1} \
               &=   &2 \\times \\textcolor{teal}{&1} +[_&3&4_] \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_]+[_&1*&3&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15751,7 +15751,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_]+&2) \\times \\textcolor{teal}{&1} \
               &=  [_&3&4_] \\times \\textcolor{teal}{&1} + &2 \\times \\textcolor{teal}{&1}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3&4_] + [_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15759,7 +15759,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}(&2+[_&3&4_]) \
               &= \\textcolor{teal}{&4} \\times &2 + \\textcolor{teal}{&4} \\times [_&3&4_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2&4_]+[_&3&4^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15767,7 +15767,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}([_&3&4_]+&2) \
               &= \\textcolor{teal}{&4} \\times [_&3&4_] + \\textcolor{teal}{&4} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3&4^2_] + [_&2&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15775,7 +15775,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2+[_&3&4_]) \\times \\textcolor{teal}{&4} \
               &=   &2 \\times \\textcolor{teal}{&4} +[_&3&4_] \\times \\textcolor{teal}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2&4_]+[_&3&4^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15783,7 +15783,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_]+&2) \\times \\textcolor{teal}{&4} \
               &=  [_&3&4_] \\times \\textcolor{teal}{&4} + &2 \\times \\textcolor{teal}{&4}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3&4^2_] + [_&2&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15791,7 +15791,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&2 - [_&3&4_]) \
               &= \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} \\times [_&3&4_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_] - [_&1*&3&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15799,7 +15799,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}([_&3&4_]-&2) \
               &= \\textcolor{teal}{&1} \\times [_&3&4_] - \\textcolor{teal}{&1} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3&4_] - [_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15807,7 +15807,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2-[_&3&4_]) \\times \\textcolor{teal}{&1} \
               &=   &2 \\times \\textcolor{teal}{&1} - [_&3&4_] \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&2_] - [_&1*&3&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15815,7 +15815,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_] - &2) \\times \\textcolor{teal}{&1} \
               &=  [_&3&4_] \\times \\textcolor{teal}{&1} - &2 \\times \\textcolor{teal}{&1}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&3&4_] - [_&1*&2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15823,7 +15823,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}(&2 - [_&3&4_]) \
               &= \\textcolor{teal}{&4} \\times &2 - \\textcolor{teal}{&4} \\times [_&3&4_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2&4_] - [_&3&4^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15831,7 +15831,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}([_&3&4_] - &2) \
               &= \\textcolor{teal}{&4} \\times [_&3&4_] - \\textcolor{teal}{&4} \\times &2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3&4^2_] - [_&2&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15839,7 +15839,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2-[_&3&4_]) \\times \\textcolor{teal}{&4} \
               &=   &2 \\times \\textcolor{teal}{&4} - [_&3&4_] \\times \\textcolor{teal}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2&4_] - [_&3&4^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15847,7 +15847,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_]+&2) \\times \\textcolor{teal}{&4} \
               &=  [_&3&4_] \\times \\textcolor{teal}{&4} - &2 \\times \\textcolor{teal}{&4}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3&4^2_] - [_&2&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15893,7 +15893,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}(&2[+_&3&4_]) \
               &=   &2 \\times \\textcolor{teal}{&1} [+_&3&4_] \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&2)_] [+_&1*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15901,7 +15901,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1}([_&3&4_][+_&2_]) \
               &=    [_&3&4_] \\times \\textcolor{teal}{&1}  [+_&2_] \\times \\textcolor{teal}{&1}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&3)*&4_] [+_&1*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15909,7 +15909,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{-&1}(&2[+_&3&4_]) \
               &=   &2 \\times \\textcolor{teal}{(-&1)} [+_&3&4_] \\times \\textcolor{teal}{(-&1)} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*(&2)_] [+_-&1*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15917,7 +15917,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{-&1}([_&3&4_][+_&2_]) \
               &=    [_&3&4_] \\times \\textcolor{teal}{(-&1)}  [+_&2_] \\times \\textcolor{teal}{(-&1)}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*(&3)*&4_] [+_-&1*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15925,7 +15925,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2[+_&3&4_]) \\times \\textcolor{teal}{&1} \
               &=   &2 \\times \\textcolor{teal}{&1} [+_&3&4_] \\times \\textcolor{teal}{&1} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&2)_] [+_&1*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15933,7 +15933,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_][+_&2_]) \\times \\textcolor{teal}{&1} \
               &=    [_&3&4_] \\times \\textcolor{teal}{&1}  [+_&2_] \\times \\textcolor{teal}{&1}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&3)*&4_] [+_&1*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15941,7 +15941,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2[+_&3&4_]) \\times \\textcolor{teal}{(-&1)} \
               &=   &2 \\times \\textcolor{teal}{(-&1)} [+_&3&4_] \\times \\textcolor{teal}{(-&1)} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*(&2)_] [+_-&1*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15949,7 +15949,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_][+_&2_]) \\times \\textcolor{teal}{(-&1)} \
               &=    [_&3&4_] \\times \\textcolor{teal}{(-&1)}  [+_&2_] \\times \\textcolor{teal}{(-&1)}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&1*(&3)*&4_] [+_-&1*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -15959,7 +15959,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}(&2[+_&3&4_]) \
               &=   &2 \\times \\textcolor{teal}{&4} [+_&3&4_] \\times \\textcolor{teal}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*(&2)_] [+_&4*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15967,7 +15967,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&4}([_&3&4_][+_&2_]) \
               &=    [_&3&4_] \\times \\textcolor{teal}{&4}  [+_&2_] \\times \\textcolor{teal}{&4}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*(&3)*&4_] [+_&4*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15975,7 +15975,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2[+_&3&4_]) \\times \\textcolor{teal}{&4} \
               &=   &2 \\times \\textcolor{teal}{&4} [+_&3&4_] \\times \\textcolor{teal}{&4} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*(&2)_] [+_&4*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15983,7 +15983,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_][+_&2_]) \\times \\textcolor{teal}{&4} \
               &=    [_&3&4_] \\times \\textcolor{teal}{&4}  [+_&2_] \\times \\textcolor{teal}{&4}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&4*(&3)*&4_] [+_&4*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15991,7 +15991,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{-&4}(&2[+_&3&4_]) \
               &=   &2 \\times \\textcolor{teal}{(-&4)} [+_&3&4_] \\times \\textcolor{teal}{(-&4)} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&4*(&2)_] [+_-&4*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -15999,7 +15999,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{-&4}([_&3&4_][+_&2_]) \
               &=    [_&3&4_] \\times \\textcolor{teal}{(-&4)}  [+_&2_] \\times \\textcolor{teal}{(-&4)}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&4*(&3)*&4_] [+_-&4*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -16008,7 +16008,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&2[+_&3&4_]) \\times \\textcolor{teal}{(-&4)} \
               &=   &2 \\times \\textcolor{teal}{(-&4)} [+_&3&4_] \\times \\textcolor{teal}{(-&4)} \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&4*(&2)_] [+_-&4*(&3)*&4_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16016,7 +16016,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&3&4_][+_&2_]) \\times \\textcolor{teal}{(-&4)} \
               &=    [_&3&4_] \\times \\textcolor{teal}{(-&4)}  [+_&2_] \\times \\textcolor{teal}{(-&4)}\\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&4*(&3)*&4_] [+_-&4*(&2)_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16071,7 +16071,7 @@ const questions = {
               (\\textcolor{teal}{&1}+\\textcolor{orange}{[_&2&3_]})(&4+[_&5&3_]) \
               &= \\textcolor{teal}{&1} \\times &4 + \\textcolor{teal}{&1} \\times [_&5&3_] + \\textcolor{orange}{[_&2&3_]} \\times &4 + \\textcolor{orange}{[_&2&3_]} \\times [_&5&3_] \\\\ \
               &= [_&1*&4_] +   [_&5*&1&3_] + [_&2*&4&3_] + [_&2&3*&5&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&4_] +   [_(&5*&1+&2*&4)&3_] + [_&2&3*&5&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16080,7 +16080,7 @@ const questions = {
               (\\textcolor{orange}{[_&2&3_]} + \\textcolor{teal}{&1})(&4+[_&5&3_]) \
               &= \\textcolor{orange}{[_&2&3_]} \\times &4 + \\textcolor{orange}{[_&2&3_]} \\times [_&5&3_] + \\textcolor{teal}{&1} \\times &4 + \\textcolor{teal}{&1} \\times [_&5&3_]  \\\\ \
               &= [_&2*&4&3_] + [_&2&3*&5&3_] + [_&1*&4_] +   [_&5*&1&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&4_] +   [_(&5*&1+&2*&4)&3_] + [_&2&3*&5&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16089,7 +16089,7 @@ const questions = {
               (\\textcolor{teal}{&1}+\\textcolor{orange}{[_&2&3_]})([_&5&3_]+&4) \
               &= \\textcolor{teal}{&1} \\times [_&5&3_] + \\textcolor{teal}{&1} \\times &4 + \\textcolor{orange}{[_&2&3_]} \\times [_&5&3_] + \\textcolor{orange}{[_&2&3_]} \\times &4 \\\\ \
               &= [_&5*&1&3_] + [_&1*&4_] + [_&2&3*&5&3_]  + [_&2*&4&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&4_] +   [_(&5*&1+&2*&4)&3_] + [_&2&3*&5&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16098,7 +16098,7 @@ const questions = {
               (\\textcolor{orange}{[_&2&3_]} + \\textcolor{teal}{&1})([_&5&3_]+&4) \
               &= \\textcolor{orange}{[_&2&3_]} \\times [_&5&3_] + \\textcolor{orange}{[_&2&3_]} \\times &4 + \\textcolor{teal}{&1} \\times [_&5&3_] + \\textcolor{teal}{&1} \\times &4  \\\\ \
               &= [_&2&3*&5&3_] + [_&2*&4&3_] +  [_&5*&1&3_] + [_&1*&4_]  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*&4_] +   [_(&5*&1+&2*&4)&3_] + [_&2&3*&5&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16133,7 +16133,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&1[+_&2&3_])(&4[+_&5&3_]) \
               &= [_&1*(&4)_] [+_&1*(&5)*&3_] [+_&2&3*(&4)_] [+_&2&3*(&5)*&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&4) + (&1*(&5)+(&2)*(&4))&3 + (&2&3)*(&5)*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16141,7 +16141,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&2&3_][+_&1_])(&4[+_&5&3_]) \
               &= [_&2&3*(&4)_] [+_&2&3*(&5)*&3_] [+_&1*(&4)_] [+_&1*(&5)*&3_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&4) + (&1*(&5)+(&2)*(&4))&3 + (&2&3)*(&5)*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16149,7 +16149,7 @@ const questions = {
                 text: '$$\\begin{align} \
               ([_&2&3_][+_&1_])([_&5&3_][+_&4_]) \
               &=  [_&2&3*(&5)*&3_] [+_&2&3*(&4)_] [+_&1*(&5)*&3_] [+_&1*(&4)_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&4) + (&1*(&5)+(&2)*(&4))&3 + (&2&3)*(&5)*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16157,7 +16157,7 @@ const questions = {
                 text: '$$\\begin{align} \
               (&1[+_&2&3_])([_&5&3_][+_&4_]) \
               &=  [_&1*(&5)*&3_] [+_&1*(&4)_] [+_&2&3*(&5)*&3_] [+_&2&3*(&4)_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1*(&4) + (&1*(&5)+(&2)*(&4))&3 + (&2&3)*(&5)*&3_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -16243,7 +16243,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1} \\times &2+\\textcolor{teal}{&1} \\times &3 \
               &= \\textcolor{teal}{&1} \\times (&2+&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2+&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16252,7 +16252,7 @@ const questions = {
               &2 \\times \\textcolor{teal}{&1}+\\textcolor{teal}{&1} \\times &3 \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2+&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2+&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16261,7 +16261,7 @@ const questions = {
               \\textcolor{teal}{&1} \\times &2 +  &3 \\times \\textcolor{teal}{&1} \
               &= \\textcolor{teal}{&1} \\times &2 +  \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2+&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2+&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16270,7 +16270,7 @@ const questions = {
               &2 \\times \\textcolor{teal}{&1} + &3 \\times \\textcolor{teal}{&1} \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2+&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2+&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16278,7 +16278,7 @@ const questions = {
                 text: '$$\\begin{align} \
               \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} \\times &3 \
               &= \\textcolor{teal}{&1} \\times (&2 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16287,7 +16287,7 @@ const questions = {
               &2 \\times \\textcolor{teal}{&1} - \\textcolor{teal}{&1} \\times &3 \
               &= \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16296,7 +16296,7 @@ const questions = {
               \\textcolor{teal}{&1} \\times &2 -  &3 \\times \\textcolor{teal}{&1} \
               &= \\textcolor{teal}{&1} \\times &2 -  \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16305,7 +16305,7 @@ const questions = {
               &2 \\times \\textcolor{teal}{&1} + &3 \\times \\textcolor{teal}{&1} \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1}  \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16415,7 +16415,7 @@ const questions = {
               \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1} &3 \
               &= \\textcolor{teal}{&1} \\times &2 + \\textcolor{teal}{&1}  \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2+&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2+&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16424,7 +16424,7 @@ const questions = {
                 \\textcolor{teal}{&1} &3 + \\textcolor{teal}{&1} \\times &2 \
                &= \\textcolor{teal}{&1}  \\times &3 + \\textcolor{teal}{&1} \\times &2 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3+&2) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3+&2)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16433,7 +16433,7 @@ const questions = {
                 \\textcolor{teal}{&1} &3 + \\textcolor{teal}{&1}&4 \
                &= \\textcolor{teal}{&1} \\times &3 + \\textcolor{teal}{&1} \\times &4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3+&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3+&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16442,7 +16442,7 @@ const questions = {
                 \\textcolor{teal}{&1} &3 - \\textcolor{teal}{&1}&4 \
               &=  \\textcolor{teal}{&1} \\times &3 - \\textcolor{teal}{&1} \\times &4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3-&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3-&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16451,7 +16451,7 @@ const questions = {
               \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} &3 \
               &= \\textcolor{teal}{&1} \\times &2 - \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2-&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2-&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16460,7 +16460,7 @@ const questions = {
                 \\textcolor{teal}{&1} &3 - \\textcolor{teal}{&1} \\times &2 \
               &= \\textcolor{teal}{&1} \\times &3 - \\textcolor{teal}{&1} \\times &2 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3-&2) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3-&2)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -16470,7 +16470,7 @@ const questions = {
               &1\\textcolor{teal}{&3} + &2\\textcolor{teal}{&3} \
               &= &1 \\times \\textcolor{teal}{&3} + &2 \\times \\textcolor{teal}{&3} \\\\ \
               &= (&1+&2)\\times \\textcolor{teal}{&3}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&1+&2)&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16479,7 +16479,7 @@ const questions = {
               &1\\textcolor{teal}{&3} - &2\\textcolor{teal}{&3} \
               &= &1  \\times \\textcolor{teal}{&3} - &2 \\times \\textcolor{teal}{&3} \\\\ \
               &= (&1-&2)\\times \\textcolor{teal}{&3}  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&1-&2)&3}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16488,7 +16488,7 @@ const questions = {
               &4\\textcolor{teal}{&3} + &1\\textcolor{teal}{&3} \
               &= \\textcolor{teal}{&3}  \\times &4 + \\textcolor{teal}{&3}  \\times &1 \\\\ \
               &= \\textcolor{teal}{&3} \\times (&4+&1)  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3(&4+&1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16497,7 +16497,7 @@ const questions = {
               \\textcolor{teal}{&3}&4 + &1\\textcolor{teal}{&3} \
               &= \\textcolor{teal}{&3} \\times &4 + \\textcolor{teal}{&3} \\times &1 \\\\ \
               &= \\textcolor{teal}{&3}  \\times (&4+&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3(&4+&1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16506,7 +16506,7 @@ const questions = {
               &4\\textcolor{teal}{&3} - &1\\textcolor{teal}{&3} \
               &= \\textcolor{teal}{&3}  \\times &4 - \\textcolor{teal}{&3} \\times &1 \\\\ \
               &= \\textcolor{teal}{&3} \\times (&4-&1)  \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3(&4-&1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16515,7 +16515,7 @@ const questions = {
               \\textcolor{teal}{&3}&4 - &1\\textcolor{teal}{&3} \
               &= \\textcolor{teal}{&3} \\times &4 - \\textcolor{teal}{&3} \\times &1 \\\\ \
               &= \\textcolor{teal}{&3}  \\times (&4-&1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&3(&4-&1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -16595,7 +16595,7 @@ const questions = {
                 &1&3+[_&1*&2_]&4 \
               &= \\textcolor{teal}{&1} \\times &3+\\textcolor{teal}{&1} \\times &2&4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3 + &2&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3 + &2&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16604,7 +16604,7 @@ const questions = {
                 [_&1*&2_]&4 + &1&3\
               &= \\textcolor{teal}{&1} \\times &2&4 + \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&4 + &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&4 + &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16613,7 +16613,7 @@ const questions = {
                 &1&3 - [_&1*&2_]&4 \
               &= \\textcolor{teal}{&1} \\times &3 - \\textcolor{teal}{&1} \\times &2&4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&3 - &2&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&3 - &2&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16622,7 +16622,7 @@ const questions = {
                 [_&1*&2_]&4 - &1&3\
               &= \\textcolor{teal}{&1} \\times &2&4 - \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&4 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&4 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16707,7 +16707,7 @@ const questions = {
                 [_&1*&2_]&5+[_&1*&3_]&4 \
               &= \\textcolor{teal}{&1} \\times &2&5 + \\textcolor{teal}{&1} \\times &3&4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&5 + &3&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&5 + &3&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16716,7 +16716,7 @@ const questions = {
                 [_&1*&2_]&5 - [_&1*&3_]&4 \
               &= \\textcolor{teal}{&1} \\times &2&5 - \\textcolor{teal}{&1} \\times &3&4 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&5 - &3&4) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&5 - &3&4)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16725,7 +16725,7 @@ const questions = {
                 [_&1*&2_]&5+[_&1*&3_] \
               &= \\textcolor{teal}{&1} \\times &2&5 + \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&5 + &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&5 + &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16734,7 +16734,7 @@ const questions = {
                 [_&1*&2_]&5-[_&1*&3_] \
               &= \\textcolor{teal}{&1} \\times &2&5 - \\textcolor{teal}{&1} \\times &3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&5 - &3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&5 - &3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16771,7 +16771,7 @@ const questions = {
                 &1+[_&1*&2_]&3 \
               &= \\textcolor{teal}{&1} \\times 1 + \\textcolor{teal}{&1} \\times &2&3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (1 + &2&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(1 + &2&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16780,7 +16780,7 @@ const questions = {
                 [_&1*&2_]&3 + &1 \
               &= \\textcolor{teal}{&1} \\times &2&3 + \\textcolor{teal}{&1} \\times 1 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&3 + 1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&3 + 1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16789,7 +16789,7 @@ const questions = {
                 &1 - [_&1*&2_]&3 \
               &= \\textcolor{teal}{&1} \\times 1 - \\textcolor{teal}{&1} \\times &2&3 \\\\ \
               &= \\textcolor{teal}{&1} \\times (1 - &2&3) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(1 - &2&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16798,7 +16798,7 @@ const questions = {
                 [_&1*&2_]&3 - &1 \
               &= \\textcolor{teal}{&1} \\times &2&3 - \\textcolor{teal}{&1} \\times 1 \\\\ \
               &= \\textcolor{teal}{&1} \\times (&2&3 - 1) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1(&2&3 - 1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16849,7 +16849,7 @@ const questions = {
                 [_&1*&2*&4^2_]+[_&1*&3*&4_] \
               &= \\textcolor{teal}{[_&5_]&4} \\times [_&6*&4_] + \\textcolor{teal}{[_&5_]&4} \\times [_&7_] \\\\ \
               &= \\textcolor{teal}{[_&5_]&4} \\times ([_&6*&4_] + [_&7_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]&4([_&6*&4_] + [_&7_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16858,7 +16858,7 @@ const questions = {
                 [_&1*&2*&4_]+[_&1*&3*&4^2_] \
               &= \\textcolor{teal}{[_&5_]&4} \\times [_&6_] + \\textcolor{teal}{[_&5_]&4} \\times [_&7*&4_] \\\\ \
               &= \\textcolor{teal}{[_&5_]&4} \\times ([_&6_] + [_&7*&4_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]&4([_&6_] + [_&7*&4_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16867,7 +16867,7 @@ const questions = {
                 [_&1*&2*&4^2_] - [_&1*&3*&4_] \
               &= \\textcolor{teal}{[_&5_]&4} \\times [_&6*&4_] - \\textcolor{teal}{[_&5_]&4} \\times [_&7_] \\\\ \
               &= \\textcolor{teal}{[_&5_]&4} \\times ([_&6*&4_] - [_&7_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]&4([_&6*&4_] - [_&7_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16876,7 +16876,7 @@ const questions = {
                 [_&1*&2*&4_] - [_&1*&3*&4^2_] \
               &= \\textcolor{teal}{[_&5_]&4} \\times [_&6_] - \\textcolor{teal}{[_&5_]&4} \\times [_&7*&4_] \\\\ \
               &= \\textcolor{teal}{[_&5_]&4} \\times ([_&6_] - [_&7*&4_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]&4([_&6_] - [_&7*&4_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16885,7 +16885,7 @@ const questions = {
                 [_&1*&2*&4^2_]+[_&1*&3_] \
               &= \\textcolor{teal}{[_&5_]} \\times [_&6*&4^2_] + \\textcolor{teal}{[_&5_]} \\times [_&7_] \\\\ \
               &= \\textcolor{teal}{[_&5_]} \\times ([_&6*&4^2_] + [_&7_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]([_&6*&4^2_] + [_&7_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16894,7 +16894,7 @@ const questions = {
                 [_&1*&2_]+[_&1*&3*&4^2_] \
               &= \\textcolor{teal}{[_&5_]} \\times [_&6_] + \\textcolor{teal}{[_&5_]} \\times [_&7*&4^2_] \\\\ \
               &= \\textcolor{teal}{[_&5_]} \\times ([_&6_] + [_&7*&4^2_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]([_&6_] + [_&7*&4^2_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16903,7 +16903,7 @@ const questions = {
                 [_&1*&2*&4^2_] - [_&1*&3_] \
               &= \\textcolor{teal}{[_&5_]} \\times [_&6*&4^2_] - \\textcolor{teal}{[_&5_]} \\times [_&7_] \\\\ \
               &= \\textcolor{teal}{[_&5_]} \\times ([_&6*&4^2_] - [_&7_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]([_&6*&4^2_] - [_&7_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16912,7 +16912,7 @@ const questions = {
                 [_&1*&2_] - [_&1*&3*&4^2_] \
               &= \\textcolor{teal}{[_&5_]} \\times [_&6_] - \\textcolor{teal}{[_&5_]} \\times [_&7*&4^2_] \\\\ \
               &= \\textcolor{teal}{[_&5_]} \\times ([_&6_] - [_&7*&4^2_]) \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&5_]([_&6_] - [_&7*&4^2_])}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -16982,7 +16982,7 @@ const questions = {
                 (\\textcolor{teal}{&1}+\\textcolor{orange}{[_&2&3_]})(\\textcolor{teal}{&1}-\\textcolor{orange}{[_&2&3_]}) \
               &= \\textcolor{teal}{&1}^2 -(\\textcolor{orange}{[_&2&3_]})^2 \\\\ \
               &= [_&1^2_] -&2^2 \\times &3^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] - [_&2^2&3^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -16991,7 +16991,7 @@ const questions = {
                 (\\textcolor{teal}{&1}-\\textcolor{orange}{[_&2&3_]})(\\textcolor{teal}{&1}+\\textcolor{orange}{[_&2&3_]}) \
               &= \\textcolor{teal}{&1}^2 -(\\textcolor{orange}{[_&2&3_]})^2 \\\\ \
               &= [_&1^2_] -&2^2 \\times &3^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] - [_&2^2&3^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17000,7 +17000,7 @@ const questions = {
                 (\\textcolor{teal}{[_&2&3_]} + \\textcolor{orange}{&1})(\\textcolor{teal}{[_&2&3_]} - \\textcolor{orange}{&1}) \
               &=  (\\textcolor{teal}{[_&2&3_]})^2 - \\textcolor{orange}{&1}^2 \\\\ \
               &= &2^2 \\times &3^2 - [_&1^2_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2^2&3^2_] - [_&1^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17009,7 +17009,7 @@ const questions = {
                 (\\textcolor{teal}{[_&2&3_]} - \\textcolor{orange}{&1})(\\textcolor{teal}{[_&2&3_]} - \\textcolor{orange}{&1}) \
               &= (\\textcolor{teal}{[_&2&3_]})^2 - \\textcolor{orange}{&1}^2 \\\\ \
               &=  &2^2 \\times &3^2 - [_&1^2_] \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2^2&3^2_] - [_&1^2_]}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17051,7 +17051,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 [_&1^2_]-[_(&2&3)^2_] \
               &=  &1^2-([_&2&3_])^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&1+&2&3)(&1-&2&3)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17059,7 +17059,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 [_(&2&3)^2_] - [_&1^2_] \
               &=  ([_&2&3_])^2 - &1^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&2&3+&1)(&2&3-&1)}} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17087,7 +17087,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&1}+\\textcolor{orange}{&2})^2 \
               &=  \\textcolor{teal}{&1}^2 + 2 \\times \\textcolor{teal}{&1} \\times \\textcolor{orange}{&2} + \\textcolor{orange}{&2}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] + [_2*&1*&2_] + &2^2 }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17095,7 +17095,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&2}+\\textcolor{orange}{&1})^2 \
               &=  \\textcolor{teal}{&2}^2 + 2 \\times \\textcolor{teal}{&2} \\times \\textcolor{orange}{&1} + \\textcolor{orange}{&1}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2^2 + [_2*&1*&2_] + [_&1^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17128,7 +17128,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&1}-\\textcolor{orange}{&2})^2 \
               &=  \\textcolor{teal}{&1}^2 - 2 \\times \\textcolor{teal}{&1} \\times \\textcolor{orange}{&2} + \\textcolor{orange}{&2}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] - [_2*&1*&2_] + &2^2 }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17136,7 +17136,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&2} - \\textcolor{orange}{&1})^2 \
               &=  \\textcolor{teal}{&2}^2 - 2 \\times \\textcolor{teal}{&2} \\times \\textcolor{orange}{&1} + \\textcolor{orange}{&1}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2^2 - [_2*&1*&2_] + [_&1^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17170,7 +17170,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&1} + \\textcolor{orange}{[_&2&3_]})^2 \
               &=  \\textcolor{teal}{&1}^2 + 2 \\times \\textcolor{teal}{&1} \\times \\textcolor{orange}{[_&2&3_]} + (\\textcolor{orange}{[_&2&3_]})^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] + [_2*&1*&2*&3_] + [_(&2&3)^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17178,7 +17178,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{[_&2&3_]}+\\textcolor{orange}{&1})^2 \
               &=  (\\textcolor{teal}{[_&2&3_]})^2 + 2 \\times \\textcolor{teal}{[_&2&3_]} \\times \\textcolor{orange}{&1} + \\textcolor{orange}{&1}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2&3)^2_] + [_2*&1*&2*&3_] + [_&1^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17210,7 +17210,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{&1} - \\textcolor{orange}{[_&2&3_]})^2 \
               &=  \\textcolor{teal}{&1}^2 - 2 \\times \\textcolor{teal}{&1} \\times \\textcolor{orange}{[_&2&3_]} + (\\textcolor{orange}{[_&2&3_]})^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1^2_] - [_2*&1*&2*&3_] + [_(&2&3)^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17218,7 +17218,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 (\\textcolor{teal}{[_&2&3_]} - \\textcolor{orange}{&1})^2 \
               &=  (\\textcolor{teal}{[_&2&3_]})^2 - 2 \\times \\textcolor{teal}{[_&2&3_]} \\times \\textcolor{orange}{&1} + \\textcolor{orange}{&1}^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&2&3)^2_] - [_2*&1*&2*&3_] + [_&1^2_] }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17246,7 +17246,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &3^2 - [_2*&1_]&3 + [_&1^2_] \
               &= &3^2 - 2 \\times &3 \\times &1 + &1^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&3-&1)^2 }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17254,7 +17254,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &3^2 + [_2*&1_]&3 + [_&1^2_] \
               &= &3^2 + 2 \\times &3 \\times &1 + &1^2 \\\\ \
-              &= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{(&3+&1)^2 }} \
+              &= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17290,7 +17290,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x+&1=[_&1+&2_]  \
               & \\quad \\lrArr \\quad x=[_&1+&2_]-&1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17319,7 +17319,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x-&1=&2  \
               & \\quad \\lrArr \\quad x=&1+&2\\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&1+&2_]}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17348,7 +17348,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 [_&1+&2_]-x=&1  \
               & \\quad \\lrArr \\quad x=[_&1+&2_]-&1\\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17375,7 +17375,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &1x=[_&1*&2_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&1*&2_]}{&1}\\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17383,7 +17383,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x \\times &1=[_&1*&2_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&1*&2_]}{&1}\\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17417,7 +17417,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 \\frac{x}{&1}=&2  \
               & \\quad \\lrArr \\quad x=&2 \\times &1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1_]}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17450,7 +17450,7 @@ const questions = {
                 \\frac{[_&1*&2_]}{x}=&2  \
               & \\quad \\lrArr \\quad [_&1*&2_] = &2 \\times x \\\\ \
               & \\quad \\lrArr \\quad x= \\frac {[_&1*&2_]}{&2} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17482,7 +17482,7 @@ const questions = {
               },
               {
                 text: '$$\\begin{align} \
-                -x=&1 \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-(&1)_]}} \
+                -x=&1 \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17523,7 +17523,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x+&1=[_&1+(&2)_]  \
               & \\quad \\lrArr \\quad x=[_&1+(&2)_]-&1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17531,7 +17531,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &1+x=[_&1+(&2)_]  \
               & \\quad \\lrArr \\quad x=[_&1+(&2)_]-&1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17540,7 +17540,7 @@ const questions = {
                 x+(&1)=[_&1+(&2)_]  \
               & \\quad \\lrArr \\quad x=[_&1+(&2)_]-(&1) \\\\ \
               & \\quad \\lrArr \\quad x=[_&1+(&2)_] + [_-(&1)_] \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17569,7 +17569,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x-&1=&2  \
               & \\quad \\lrArr \\quad x=&2+&1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2+&1_]}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17604,7 +17604,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 [_&1+(&2)_]-x=&1  \
               & \\quad \\lrArr \\quad x=[_&2+(&1)_]-&1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17613,7 +17613,7 @@ const questions = {
                 [_&1+(&2)_]-x=&1  \
               & \\quad \\lrArr \\quad x=[_&2+(&1)_]-(&1) \\\\ \
               & \\quad \\lrArr \\quad x=[_&2+(&1)_]+[_-(&1)_] \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17659,7 +17659,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &1x=[_&1*(&2)_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&2*(&1)_]}{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17667,7 +17667,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 &1x=[_&1*(&2)_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&2*(&1)_]}{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17675,7 +17675,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x \\times &1=[_&1*(&2)_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&2*(&1)_]}{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17683,7 +17683,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 x \\times (&1)=[_&1*(&2)_]  \
               & \\quad \\lrArr \\quad x=\\frac{[_&2*(&1)_]}{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&2}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17719,7 +17719,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 \\frac{x}{&1}=&2  \
               & \\quad \\lrArr \\quad x=&2 \\times &1 \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1_]}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
             [
@@ -17727,7 +17727,7 @@ const questions = {
                 text: '$$\\begin{align} \
                 \\frac{x}{&1}=&2  \
               & \\quad \\lrArr \\quad x=&2 \\times (&1) \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*(&1)_]}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
           ],
@@ -17760,7 +17760,7 @@ const questions = {
                 \\frac{[_&1*(&2)_]}{x}=&2  \
               & \\quad \\lrArr \\quad [_&1*(&2)_] = &2 \\times x \\\\ \
               & \\quad \\lrArr \\quad x= \\frac {[_&1*(&2)_]}{&2} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{&1}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ],
 
@@ -17795,8 +17795,8 @@ const questions = {
                 text: '$$\\begin{align} \
                 x+\\frac{&2}{&1}=\\frac{[_&2+&3_]}{&1} \
               & \\quad \\lrArr \\quad x=\\frac{[_&2+&3_]}{&1}-\\frac{&2}{&1} \\\\ \
-              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&3}{&1}}} @@ \
-              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3/&1_]}} @@ \
+              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
               \\end{align}$$' },
             ],
             [
@@ -17804,8 +17804,8 @@ const questions = {
                 text: '$$\\begin{align} \
                 \\frac{&2}{&1} + x = \\frac{[_&2+&3_]}{&1} \
               & \\quad \\lrArr \\quad x=\\frac{[_&2+&3_]}{&1}-\\frac{&2}{&1} \\\\ \
-              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&3}{&1}}} @@ \
-              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3/&1_]}} @@ \
+              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
               \\end{align}$$' },
             ],
           ],
@@ -17835,8 +17835,8 @@ const questions = {
                 text: '$$\\begin{align} \
                 x - \\frac{&2}{&1}=\\frac{&3}{&1} \
               & \\quad \\lrArr \\quad x=\\frac{&3}{&1}+\\frac{&2}{&1} \\\\ \
-              @@ pgcd(&3+&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3+&2)/&1_]}} @@ \
-              @@ pgcd(&3+&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&3+&2_]}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3+&2)/&1_]}} @@ \
+              @@ pgcd(&3+&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&3+&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&3+&2_]}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
               \\end{align}$$' },
             ],
 
@@ -17867,8 +17867,8 @@ const questions = {
                 text: '$$\\begin{align} \
                 \\frac{[_&2+&3_]}{&1} - x = \\frac{&2}{&1} \
               & \\quad \\lrArr \\quad x = \\frac{[_&2+&3_]}{&1}-\\frac{&2}{&1} \\\\ \
-              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3/&1_]}} @@ \
-              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3/&1_]}} @@ \
+              @@ pgcd(&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&3}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
               \\end{align}$$' },
             ],
 
@@ -17934,7 +17934,7 @@ const questions = {
                 \\textcolor{teal}{&2}x = \\frac{[_&2*&3_]}{&1} \
               & \\quad \\lrArr \\quad x = \\frac{[_&2*&3_]}{&1} \\textcolor{teal}{\\div &2} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{[_&2*&3_] \\div &2 }{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&3}{&1}}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ], [
               {
@@ -17942,7 +17942,7 @@ const questions = {
                 x \\textcolor{teal}{\\times &2} = \\frac{[_&2*&3_]}{&1} \
               & \\quad \\lrArr \\quad x = \\frac{[_&2*&3_]}{&1} \\textcolor{teal}{\\div &2} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{[_&2*&3_] \\div &2 }{&1} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&3}{&1}}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ], [
               {
@@ -17950,7 +17950,7 @@ const questions = {
                 \\textcolor{teal}{&2}x=\\frac{&1}{&3} \
               & \\quad \\lrArr \\quad x = \\frac{&1}{&3} \\textcolor{teal}{\\times \\frac{1}{&2}} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{&1}{&3 \\times &2} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&1}{[_&3*&2_]}}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ], [
               {
@@ -17958,21 +17958,21 @@ const questions = {
                 x \\textcolor{teal}{\\times &2} = \\frac{&1}{&3} \
               & \\quad \\lrArr \\quad x = \\frac{&1}{&3} \\textcolor{teal}{\\times \\frac{1}{&2}} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{&1}{&3 \\times &2} \\\\ \
-              & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&1}{[_&3*&2_]}}} \
+              & \\quad \\lrArr \\quad  x= &sol  \
               \\end{align}$$' },
             ], [
               {
                 text: '$$\\begin{align} \
                 x \\textcolor{teal}{\\times &1} = &2\
-                @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
-                @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{\\textcolor{teal}{&1}} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+                @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+                @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{\\textcolor{teal}{&1}} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
                 \\end{align}$$' },
             ], [
               {
                 text: '$$\\begin{align} \
                 \\textcolor{teal}{&1}x = &2\
-                @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
-                @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{\\textcolor{teal}{&1}} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+                @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+                @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{\\textcolor{teal}{&1}} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
                 \\end{align}$$' },
             ],
           ],
@@ -18003,8 +18003,8 @@ const questions = {
                 \\frac{x}{\\textcolor{teal}{&2}}=\\frac{&3}{&1} \
               & \\quad \\lrArr \\quad x = \\frac{&3}{&1} \\textcolor{teal}{\\times &2} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{&3 \\times &2}{&1} \\\\ \
-              @@ pgcd(&2*&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2/&1_]}} @@ \
-              @@ pgcd(&2*&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&2*&3_]}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&3*&2/&1_]}} @@ \
+              @@ pgcd(&2*&3;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&2*&3;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&2*&3_]}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
               \\end{align}$$' },
             ]
           ],
@@ -18043,8 +18043,8 @@ const questions = {
               & \\quad \\lrArr \\quad \\frac{x}{\\textcolor{teal}{&2}} = \\frac{&1}{&3} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{&1}{&3} \\times \\textcolor{teal}{&2} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{&1 \\times &2}{&3} \\\\ \
-              @@ pgcd(&2*&1;&3) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1/&3_]}} @@ \
-              @@ pgcd(&2*&1;&3) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&2*&1_]}{&3} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2*&1/&3_]}} @@ \
+              @@ pgcd(&2*&1;&3) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&2*&1;&3) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&2*&1_]}{&3} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
 
@@ -18054,8 +18054,8 @@ const questions = {
                 \\frac{&2}{x}=&1 \
               & \\quad \\lrArr \\quad \\frac{x}{\\textcolor{teal}{&2}} = \\frac{1}{&1} \\\\ \
               & \\quad \\lrArr \\quad x = \\frac{1}{&1} \\times \\textcolor{teal}{&2} \\\\ \
-              @@ pgcd(&1;&2) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{\\frac{&2}{&1}}} @@ \
-              @@ pgcd(&1;&2) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+              @@ pgcd(&1;&2) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&1;&2) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
           ],
@@ -18090,8 +18090,8 @@ const questions = {
                 &1x\\textcolor{teal}{+&2}=0 \
               & \\quad \\lrArr \\quad \\textcolor{orange}{&1}x = \\textcolor{teal}{-&2}\\\\ \
               & \\quad \\lrArr \\quad x = \\frac{-&2}{\\textcolor{orange}{&1}}\\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{-\\frac{&2}{&1}}} @@ \
-              @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
             [
@@ -18100,8 +18100,8 @@ const questions = {
                 \\textcolor{teal}{&2+}&1x=0 \
               & \\quad \\lrArr \\quad \\textcolor{orange}{&1}x = \\textcolor{teal}{-&2}\\\\ \
               & \\quad \\lrArr \\quad x = \\frac{-&2}{\\textcolor{orange}{&1}}\\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{-\\frac{&2}{&1}}}} @@ \
-              @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
 
@@ -18148,8 +18148,8 @@ const questions = {
               &1x\\textcolor{teal}{+&2}=0 \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = \\textcolor{teal}{-&2} \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{-&2}{\\textcolor{orange}{&1}} \\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}}} @@ \
-            @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ], [
               {
@@ -18157,8 +18157,8 @@ const questions = {
             \\textcolor{teal}{&2}+&1x=0 \
             & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = \\textcolor{teal}{-&2} \\\\ \
             & \\quad \\lrArr \\quad  x = \\frac{-&2}{\\textcolor{orange}{&1}} \\\\ \
-            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}}} @@ \
-          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
          \\end{align}$$' },
             ],
             [
@@ -18166,16 +18166,16 @@ const questions = {
                 text: '$$\\begin{align} \
               &1x\\textcolor{teal}{-&2}=0 \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = \\textcolor{teal}{&2} \\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
-            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ], [
               {
                 text: '$$\\begin{align} \
             \\textcolor{teal}{-&2}+&1x=0 \
             & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = \\textcolor{teal}{&2} \\\\ \
-            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
-          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
          \\end{align}$$' },
             ],
 
@@ -18185,8 +18185,8 @@ const questions = {
               -&1x\\textcolor{teal}{+&2}=0 \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{-&1}x = \\textcolor{teal}{-&2} \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{-&2}{\\textcolor{orange}{-&1}} \\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}}} @@ \
-            @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(&2;&1) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ],
             [
@@ -18195,8 +18195,8 @@ const questions = {
             \\textcolor{teal}{&2}-&1x=0 \
             & \\quad \\lrArr \\quad  \\textcolor{orange}{-&1}x = \\textcolor{teal}{-&2} \\\\ \
             & \\quad \\lrArr \\quad  x = \\frac{-&2}{\\textcolor{orange}{-&1}} \\\\ \
-            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}}} @@ \
-          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_&2/&1_]}} @@ \
+            @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+          @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= \\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
          \\end{align}$$' },
             ],
             [
@@ -18205,8 +18205,8 @@ const questions = {
               -&1x\\textcolor{teal}{-&2}=0 \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{-&1}x = \\textcolor{teal}{&2} \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{&2}{\\textcolor{orange}{-&1}} \\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
-            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ], [
               {
@@ -18214,8 +18214,8 @@ const questions = {
               \\textcolor{teal}{-&2}-&1x=0 \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{-&1}x = \\textcolor{teal}{&2} \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{&2}{\\textcolor{orange}{-&1}} \\\\ \
-              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
-            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_-&2/&1_]}} @@ \
+              @@ pgcd(&2;&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(&2;&1) != 1  ?? & \\quad \\lrArr \\quad  x= -\\frac{&2}{&1} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ],
 
@@ -18252,8 +18252,8 @@ const questions = {
                 &3x\\textcolor{teal}{+&2}=&1 \
               & \\quad \\lrArr \\quad &3x = &1\\textcolor{teal}{-&2} \\\\ \
               & \\quad \\lrArr \\quad \\textcolor{orange}{&3}x = [_&1-&2_] \\\\ \
-              @@ pgcd(&1-&2;&3) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)/&3_]}} @@ \
-              @@ pgcd(&1-&2;&3) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&1-&2_]}{\\textcolor{orange}{&3}} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)/&3_]}} @@ \
+              @@ pgcd(&1-&2;&3) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&1-&2;&3) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&1-&2_]}{\\textcolor{orange}{&3}} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
 
@@ -18294,9 +18294,9 @@ const questions = {
               & \\quad \\lrArr \\quad  &1x = &3\\textcolor{teal}{[+_-(&2)_]} \\\\  \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = [_&3-(&2)_] \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{[_&3-(&2)_]}{\\textcolor{orange}{&1}} \\\\ \
-              @@ pgcd(abs(&3-(&2));&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
-            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
-            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
+              @@ pgcd(abs(&3-(&2));&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ],
             [
@@ -18306,9 +18306,9 @@ const questions = {
               & \\quad \\lrArr \\quad  &1x = &3\\textcolor{teal}{[+_-(&2)_]} \\\\  \
               & \\quad \\lrArr \\quad  \\textcolor{orange}{&1}x = [_&3-(&2)_] \\\\ \
               & \\quad \\lrArr \\quad  x = \\frac{[_&3-(&2)_]}{\\textcolor{orange}{&1}} \\\\ \
-              @@ pgcd(abs(&3-(&2));&1) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
-            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
-            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&3-(&2))/(&1)_]}} @@ \
+              @@ pgcd(abs(&3-(&2));&1) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&3-(&2));&1) != 1 && (&3-(&2))*(&1)<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&3-(&2))_]}{[_abs(&1)_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
            \\end{align}$$' },
             ],
           ],
@@ -18342,8 +18342,8 @@ const questions = {
                 &3x\\textcolor{teal}{+&2}=\\textcolor{orange}{[_&4x_]}+&1 \
               & \\quad \\lrArr \\quad &3x \\textcolor{orange}{-[_&4x_]} = &1\\textcolor{teal}{-&2} \\\\ \
               & \\quad \\lrArr \\quad \\textcolor{violet}{[_&3-&4_]}x = [_&1-&2_] \\\\ \
-              @@ pgcd(&3-&4;&1-&2) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)/(&3-&4)_]}} @@ \
-              @@ pgcd(&3-&4;&1-&2) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&1-&2_]}{\\textcolor{violet}{[_&3-&4_]}} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-&2)/(&3-&4)_]}} @@ \
+              @@ pgcd(&3-&4;&1-&2) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+              @@ pgcd(&3-&4;&1-&2) != 1 ?? & \\quad \\lrArr \\quad  x= \\frac{[_&1-&2_]}{\\textcolor{violet}{[_&3-&4_]}} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
              \\end{align}$$' },
             ],
 
@@ -18375,15 +18375,15 @@ const questions = {
           correctionDetails: [
             [
               {
-                text: '$$\\begin{align} \
-              &3x\\textcolor{teal}{[+_&2_]}=\\textcolor{orange}{&4x}[+_&1_] \
-              & \\quad \\lrArr \\quad &3x \\textcolor{orange}{[+_-(&4)x_]} = &1\\textcolor{teal}{[+_-(&2)_]} \\\\ \
-              & \\quad \\lrArr \\quad  \\textcolor{violet}{[_&3-(&4)_]}x = [_&1-(&2)_] \\\\  \
-              & \\quad \\lrArr \\quad  x = \\frac{[_&1-(&2)_]}{\\textcolor{violet}{[_&3-(&4)_]}} \\\\ \
-              @@ pgcd(abs(&1-(&2));abs(&3-(&4))) = 1 ?? & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-(&2))/(&3-(&4))_]}} @@ \
-            @@ pgcd(abs(&1-(&2));abs(&3-(&4))) != 1 && (&1-(&2))*(&3-(&4))>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&1-(&2))_]}{[_abs(&3-(&4))_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-(&2))/(&3-(&4))_]}} @@ \
-            @@ pgcd(abs(&1-(&2));abs(&3-(&4))) != 1 && (&1-(&2))*(&3-(&4))<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&1-(&2))_]}{[_abs(&3-(&4))_]} \\\\ & \\quad \\lrArr \\quad  x= \\enclose{roundedbox}[3px solid green]{\\textcolor{green}{[_(&1-(&2))/(&1-(&4))_]}} @@ \
-           \\end{align}$$' },
+                text: `$$\\begin{align} \
+              &3x\\textcolor{${color1}}{[+_&2_]}=\\textcolor{${color2}}{&4x}[+_&1_] \
+              & \\quad \\lrArr \\quad &3x \\textcolor{${color2}}{[+_-(&4)x_]} = &1\\textcolor{${color1}}{[+_-(&2)_]} \\\\ \
+              & \\quad \\lrArr \\quad  \\textcolor{${color3}}{[_(&3-(&4))x_]} = [_&1-(&2)_] \\\\  \
+              & \\quad \\lrArr \\quad  x = \\frac{[_&1-(&2)_]}{\\textcolor{${color3}}{[_&3-(&4)_]}} \\\\ \
+              @@ pgcd(abs(&1-(&2));abs(&3-(&4))) = 1 ?? & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&1-(&2));abs(&3-(&4))) != 1 && (&1-(&2))*(&3-(&4))>0  ?? & \\quad \\lrArr \\quad  x= \\frac{[_abs(&1-(&2))_]}{[_abs(&3-(&4))_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
+            @@ pgcd(abs(&1-(&2));abs(&3-(&4))) != 1 && (&1-(&2))*(&3-(&4))<0  ?? & \\quad \\lrArr \\quad  x= -\\frac{[_abs(&1-(&2))_]}{[_abs(&3-(&4))_]} \\\\ & \\quad \\lrArr \\quad  x= &sol  @@ \
+           \\end{align}$$` },
             ],
           ],
           type: 'equation',

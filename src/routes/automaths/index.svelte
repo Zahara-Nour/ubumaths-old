@@ -15,7 +15,7 @@
 	import { fetchImage } from '$lib/images'
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
-	import {darkmode} from '$lib/stores'
+	import { darkmode } from '$lib/stores'
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -283,10 +283,13 @@
 
 {#if displayExemple}
 	<!-- <div class=" px-2 py-5" style="{'position:sticky; bottom:0; z-index:2;'}"> -->
-	<div class="flex items-center justify-center py-2" style="{`${$darkmode ? 'border-radius:5px;background:#fff' : ''};position:sticky; bottom:0; z-index:2;`}">
-		<div
-			style="{'width:95vw;'}"
-		>
+	<div
+		class="flex items-center justify-center py-2"
+		style="{`${
+			$darkmode ? 'border-radius:5px;background:#fff' : ''
+		};position:sticky; bottom:0; z-index:2;`}"
+	>
+		<div style="{'width:95vw;'}">
 			<QuestionCard card="{generated}" flashcard="{true}" description />
 		</div>
 	</div>
