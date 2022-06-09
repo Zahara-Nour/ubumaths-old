@@ -71,9 +71,9 @@
 		{/if}
 		{#if displayDetails && item.correctionDetails}
 			{#each detailedCorrection as line}
-				<div class="mb-1 z-0 relative" >
+				<p class="mb-1 z-0 relative" >
 					{@html line}
-				</div>
+				</p>
 			{/each}
 		{:else}
 			{#each correction as line}

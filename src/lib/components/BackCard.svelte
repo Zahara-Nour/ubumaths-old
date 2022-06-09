@@ -48,7 +48,9 @@
 					{#if details}
 						<div class="my-2 z-0 relative">
 							{#each details as detail}
+							<p>
 								{@html detail.text ? detail.text : detail}
+							</p>
 							{/each}
 						</div>
 					{/if}

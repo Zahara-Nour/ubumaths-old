@@ -290,7 +290,7 @@
 		};position:sticky; bottom:0; z-index:2;`}"
 	>
 		<div style="{'width:95vw;'}">
-			<QuestionCard card="{generated}" flashcard="{true}" description />
+			<QuestionCard card="{generated}" flashcard="{true}" showDescription={true} />
 		</div>
 	</div>
 {/if}

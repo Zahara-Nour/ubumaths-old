@@ -40,7 +40,9 @@
 			{#if showDescription}
 				<div>
 					<Title>
-						<span class = 'z-0 relative' style={'color:var(--mdc-theme-primary'}>{@html $formatLatex(description)}</span>
+						<div class='flex justify-between'>
+							<span class = 'z-0 relative' style={'color:var(--mdc-theme-primary'}>{@html $formatLatex(description)}</span> <span>{card.id} </span>
+						</div>
 					</Title>
 					{#if subdescription}
 						<Subtitle>

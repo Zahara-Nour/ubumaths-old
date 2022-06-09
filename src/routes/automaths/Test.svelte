@@ -413,7 +413,7 @@
 								out:fly="{{ x: -500, duration: cards.length > 1 ? 700 : 0 }}"
 							>
 								<div class=" p-2 elevation-{4} rounded-lg">
-									<QuestionCard card="{card}" onChoice="{onChoice}" />
+									<QuestionCard card="{card}" onChoice="{onChoice}"/>
 								</div>
 							</div>
 						{/each}

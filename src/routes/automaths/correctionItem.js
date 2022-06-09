@@ -95,8 +95,8 @@ export function createCorrection(item) {
 							() =>
 								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px; margin:2px;padding:5px;display:inline-block">` +
 								(item.type === 'choice'
-									? get(toMarkup)(item.choices[solutions[0]].text)
-									: get(toMarkup)('$$' + solutions_latex[0] + '$$')) +
+									? get(formatLatex)(item.choices[solutions[0]].text)
+									: get(toMarkup)(solutions_latex[0])) +
 								'</span>',
 						)
 						.replace(
@@ -304,8 +304,8 @@ export function createDetailedCorrection(item) {
 					() =>
 						`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
 						(item.type === 'choice'
-							? get(toMarkup)(item.choices[solutions[0]].text)
-							: get(toMarkup)('$$' + solutions_latex[0] + '$$')) +
+							? get(formatLatex)(item.choices[solutions[0]].text)
+							: get(toMarkup)(solutions_latex[0])) +
 						'</span>',
 				)
 				.replace(
