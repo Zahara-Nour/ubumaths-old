@@ -286,7 +286,6 @@ let color3
 
 
 darkmode.subscribe((dark) => {
-	console.log('mode 2  changed', dark)
 	if (dark) {
 		correct_color = mdc_colors['lime-500']
 		unoptimal_color = mdc_colors['amber-300']

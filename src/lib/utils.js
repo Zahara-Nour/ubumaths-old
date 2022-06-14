@@ -1,5 +1,3 @@
-import {toMarkup} from '$lib/stores'
-import { format } from 'prettier'
 
 const loggers = {}
 function getLogger(name, level = 'info') {

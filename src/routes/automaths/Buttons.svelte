@@ -5,15 +5,12 @@
 		mdiHelp,
 		mdiBasketPlus,
 		mdiBasket,
-		mdiCloudDownloadOutline,
-		mdiCloudUploadOutline,
 		mdiLink,
 		mdiTrashCanOutline,
 	} from '@mdi/js'
 	import Fab from '@smui/fab'
 	import Badge from '@smui-extra/badge'
 	import Tooltip, { Wrapper } from '@smui/tooltip'
-	import IconButton from '@smui/icon-button'
 	import { Icon } from '@smui/common'
 	import { Svg } from '@smui/common/elements'
 

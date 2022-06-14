@@ -17,13 +17,13 @@
 	let init
 
 	async function updateHeight() {
-		console.log('updateHeight')
+		// console.log('updateHeight')
 		height = Math.max(hfront, hback)
-		console.log('height', height)
+		// console.log('height', height)
 	}
 
 	$: if (card) {
-		console.log('changing card')
+		// console.log('changing card')
 		flip = false
 
 		// Kludge to trigger an updateHeight
@@ -31,10 +31,10 @@
 		// fontSize.update((size) => size - 1)
 	}
 
-	$: console.log('hback', hback)
-	$: console.log('hfront', hfront)
-	$: console.log('height', height)
-	$: console.log('init', init)
+	// $: console.log('hback', hback)
+	// $: console.log('hfront', hfront)
+	// $: console.log('height', height)
+	// $: console.log('init', init)
 	$: if (flashcard && hfront && hback) {
 		updateHeight()
 	}
@@ -44,7 +44,7 @@
 	}
 
 	$: if ($fontSize) {
-		console.log('changing size')
+		// console.log('changing size')
 		height = 0
 	}
 </script>

@@ -52,6 +52,7 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^1.35.3",
 		"svelte-viewport-info": "^1.0.0",
+		"tinycas": "^0.8.5",
 		"tinymathlive": "^0.73.8"
 	}
 }

@@ -126,7 +126,7 @@
 				delete available[theme]
 			}
 		})
-		console.log('availables', available)
+		// console.log('availables', available)
 		return available
 	}
 
@@ -160,7 +160,6 @@
 
 		let href = 'http://localhost:3000/automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
-		console.log('href', href)
 		navigator.clipboard
 			.writeText(href)
 			.then(function () {

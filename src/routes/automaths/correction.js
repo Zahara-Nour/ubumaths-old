@@ -165,7 +165,7 @@ function checkAnswer(item) {
 
     if (item.testAnswer) {
         const tests = item.testAnswer.replace(/&answer/g, item.answer).split('&&')
-        console.log('tests', tests)
+        // console.log('tests', tests)
         const failed = tests.some((test) => math(test).eval().isFalse())
 
         // TODO : tester les formats

@@ -29,7 +29,6 @@ console.log('question', question)
     ? $toMarkup(question.expression2_latex)
     : null
 
-$: console.log('enounce', enounce)
 </script>
 
 <div class="flex flex-col items-center">

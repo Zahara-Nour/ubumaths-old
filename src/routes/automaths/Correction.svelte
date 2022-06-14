@@ -5,7 +5,7 @@
 	import { Icon } from '@smui/common'
 	import { Svg } from '@smui/common/elements'
 	import { onMount } from 'svelte'
-	import { mode, toMarkup } from '$lib/stores'
+	import { mode } from '$lib/stores'
 	import { assessItems } from './correction'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
 
@@ -157,17 +157,5 @@
 <style>
 	/* pacifico-regular - latin */
 
-	.container {
-		padding-top: 15px;
-		padding-bottom: 15px;
-		width: 100%;
-		height: 350px;
-		border: 8px solid rgb(255, 215, 165);
-		border-radius: 15px;
-		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-	}
-	#deck {
-		width: 100%;
-		height: 100%;
-	}
+	
 </style>

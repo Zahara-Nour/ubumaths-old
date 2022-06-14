@@ -5,7 +5,7 @@
 	import Button, { Label } from '@smui/button'
 	import generate from './generateQuestion'
 	import CircularProgress from '$lib/components/CircularProgress.svelte'
-	import { onDestroy, onMount } from 'svelte'
+	import { onDestroy } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import { getLogger, shuffle } from '$lib/utils'
@@ -86,7 +86,6 @@
 	})
 
 	function initMathField() {
-		console.log('init mathfield', mf)
 		mf.setOptions({
 			// virtualKeyboardMode: 'onfocus',
 			decimalSeparator: ',',
@@ -112,7 +111,6 @@
 		const basket = JSON.parse(
 			decodeURI($page.url.searchParams.get('questions')),
 		)
-		console.log('basket', basket)
 		classroom =
 			JSON.parse(decodeURI($page.url.searchParams.get('classroom'))) === 'true'
 
@@ -457,33 +455,8 @@
 {/if}
 
 <style>
-	.error {
-		border: 5px solid red;
-	}
+	
 
-	.portrait {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.landscape {
-		width: 100%;
-		display: flex;
-		align-items: center;
-	}
-
-	.column1 {
-		flex-basis: 60%;
-		flex-grow: 0;
-		flex-shrink: 0;
-	}
-	.column2 {
-		flex-basis: 40%;
-		flex-grow: 0;
-		flex-shrink: 0;
-	}
 
 	#cards-container {
 		margin-top: 20px;

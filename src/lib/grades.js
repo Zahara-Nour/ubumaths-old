@@ -96,11 +96,11 @@ export function gradeMatchesClass(gradeQuestion, gradeClass) {
     return !!grade
 }
 
-export function testGrades() {
-    console.log(CP, ' matches ', CE1, gradeMatchesClass(CP, CE1))
-    console.log(CE1, ' matches ', CP, gradeMatchesClass(CE1, CP))
-    console.log(SECONDE, ' matches ', TERMINALE_SPE_MATHS, gradeMatchesClass(SECONDE, TERMINALE_SPE_MATHS))
-    console.log(PREMIERE_STMG, ' matches ', TERMINALE_SPE_MATHS, gradeMatchesClass(PREMIERE_STMG, TERMINALE_SPE_MATHS))
-}
+// export function testGrades() {
+//     console.log(CP, ' matches ', CE1, gradeMatchesClass(CP, CE1))
+//     console.log(CE1, ' matches ', CP, gradeMatchesClass(CE1, CP))
+//     console.log(SECONDE, ' matches ', TERMINALE_SPE_MATHS, gradeMatchesClass(SECONDE, TERMINALE_SPE_MATHS))
+//     console.log(PREMIERE_STMG, ' matches ', TERMINALE_SPE_MATHS, gradeMatchesClass(PREMIERE_STMG, TERMINALE_SPE_MATHS))
+// }
 
 

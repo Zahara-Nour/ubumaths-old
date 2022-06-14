@@ -4,8 +4,7 @@
 	import { mdiOrbitVariant } from '@mdi/js'
 	import Fab, { Icon } from '@smui/fab'
 	import { Svg } from '@smui/common/elements'
-	import Paper, { Title, Subtitle, Content } from '@smui/paper'
-	import { onMount, afterUpdate } from 'svelte'
+	import Paper, { Content } from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
 	import { createDetailedCorrection } from '../../routes/automaths/correctionItem'
@@ -29,7 +28,6 @@
 		} else {
 			s = $formatLatex('$$' + math(s).latex + '$$')
 		}
-		console.log(s)
 		return s
 	}
 

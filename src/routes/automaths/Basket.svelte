@@ -7,7 +7,6 @@
 	import generate from './generateQuestion'
 	import datas, { getQuestion } from './questions.js'
 
-	const questions = datas.questions
 	const ids = datas.ids
 
 	export let basket

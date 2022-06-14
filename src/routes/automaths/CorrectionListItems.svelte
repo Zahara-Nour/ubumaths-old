@@ -1,5 +1,4 @@
 <script>
-	import Fab from '@smui/fab'
 	import { STATUS_CORRECT, STATUS_UNOPTIMAL_FORM } from './correction'
 	import CorrectionItem from './CorrectionItem.svelte'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'

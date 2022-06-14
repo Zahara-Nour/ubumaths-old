@@ -5,7 +5,6 @@
 	import { Svg } from '@smui/common/elements'
 	import Paper, { Title, Subtitle, Content } from '@smui/paper'
 	import Question from '/src/routes/automaths/Question.svelte'
-	import { onMount, afterUpdate } from 'svelte'
 	import { formatLatex } from '$lib/stores'
 
 	export let toggleFlip = () => {}
