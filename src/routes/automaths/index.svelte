@@ -91,7 +91,7 @@
 				}
 			})
 		}
-		console.log('generated', generated)
+		// console.log('generated', generated)
 	}
 
 	function generateExemple(theme, domain, subdomain, level) {

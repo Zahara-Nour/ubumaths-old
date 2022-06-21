@@ -11,7 +11,7 @@
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
 
-	let hfront
+	let hfront = 0
 	let hback = 0
 	let height
 	let init

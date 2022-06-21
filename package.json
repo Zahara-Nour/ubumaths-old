@@ -7,6 +7,7 @@
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"test": "playwright test",
+		"vitest": "vitest",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"prepare": "svelte-kit sync && npm run smui-theme-light && npm run smui-theme-dark && npm run site-light && npm run site-dark",
@@ -36,23 +37,29 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.56",
 		"@sveltejs/kit": "next",
+		"@testing-library/jest-dom": "^5.16.4",
+		"@testing-library/svelte": "^3.1.3",
 		"autoprefixer": "^10.4.7",
 		"eslint": "^8.12.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"jsdom": "^19.0.0",
 		"postcss": "^8.4.14",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"smui-theme": "^6.0.0-beta.16",
 		"svelte": "^3.44.0",
 		"svelte-preprocess": "^4.10.6",
-		"tailwindcss": "^3.0.24"
+		"tailwindcss": "^3.0.24",
+		"vitest": "^0.15.0",
+		"vitest-svelte-kit": "^0.0.6"
 	},
 	"type": "module",
 	"dependencies": {
 		"@supabase/supabase-js": "^1.35.3",
+		"decimal.js": "^10.3.1",
 		"svelte-viewport-info": "^1.0.0",
-		"tinycas": "^0.8.5",
+		"tinycas": "^0.8.8",
 		"tinymathlive": "^0.73.8"
 	}
 }

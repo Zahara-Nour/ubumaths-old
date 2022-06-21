@@ -11,9 +11,9 @@
 	export let card
 	export let showDescription
 	export let flashcard
-	export let height
-	export let h
-	export let onChoice
+	export let height = 0
+	export let h = 0
+	export let onChoice = () => {}
 
 	let choices
   

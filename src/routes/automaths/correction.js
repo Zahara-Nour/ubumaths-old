@@ -446,7 +446,7 @@ export function assessItems(questions, answers, answers_latex, answers_choice, t
     for (let i = 0; i < questions.length; i++) {
         const question = questions[i]
         total += question.points
-        console.log('question', question)
+        // console.log('question', question)
         items[i] = {
             ...question,
             answer: answers[i],

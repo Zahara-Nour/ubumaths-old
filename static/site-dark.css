@@ -538,6 +538,10 @@ a {
   text-transform: var(--mdc-typography-overline-text-transform, uppercase);
 }
 
+body {
+  margin: 0;
+}
+
 html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -562,6 +566,11 @@ html {
   text-transform: inherit;
   /* @alternate */
   text-transform: var(--mdc-typography-body1-text-transform, inherit);
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 h1 {

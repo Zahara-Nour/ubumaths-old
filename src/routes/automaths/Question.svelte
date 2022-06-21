@@ -8,7 +8,7 @@
   let enounce2
   
 
-console.log('question', question)
+// console.log('question', question)
   $: showExp =
     question.expression_latex &&
     !(question.options && question.options.includes('no-exp'))
