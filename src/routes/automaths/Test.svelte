@@ -5,7 +5,7 @@
 	import Button, { Label } from '@smui/button'
 	import generate from './generateQuestion'
 	import CircularProgress from '$lib/components/CircularProgress.svelte'
-	import { onDestroy } from 'svelte'
+	import { onDestroy, setContext } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import { getLogger, shuffle } from '$lib/utils'
@@ -25,10 +25,10 @@
 	let current = 0
 	let answer
 	let answer_latex
-	let answer_choice
 	let answers = []
+	let answerss = []
 	let answers_latex = []
-	let answers_choice = []
+	let answerss_latex = []
 	let times = []
 	// let generated
 	let generateds = []
@@ -85,29 +85,14 @@
 		handleKeydown.set(() => {})
 	})
 
-	function initMathField() {
-		mf.setOptions({
-			// virtualKeyboardMode: 'onfocus',
-			decimalSeparator: ',',
-			virtualKeyboardMode: 'manual',
-			...virtualKeyboard,
-			// onKeystroke,
-			inlineShortcuts: {
-				xx: {},
-			},
-		})
-		if (!mf.hasFocus) mf.focus()
-	}
-
 	function initTest() {
 		info('init test')
 		current = 0
 		restart = false
 		finish = false
 		generateds = []
-		answers = []
-		answers_latex = []
-		answers_choice = []
+		answerss = []
+		answerss_latex = []
 		const basket = JSON.parse(
 			decodeURI($page.url.searchParams.get('questions')),
 		)
@@ -162,31 +147,20 @@
 	function onChoice(choice) {
 		// answer = choice
 		// answer_latex = choice
-		answer_choice = choice
+		answers.push(choice)
 		change()
 	}
 
-	function recordAnswer() {
-		// console.log('mf value', mf.value)
-		answer_latex = mf
-			.getValue()
-			// on remplace plusieurs espaces par un seul, bizarrz normalement pas besoin
-			.replace(/(\\,){2,}/g, '\\,')
-			.trim()
-		answer = mf.getValue('ascii-math')
-		answer = answer
-			// .replace(/xx/g, '*')
-			.replace(/÷/g, ':')
-			.replace(/\((\d+(,\d+)*)\)\//g, (_, p1) => p1 + '/')
-			.replace(/\(([a-z])\)\//g, (_, p1) => p1 + '/')
-			.replace(/\/\((\d+(,\d+)*)\)/g, (_, p1) => '/' + p1)
-			.replace(/\/\(([a-z])\)/g, (_, p1) => '/' + p1)
-			.trim()
-		trace(`answer latex: ${answer_latex} asccii: ${answer}`)
+	function onChoices(choice) {
+		// answer = choice
+		// answer_latex = choice
+		
+		change()
 	}
 
+	
+
 	function commit() {
-		recordAnswer()
 		change()
 	}
 
@@ -205,60 +179,6 @@
 		change()
 	}
 
-	function onKeystroke(ev) {
-		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
-		const key_allowed2 = [
-			'Backspace',
-			'ArrowLeft',
-			'ArrowRight',
-			'ArrowDown',
-			'ArrowUp',
-		]
-		const keystroke_allowed = ['[Enter]', '[NumpadEnter]']
-
-		const keystroke = ev.detail.keystroke
-		const key = ev.detail.event.key
-		trace('keystroke', keystroke)
-		trace('key', key)
-
-		if (
-			keystroke === '[Space]' &&
-			!(
-				answer_latex &&
-				answer_latex.length >= 2 &&
-				answer_latex.slice(answer_latex.length - 2) === '\\,'
-			)
-		) {
-			ev.preventDefault()
-			mf.insert('\\,')
-		} else if (key === '%') {
-			ev.preventDefault()
-			mf.insert('\\%')
-		} else if (key === 'r') {
-			ev.preventDefault()
-			mf.insert('\\sqrt')
-		} else if (key === '*') {
-			ev.preventDefault()
-			mf.insert('\\times ')
-		} else if (key === ':') {
-			ev.preventDefault()
-			mf.insert('\\div ')
-		} else if (key === '<') {
-			ev.preventDefault()
-			mf.insert('<')
-		} else if (
-			!key_allowed.includes(key) &&
-			!key_allowed2.includes(key) &&
-			!keystroke_allowed.includes(keystroke)
-		) {
-			ev.preventDefault()
-		}
-	}
-
-	function onChangeMathField(e) {
-		// utile dans le cas d'une expression mal formée
-		recordAnswer()
-	}
 
 	// on passe à la question suivante
 	async function change() {
@@ -267,21 +187,17 @@
 		// if (timeout) clearTimeout(timeout)
 
 		if (cards.length <= generateds.length) {
-			answers.push(answer)
-			answers_latex.push(answer_latex)
-			answers_choice.push(answer_choice)
+			answerss.push(answers)
+			answerss_latex.push(answers_latex)
 			let time = Math.min(Math.round(elapsed / 1000), delay)
 			if (time === 0) time = 1
 			times.push(time)
+			console.log('answerss', answerss)
 		}
 		if (cards.length > 1) {
-			if (mf) {
-				mf.setValue('')
-				// if (!mf.hasFocus()) mf.focus()
-			}
-			answer = ''
-			answer_latex = ''
-			answer_choice = null
+			answers = []
+			answers_latex = []
+			setContext('question-params', {answers, answers_latex})
 
 			cards = [...cards.slice(1, cards.length)]
 			card = cards[0]
@@ -301,8 +217,6 @@
 			timer = setInterval(countDown, 10)
 		} else {
 			finish = true
-			// mathlive bug : virtual keyboard still displays otherwise
-			if (mf) mf.blur()
 		}
 	}
 
@@ -313,18 +227,7 @@
 		initTest()
 	}
 
-	$: if (mf) {
-		initMathField()
-	}
 
-	// $: if (card && mf && !mf.hasFocus()) {
-	// 	mf.focus()
-	// }
-
-	// test pour vérifier que l'expression est bien formée à chaque frappe
-	$: if (answer) {
-		correct = math(answer).type !== '!! Error !!'
-	}
 
 	$: delay = slider * 1000
 </script>
@@ -355,9 +258,8 @@
 	{#if showCorrection}
 		<Correction
 			questions="{generateds}"
-			answers="{answers}"
-			answers_latex="{answers_latex}"
-			answers_choice="{answers_choice}"
+			answerss="{answerss}"
+			answerss_latex="{answerss_latex}"
 			times="{times}"
 			query="{location.search}"
 			classroom="{classroom}"
@@ -411,7 +313,12 @@
 								out:fly="{{ x: -500, duration: cards.length > 1 ? 700 : 0 }}"
 							>
 								<div class=" p-2 elevation-{4} rounded-lg">
-									<QuestionCard card="{card}" onChoice="{onChoice}"/>
+									<QuestionCard
+										card="{card}"
+										onChoice="{onChoice}"
+										interactive = !classroom
+										commit={commit}
+									/>
 								</div>
 							</div>
 						{/each}
@@ -419,7 +326,7 @@
 				</div>
 			{/if}
 
-			{#if !card.choices && !classroom}
+			<!-- {#if !card.choices && !classroom}
 				<div class="flex items-center justify-center " style="width:80%">
 					<span class="mr-4">Ta réponse:</span>
 					<div class="flex-grow-1" style="width:70%">
@@ -447,7 +354,7 @@
 						{/if}
 					</div>
 				</div>
-			{/if}
+			{/if} -->
 		</div>
 	</div>
 {:else}
@@ -455,9 +362,6 @@
 {/if}
 
 <style>
-	
-
-
 	#cards-container {
 		margin-top: 20px;
 		margin-bottom: 20px;

@@ -634,7 +634,7 @@ export default function generateQuestion(question, generateds = [], nbquestions 
     type: question.choices ? 'choice' : 'result',
     ...question,
     // TODO: le mettre ailleurs ça alourdit ici
-    order_elements: question.order_elements || ['enounce', 'enounce2', 'enounce-image', 'expression']
+    order_elements: question.order_elements || ['enounce', 'enounce2', 'enounce-image', 'expression', 'choices']
   }
   if (choices) generated.choices = choices
   if (solutions) generated.solutions = solutions

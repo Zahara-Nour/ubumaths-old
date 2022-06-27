@@ -14,9 +14,8 @@
 	import math from 'tinycas'
 
 	export let questions
-	export let answers
-	export let answers_latex
-	export let answers_choice
+	export let answerss
+	export let answerss_latex
 	export let times
 	export let restart
 	export let query
@@ -28,36 +27,40 @@
 	const toggleDetails = () => (displayDetails = !displayDetails)
 	let colorResult
 	let messageResult
+	let items
+	let score
+	let total
 
-	// inititalisation
-	let { items, score, total } = assessItems(
-		questions,
-		answers,
-		answers_latex,
-		answers_choice,
-		times,
-		classroom,
-	)
+	if (!classroom) {
+		// inititalisation
+		;({ items, score, total } = assessItems(
+			questions,
+			answerss,
+			answerss_latex,
+			times,
+		))
+	}
 
 	// Quand le composant de correction a fini de s'afficher,
 	// le score a déjà été calculé, on l'enregistre
 	onMount(async () => {
-		percent = score / total
+		if (!classroom) {
+			percent = score / total
 
-		if (percent === 1) {
-			colorResult = correct_color
-			messageResult = 'Perfect !'
-		} else if (percent >= 0.8) {
-			colorResult = correct_color
-			messageResult = 'Good Job !'
-		} else if (percent >= 0.5) {
-			colorResult = unoptimal_color
-			messageResult = 'Keep on !'
-		} else {
-			colorResult = incorrect_color
-			messageResult = 'Try again !'
+			if (percent === 1) {
+				colorResult = correct_color
+				messageResult = 'Perfect !'
+			} else if (percent >= 0.8) {
+				colorResult = correct_color
+				messageResult = 'Good Job !'
+			} else if (percent >= 0.5) {
+				colorResult = unoptimal_color
+				messageResult = 'Keep on !'
+			} else {
+				colorResult = incorrect_color
+				messageResult = 'Try again !'
+			}
 		}
-
 		// évaluation à sauvegarder
 	})
 
@@ -156,6 +159,4 @@
 
 <style>
 	/* pacifico-regular - latin */
-
-	
 </style>

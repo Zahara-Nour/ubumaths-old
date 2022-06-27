@@ -9,7 +9,6 @@ export const STATUS_BAD_UNIT = 'bad unit'
 
 let { fail, trace, info } = getLogger('correction', 'info')
 
-
 // VALIDATION DES REPONSES
 // 1) on regarde si il y a eu une réponse -> STATUS_EMPTY
 // 2) on regarde si l'expression est valide mathématiquement -> STATUS_INCORRECT
@@ -19,531 +18,757 @@ let { fail, trace, info } = getLogger('correction', 'info')
 //   signes superflus, termes nuls, facteurs nuls, facteurs égaux à 1,
 //   fractions réduites, unités
 //   -> STATUS_BAD_FORM ou STATUS_UNOPTIMAL_FORM
-// 5) si la solution n'est pas explicitement calculable un test (testAnswer) de validation 
+// 5) si la solution n'est pas explicitement calculable un test (testAnswer) de validation
 //    peut être effectué -> STATUS_INCORRECT ou STATUS_CORRECT ou inchangé (peut deja etre STATUS_UNOPTIMAL_FORM ou STATUS_BAD_FORM)
 // 6) Sinon après avoir mis en ordre les termes et facteurs, on compare strictement la réponse à la solution explicite -> STATUS_BAD_FORM ou STATUS_CORRECT
-// TODO: Formats 
+// TODO: Formats
 
 const EMPTY_ANSWER = "Tu n'as rien répondu."
+const EMPTY_MULTIPLE_ANSWERS = "Tu n'as pas tout complété."
 const ZEROS =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> contient un ou des zéros inutiles."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> contient un ou des zéros inutiles."
+const ZEROS_MULTIPLE_ANSWERS =
+	'Il y a un ou des zéros inutiles dans tes réponses :'
 const FACTORE_ONE =
-    "Dans <span style='color:_COLORANSWER_'>ta réponse</span>, tu peux enlever un facteur égal à 1."
+	"Dans <span style='color:_COLORANSWER_'>ta réponse</span>, tu peux simplifier le ou les facteurs 1."
+const FACTORE_ONE_MULTIPLE_ANSWERS =
+	'Il y a un ou des facteurs 1 inutiles dans tes réponses :'
 const FACTORE_ZERO =
-    "Tu peux simplifier <span style='color:_COLORANSWER_'>ta réponse</span> qui contient un facteur nul."
+	"Tu peux simplifier <span style='color:_COLORANSWER_'>ta réponse</span> qui contient un ou des facteurs nuls."
+const FACTORE_ZERO_MULTIPLE_ANSWERS =
+	'Dans tes réponses, tu peux simplifier un ou des facteurs nuls.'
+
 const NULL_TERMS =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> contient un terme nul que tu peux enlever."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> contient un terme nul que tu peux enlever."
+const NULL_TERMS_MULTIPLE_ANSWERS =
+	'Il y a un ou des termes nuls que tu peux enlever dans tes réponses.'
 const BRACKETS =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> contient des parenthèses inutiles."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> contient des parenthèses inutiles."
+const BRACKETS_MULTIPLE_ANSWERS =
+	'il y a des parenthèses inutiles dans tes réponses.'
 const BRACKETS_FIRST_TERM =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> contient des parenthèses inutiles en début de somme."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> contient des parenthèses inutiles en début de somme."
 const SPACES =
-    "Les chiffres sont mal espacés dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+	"Les chiffres sont mal espacés dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+const SPACES_MULTIPLE_ANSWERS =
+	'Les chiffres sont mal espacés dans tes réponses'
 const SIGNS =
-    "Tu peux faire des simplifications de signes dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+	"Tu peux faire des simplifications de signes dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+const SIGNS_MULTIPLE_ANSWERS =
+	'Tu peux faire des simplifications de signes dans tes réponses.'
 const MATH_INCORRECT =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas mathématiquement correcte."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas écrite correctement."
+const MATH_INCORRECT_MULTIPLE_ANSWERS =
+	'Une ou plusieurs de tes réponses ne sont pas écrites correctement:'
+const MATH_GLOBALLY_INCORRECT =
+	"L'expression obtenue n'est pas mathématiquement correcte."
 const PRODUCTS =
-    "Tu peux simplifier certains symboles de multiplication dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+	"Tu peux simplifier certains symboles de multiplication dans <span style='color:_COLORANSWER_'>ta réponse</span>."
+const PRODUCTS_MULTIPLE_ANSWERS =
+	'Tu peux simplifier certains symboles de multiplication dans tes réponses>.'
 const FRACTIONS =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> contient une ou des fractions non simplifiées."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> contient une ou des fractions non simplifiées."
+
+const FRACTIONS_MULTIPLE_ANSWERS =
+	'Il y a une ou des fractions non simplifiées dans tes réponses.'
+
 const BAD_FORM =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas écrite sous la forme demandée."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas écrite sous la forme demandée."
+
+const BAD_FORM_MULTIPLE_ANSWERS =
+	"La forme demandée n'est pas respectée dans tes réponses."
 
 const BAD_UNIT =
-    "<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas écrite avec l'unité demandée."
+	"<span style='color:_COLORANSWER_'>Ta réponse</span> n'est pas écrite avec l'unité demandée."
+const BAD_UNIT_MULTIPLE_ANSWERS =
+	"Tes réponses n'utilisent pas l'unité demandée."
 
 const TERMS_PERMUTATION =
-    "Dans <span style='color:_COLORANSWER_'>ta réponse</span> les termes doivent être écrits dans un certain ordre."
+	"Dans <span style='color:_COLORANSWER_'>ta réponse</span> les termes doivent être écrits dans un certain ordre."
+
+const TERMS_PERMUTATION_MULTIPLE_ANSWERS =
+	'Les termes doivent être écrits dans un certain ordre dans tes réponses.'
 
 const FACTORS_PERMUTATION =
-    "Dans <span style='color:_COLORANSWER_'>ta réponse</span> les facteurs doivent être écrits dans un certain ordre."
+	"Dans <span style='color:_COLORANSWER_'>ta réponse</span> les facteurs doivent être écrits dans un certain ordre."
+
+const FACTORS_PERMUTATION_MULTIPLE_ANSWERS =
+	'Les facteurs doivent être écrits dans un certain ordre dans tes réponses.'
 
 const TERMS_FACTORS_PERMUTATION =
-    "Dans <span style='color:_COLORANSWER_'>ta réponse</span> les termes et facteurs doivent être écrits dans un certain ordre."
+	"Dans <span style='color:_COLORANSWER_'>ta réponse</span> les termes et facteurs doivent être écrits dans un certain ordre."
+
+const TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS =
+	'Les termes et facteurs doivent être écrits dans un certain ordre dans tes réponses.'
+
+const INCOMPLETE_CHOICES = "Tu n'as pas choisi toutes les bonnes réponses."
 
 // retourne un tableau des contraintes non respectées
 function checkConstraints(item) {
+	const checks = [
+		{
+			option: ['no-penalty-for-incorrect-spaces', 'require-correct-spaces'],
+			function: checkSpaces,
+			com: SPACES,
+			comMultipleAnswers: SPACES_MULTIPLE_ANSWERS,
+			text: 'spaces',
+		},
+		{
+			option: ['no-penalty-for-explicit-products', 'require-implicit-products'],
+			function: checkProducts,
+			com: PRODUCTS,
+			comMultipleAnswers: PRODUCTS_MULTIPLE_ANSWERS,
+			text: 'implicits products',
+		},
+		{
+			option: [
+				'no-penalty-for-extraneous-brackets',
+				'require-no-extraneaous-brackets',
+			],
+			function: checkBrackets,
+			com: BRACKETS,
+			comMultipleAnswers: BRACKETS_MULTIPLE_ANSWERS,
+			text: 'extraneous brackets',
+		},
 
-    const checks = [
-        {
-            option: ['no-penalty-for-incorrect-spaces', 'require-correct-spaces'],
-            function: checkSpaces,
-            com: SPACES,
-            text: 'spaces'
-        },
-        {
-            option: [
-                'no-penalty-for-explicit-products',
-                'require-implicit-products',
-            ],
-            function: checkProducts,
-            com: PRODUCTS,
-            text: 'implicits products'
-        },
-        {
-            option: [
-                'no-penalty-for-extraneous-brackets',
-                'require-no-extraneaous-brackets',
-            ],
-            function: checkBrackets,
-            com: BRACKETS,
-            text: 'extraneous brackets'
-        },
+		// la vérifiaction pour le premiet terme se fait dans check_brackets
 
-        // la vérifiaction pour le premiet terme se fait dans check_brackets
+		// {
+		//     option: [
+		//         'no-penalty-for-extraneous-brackets-in-first-negative-term',
+		//         'require-no-extraneaous-brackets',
+		//     ],
+		//     function: checkBrackets,
+		//     com: BRACKETS_FIRST_TERM,
+		// },
+		{
+			option: [
+				'no-penalty-for-extraneous-zeros',
+				'require-no-extraneaous-zeros',
+			],
+			function: checkZeros,
+			com: ZEROS,
+			comMultipleAnswers: ZEROS_MULTIPLE_ANSWERS,
+			text: 'extraneous zeros',
+		},
+		{
+			option: [
+				'no-penalty-for-extraneous-signs',
+				'require-no-extraneaous-signs',
+			],
+			function: checkSigns,
+			com: SIGNS,
+			comMultipleAnswers: SIGNS_MULTIPLE_ANSWERS,
+			text: 'extraneous signs',
+		},
+		{
+			option: ['no-penalty-for-factor-one', 'require-no-factor-one'],
+			function: checkFactorsOne,
+			com: FACTORE_ONE,
+			comMultipleAnswers: FACTORE_ONE_MULTIPLE_ANSWERS,
+			text: 'factor one',
+		},
+		{
+			option: ['no-penalty-for-factor-zero', 'require-no-factor-zero'],
+			function: checkFactorsZero,
+			com: FACTORE_ZERO,
+			comMultipleAnswers: FACTORE_ZERO_MULTIPLE_ANSWERS,
+			text: 'factor zero',
+		},
+		{
+			option: ['no-penalty-for-null-terms', 'require-no-null-terms'],
+			function: checkNullTerms,
+			com: NULL_TERMS,
+			comMultipleAnswers: NULL_TERMS_MULTIPLE_ANSWERS,
+			text: 'null term',
+		},
+		{
+			option: [
+				'no-penalty-for-non-reduced-fractions',
+				'require-reduced-fractions',
+			],
+			function: checkFractions,
+			com: FRACTIONS,
+			comMultipleAnswers: FRACTIONS_MULTIPLE_ANSWERS,
+			text: 'non reduced fraction',
+		},
+		{
+			option: ['no-penalty-for-not-respected-unit', 'require-specific-unit'],
+			function: checkUnits,
+			com: BAD_UNIT,
+			comMultipleAnswers: BAD_UNIT_MULTIPLE_ANSWERS,
+			text: 'bad unit',
+		},
+	]
 
-        // {
-        //     option: [
-        //         'no-penalty-for-extraneous-brackets-in-first-negative-term',
-        //         'require-no-extraneaous-brackets',
-        //     ],
-        //     function: checkBrackets,
-        //     com: BRACKETS_FIRST_TERM,
-        // },
-        {
-            option: [
-                'no-penalty-for-extraneous-zeros',
-                'require-no-extraneaous-zeros',
-            ],
-            function: checkZeros,
-            com: ZEROS,
-            text: 'extraneous zeros'
-        },
-        {
-            option: [
-                'no-penalty-for-extraneous-signs',
-                'require-no-extraneaous-signs',
-            ],
-            function: checkSigns,
-            com: SIGNS,
-            text: 'extraneous signs'
-        },
-        {
-            option: ['no-penalty-for-factor-one', 'require-no-factor-one'],
-            function: checkFactorsOne,
-            com: FACTORE_ONE,
-            text: 'factor one'
-        },
-        {
-            option: ['no-penalty-for-factor-zero', 'require-no-factor-zero'],
-            function: checkFactorsZero,
-            com: FACTORE_ZERO,
-            text: 'factor zero'
-        },
-        {
-            option: ['no-penalty-for-null-terms', 'require-no-null-terms'],
-            function: checkNullTerms,
-            com: NULL_TERMS,
-            text: 'null term'
-        },
-        {
-            option: ['no-penalty-for-non-reduced-fractions', 'require-reduced-fractions'],
-            function: checkFractions,
-            com: FRACTIONS,
-            text: 'non reduced fraction'
-        },
-    ]
-
-    checks.forEach((check) => {
-        if (!item.options.includes(check.option[0]) && !check.function(item)) {
-            // console.log(check.option[0], 'not passed', item)
-            item.coms.push(check.com)
-            if (item.options.includes(check.option[1])) {
-                item.status = STATUS_BAD_FORM
-            } else {
-                // penalty = true
-                item.unoptimals.push(check.text)
-                if (item.status !== STATUS_BAD_FORM) item.status = STATUS_UNOPTIMAL_FORM
-            }
-        }
-    })
+	// on doit checker chaque contrainte si require est positionnée ou si no-penalty n'est pas positionnée
+	// (les 2 ne peuvent pas petre positionnées en même temps)
+	//
+	checks.forEach((check) => {
+		if (!item.options.includes(check.option[0])) {
+			const problematicAnswers = check.function(item)
+			if (problematicAnswers.length) {
+				item.unoptimals.push(check.text)
+				item.coms.push(
+					item.answers.length === 1 ? check.com : check.comMultipleAnswers,
+				)
+				problematicAnswers.forEach((i) => {
+					item.statuss[i] =
+						!item.options.includes(check.option[1]) &&
+						item.statuss[i] !== STATUS_BAD_FORM
+							? STATUS_UNOPTIMAL_FORM
+							: STATUS_BAD_FORM
+				})
+			}
+		}
+	})
 }
 
-function checkAnswer(item) {
+function checkTermsAndFactors(item) {
+	let sols = item.solutions.map((solution) => math(solution))
+	sols = sols.map((solution) =>
+		solution
+			.removeZerosAndSpaces()
+			.reduceFractions()
+			.simplifyNullProducts()
+			.removeNullTerms()
+			.removeFactorsOne()
+			.removeSigns()
+			.removeUnecessaryBrackets()
+			.removeMultOperator(),
+	)
+
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			let e = math(answer)
+
+			// Les tests de contraintes ont été faits. Il faut simplifier la réponse pour pouvoir
+			// la comparer à la solution : on enlève les parenthèses inutiles, les signes inutiles....
+			e = e
+				.removeZerosAndSpaces()
+				.reduceFractions()
+				.simplifyNullProducts()
+				.removeNullTerms()
+				.removeFactorsOne()
+				.removeSigns()
+				.removeUnecessaryBrackets()
+				.removeMultOperator()
+
+			// item.cleanedExp = e.string
+			// item.cleanedSolutions = sols.map((s) => s.string)
+			// }
 
 
-    if (item.testAnswer) {
-        const tests = item.testAnswer.replace(/&answer/g, item.answer).split('&&')
-        // console.log('tests', tests)
-        const failed = tests.some((test) => math(test).eval().isFalse())
-
-        // TODO : tester les formats
-
-        if (failed) {
-            item.status = STATUS_INCORRECT
-        } else if (item.status !== STATUS_UNOPTIMAL_FORM && item.status !== STATUS_BAD_FORM) {
-            item.status = STATUS_CORRECT
-        }
-    } else {
-        let e = math(item.answer)
-
-        let sols = item.solutions.map((solution) => math(solution))
-
-        // Les tests de contraintes ont été faits. Il faut simplifier la réponse pour pouvoir
-        // la comparer à la solution : on enlève les parenthèses inutiles, les signes inutiles....
-        e = e
-            .removeZerosAndSpaces()
-            .reduceFractions()
-            .simplifyNullProducts()
-            .removeNullTerms()
-            .removeFactorsOne()
-            .removeSigns()
-            .removeUnecessaryBrackets()
-            .removeMultOperator()
-            
-        sols = sols.map((solution) => solution
-            .removeZerosAndSpaces()
-            .reduceFractions()
-            .simplifyNullProducts()
-            .removeNullTerms()
-            .removeFactorsOne()
-            .removeSigns()
-            .removeUnecessaryBrackets()
-            .removeMultOperator()
-        )
-        item.cleanedExp = e.string
-        item.cleanedSolutions = sols.map(s => s.string)
-        // }
-        // il reste a tester la permutation des termes et facteurs qui est autorisée par défaut
+			if (
+				item.options.includes('disallow-terms-and-factors-permutation') ||
+				item.options.includes('penalty-for-terms-and-factors-permutation')
+			) {
+				if (!sols[i].strictlyEquals(e)) {
+					if (
+						item.options.includes(
+							'penalty-for-terms-and-factors-permutation',
+						) &&
+						item.statuss[i] !== STATUS_BAD_FORM &&
+						item.statuss[i] !== STATUS_BAD_UNIT
+					) {
+						item.unoptimals.push('terms and factors unordered')
+						item.statuss[i] = STATUS_UNOPTIMAL_FORM
+						item.coms.push(item.answers.length === 1 ? TERMS_FACTORS_PERMUTATION : TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS)
+					} else {
+						item.statuss[i] = STATUS_BAD_FORM
+                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
 
 
-        const e2 = e.sortTermsAndFactors()
-        const sols2 = sols.map((solution) => solution.sortTermsAndFactors())
+					}
+				}
+			} else if (
+				item.options.includes('disallow-terms-permutation') ||
+				item.options.includes('penalty-for-terms-permutation')
+			) {
+				e = e.sortFactors()
+				sols = sols.map((solution) => solution.sortFactors())
+				if (!sols[i].strictlyEquals(e)) {
+					if (
+						item.options.includes('penalty-for-terms-permutation') &&
+						item.statuss[i] !== STATUS_BAD_FORM &&
+						item.statuss[i] !== STATUS_BAD_UNIT
+					) {
+						item.unoptimals.push('terms unordered')
+						item.statuss[i] = STATUS_UNOPTIMAL_FORM
+                        item.coms.push(item.answers.length === 1 ? TERMS_PERMUTATION : TERMS_PERMUTATION_MULTIPLE_ANSWERS)
+					} else {
+						item.statuss[i] = STATUS_BAD_FORM
+                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
+					}
+				}
+			} else if (
+				item.options.includes('disallow-factors-permutation') ||
+				item.options.includes('penalty-for-factors-permutation')
+			) {
+				e = e.sortTerms()
+				sols = sols.map((solution) => solution.sortTerms())
+				if (!sols[i].strictlyEquals(e)) {
+					if (
+						item.options.includes('penalty-for-factors-permutation') &&
+						item.statuss[i] !== STATUS_BAD_FORM &&
+						item.statuss[i] !== STATUS_BAD_UNIT
+					) {
+						item.unoptimals.push('factors unordered')
+						item.statuss[i] = STATUS_UNOPTIMAL_FORM
+                        item.coms.push(item.answers.length === 1 ? FACTORS_PERMUTATION : FACTORS_PERMUTATION_MULTIPLE_ANSWERS)
+					} else {
+						item.statuss[i] = STATUS_BAD_FORM
+                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
+					}
+				}
+			}
+		}
 
-        // Pourquoi regarder s'il y a une unité ?
-        if (!e2.unit && !sols2.some((sol) => sol.strictlyEquals(e2))) {
+	})
+}
 
-            item.status = STATUS_BAD_FORM
-        }
-        else if (item.unit
-            && (item.unit === 'HMS' && !e.isTime() || item.unit !== 'HMS' && !e.unit || item.unit !== 'HMS' && e.unit.string !== item.unit)) {
-            // console.log("pb unit")
-            if (item.options.includes('require-specific-unit')) {
-                item.status = STATUS_BAD_UNIT
-            }
-            else if (!item.options.includes('no-penalty-for-not-respected-unit') && item.status !== STATUS_BAD_FORM) {
-                item.unoptimals.push('unit not respected')
-                item.status = STATUS_UNOPTIMAL_FORM
+function checkUnits(item) {
+	const result = []
+	if (item.unit) {
+		item.answers.forEach((answer, i) => {
+			if (
+				item.statuss[i] !== STATUS_EMPTY &&
+				item.statuss[i] !== STATUS_INCORRECT
+			) {
+				const e = math(answer)
 
-            }
-        }
+				if (
+					(item.unit === 'HMS' && !e.isTime()) ||
+					(item.unit !== 'HMS' && !e.unit) ||
+					(item.unit !== 'HMS' && e.unit.string !== item.unit)
+				)
+					result.push(i)
+			}
+		})
+	}
 
-        else if (item.options.includes('disallow-terms-and-factors-permutation') ||
-            item.options.includes('penalty-for-terms-and-factors-permutation')) {
-
-            if (!sols.some((sol) => sol.strictlyEquals(e))) {
-                if (item.options.includes('penalty-for-terms-and-factors-permutation')) {
-                    item.unoptimals.push('terms and factors unordered')
-                    item.status = STATUS_UNOPTIMAL_FORM
-                    item.coms.push(TERMS_FACTORS_PERMUTATION)
-                } else {
-                    item.status = STATUS_BAD_FORM
-                }
-            }
-
-        }
-        else if (item.options.includes('disallow-terms-permutation') ||
-            item.options.includes('penalty-for-terms-permutation')) {
-            e = e.sortFactors()
-            sols = sols.map((solution) => solution.sortFactors())
-            if (!sols.some((sol) => sol.strictlyEquals(e))) {
-                if (item.options.includes('penalty-for-terms-permutation')) {
-                    item.unoptimals.push('terms unordered')
-                    item.status = STATUS_UNOPTIMAL_FORM
-                    item.coms.push(TERMS_PERMUTATION)
-                } else {
-                    item.status = STATUS_BAD_FORM
-                }
-            }
-
-        }
-        else if (item.options.includes('disallow-factors-permutation') ||
-            item.options.includes('penalty-for-factors-permutation')) {
-            e = e.sortTerms()
-            sols = sols.map((solution) => solution.sortTerms())
-            if (!sols.some((sol) => sol.strictlyEquals(e))) {
-                if (item.options.includes('penalty-for-factors-permutation')) {
-                    item.unoptimals.push('factors unordered')
-                    item.status = STATUS_UNOPTIMAL_FORM
-                    item.coms.push(FACTORS_PERMUTATION)
-                } else {
-                    item.status = STATUS_BAD_FORM
-                }
-            }
-        }
-
-
-
-
-        // if (
-        //     item.options.includes('disallow-terms-and-factors-permutation') ||
-        //     item.options.includes('disallow-terms-permutation') ||
-        //     item.options.includes('disallow-factors-permutation')
-        // ) {
-        //     if (
-        //         !item.options.includes('disallow-terms-permutation') &&
-        //         !item.options.includes('disallow-terms-and-factors-permutation')
-        //     ) {
-        //         e = e.sortTerms()
-        //         sols = sols.map((solution) => solution.sortTerms())
-        //     } else if (
-        //         !item.options.includes('disallow-factors-permutation') &&
-        //         !item.options.includes('disallow-terms-and-factors-permutation')
-        //     ) {
-        //         e = e.sortFactors()
-        //         sols = sols.map((solution) => solution.sortFactors())
-        //     }
-        // } else {
-        //     e = e.sortTermsAndFactors()
-        //     sols = sols.map((solution) => solution.sortTermsAndFactors())
-        // }
-
-
-        // if (!sols.some((sol) => sol.strictlyEquals(e))) {
-        //     item.status = STATUS_BAD_FORM
-        // } else if (item.status !== STATUS_UNOPTIMAL_FORM) {
-        //     item.status = STATUS_CORRECT
-        // }
-
-        // if (item.status !== STATUS_UNOPTIMAL_FORM && item.status !== STATUS_BAD_FORM && item.status!==) {
-        //     item.status = STATUS_CORRECT
-        // }
-
-        if (!item.status) {
-            item.status = STATUS_CORRECT
-        }
-    }
-
-    if (item.status === STATUS_BAD_FORM) item.coms.push(BAD_FORM)
-    else if (item.status === STATUS_BAD_UNIT) item.coms.push(BAD_UNIT)
+	return result
 }
 
 function checkProducts(item) {
-    const e = math(item.answer)
-    return e.removeMultOperator().string === e.string
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.removeMultOperator().string !== e.string) result.push(i)
+		}
+	})
+	return result
 }
 
 function checkFractions(item) {
-    const e = math(item.answer)
-    return e.reduceFractions().string === e.string
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.reduceFractions().string !== e.string) result.push(i)
+		}
+	})
+	return result
 }
 
 function checkNullTerms(item) {
-    const e = math(item.answer)
-    return e.removeNullTerms().string === e.string
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.removeNullTerms().string !== e.string) result.push(i)
+		}
+	})
+	return result
 }
 
 function checkBrackets(item) {
-    let e
-    switch (item.type) {
-        case 'trou':
-            e = math(item.expression.replace('?', item.answer))
-
-            break
-        default:
-            e = math(item.answer)
-    }
-    const allowBracketsInFirstNegativeTerm = item.options.includes('no-penalty-for-extraneous-brackets-in-first-negative-term')
-    const check = e.removeUnecessaryBrackets(allowBracketsInFirstNegativeTerm
-    )
-        .string === e.string
-    item.checkBrackets = check
-    return check
+	const result = []
+	const allowBracketsInFirstNegativeTerm = item.options.includes(
+		'no-penalty-for-extraneous-brackets-in-first-negative-term',
+	)
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (
+				e.removeUnecessaryBrackets(allowBracketsInFirstNegativeTerm).string !==
+				e.string
+			) {
+				result.push(i)
+			}
+		}
+	})
+	return result
 }
 
 function checkSigns(item) {
-    const e1 = math(item.answer)
-        .reduceFractions()
-        .simplifyNullProducts()
-        .removeNullTerms()
-        .removeFactorsOne()
-        .removeUnecessaryBrackets()
-        .removeMultOperator()
-        .removeMultOperator()
-        .removeUnecessaryBrackets()
-        .string
-    const e2 = math(item.answer)
-        .reduceFractions()
-        .simplifyNullProducts()
-        .removeNullTerms()
-        .removeFactorsOne()
-        .removeSigns()
-        .removeUnecessaryBrackets()
-        .removeMultOperator()
-        .string
-    // il faut enlever les * inutiles
-
-    return e1 === e2
-
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			// pourquoi tout ce bordel déjà ??????
+			const e1 = math(answer)
+				.reduceFractions()
+				.simplifyNullProducts()
+				.removeNullTerms()
+				.removeFactorsOne()
+				.removeUnecessaryBrackets()
+				.removeMultOperator()
+				.removeSigns()
+			const e2 = math(answer)
+				.reduceFractions()
+				.simplifyNullProducts()
+				.removeNullTerms()
+				.removeFactorsOne()
+				.removeUnecessaryBrackets()
+				.removeMultOperator()
+			// il faut enlever les * inutiles
+			// console.log('check signs', e1.string, e2.string, e1.string === e2.string)
+			if (e1.string !== e2.string) result.push(i)
+		}
+	})
+	return result
 }
 
 function checkFactorsOne(item) {
-    const e = math(item.answer)
-    return e.removeFactorsOne().string === e.string
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.removeFactorsOne().string !== e.string) result.push(i)
+		}
+	})
+	return result
 }
 
 function checkFactorsZero(item) {
-    const e = math(item.answer)
-    return e.simplifyNullProducts().string === e.string
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.simplifyNullProducts().string !== e.string) result.push(i)
+		}
+	})
+	return result
 }
 
 // retourne true si la vérification est OK
 function checkSpaces(item) {
-    //  TODO: a Remplacer par searchMisplacedSpaces
-    // la sortie asciimaths du mathfield ne garde pas les espaces
-    const a = item.answer_latex.replace(/\\,/g, ' ').replace('{,}', '.').trim()
+	//  TODO: a Remplacer par searchMisplacedSpaces
+	// la sortie asciimaths du mathfield ne garde pas les espaces
 
-    const regex = /\d+[\d\s]*(\.[\d\s]*\d+)?/g
-    const matches = a.match(regex)
+	const result = []
+	item.answers_latex.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const a = answer.replace(/\\,/g, ' ').replace('{,}', '.').trim()
+			const regex = /\d+[\d\s]*(\.[\d\s]*\d+)?/g
+			const matches = a.match(regex)
+			const regexsInt = [
+				/\d{4}/,
+				/\s$/,
+				/\s\d{2}$/,
+				/\s\d{2}\s/,
+				/\s\d$/,
+				/\s\d\s/,
+			]
+			const regexsDec = [
+				/\d{4}/,
+				/^\s/,
+				/^\d{2}\s/,
+				/\s\d{2}\s/,
+				/^\d\s/,
+				/\s\d\s/,
+			]
+			const findIncorrectSpace = (s) => {
+				let [int, dec] = s.split('.')
+				// Dans le cas des entiers, il peut y a voir un espace à la fin,
+				// il faut l'enlever
+				int = int.trim()
 
-    if (matches) {
-        const regexsInt = [
-            /\d{4}/,
-            /\s$/,
-            /\s\d{2}$/,
-            /\s\d{2}\s/,
-            /\s\d$/,
-            /\s\d\s/,
-        ]
+				if (
+					regexsInt.some((regex) => int.match(regex)) ||
+					(dec && regexsDec.some((regex) => dec.match(regex)))
+				) {
+					return true
+				}
 
-        const regexsDec = [
-            /\d{4}/,
-            /^\s/,
-            /^\d{2}\s/,
-            /\s\d{2}\s/,
-            /^\d\s/,
-            /\s\d\s/,
-        ]
-        return !matches.some((match) => {
-            let [int, dec] = match.split('.')
-            // Dans le cas des entiers, il peut y a voir un espace à la fin,
-            // il faut l'enlever
-            int = int.trim()
-
-            const result = regexsInt.some((regex) => int.match(regex) ||
-                (dec && regexsDec.some((regex) => dec.match(regex))))
-            return result
-        })
-    }
-
-    return true
+				return false
+			}
+			// on a trouvé des nombres
+			if (matches && matches.some(findIncorrectSpace)) {
+				result.push(i)
+			}
+		}
+	})
+	return result
 }
 
-function checkOrder() {
-    return true
-}
+// function checkOrder() {
+//     return true
+// }
 
 // retourne true si la vérification est OK
 function checkZeros(item) {
-    return !math(item.answer).searchUnecessaryZeros()
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+			if (e.searchUnecessaryZeros()) result.push(i)
+		}
+	})
+	return result
 }
 
-export function assessItems(questions, answers, answers_latex, answers_choice, times, classroom) {
-    let total = 0
-    let score = 0
-    const items = []
-    for (let i = 0; i < questions.length; i++) {
-        const question = questions[i]
-        total += question.points
-        // console.log('question', question)
-        items[i] = {
-            ...question,
-            answer: answers[i],
-            answer_latex: answers_latex[i],
-            answer_choice: answers_choice[i],
-            time: times[i],
-            number: i + 1,
-        }
+function checkForm(item) {
+	const result = []
+	item.answers.forEach((answer, i) => {
+		if (
+			item.statuss[i] !== STATUS_EMPTY &&
+			item.statuss[i] !== STATUS_INCORRECT
+		) {
+			const e = math(answer)
+				.removeZerosAndSpaces()
+				.reduceFractions()
+				.simplifyNullProducts()
+				.removeNullTerms()
+				.removeFactorsOne()
+				.removeSigns()
+				.removeUnecessaryBrackets()
+				.removeMultOperator()
+				.sortTermsAndFactors()
 
-        assessItem(items[i], classroom)
-        switch (items[i].status) {
-            case STATUS_CORRECT:
-                score += items[i].points
-                break
+			const solution = math(item.solutions[i])
+				.removeZerosAndSpaces()
+				.reduceFractions()
+				.simplifyNullProducts()
+				.removeNullTerms()
+				.removeFactorsOne()
+				.removeSigns()
+				.removeUnecessaryBrackets()
+				.removeMultOperator()
+				.sortTermsAndFactors()
 
-            case STATUS_UNOPTIMAL_FORM:
-                score += items[i].points / 2
-                break
+			// il faut trouver une autre solution quand il y a des unités
+			if (!e.unit && !e.strictlyEquals(solution)) {
+				item.statuss[i] = STATUS_BAD_FORM
+                item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS )
 
-            case STATUS_EMPTY:
-            case STATUS_BAD_FORM:
-            case STATUS_INCORRECT:
-                break
-
-            default:
-                fail('status not set')
-        }
-    }
-    info('corrected items', items)
-    return { items, score, total }
+			}
+		}
+	})
+	return result
 }
 
-export function assessItem(item, classroom = false) {
+export function assessItems(questions, answerss, answerss_latex, times) {
+	let total = 0
+	let score = 0
+	const items = []
+	for (let i = 0; i < questions.length; i++) {
+		const question = questions[i]
+		total += question.points
+		// console.log('question', question)
+		items[i] = {
+			...question,
+			answers: answerss[i],
+			answers_latex: answerss_latex[i],
+			time: times[i],
+			number: i + 1,
+		}
 
+		assessItem(items[i])
 
-    item.options = item.options || []
-    item.coms = item.coms || []
-    if (!item.answer_latex && item.answer) {
-        item.answer_latex = item.answer.replace('/ /g', '\\,').replace(',', '{,}').replace('.', '{,}').trim()
-    }
-    item.unoptimals = []
+		score +=
+			items[i].status == STATUS_CORRECT
+				? items[i].points
+				: STATUS_UNOPTIMAL_FORM
+				? (score += items[i].points / 2)
+				: 0
+	}
+	info('corrected items', items)
+	return { items, score, total }
+}
 
+// on évalue la réponse de l'utilisateur en donnant un statut à chaque élément de la réponse,
+// ainsi qu'à la réponse globale
+export function assessItem(item) {
+	// console.log('correcting', item)
 
-    if ((item.type === 'choice' && item.answer_choice === null)
-        || (item.type !== 'choice' && !item.answer)) {
-        //answer_choice peut etre égal à 0
-        if (!classroom) item.coms.push(EMPTY_ANSWER)
-        item.status = STATUS_EMPTY
-    } else {
+	// essentiellement pour les tests
+	if (!item.answers_latex) {
+		item.answers_latex = item.answers.map((answer) =>
+			math(answer).toLatex({ addSpaces: false }),
+		)
+	}
 
-        switch (item.type) {
-            case 'choice':
-                item.status =
-                    item.solutions.includes(item.answer_choice) === true
-                        ? STATUS_CORRECT
-                        : STATUS_INCORRECT
+	item.options = item.options || []
+	item.coms = item.coms || []
 
-                break
+	item.unoptimals = []
 
-            default: {
+	// le status de la réponse globale
+	item.status = STATUS_CORRECT
 
-                let isNotWellFormedExpression
+	// le statut de chaque réponse si il y a plusieurs champs réponses
+	// initialisée à CORRECT ou EMPTY
+	item.statuss = item.answers.map((answer) =>
+		(item.type === 'choice' && answer >= 0) || answer
+			? STATUS_CORRECT
+			: STATUS_EMPTY,
+	)
+	// si toutes les réponses sont vides, pas besoin d'aller plus loin
+	if (item.statuss.every((status) => status === STATUS_EMPTY)) {
+		item.coms.push(EMPTY_ANSWER)
+		item.status = STATUS_EMPTY
+	}
+	// le cas simple à traiter des réponses à choix (multiples ou non)
+	else if (
+		item.type === 'choice' &&
+		item.solutions.toString() !== item.answers.toString()
+	) {
+		item.status = STATUS_INCORRECT
+	}
+	// choix multiples
+	else if (
+		item.type === 'choices' &&
+		item.solutions.toString() !== item.answers.toString()
+	) {
+		// on veut compter une partie des points si la ou les réponses choisies
+		// sont correctes mais qu'il en manque
+		item.answers.forEach((answer, i) => {
+			if (!item.solutions.includes(answer)) {
+				item.statuss[i] = STATUS_INCORRECT
+				item.status = STATUS_INCORRECT
+			}
+		})
+		if (item.status !== STATUS_INCORRECT) {
+			item.status = STATUS_UNOPTIMAL_FORM
+			item.coms.push(INCOMPLETE_CHOICES)
+		}
+	}
+	// cas général
+	else {
+		if (item.statuss.some((status) => status === STATUS_EMPTY)) {
+			item.coms.push(EMPTY_MULTIPLE_ANSWERS)
+		}
 
-                const expressionFormToBeChecked = item.type === 'trou'
-                    ? item.expression.replace('?', item.answer)
-                    : item.answer
-                isNotWellFormedExpression = math(expressionFormToBeChecked).isIncorrect()
+		// On vérifie que les réponses sont écrites correctement
+		let incorrectForm = false
+		item.answers.forEach((answer, i) => {
+			if (item.statuss[i] !== STATUS_EMPTY && math(answer).isIncorrect()) {
+				item.statuss[i] = STATUS_INCORRECT
+				item.status = STATUS_INCORRECT
+				incorrectForm = true
+			}
+		})
 
+		if (incorrectForm && item.answers.length === 1) {
+			item.coms.push(MATH_INCORRECT)
+		} else if (incorrectForm) {
+			item.coms.push(MATH_INCORRECT_MULTIPLE_ANSWERS)
+		}
 
-                if (isNotWellFormedExpression) {
-                    item.coms.push(MATH_INCORRECT)
-                    item.status = STATUS_INCORRECT
-                } else {
-                    // si i ly a un testAnswer, la validation se fera plus tard
-                    // A REVOIR : il n' y a pas de raison de faire intervenir testAnswer ici
-                    // il faut juste vérifier que l'on est dans un type de question 'result' ou que la solution est donnée
-                    // explicitement dans solutions
-                    const equivalent =
-                        item.testAnswer ||
-                        item.solutions.some((solution) => {
-                            return math(item.answer).equals(math(solution))
-                        }
-                        )
+		// dans le cas d'une égalité à trou, il faut vérifier que l'expression globale est également
+		// écrite correctement
+		if (item.type === 'trou') {
+			const putAnswers = (() => {
+				let count = 0
+				return () => item.answers[count++]
+			})()
+			const globallyIncorrectForm = math(
+				item.expression.replace(/\?/g, putAnswers),
+			).isIncorrect()
+			if (globallyIncorrectForm) {
+				item.status = STATUS_INCORRECT
+				if (!incorrectForm) item.coms.push(MATH_GLOBALLY_INCORRECT)
+			}
+		}
 
-                    // console.log(math(item.solutions[0]).shallow())
-                    // console.log(math(item.solutions[0]))
-                    if (!equivalent) {
-                        item.status = STATUS_INCORRECT
-                    } else {
-                        // vérification des contraintes de forme
-                        checkConstraints(item)
-                        if (item.status !== STATUS_BAD_FORM) {
-                            checkAnswer(item)
-                        }
-                    }
-                }
-            }
-        }
-    }
+		if (
+			!item.statuss.every(
+				(status) => status === STATUS_INCORRECT || status === STATUS_EMPTY,
+			)
+		) {
+			// Premièrement, vérification que la ou les réponses sont seulement équivalentes à la solution
+			//  ou vérifient le critère de validation
+			if (item.testAnswers) {
+				item.answers.forEach((answer, i) => {
+					if (
+						(item.testAnswers[i] &&
+							item.statuss[i] !== STATUS_EMPTY &&
+							item.statuss[i] !== STATUS_INCORRECT) ||
+						(item.statuss[0] !== STATUS_EMPTY &&
+							item.statuss[0] !== STATUS_INCORRECT)
+					) {
+						const t = item.testAnswers[i] || item.testAnswers[0]
+						const tests = t.replace(/&answer/g, answer).split('&&')
+						const failed = tests.some((test) => math(test).eval().isFalse())
+						if (failed) {
+							item.statuss[i] = STATUS_INCORRECT
+							item.status = STATUS_INCORRECT
+						}
+					}
+				})
+			}
+			// les solutions sont explicites et sont dans item.solutions
+			else {
+				item.answers.forEach((answer, i) => {
+					if (
+						item.statuss[i] !== STATUS_EMPTY &&
+						item.statuss[i] !== STATUS_INCORRECT &&
+						!math(answer).equals(math(item.solutions[i]))
+					) {
+						item.statuss[i] = STATUS_INCORRECT
+						item.status = STATUS_INCORRECT
+					}
+				})
+			}
+
+			//  A ce stade,le status chaque élément de réponse est STATUS_EMPTY, STATUS_CORRECT
+			// ou STATUS_INCORRECT
+			// On vérifie les contraintes de formes
+			checkConstraints(item)
+			checkTermsAndFactors(item)
+			// TODO : tester les formats
+			checkForm(item)
+			if (item.status !== STATUS_EMPTY && item.status !== STATUS_INCORRECT) {
+				if (item.statuss.some((status) => status === STATUS_BAD_FORM)) {
+					item.status = STATUS_BAD_FORM
+				} else if (
+					item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM)
+				) {
+					item.status = STATUS_UNOPTIMAL_FORM
+				}
+			}
+		}
+	}
 }

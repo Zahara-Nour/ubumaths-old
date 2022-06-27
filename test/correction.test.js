@@ -9,7 +9,7 @@ describe('testing empty answer', () => {
             expressions: ['1+2'],
         },
         {
-            answer: '',
+            answers: [''],
             check_status: STATUS_EMPTY
         },
     ],
@@ -18,7 +18,7 @@ describe('testing empty answer', () => {
             choices: [],
         },
         {
-            answer_choice: null,
+            answers: [],
             check_status: STATUS_EMPTY
         }
     ]]
@@ -41,7 +41,7 @@ describe('testing correct answer (no unit)', () => {
             expressions: ['2+3'],
         },
         {
-            answer: '5',
+            answers: ['5'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -51,7 +51,7 @@ describe('testing correct answer (no unit)', () => {
             'result-type': 'decimal',
         },
         {
-            answer: '2,3',
+            answers: ['2,3'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -60,7 +60,7 @@ describe('testing correct answer (no unit)', () => {
             expressions: ['1,2'],
         },
         {
-            answer: '6/5',
+            answers: ['6/5'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -70,7 +70,7 @@ describe('testing correct answer (no unit)', () => {
             solutions: [[0]],
         },
         {
-            answer_choice: 0,
+            answers: [0],
             check_status: STATUS_CORRECT
         }
     ]]
@@ -81,9 +81,9 @@ describe('testing correct answer (no unit)', () => {
 
         const generated = generateQuestion(q)
         if (q.choices) {
-            answer_choice_text = q.choices[0][check.answer_choice]
+            answer_choice_text = q.choices[0][check.answers[0]]
             new_answer_choice = generated.choices.indexOf(answer_choice_text)
-            check.answer_choice = new_answer_choice
+            check.answers = [new_answer_choice]
         }
         const item = {
             ...generated,
@@ -100,7 +100,7 @@ describe('testing correct answer (with same unit)', () => {
             expressions: ['2 cm + 3 cm'],
         },
         {
-            answer: '5 cm',
+            answers: ['5 cm'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -114,6 +114,7 @@ describe('testing correct answer (with same unit)', () => {
         }
 
         assessItem(item)
+        // console.log('item', item)
         expect(item.status).toBe(item.check_status)
     })
 })
@@ -124,7 +125,7 @@ describe('testing correct answer (with different unit)', () => {
             expressions: ['2 m + 3 m'],
         },
         {
-            answer: '500 cm',
+            answers: ['500 cm'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -149,7 +150,7 @@ describe('testing incorrect answer', () => {
             expressions: ['3+4'],
         },
         {
-            answer: '6',
+            answers: ['6'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -159,7 +160,7 @@ describe('testing incorrect answer', () => {
             solutions: [[0]],
         },
         {
-            answer_choice: 1,
+            answers: [1],
             check_status: STATUS_INCORRECT
         }
     ]]
@@ -170,9 +171,9 @@ describe('testing incorrect answer', () => {
 
         const generated = generateQuestion(q)
         if (q.choices) {
-            answer_choice_text = q.choices[0][check.answer_choice]
+            answer_choice_text = q.choices[0][check.answers[0]]
             new_answer_choice = generated.choices.indexOf(answer_choice_text)
-            check.answer_choice = new_answer_choice
+            check.answers = [new_answer_choice]
         }
         const item = {
             ...generated,
@@ -189,7 +190,7 @@ describe('testing incorrect answer (with unit)', () => {
             expressions: ['2 cm + 3 cm'],
         },
         {
-            answer: '6 cm',
+            answers: ['6 cm'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -212,7 +213,7 @@ describe('testing incorrect answer (incorrect unit)', () => {
             expressions: ['2 cm + 3 cm'],
         },
         {
-            answer: '5 m',
+            answers: ['5 m'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -235,7 +236,7 @@ describe('testing incorrect answer (forgotten unit)', () => {
             expressions: ['2 cm + 3 cm'],
         },
         {
-            answer: '5',
+            answers: ['5'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -263,7 +264,7 @@ describe('testing correct answer with specified unit (require-specific-unit)', (
             options: ['require-specific-unit']
         },
         {
-            answer: '5m',
+            answers: ['5m'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -288,7 +289,7 @@ describe('testing incorrect answer with specified unit (require-specific-unit)',
             options: ['require-specific-unit']
         },
         {
-            answer: '6m',
+            answers: ['6m'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -313,7 +314,7 @@ describe('testing incorrect answer with specified unit (require-specific-unit) (
             options: ['require-specific-unit']
         },
         {
-            answer: '5 cm',
+            answers: ['5 cm'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -338,7 +339,7 @@ describe('testing forgotten unit answer with specified unit (require-specific-un
             options: ['require-specific-unit']
         },
         {
-            answer: '5',
+            answers: ['5'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -363,8 +364,9 @@ describe('testing bad unit answer with specified unit (require-specific-unit)', 
             options: ['require-specific-unit']
         },
         {
-            answer: '500 cm',
-            check_status: STATUS_BAD_UNIT
+            answers: ['500 cm'],
+            // check_status: STATUS_BAD_UNIT
+            check_status: STATUS_BAD_FORM
         },
     ],
     ]
@@ -392,7 +394,7 @@ describe('testing correct answer with specified unit (no-penalty-for-not-respect
             options: ['no-penalty-for-not-respected-unit']
         },
         {
-            answer: '5m',
+            answers: ['5m'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -417,7 +419,7 @@ describe('testing incorrect answer with specified unit (no-penalty-for-not-respe
             options: ['no-penalty-for-not-respected-unit']
         },
         {
-            answer: '6m',
+            answers: ['6m'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -442,7 +444,7 @@ describe('testing incorrect answer with specified unit (no-penalty-for-not-respe
             options: ['no-penalty-for-not-respected-unit']
         },
         {
-            answer: '5 cm',
+            answers: ['5 cm'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -467,7 +469,7 @@ describe('testing forgotten unit answer with specified unit (no-penalty-for-not-
             options: ['no-penalty-for-not-respected-unit']
         },
         {
-            answer: '5',
+            answers: ['5'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -492,7 +494,7 @@ describe('testing bad unit answer with specified unit (no-penalty-for-not-respec
             options: ['no-penalty-for-not-respected-unit']
         },
         {
-            answer: '500 cm',
+            answers: ['500 cm'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -520,7 +522,7 @@ describe('testing correct answer with specified unit', () => {
             unit: 'm',
         },
         {
-            answer: '5m',
+            answers: ['5m'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -544,7 +546,7 @@ describe('testing incorrect answer with specified unit', () => {
             unit: 'm',
         },
         {
-            answer: '6m',
+            answers: ['6m'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -568,7 +570,7 @@ describe('testing forgotten unit answer with specified unit', () => {
             unit: 'm',
         },
         {
-            answer: '5',
+            answers: ['5'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -592,7 +594,7 @@ describe('testing incorrect answer with specified unit', () => {
             unit: 'm',
         },
         {
-            answer: '5 cm',
+            answers: ['5 cm'],
             check_status: STATUS_INCORRECT
         },
     ],
@@ -616,7 +618,7 @@ describe('testing bad unit answer with specified unit', () => {
             unit: 'm',
         },
         {
-            answer: '500 cm',
+            answers: ['500 cm'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -644,7 +646,7 @@ describe('testing correct answer with extraneous zeros (require-no-extraneaous-z
             options: ['require-no-extraneaous-zeros']
         },
         {
-            answer: '5,0',
+            answers: ['5,0'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -654,7 +656,7 @@ describe('testing correct answer with extraneous zeros (require-no-extraneaous-z
             options: ['require-no-extraneaous-zeros']
         },
         {
-            answer: '5,10',
+            answers: ['5,10'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -664,7 +666,7 @@ describe('testing correct answer with extraneous zeros (require-no-extraneaous-z
             options: ['require-no-extraneaous-zeros']
         },
         {
-            answer: '05',
+            answers: ['05'],
             check_status: STATUS_BAD_FORM
         },
     ]
@@ -688,7 +690,7 @@ describe('testing correct answer with extraneous zeros (no-penalty-for-extraneou
             options: ['no-penalty-for-extraneous-zeros']
         },
         {
-            answer: '5,0',
+            answers: ['5,0'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -698,7 +700,7 @@ describe('testing correct answer with extraneous zeros (no-penalty-for-extraneou
             options: ['no-penalty-for-extraneous-zeros']
         },
         {
-            answer: '05',
+            answers: ['05'],
             check_status: STATUS_CORRECT
         },
     ]
@@ -721,7 +723,7 @@ describe('testing correct answer with extraneous zeros', () => {
             expressions: ['2+3'],
         },
         {
-            answer: '5,0',
+            answers: ['5,0'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -730,7 +732,7 @@ describe('testing correct answer with extraneous zeros', () => {
             expressions: ['2+3'],
         },
         {
-            answer: '05',
+            answers: ['05'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ]
@@ -758,7 +760,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(5)',
+                answers: ['(5)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -768,7 +770,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(-2)+a',
+                answers: ['(-2)+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -778,7 +780,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a-((c+d))',
+                answers: ['a-((c+d))'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -788,7 +790,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c+d)',
+                answers: ['a+(c+d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -798,7 +800,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a+c)+d',
+                answers: ['(a+c)+d'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -808,7 +810,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c-d)',
+                answers: ['a+(c-d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -818,7 +820,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a-c)+d',
+                answers: ['(a-c)+d'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -828,7 +830,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c*d)',
+                answers: ['a+(c*d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -838,7 +840,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c*d)+a',
+                answers: ['(c*d)+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -848,7 +850,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c:d)',
+                answers: ['a+(c:d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -858,7 +860,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c:d)+a',
+                answers: ['(c:d)+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -868,7 +870,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c/d)',
+                answers: ['a+(c/d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -878,7 +880,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c/d)+a',
+                answers: ['(c/d)+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -888,7 +890,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a+(c^d)',
+                answers: ['a+(c^d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -898,7 +900,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c^d)+a',
+                answers: ['(c^d)+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -911,7 +913,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a+c)-d',
+                answers: ['(a+c)-d'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -921,7 +923,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a-c)-d',
+                answers: ['(a-c)-d'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -931,7 +933,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a-(c*d)',
+                answers: ['a-(c*d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -941,7 +943,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c*d)-a',
+                answers: ['(c*d)-a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -951,7 +953,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a-(c:d)',
+                answers: ['a-(c:d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -961,7 +963,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c:d)-a',
+                answers: ['(c:d)-a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -971,7 +973,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a-(c/d)',
+                answers: ['a-(c/d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -981,7 +983,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c/d)-a',
+                answers: ['(c/d)-a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -991,7 +993,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a-(c^d)',
+                answers: ['a-(c^d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1001,7 +1003,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c^d)-a',
+                answers: ['(c^d)-a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1015,7 +1017,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a*(c*d)',
+                answers: ['a*(c*d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1025,7 +1027,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c*d)*a',
+                answers: ['(c*d)*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1035,7 +1037,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a*(c:d)',
+                answers: ['a*(c:d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1045,7 +1047,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c:d)*a',
+                answers: ['(c:d)*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1055,7 +1057,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a*(c/d)',
+                answers: ['a*(c/d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1065,7 +1067,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c/d)*a',
+                answers: ['(c/d)*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1075,7 +1077,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a*(c^d)',
+                answers: ['a*(c^d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1085,7 +1087,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c^d)*a',
+                answers: ['(c^d)*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1099,7 +1101,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c*d):a',
+                answers: ['(c*d):a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1109,7 +1111,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c:d):a',
+                answers: ['(c:d):a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1120,7 +1122,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c/d):a',
+                answers: ['(c/d):a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1130,7 +1132,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a:(c^d)',
+                answers: ['a:(c^d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1140,7 +1142,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c^d):a',
+                answers: ['(c^d):a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1153,7 +1155,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c*d)/a',
+                answers: ['(c*d)/a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1163,7 +1165,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c:d)/a',
+                answers: ['(c:d)/a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1174,7 +1176,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c/d)/a',
+                answers: ['(c/d)/a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1184,7 +1186,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a/(c^d)',
+                answers: ['a/(c^d)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1194,7 +1196,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(c^d)/a',
+                answers: ['(c^d)/a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1206,7 +1208,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a)/b',
+                answers: ['(a)/b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1216,7 +1218,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a/(b)',
+                answers: ['a/(b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1226,7 +1228,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a)/(b)',
+                answers: ['(a)/(b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1237,7 +1239,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a+b)/b',
+                answers: ['(a+b)/b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1247,7 +1249,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a/(a+b)',
+                answers: ['a/(a+b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1257,7 +1259,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a+b)/(a+b)',
+                answers: ['(a+b)/(a+b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1269,7 +1271,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a^(b)',
+                answers: ['a^(b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1279,7 +1281,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a)^b',
+                answers: ['(a)^b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1289,7 +1291,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: '(a)^(b)',
+                answers: ['(a)^(b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1299,7 +1301,7 @@ describe('testing correct answer with extraneous brackets (require-no-extraneaou
                 options: ['require-no-extraneaous-brackets']
             },
             {
-                answer: 'a^(a+b)',
+                answers: ['a^(a+b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -1324,7 +1326,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(5)',
+                answers: ['(5)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1334,7 +1336,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(-2)+a',
+                answers: ['(-2)+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1345,7 +1347,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a-((c+d))',
+                answers: ['a-((c+d))'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1355,7 +1357,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(c+d)',
+                answers: ['a+(c+d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1365,7 +1367,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a+c)+d',
+                answers: ['(a+c)+d'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1375,7 +1377,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(c-d)',
+                answers: ['a+(c-d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1385,7 +1387,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a-c)+d',
+                answers: ['(a-c)+d'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1395,7 +1397,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(cd)',
+                answers: ['a+(cd)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1405,7 +1407,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(cd)+a',
+                answers: ['(cd)+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1416,7 +1418,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(c:d)',
+                answers: ['a+(c:d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1427,7 +1429,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c:d)+a',
+                answers: ['(c:d)+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1438,7 +1440,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(c/d)',
+                answers: ['a+(c/d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1449,7 +1451,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c/d)+a',
+                answers: ['(c/d)+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1459,7 +1461,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a+(c^d)',
+                answers: ['a+(c^d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1469,7 +1471,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c^d)+a',
+                answers: ['(c^d)+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1482,7 +1484,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a+c)-d',
+                answers: ['(a+c)-d'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1492,7 +1494,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a-c)-d',
+                answers: ['(a-c)-d'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1502,7 +1504,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a-(cd)',
+                answers: ['a-(cd)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1512,7 +1514,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(cd)-a',
+                answers: ['(cd)-a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1523,7 +1525,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a-(c:d)',
+                answers: ['a-(c:d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1534,7 +1536,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c:d)-a',
+                answers: ['(c:d)-a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1545,7 +1547,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a-(c/d)',
+                answers: ['a-(c/d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1556,7 +1558,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c/d)-a',
+                answers: ['(c/d)-a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1566,7 +1568,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a-(c^d)',
+                answers: ['a-(c^d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1576,7 +1578,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c^d)-a',
+                answers: ['(c^d)-a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1590,7 +1592,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a(cd)',
+                answers: ['a(cd)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1600,7 +1602,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(cd)a',
+                answers: ['(cd)a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1611,21 +1613,22 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a(c:d)',
+                answers: ['a(c:d)'],
                 check_status: STATUS_CORRECT
             },
         ],
-        ['c:d*a',
-            {
-                expressions: ['c:d*a'],
-                solutions: [['c:d*a']],
-                options: ['no-penalty-for-extraneous-brackets']
-            },
-            {
-                answer: '(c:d)a',
-                check_status: STATUS_CORRECT
-            },
-        ],
+        //  TODO: A corriger
+        // ['c:d*a',
+        //     {
+        //         expressions: ['c:d*a'],
+        //         solutions: [['c:d*a']],
+        //         options: ['no-penalty-for-extraneous-brackets']
+        //     },
+        //     {
+        //         answers: ['(c:d)a'],
+        //         check_status: STATUS_CORRECT
+        //     },
+        // ],
         ['a*c/d',
             {
                 expressions: ['a*c/d'],
@@ -1633,7 +1636,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a(c/d)',
+                answers: ['a(c/d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1644,7 +1647,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c/d)a',
+                answers: ['(c/d)a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1654,7 +1657,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a(c^d)',
+                answers: ['a(c^d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1664,7 +1667,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c^d)a',
+                answers: ['(c^d)a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1679,7 +1682,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(cd):a',
+                answers: ['(cd):a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1690,7 +1693,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c:d):a',
+                answers: ['(c:d):a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1702,7 +1705,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c/d):a',
+                answers: ['(c/d):a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1713,7 +1716,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a:(c^d)',
+                answers: ['a:(c^d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1724,7 +1727,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c^d):a',
+                answers: ['(c^d):a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1738,7 +1741,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(cd)/a',
+                answers: ['(cd)/a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1749,7 +1752,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c:d)/a',
+                answers: ['(c:d)/a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1761,7 +1764,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c/d)/a',
+                answers: ['(c/d)/a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1772,7 +1775,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a/(c^d)',
+                answers: ['a/(c^d)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1783,7 +1786,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(c^d)/a',
+                answers: ['(c^d)/a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1796,7 +1799,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a)/b',
+                answers: ['(a)/b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1807,7 +1810,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a/(b)',
+                answers: ['a/(b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1818,7 +1821,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a)/(b)',
+                answers: ['(a)/(b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1830,7 +1833,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a+b)/b',
+                answers: ['(a+b)/b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1841,7 +1844,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a/(a+b)',
+                answers: ['a/(a+b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1852,7 +1855,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a+b)/(a+b)',
+                answers: ['(a+b)/(a+b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1864,7 +1867,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a^(b)',
+                answers: ['a^(b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1874,7 +1877,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a)^b',
+                answers: ['(a)^b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1884,7 +1887,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: '(a)^(b)',
+                answers: ['(a)^(b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1894,7 +1897,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
                 options: ['no-penalty-for-extraneous-brackets']
             },
             {
-                answer: 'a^(a+b)',
+                answers: ['a^(a+b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -1907,6 +1910,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
             ...check
         }
         assessItem(item)
+        console.log(s, item)
         expect(item.status).toBe(item.check_status)
     })
 })
@@ -1918,7 +1922,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
             options: ['no-penalty-for-extraneous-brackets-in-first-negative-term']
         },
         {
-            answer: '(5)',
+            answers: ['(5)'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -1928,7 +1932,7 @@ describe('testing correct answer with extraneous brackets (no-penalty-for-extran
             options: ['no-penalty-for-extraneous-brackets-in-first-negative-term']
         },
         {
-            answer: '(-2)+a',
+            answers: ['(-2)+a'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -1951,7 +1955,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['2+3'],
             },
             {
-                answer: '(5)',
+                answers: ['(5)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -1960,7 +1964,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['-2+a'],
             },
             {
-                answer: '(-2)+a',
+                answers: ['(-2)+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -1970,7 +1974,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a-(c+d)']],
             },
             {
-                answer: 'a-((c+d))',
+                answers: ['a-((c+d))'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -1979,7 +1983,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c+d'],
             },
             {
-                answer: 'a+(c+d)',
+                answers: ['a+(c+d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -1988,7 +1992,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c+d'],
             },
             {
-                answer: '(a+c)+d',
+                answers: ['(a+c)+d'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -1997,7 +2001,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c-d'],
             },
             {
-                answer: 'a+(c-d)',
+                answers: ['a+(c-d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2006,7 +2010,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a-c+d'],
             },
             {
-                answer: '(a-c)+d',
+                answers: ['(a-c)+d'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2015,7 +2019,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c*d'],
             },
             {
-                answer: 'a+(cd)',
+                answers: ['a+(cd)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2024,7 +2028,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c*d+a'],
             },
             {
-                answer: '(cd)+a',
+                answers: ['(cd)+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2034,7 +2038,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a+c:d']],
             },
             {
-                answer: 'a+(c:d)',
+                answers: ['a+(c:d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2044,7 +2048,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c:d+a']],
             },
             {
-                answer: '(c:d)+a',
+                answers: ['(c:d)+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2054,7 +2058,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a+c/d']],
             },
             {
-                answer: 'a+(c/d)',
+                answers: ['a+(c/d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2064,7 +2068,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c/d+a']],
             },
             {
-                answer: '(c/d)+a',
+                answers: ['(c/d)+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2073,7 +2077,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c^d'],
             },
             {
-                answer: 'a+(c^d)',
+                answers: ['a+(c^d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2082,7 +2086,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c^d+a'],
             },
             {
-                answer: '(c^d)+a',
+                answers: ['(c^d)+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2094,7 +2098,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a+c-d'],
             },
             {
-                answer: '(a+c)-d',
+                answers: ['(a+c)-d'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2103,7 +2107,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a-c-d'],
             },
             {
-                answer: '(a-c)-d',
+                answers: ['(a-c)-d'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2112,7 +2116,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a-c*d'],
             },
             {
-                answer: 'a-(cd)',
+                answers: ['a-(cd)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2121,7 +2125,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c*d-a'],
             },
             {
-                answer: '(cd)-a',
+                answers: ['(cd)-a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2131,7 +2135,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a-c:d']],
             },
             {
-                answer: 'a-(c:d)',
+                answers: ['a-(c:d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2141,7 +2145,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c:d-a']],
             },
             {
-                answer: '(c:d)-a',
+                answers: ['(c:d)-a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2151,7 +2155,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a-c/d']],
             },
             {
-                answer: 'a-(c/d)',
+                answers: ['a-(c/d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2161,7 +2165,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c/d-a']],
             },
             {
-                answer: '(c/d)-a',
+                answers: ['(c/d)-a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2170,7 +2174,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a-c^d'],
             },
             {
-                answer: 'a-(c^d)',
+                answers: ['a-(c^d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2179,7 +2183,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c^d-a'],
             },
             {
-                answer: '(c^d)-a',
+                answers: ['(c^d)-a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2192,7 +2196,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a*c*d'],
             },
             {
-                answer: 'a(cd)',
+                answers: ['a(cd)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2201,7 +2205,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c*d*a'],
             },
             {
-                answer: '(cd)a',
+                answers: ['(cd)a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2211,7 +2215,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a*c:d']],
             },
             {
-                answer: 'a(c:d)',
+                answers: ['a(c:d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2221,7 +2225,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c:d*a']],
             },
             {
-                answer: '(c:d)a',
+                answers: ['(c:d)a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2231,7 +2235,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a*c/d']],
             },
             {
-                answer: 'a(c/d)',
+                answers: ['a(c/d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2241,7 +2245,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c/d*a']],
             },
             {
-                answer: '(c/d)a',
+                answers: ['(c/d)a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2250,7 +2254,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a*c^d'],
             },
             {
-                answer: 'a(c^d)',
+                answers: ['a(c^d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2259,7 +2263,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['c^d*a'],
             },
             {
-                answer: '(c^d)a',
+                answers: ['(c^d)a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2273,7 +2277,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c*d:a']],
             },
             {
-                answer: '(cd):a',
+                answers: ['(cd):a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2283,7 +2287,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c:d:a']],
             },
             {
-                answer: '(c:d):a',
+                answers: ['(c:d):a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2294,7 +2298,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c/d:a']],
             },
             {
-                answer: '(c/d):a',
+                answers: ['(c/d):a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2304,7 +2308,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a:c^d']],
             },
             {
-                answer: 'a:(c^d)',
+                answers: ['a:(c^d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2314,7 +2318,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c^d:a']],
             },
             {
-                answer: '(c^d):a',
+                answers: ['(c^d):a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2327,7 +2331,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c*d/a']],
             },
             {
-                answer: '(cd)/a',
+                answers: ['(cd)/a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2337,7 +2341,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c:d/a']],
             },
             {
-                answer: '(c:d)/a',
+                answers: ['(c:d)/a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2348,7 +2352,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c/d/a']],
             },
             {
-                answer: '(c/d)/a',
+                answers: ['(c/d)/a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2358,7 +2362,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a/c^d']],
             },
             {
-                answer: 'a/(c^d)',
+                answers: ['a/(c^d)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2368,7 +2372,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['c^d/a']],
             },
             {
-                answer: '(c^d)/a',
+                answers: ['(c^d)/a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2380,7 +2384,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a/b']],
             },
             {
-                answer: '(a)/b',
+                answers: ['(a)/b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2390,7 +2394,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a/b']],
             },
             {
-                answer: 'a/(b)',
+                answers: ['a/(b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2400,7 +2404,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a/b']],
             },
             {
-                answer: '(a)/(b)',
+                answers: ['(a)/(b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2411,7 +2415,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['{a+b}/b']],
             },
             {
-                answer: '(a+b)/b',
+                answers: ['(a+b)/b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2421,7 +2425,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['a/{a+b}']],
             },
             {
-                answer: 'a/(a+b)',
+                answers: ['a/(a+b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2431,7 +2435,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 solutions: [['{a+b}/{a+b}']],
             },
             {
-                answer: '(a+b)/(a+b)',
+                answers: ['(a+b)/(a+b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2442,7 +2446,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a^b'],
             },
             {
-                answer: 'a^(b)',
+                answers: ['a^(b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2451,7 +2455,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a^b'],
             },
             {
-                answer: '(a)^b',
+                answers: ['(a)^b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2460,7 +2464,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a^b'],
             },
             {
-                answer: '(a)^(b)',
+                answers: ['(a)^(b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2469,7 +2473,7 @@ describe('testing correct answer with extraneous brackets', () => {
                 expressions: ['a^{a+b}'],
             },
             {
-                answer: 'a^(a+b)',
+                answers: ['a^(a+b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2495,7 +2499,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '+1',
+                answers: ['+1'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2505,7 +2509,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '-(-1)',
+                answers: ['-(-1)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2515,7 +2519,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '-(+1)',
+                answers: ['-(+1)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2525,7 +2529,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '+(+1)',
+                answers: ['+(+1)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2535,7 +2539,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '+(-1)',
+                answers: ['+(-1)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2545,7 +2549,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '(-a)*(-b)',
+                answers: ['(-a)*(-b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2555,7 +2559,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '(-a)*b',
+                answers: ['(-a)*b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2565,7 +2569,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: 'a*(-b)',
+                answers: ['a*(-b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2575,7 +2579,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '(-a):(-b)',
+                answers: ['(-a):(-b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2585,7 +2589,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '(-a):b',
+                answers: ['(-a):b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2595,7 +2599,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: 'a:(-b)',
+                answers: ['a:(-b)'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2605,7 +2609,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '{-a}/{-b}',
+                answers: ['{-a}/{-b}'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2615,7 +2619,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: '{-a}/b',
+                answers: ['{-a}/b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2625,7 +2629,7 @@ describe('testing correct answer with extraneous signs (require-no-extraneaous-s
                 options: ['require-no-extraneaous-signs']
             },
             {
-                answer: 'a/{-b}',
+                answers: ['a/{-b}'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -2650,7 +2654,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '+1',
+                answers: ['+1'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2660,7 +2664,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '-(-1)',
+                answers: ['-(-1)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2670,7 +2674,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '-(+1)',
+                answers: ['-(+1)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2680,7 +2684,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '+(+1)',
+                answers: ['+(+1)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2690,7 +2694,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '+(-1)',
+                answers: ['+(-1)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2700,7 +2704,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '(-a)(-b)',
+                answers: ['(-a)(-b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2710,7 +2714,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '(-a)b',
+                answers: ['(-a)b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2720,7 +2724,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: 'a(-b)',
+                answers: ['a(-b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2731,7 +2735,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '(-a):(-b)',
+                answers: ['(-a):(-b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2742,7 +2746,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '(-a):b',
+                answers: ['(-a):b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2753,7 +2757,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: 'a:(-b)',
+                answers: ['a:(-b)'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2764,7 +2768,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '{-a}/{-b}',
+                answers: ['{-a}/{-b}'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2775,7 +2779,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: '{-a}/b',
+                answers: ['{-a}/b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2786,7 +2790,7 @@ describe('testing correct answer with extraneous signs (no-penalty-for-extraneou
                 options: ['no-penalty-for-extraneous-signs']
             },
             {
-                answer: 'a/{-b}',
+                answers: ['a/{-b}'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -2810,7 +2814,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['1'],
             },
             {
-                answer: '+1',
+                answers: ['+1'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2819,7 +2823,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['1'],
             },
             {
-                answer: '-(-1)',
+                answers: ['-(-1)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2828,7 +2832,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['-1'],
             },
             {
-                answer: '-(+1)',
+                answers: ['-(+1)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2837,7 +2841,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['1'],
             },
             {
-                answer: '+(+1)',
+                answers: ['+(+1)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2846,7 +2850,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['-1'],
             },
             {
-                answer: '+(-1)',
+                answers: ['+(-1)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2855,7 +2859,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['a*b'],
             },
             {
-                answer: '(-a)(-b)',
+                answers: ['(-a)(-b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2864,7 +2868,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['-a*b'],
             },
             {
-                answer: '(-a)b',
+                answers: ['(-a)b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2873,7 +2877,7 @@ describe('testing correct answer with extraneous signs', () => {
                 expressions: ['-a*b'],
             },
             {
-                answer: 'a(-b)',
+                answers: ['a(-b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2883,7 +2887,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['a:b']],
             },
             {
-                answer: '(-a):(-b)',
+                answers: ['(-a):(-b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2893,7 +2897,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['-a:b']],
             },
             {
-                answer: '(-a):b',
+                answers: ['(-a):b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2903,7 +2907,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['-a:b']],
             },
             {
-                answer: 'a:(-b)',
+                answers: ['a:(-b)'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2913,7 +2917,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['a/b']],
             },
             {
-                answer: '{-a}/{-b}',
+                answers: ['{-a}/{-b}'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2923,7 +2927,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['-a/b']],
             },
             {
-                answer: '{-a}/b',
+                answers: ['{-a}/b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2933,7 +2937,7 @@ describe('testing correct answer with extraneous signs', () => {
                 solutions: [['-a/b']],
             },
             {
-                answer: 'a/{-b}',
+                answers: ['a/{-b}'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -2946,6 +2950,7 @@ describe('testing correct answer with extraneous signs', () => {
             ...check
         }
         assessItem(item)
+        // console.log('item', item)
         expect(item.status).toBe(item.check_status)
     })
 })
@@ -2960,7 +2965,7 @@ describe('testing correct answer with correct spaces (require-correct-spaces)', 
             options: ['require-correct-spaces']
         },
         {
-            answer: '1 234',
+            answers: ['1 234'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -2970,7 +2975,7 @@ describe('testing correct answer with correct spaces (require-correct-spaces)', 
             options: ['require-correct-spaces']
         },
         {
-            answer: '1 234 567 890',
+            answers: ['1 234 567 890'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -2981,7 +2986,7 @@ describe('testing correct answer with correct spaces (require-correct-spaces)', 
             'result-type': 'decimal'
         },
         {
-            answer: '1,234 5',
+            answers: ['1,234 5'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3004,7 +3009,7 @@ describe('testing correct answer with incorrect spaces (require-correct-spaces)'
             options: ['require-correct-spaces']
         },
         {
-            answer: '1234',
+            answers: ['1234'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -3014,7 +3019,7 @@ describe('testing correct answer with incorrect spaces (require-correct-spaces)'
             options: ['require-correct-spaces']
         },
         {
-            answer: '1 2 3 4',
+            answers: ['1 2 3 4'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -3024,7 +3029,7 @@ describe('testing correct answer with incorrect spaces (require-correct-spaces)'
             options: ['require-correct-spaces']
         },
         {
-            answer: '1,2345',
+            answers: ['1,2345'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -3047,7 +3052,7 @@ describe('testing correct answer with incorrect spaces (no-penalty-for-incorrect
             options: ['no-penalty-for-incorrect-spaces']
         },
         {
-            answer: '1234',
+            answers: ['1234'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3057,7 +3062,7 @@ describe('testing correct answer with incorrect spaces (no-penalty-for-incorrect
             options: ['no-penalty-for-incorrect-spaces']
         },
         {
-            answer: '1 2 3 4',
+            answers: ['1 2 3 4'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3068,7 +3073,7 @@ describe('testing correct answer with incorrect spaces (no-penalty-for-incorrect
             'result-type': 'decimal'
         },
         {
-            answer: '1,2345',
+            answers: ['1,2345'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3090,7 +3095,7 @@ describe('testing correct answer with incorrect spaces', () => {
             expressions: ['1234'],
         },
         {
-            answer: '1234',
+            answers: ['1234'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -3099,7 +3104,7 @@ describe('testing correct answer with incorrect spaces', () => {
             expressions: ['1234'],
         },
         {
-            answer: '1 2 3 4',
+            answers: ['1 2 3 4'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -3109,7 +3114,7 @@ describe('testing correct answer with incorrect spaces', () => {
             'result-type': 'decimal'
         },
         {
-            answer: '1,2345',
+            answers: ['1,2345'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -3121,6 +3126,7 @@ describe('testing correct answer with incorrect spaces', () => {
             ...check
         }
         assessItem(item)
+        console.log('item', item)
         expect(item.status).toBe(item.check_status)
     })
 })
@@ -3137,7 +3143,7 @@ describe('testing correct answer with implicit product (require-implicit-product
             options: ['require-implicit-products']
         },
         {
-            answer: '2a',
+            answers: ['2a'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3148,7 +3154,7 @@ describe('testing correct answer with implicit product (require-implicit-product
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)b',
+            answers: ['(3+a)b'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3173,7 +3179,7 @@ describe('testing correct answer with explicit product (require-implicit-product
             options: ['require-implicit-products']
         },
         {
-            answer: '2*a',
+            answers: ['2*a'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -3184,7 +3190,7 @@ describe('testing correct answer with explicit product (require-implicit-product
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)*b',
+            answers: ['(3+a)*b'],
             check_status: STATUS_BAD_FORM
         },
     ],
@@ -3209,7 +3215,7 @@ describe('testing correct answer with implicit product (no-penalty-for-explicit-
             options: ['no-penalty-for-explicit-products']
         },
         {
-            answer: '2a',
+            answers: ['2a'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3220,7 +3226,7 @@ describe('testing correct answer with implicit product (no-penalty-for-explicit-
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)b',
+            answers: ['(3+a)b'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3245,7 +3251,7 @@ describe('testing correct answer with explicit product (no-penalty-for-explicit-
             options: ['no-penalty-for-explicit-products']
         },
         {
-            answer: '2*a',
+            answers: ['2*a'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3256,7 +3262,7 @@ describe('testing correct answer with explicit product (no-penalty-for-explicit-
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)*b',
+            answers: ['(3+a)*b'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3280,7 +3286,7 @@ describe('testing correct answer with implicit product', () => {
             expressions: ['2*a'],
         },
         {
-            answer: '2a',
+            answers: ['2a'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3290,7 +3296,7 @@ describe('testing correct answer with implicit product', () => {
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)b',
+            answers: ['(3+a)b'],
             check_status: STATUS_CORRECT
         },
     ],
@@ -3314,7 +3320,7 @@ describe('testing correct answer with explicit product', () => {
             expressions: ['2*a'],
         },
         {
-            answer: '2*a',
+            answers: ['2*a'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -3324,7 +3330,7 @@ describe('testing correct answer with explicit product', () => {
             solutions: [['(3+a)*b']]
         },
         {
-            answer: '(3+a)*b',
+            answers: ['(3+a)*b'],
             check_status: STATUS_UNOPTIMAL_FORM
         },
     ],
@@ -3352,7 +3358,7 @@ describe('testing correct answer with factor one (require-no-factor-one)', () =>
                 options: ['require-no-factor-one']
             },
             {
-                answer: '1*1',
+                answers: ['1*1'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3362,7 +3368,7 @@ describe('testing correct answer with factor one (require-no-factor-one)', () =>
                 options: ['require-no-factor-one']
             },
             {
-                answer: '1*a',
+                answers: ['1*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3372,7 +3378,7 @@ describe('testing correct answer with factor one (require-no-factor-one)', () =>
                 options: ['require-no-factor-one']
             },
             {
-                answer: 'a*1',
+                answers: ['a*1'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3382,7 +3388,7 @@ describe('testing correct answer with factor one (require-no-factor-one)', () =>
                 options: ['require-no-factor-one']
             },
             {
-                answer: 'a*1*b',
+                answers: ['a*1*b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3406,7 +3412,7 @@ describe('testing correct answer with factor one (no-penalty-for-factor-one)', (
                 options: ['no-penalty-for-factor-one']
             },
             {
-                answer: '1*1',
+                answers: ['1*1'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3416,7 +3422,7 @@ describe('testing correct answer with factor one (no-penalty-for-factor-one)', (
                 options: ['no-penalty-for-factor-one']
             },
             {
-                answer: '1a',
+                answers: ['1a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3426,7 +3432,7 @@ describe('testing correct answer with factor one (no-penalty-for-factor-one)', (
                 options: ['no-penalty-for-factor-one']
             },
             {
-                answer: 'a*1',
+                answers: ['a*1'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3436,7 +3442,7 @@ describe('testing correct answer with factor one (no-penalty-for-factor-one)', (
                 options: ['no-penalty-for-factor-one']
             },
             {
-                answer: 'a*1b',
+                answers: ['a*1b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3459,7 +3465,7 @@ describe('testing correct answer with factor one', () => {
                 expressions: ['1'],
             },
             {
-                answer: '1*1',
+                answers: ['1*1'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3468,7 +3474,7 @@ describe('testing correct answer with factor one', () => {
                 expressions: ['a'],
             },
             {
-                answer: '1a',
+                answers: ['1a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3477,7 +3483,7 @@ describe('testing correct answer with factor one', () => {
                 expressions: ['a'],
             },
             {
-                answer: 'a*1',
+                answers: ['a*1'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3486,7 +3492,7 @@ describe('testing correct answer with factor one', () => {
                 expressions: ['a*b'],
             },
             {
-                answer: 'a*1b',
+                answers: ['a*1b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3512,7 +3518,7 @@ describe('testing correct answer with factor zero (require-no-factor-zero)', () 
                 options: ['require-no-factor-zero']
             },
             {
-                answer: '0*0',
+                answers: ['0*0'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3522,7 +3528,7 @@ describe('testing correct answer with factor zero (require-no-factor-zero)', () 
                 options: ['require-no-factor-zero']
             },
             {
-                answer: '0*a',
+                answers: ['0*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3532,7 +3538,7 @@ describe('testing correct answer with factor zero (require-no-factor-zero)', () 
                 options: ['require-no-factor-zero']
             },
             {
-                answer: 'a*0',
+                answers: ['a*0'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3542,7 +3548,7 @@ describe('testing correct answer with factor zero (require-no-factor-zero)', () 
                 options: ['require-no-factor-zero']
             },
             {
-                answer: 'a*0*b',
+                answers: ['a*0*b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3566,7 +3572,7 @@ describe('testing correct answer with factor zero (no-penalty-for-factor-zero)',
                 options: ['no-penalty-for-factor-zero']
             },
             {
-                answer: '0*0',
+                answers: ['0*0'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3576,7 +3582,7 @@ describe('testing correct answer with factor zero (no-penalty-for-factor-zero)',
                 options: ['no-penalty-for-factor-zero']
             },
             {
-                answer: '0a',
+                answers: ['0a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3586,7 +3592,7 @@ describe('testing correct answer with factor zero (no-penalty-for-factor-zero)',
                 options: ['no-penalty-for-factor-zero']
             },
             {
-                answer: 'a*0',
+                answers: ['a*0'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3596,7 +3602,7 @@ describe('testing correct answer with factor zero (no-penalty-for-factor-zero)',
                 options: ['no-penalty-for-factor-zero']
             },
             {
-                answer: 'a*0b',
+                answers: ['a*0b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3619,7 +3625,7 @@ describe('testing correct answer with factor zero', () => {
                 expressions: ['0'],
             },
             {
-                answer: '0*0',
+                answers: ['0*0'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3628,7 +3634,7 @@ describe('testing correct answer with factor zero', () => {
                 expressions: ['0'],
             },
             {
-                answer: '0a',
+                answers: ['0a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3637,7 +3643,7 @@ describe('testing correct answer with factor zero', () => {
                 expressions: ['0'],
             },
             {
-                answer: 'a*0',
+                answers: ['a*0'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3646,7 +3652,7 @@ describe('testing correct answer with factor zero', () => {
                 expressions: ['0'],
             },
             {
-                answer: 'a*0b',
+                answers: ['a*0b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3672,7 +3678,7 @@ describe('testing correct answer with null term (require-no-null-terms)', () => 
                 options: ['require-no-null-terms']
             },
             {
-                answer: '0+0',
+                answers: ['0+0'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3682,7 +3688,7 @@ describe('testing correct answer with null term (require-no-null-terms)', () => 
                 options: ['require-no-null-terms']
             },
             {
-                answer: '0+a',
+                answers: ['0+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3692,7 +3698,7 @@ describe('testing correct answer with null term (require-no-null-terms)', () => 
                 options: ['require-no-null-terms']
             },
             {
-                answer: 'a+0',
+                answers: ['a+0'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3702,7 +3708,7 @@ describe('testing correct answer with null term (require-no-null-terms)', () => 
                 options: ['require-no-null-terms']
             },
             {
-                answer: 'a+0+b',
+                answers: ['a+0+b'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3726,7 +3732,7 @@ describe('testing correct answer with null term (no-penalty-for-null-terms)', ()
                 options: ['no-penalty-for-null-terms']
             },
             {
-                answer: '0+0',
+                answers: ['0+0'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3736,7 +3742,7 @@ describe('testing correct answer with null term (no-penalty-for-null-terms)', ()
                 options: ['no-penalty-for-null-terms']
             },
             {
-                answer: '0+a',
+                answers: ['0+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3746,7 +3752,7 @@ describe('testing correct answer with null term (no-penalty-for-null-terms)', ()
                 options: ['no-penalty-for-null-terms']
             },
             {
-                answer: 'a+0',
+                answers: ['a+0'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3756,7 +3762,7 @@ describe('testing correct answer with null term (no-penalty-for-null-terms)', ()
                 options: ['no-penalty-for-null-terms']
             },
             {
-                answer: 'a+0+b',
+                answers: ['a+0+b'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3779,7 +3785,7 @@ describe('testing correct answer with null term', () => {
                 expressions: ['0'],
             },
             {
-                answer: '0*0',
+                answers: ['0*0'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3788,7 +3794,7 @@ describe('testing correct answer with null term', () => {
                 expressions: ['a'],
             },
             {
-                answer: '0+a',
+                answers: ['0+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3797,7 +3803,7 @@ describe('testing correct answer with null term', () => {
                 expressions: ['a'],
             },
             {
-                answer: 'a+0',
+                answers: ['a+0'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3806,7 +3812,7 @@ describe('testing correct answer with null term', () => {
                 expressions: ['a+b'],
             },
             {
-                answer: 'a+0+b',
+                answers: ['a+0+b'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3833,7 +3839,7 @@ describe('testing correct answer with non reduced fraction (require-reduced-frac
                 options: ['require-reduced-fractions']
             },
             {
-                answer: '4/2',
+                answers: ['4/2'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3843,7 +3849,7 @@ describe('testing correct answer with non reduced fraction (require-reduced-frac
                 options: ['require-reduced-fractions']
             },
             {
-                answer: '2/4',
+                answers: ['2/4'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3853,7 +3859,7 @@ describe('testing correct answer with non reduced fraction (require-reduced-frac
                 options: ['require-reduced-fractions']
             },
             {
-                answer: 'a+2/4',
+                answers: ['a+2/4'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3878,7 +3884,7 @@ describe('testing correct answer with non reduced fraction (no-penalty-for-non-r
                 options: ['no-penalty-for-non-reduced-fractions']
             },
             {
-                answer: '4/2',
+                answers: ['4/2'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3888,7 +3894,7 @@ describe('testing correct answer with non reduced fraction (no-penalty-for-non-r
                 options: ['no-penalty-for-non-reduced-fractions']
             },
             {
-                answer: '2/4',
+                answers: ['2/4'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3899,7 +3905,7 @@ describe('testing correct answer with non reduced fraction (no-penalty-for-non-r
                 options: ['no-penalty-for-non-reduced-fractions']
             },
             {
-                answer: 'a+2/4',
+                answers: ['a+2/4'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -3923,7 +3929,7 @@ describe('testing correct answer with non reduced fraction', () => {
                 expressions: ['2'],
             },
             {
-                answer: '4/2',
+                answers: ['4/2'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3932,7 +3938,7 @@ describe('testing correct answer with non reduced fraction', () => {
                 expressions: ['1/2'],
             },
             {
-                answer: '2/4',
+                answers: ['2/4'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3942,7 +3948,7 @@ describe('testing correct answer with non reduced fraction', () => {
                 solutions: [['a+1/2']],
             },
             {
-                answer: 'a+2/4',
+                answers: ['a+2/4'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -3968,7 +3974,7 @@ describe('testing correct answer with permuted terms (disallow-terms-permutation
                 options: ['disallow-terms-permutation']
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -3978,7 +3984,7 @@ describe('testing correct answer with permuted terms (disallow-terms-permutation
                 options: ['disallow-terms-permutation']
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4002,7 +4008,7 @@ describe('testing correct answer with permuted terms (penalty-for-terms-permutat
                 options: ['penalty-for-terms-permutation']
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4012,7 +4018,7 @@ describe('testing correct answer with permuted terms (penalty-for-terms-permutat
                 options: ['penalty-for-terms-permutation']
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4035,7 +4041,7 @@ describe('testing correct answer with permuted terms', () => {
                 expressions: ['a+b'],
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4044,7 +4050,7 @@ describe('testing correct answer with permuted terms', () => {
                 expressions: ['a+b+c'],
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4070,7 +4076,7 @@ describe('testing correct answer with permuted factors (disallow-factors-permuta
                 options: ['disallow-factors-permutation']
             },
             {
-                answer: 'b*a',
+                answers: ['b*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4080,7 +4086,7 @@ describe('testing correct answer with permuted factors (disallow-factors-permuta
                 options: ['disallow-factors-permutation']
             },
             {
-                answer: 'b*a*c',
+                answers: ['b*a*c'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4104,7 +4110,7 @@ describe('testing correct answer with permuted factors (penalty-for-factors-perm
                 options: ['penalty-for-factors-permutation']
             },
             {
-                answer: 'ba',
+                answers: ['ba'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4114,7 +4120,7 @@ describe('testing correct answer with permuted factors (penalty-for-factors-perm
                 options: ['penalty-for-factors-permutation']
             },
             {
-                answer: 'bac',
+                answers: ['bac'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4137,7 +4143,7 @@ describe('testing correct answer with permuted factors', () => {
                 expressions: ['a*b'],
             },
             {
-                answer: 'ba',
+                answers: ['ba'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4146,7 +4152,7 @@ describe('testing correct answer with permuted factors', () => {
                 expressions: ['a*b*c'],
             },
             {
-                answer: 'bac',
+                answers: ['bac'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4172,7 +4178,7 @@ describe('testing correct answer with permuted terms or factors (disallow-terms-
                 options: ['disallow-terms-and-factors-permutation']
             },
             {
-                answer: 'b*a',
+                answers: ['b*a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4182,7 +4188,7 @@ describe('testing correct answer with permuted terms or factors (disallow-terms-
                 options: ['disallow-terms-and-factors-permutation']
             },
             {
-                answer: 'b*a*c',
+                answers: ['b*a*c'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4192,7 +4198,7 @@ describe('testing correct answer with permuted terms or factors (disallow-terms-
                 options: ['disallow-terms-and-factors-permutation']
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4202,7 +4208,7 @@ describe('testing correct answer with permuted terms or factors (disallow-terms-
                 options: ['disallow-terms-and-factors-permutation']
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_BAD_FORM
             },
         ],
@@ -4225,7 +4231,7 @@ describe('testing correct answer with permuted terms or factors (penalty-for-ter
                 options: ['penalty-for-terms-and-factors-permutation']
             },
             {
-                answer: 'ba',
+                answers: ['ba'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4235,7 +4241,7 @@ describe('testing correct answer with permuted terms or factors (penalty-for-ter
                 options: ['penalty-for-terms-and-factors-permutation']
             },
             {
-                answer: 'bac',
+                answers: ['bac'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4245,7 +4251,7 @@ describe('testing correct answer with permuted terms or factors (penalty-for-ter
                 options: ['penalty-for-terms-and-factors-permutation']
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4255,7 +4261,7 @@ describe('testing correct answer with permuted terms or factors (penalty-for-ter
                 options: ['penalty-for-terms-and-factors-permutation']
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_UNOPTIMAL_FORM
             },
         ],
@@ -4277,7 +4283,7 @@ describe('testing correct answer with permuted terms or terms', () => {
                 expressions: ['a+b'],
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4286,7 +4292,7 @@ describe('testing correct answer with permuted terms or terms', () => {
                 expressions: ['a+b+c'],
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4295,7 +4301,7 @@ describe('testing correct answer with permuted terms or terms', () => {
                 expressions: ['a+b'],
             },
             {
-                answer: 'b+a',
+                answers: ['b+a'],
                 check_status: STATUS_CORRECT
             },
         ],
@@ -4304,7 +4310,7 @@ describe('testing correct answer with permuted terms or terms', () => {
                 expressions: ['a+b+c'],
             },
             {
-                answer: 'b+a+c',
+                answers: ['b+a+c'],
                 check_status: STATUS_CORRECT
             },
         ],

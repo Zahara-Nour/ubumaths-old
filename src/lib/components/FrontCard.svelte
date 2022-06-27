@@ -14,76 +14,53 @@
 	export let height = 0
 	export let h = 0
 	export let onChoice = () => {}
+	export let masked = false
+	export let interactive
+	export let commit
 
 	let choices
-  
 
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)
 
-	$: if (card.choices) {
-		choices = card.choices.map((c) => {
-			if (c.text) {
-				c.text = $formatLatex(c.text)
-			}
-			return c
-		})
-	} else {
-		choices = null
-	}
+	
 </script>
 
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}">
-		<div class="flex flex-col justify-between"  style="{height ? `height:${height-48}px;` : ''}">
+		<div
+			class="flex flex-col justify-between"
+			style="{height ? `height:${height - 48}px;` : ''}"
+		>
 			{#if showDescription}
 				<div>
 					<Title>
-						<div class='flex justify-between'>
-							<span class = 'z-0 relative' style={'color:var(--mdc-theme-primary'}>{@html $formatLatex(description)}</span> <span>{card.id} </span>
+						<div class="flex justify-between">
+							<span
+								class="z-0 relative"
+								style="{'color:var(--mdc-theme-primary'}"
+								>{@html $formatLatex(description)}</span
+							> <span>{card.id} </span>
 						</div>
 					</Title>
 					{#if subdescription}
 						<Subtitle>
-							<span class = 'z-0 relative' style={'color:var(--mdc-theme-on-surface'}>{@html $formatLatex(subdescription)}</span>
+							<span
+								class="z-0 relative"
+								style="{'color:var(--mdc-theme-on-surface'}"
+								>{@html $formatLatex(subdescription)}</span
+							>
 						</Subtitle>
 					{/if}
 				</div>
 			{/if}
 			<Content>
-				<Question question="{card}" />
-				{#if choices}
-					<div class="mt-3 flex flex-wrap justify-around">
-						{#each choices as choice, i}
-
-							<button
-								class="rounded-lg  m-2 p-1"
-								style='border: 4px solid var(--mdc-theme-primary);'
-								on:click="{() => onChoice(i)}"
-							>
-								{#if choice.image}
-									{#await choice.imageBase64P}
-										loading image
-									{:then base64}
-										<img
-											class="white"
-											src="{base64}"
-											style="max-width:min(400px,80%);max-height:40vh;"
-											alt="{`choice ${i}`}"
-										/>
-									{:catch error}
-										{error}
-									{/await}
-								{/if}
-								{#if choice.text}
-									<div class="text-base ">
-										{@html choice.text}
-									</div>
-								{/if}
-							</button>
-						{/each}
-					</div>
-				{/if}
+				<Question
+					question="{card}"
+					masked="{masked}"
+					interactive="{interactive}"
+					commit="{commit}"
+				/>
 			</Content>
 
 			{#if flashcard}
@@ -98,7 +75,6 @@
 		</div>
 	</Paper>
 </div>
-
 
 <style>
 	.buttons {

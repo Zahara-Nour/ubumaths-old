@@ -30,8 +30,7 @@ export function createCorrection(item) {
 		expression_latex,
 		expression2_latex,
 		solutions,
-		answer_latex,
-		answer_choice,
+		answers_latex,
 		correctionFormat,
 		status,
 		choices,
@@ -67,14 +66,14 @@ export function createCorrection(item) {
 							() =>
 								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
 								(item.type === 'choice'
-									? get(toMarkup)(item.choices[answer_choice].text)
-									: get(toMarkup)('$$' + answer_latex + '$$')) +
+									? get(formatLatex)(item.choices[item.answers[0]].text)
+									: get(toMarkup)('$$' + answers_latex[0] + '$$')) +
 								'</span>',
 						)
 						.replace(
 							new RegExp('&ans', 'g'),
 							`\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
-								answer_latex +
+								answers_latex[0] +
 								'}}',
 						)
 				}
@@ -132,13 +131,13 @@ export function createCorrection(item) {
 									() =>
 										`<span style="color:${answerColor};display:inline-block">` +
 										(item.type === 'choice'
-											? get(toMarkup)(item.choices[answer_choice].text)
-											: get(toMarkup)('$$' + answer_latex + '$$')) +
+											? get(formatLatex)(item.choices[item.answers[0]].text)
+											: get(toMarkup)('$$' + answers_latex[0] + '$$')) +
 										'</span>',
 								)
 								.replace(
 									new RegExp('&ans', 'g'),
-									`\\textcolor{${answerColor}}{` + answer_latex + '}',
+									`\\textcolor{${answerColor}}{` + answers_latex[0] + '}',
 								),
 					)
 				}
@@ -150,15 +149,15 @@ export function createCorrection(item) {
 			case 'rewrite': {
 				line = `$$\\begin{align*}  ${expression_latex}`
 				if (status === STATUS_INCORRECT) {
-					line += `&= \\enclose{updiagonalstrike}[3px solid ${incorrect_color}]{${answer_latex}} \\\\`
+					line += `&= \\enclose{updiagonalstrike}[3px solid ${incorrect_color}]{${answers_latex[0]}} \\\\`
 				} else if (status === STATUS_BAD_FORM || status === STATUS_BAD_UNIT) {
-					line += `&= \\textcolor{${incorrect_color}}{${answer_latex}} \\\\`
+					line += `&= \\textcolor{${incorrect_color}}{${answers_latex[0]}} \\\\`
 				} else if (status === STATUS_UNOPTIMAL_FORM) {
-					line += `&= \\textcolor{${unoptimal_color}}{${answer_latex}} \\\\`
+					line += `&= \\textcolor{${unoptimal_color}}{${answers_latex[0]}} \\\\`
 				}
 
 				line += `&=\\enclose{roundedbox}[2px solid ${correct_color}]{\\textcolor{${correct_color}}{${
-					status === STATUS_CORRECT ? answer_latex : solutions_latex[0]
+					status === STATUS_CORRECT ? answers_latex[0] : solutions_latex[0]
 				}}}`
 
 				line += '\\end{align*}$$'
@@ -234,7 +233,7 @@ export function createCorrection(item) {
 						'$$' +
 						expression_latex.replace(
 							/\\ldots/,
-							`\\textcolor{green}{${answer_latex}}`,
+							`\\textcolor{green}{${answers_latex[0]}}`,
 						) +
 						'$$'
 				} else {
@@ -251,7 +250,7 @@ export function createCorrection(item) {
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{red}{${answer_latex}}`,
+									`\\textcolor{red}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)
@@ -263,7 +262,7 @@ export function createCorrection(item) {
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{orange}{${answer_latex}}`,
+									`\\textcolor{orange}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)

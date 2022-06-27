@@ -1200,7 +1200,25 @@ const questions = {
 
       ],
       'A trou': [
-
+        {
+          description: 'Compléter une addition à trou',
+          subdescription:
+            'Nombres à 1 chiffre. Nombre plus grand en premier. Somme inférieure ou égale à 10',
+          enounces: ["Complète."],
+          expressions: [
+            '? + ? + &1= ?',
+          ],
+          variables: [
+            {
+              '&1': '$e[3;8]',
+              //  '&3':'$e[2;&2]'
+            },
+          ],
+          type: 'trou',
+          solutions: [['&2']],
+          defaultDelay: 120,
+          grade: CP,
+        },
         {
           description: 'Compléter une addition à trou',
           subdescription:
@@ -1218,7 +1236,7 @@ const questions = {
           ],
           type: 'trou',
           solutions: [['&2']],
-          defaultDelay: 10,
+          defaultDelay: 120,
           grade: CP,
         },
         {
@@ -5388,6 +5406,30 @@ const questions = {
             ['&7<&8 ?? 0 :: 1'],
           ],
           type: 'choice',
+          defaultDelay: 20,
+          grade: CM1,
+        },
+      ],
+      'Encadrer' : [
+        {
+          description: "Encadrer un nombre décimal par deux entiers consécutifs",
+          enounces: ["Encadre ce nombre décimal par deux entiers consécutifs."],
+          expressions:['?<[._&3_]<?'],
+          variables: [
+
+            {
+              '&1': '$e[0;9]',
+              '&2': '$e[1;9]',
+              '&3': '&1+&2*0,1',
+            },
+          ],
+          solutions: [['&1', '[_&1+1_]']],
+
+          correctionFormat: [{
+            correct: ['&solution1<[._&3_]<&solution2'],
+            answer: '&answer1<[._&3_]<&answer2'
+          }],
+          type: 'rewrite',
           defaultDelay: 20,
           grade: CM1,
         },

@@ -4,9 +4,11 @@
 	import { fontSize } from '$lib/stores'
 
 	export let card
+	export let interactive = false
 	export let flashcard = false
 	export let showDescription = false
 	export let onChoice = () => {}
+	export let commit
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
@@ -59,6 +61,8 @@
 				showDescription="{showDescription}"
 				height="{height}"
 				onChoice="{onChoice}"
+				interactive="{interactive}"
+				commit={commit}
 			/>
 		</div>
 		{#if flashcard}
@@ -81,6 +85,7 @@
 		flashcard="{flashcard}"
 		showDescription="{showDescription}"
 		bind:h="{hfront}"
+		masked="{true}"
 	/>
 
 	{#if flashcard}

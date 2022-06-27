@@ -27,6 +27,7 @@
 		formatLatex,
 		handleKeydown,
 		mathliveReady,
+		MathfieldElement
 	} from '$lib/stores'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
@@ -65,6 +66,7 @@
 		import('tinymathlive/dist/mathlive.min.mjs')
 			.then((m) => {
 				mathliveReady.set(true)
+				MathfieldElement.set(m.MathfieldElement)
 				toMarkup.set(m.convertLatexToMarkup)
 				const regex = /\$\$(.*?)\$\$/g
 				const replacement = (_, p1) => m.convertLatexToMarkup(p1)
