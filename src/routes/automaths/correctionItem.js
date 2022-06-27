@@ -50,6 +50,73 @@ export function createCorrection(item) {
 	}
 
 	let solutions_latex = createSolutionsLatex(item)
+
+	const regexAnswer = /&answer([1-9]?)/g
+	function replaceAnswerCorrect(match, p1) {
+		return (
+			`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
+			(item.type === 'choice'
+				? get(formatLatex)(item.choices[item.answers[p1 ? p1 - 1 : 0]].text)
+				: get(toMarkup)('$$' + answers_latex[p1 ? p1 - 1 : 0] + '$$')) +
+			'</span>'
+		)
+	}
+
+	const regexAns = /&ans([1-9]?)/g
+	function replaceAnsCorrect(match, p1) {
+		return (
+			`\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
+			answers_latex[p1 ? p1 - 1 : 0] +
+			'}}'
+		)
+	}
+
+	const regexSolution = /&solution([1-9]?)/g
+	function replaceSolution(match, p1) {
+		return (
+			`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px; margin:2px;padding:5px;display:inline-block">` +
+			(item.type === 'choice'
+				? get(formatLatex)(item.choices[solutions[p1 ? p1 - 1 : 0]].text)
+				: get(toMarkup)(solutions_latex[p1 ? p1 - 1 : 0])) +
+			'</span>'
+		)
+	}
+
+	const regexSol = /&sol([1-9]?)/g
+	function replaceSol(match, p1) {
+		return item.type === 'choice'
+			? item.choices[solutions[p1 ? p1 - 1 : 0]].text
+			: `\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
+					solutions_latex[p1 ? p1 - 1 : 0] +
+					'}}'
+	}
+
+	function replaceAnswerUncorrect(match, p1) {
+		return (
+			`<span style="color:${
+				item.statuss[p1 ? p1 - 1 : 0] === STATUS_UNOPTIMAL_FORM
+					? unoptimal_color
+					: incorrect_color
+			};display:inline-block">` +
+			(item.type === 'choice'
+				? get(formatLatex)(item.choices[item.answers[p1 ? p1 - 1 : 0]].text)
+				: get(toMarkup)('$$' + answers_latex[p1 ? p1 - 1 : 0] + '$$')) +
+			'</span>'
+		)
+	}
+
+	function replaceAnsUncorrect(match, p1) {
+		return (
+			`\\textcolor{${
+				item.statuss[p1 ? p1 - 1 : 0] === STATUS_UNOPTIMAL_FORM
+					? unoptimal_color
+					: incorrect_color
+			}}{` +
+			answers_latex[p1 ? p1 - 1 : 0] +
+			'}'
+		)
+	}
+
 	if (correctionFormat) {
 		// la correction
 		if (status === STATUS_CORRECT) {
@@ -61,21 +128,8 @@ export function createCorrection(item) {
 					line = format
 						.replace(new RegExp('&exp2', 'g'), expression2_latex)
 						.replace(new RegExp('&exp', 'g'), expression_latex)
-						.replace(
-							'&answer',
-							() =>
-								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px;  margin:2px; padding:5px;display:inline-block">` +
-								(item.type === 'choice'
-									? get(formatLatex)(item.choices[item.answers[0]].text)
-									: get(toMarkup)('$$' + answers_latex[0] + '$$')) +
-								'</span>',
-						)
-						.replace(
-							new RegExp('&ans', 'g'),
-							`\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
-								answers_latex[0] +
-								'}}',
-						)
+						.replace(regexAnswer, replaceAnswerCorrect)
+						.replace(regexAns, replaceAnsCorrect)
 				}
 
 				lines.push(line)
@@ -89,23 +143,8 @@ export function createCorrection(item) {
 					line = format
 						.replace(new RegExp('&exp2', 'g'), expression2_latex)
 						.replace(new RegExp('&exp', 'g'), expression_latex)
-						.replace(
-							'&solution',
-							() =>
-								`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px; margin:2px;padding:5px;display:inline-block">` +
-								(item.type === 'choice'
-									? get(formatLatex)(item.choices[solutions[0]].text)
-									: get(toMarkup)(solutions_latex[0])) +
-								'</span>',
-						)
-						.replace(
-							new RegExp('&sol', 'g'),
-							item.type === 'choice'
-								? item.choices[solutions[0]].text
-								: `\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
-										solutions_latex[0] +
-										'}}',
-						)
+						.replace(regexSolution, replaceSolution)
+						.replace(regexSol, replaceSol)
 				}
 
 				lines.push(line)
@@ -126,19 +165,8 @@ export function createCorrection(item) {
 								.replace(new RegExp('&exp2', 'g'), expression2_latex)
 								.replace(new RegExp('&exp', 'g'), expression_latex)
 
-								.replace(
-									'&answer',
-									() =>
-										`<span style="color:${answerColor};display:inline-block">` +
-										(item.type === 'choice'
-											? get(formatLatex)(item.choices[item.answers[0]].text)
-											: get(toMarkup)('$$' + answers_latex[0] + '$$')) +
-										'</span>',
-								)
-								.replace(
-									new RegExp('&ans', 'g'),
-									`\\textcolor{${answerColor}}{` + answers_latex[0] + '}',
-								),
+								.replace(regexAnswer, replaceAnswerUncorrect)
+								.replace(regexAns, replaceAnsUncorrect),
 					)
 				}
 			}

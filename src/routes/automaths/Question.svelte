@@ -211,7 +211,7 @@
 		question.expression_latex &&
 		!(question.options && question.options.includes('no-exp'))
 
-	$: enounce = createLatex(question.enounce)
+	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
 
 	$: enounce2 = createLatex(question.enounce2)
 

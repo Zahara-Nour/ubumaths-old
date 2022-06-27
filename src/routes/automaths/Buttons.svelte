@@ -35,52 +35,36 @@
 <div class="py-3 flex" style="{'position:sticky;top:0px;z-index:10; background:var(--mdc-theme-background)'}">
 	<div class="grow"></div>
 
-	<Wrapper>
 		<Fab class="mx-1" color="secondary" on:click="{copyLink}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiLink}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>Copier le lien</Tooltip>
-	</Wrapper>
 
-  <Wrapper >
 		<Fab class="mx-1" color="{classroom ? 'primary' : 'secondary'}" on:click="{toggleClassroom}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiProjectorScreen}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>{classroom ? "Désactiver le mode projection" : "Activer le mode projection"}</Tooltip>
-	</Wrapper>
 
-  <Wrapper >
 		<Fab class="mx-1" color="{displayExemple ? 'primary' : 'secondary'}" on:click="{toggleExemple}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiHelp}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>{displayExemple ? "Afficher un exemple" : "Cacher l'exemple"}</Tooltip>
-	</Wrapper>
 
-  <Wrapper>
 		<Fab class="mx-1" color="secondary" on:click="{fillBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiBasketPlus}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>Ajouter au panier</Tooltip>
-	</Wrapper>
 
-  <Wrapper>
 		<Fab class="mx-1" color="secondary" on:click="{flushBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiTrashCanOutline}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>Vider le panier</Tooltip>
-	</Wrapper>
 
-  <Wrapper>
 		<Fab class="mx-1" color="{showBasket ? 'primary' : 'secondary'}" on:click="{toggleBasket}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiBasket}"></path>
@@ -91,16 +75,11 @@
 				</Badge>
 			{/if}
 		</Fab>
-		<Tooltip>{showBasket ? "Afficher le panier" : "Retourner à la liste de questions"}</Tooltip>
-	</Wrapper>
 
-  <Wrapper>
 		<Fab class="mx-1" color="secondary" on:click="{launchTest}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiRocketLaunchOutline}"></path>
 			</Icon>
 		</Fab>
-		<Tooltip>Copier le lien</Tooltip>
-	</Wrapper>
 
 </div>

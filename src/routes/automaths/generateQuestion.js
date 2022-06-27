@@ -498,7 +498,7 @@ export default function generateQuestion(question, generateds = [], nbquestions 
   if (correctionFormat) {
     correctionFormat = {
       correct,
-      uncorrect: uncorrect || correct.map(c => c.replace('&answer', '&solution')).map(c => c.replace('&ans', '&sol')),
+      uncorrect: uncorrect || correct.map(c => c.replace(/&answer/g, '&solution').replace(/&ans/g, '&sol')),
       answer: answer || correct[0]
     }
   }
@@ -640,8 +640,8 @@ export default function generateQuestion(question, generateds = [], nbquestions 
   if (solutions) generated.solutions = solutions
   if (details) generated.details = details
   if (unit) generated.unit = unit
-  if (expression) generated.expression = expression
-  if (expression_latex) generated.expression_latex = expression_latex
+  generated.expression = expression || '?'
+  generated.expression_latex = expression_latex || '\\ldots'
   if (expression2_latex) generated.expression2_latex = expression2_latex
   if (enounce) generated.enounce = enounce
   if (enounce2) generated.enounce2 = enounce2

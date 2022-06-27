@@ -213,7 +213,7 @@
 				<img
 					height="100%"
 					alt="logo lycée voltaire"
-					src="images/logo-voltaire.png"
+					src="/images/logo-voltaire.png"
 				/>
 			</a>
 			<span style="color:var(--mdc-theme-secondary)">D. Le Jolly</span>

@@ -51,6 +51,7 @@
 		"svelte": "^3.44.0",
 		"svelte-preprocess": "^4.10.6",
 		"tailwindcss": "^3.0.24",
+		"tinycas": "^0.8.12",
 		"vitest": "^0.15.0",
 		"vitest-svelte-kit": "^0.0.6"
 	},
@@ -58,7 +59,6 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^1.35.3",
 		"svelte-viewport-info": "^1.0.0",
-		"tinycas": "^0.8.8",
 		"tinymathlive": "^0.73.8"
 	}
 }
