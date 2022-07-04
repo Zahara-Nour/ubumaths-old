@@ -86,6 +86,7 @@
 		showDescription="{showDescription}"
 		bind:h="{hfront}"
 		masked="{true}"
+		interactive="{interactive}"
 	/>
 
 	{#if flashcard}

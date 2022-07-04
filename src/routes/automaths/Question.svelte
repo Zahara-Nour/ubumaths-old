@@ -24,7 +24,7 @@
 	let onChoice = (i) => {
 		if (interactive) {
 			answers.push(i)
-      commit()
+			commit()
 		}
 	}
 
@@ -56,7 +56,7 @@
 	}
 
 	function onChange(ev, i) {
-		console.log('.')
+		commit()
 	}
 
 	function onInput(ev, i) {
@@ -130,7 +130,7 @@
 
 	afterUpdate(() => {
 		if (interactive) {
-			if (showExp && question.expression) {
+			if (showExp && expression) {
 				const elements = []
 				for (let i of document
 					.querySelector('#expression')
@@ -139,7 +139,15 @@
 						elements.push(i)
 					}
 				}
-
+				if (expression2) {
+					for (let i of document
+						.querySelector('#expression2')
+						.querySelectorAll('*')) {
+						if (/^mf/g.test(i.id)) {
+							elements.push(i)
+						}
+					}
+				}
 				elements.forEach((elt) => {
 					if (!elt.hasChildNodes()) {
 						const mfe = new $MathfieldElement()
@@ -165,14 +173,15 @@
 						elt.style.border = '2px dashed grey'
 						elt.style.borderRadius = '5px'
 						const i = mfs.length - 1
-						elt.addEventListener('keystroke', (ev) => onKeystroke(ev, i))
-						elt.addEventListener('input', (ev) => onInput(ev, i))
-						elt.addEventListener('change', (ev) => onChange(ev, i))
+						mfe.addEventListener('keystroke', (ev) => onKeystroke(ev, i))
+						mfe.addEventListener('input', (ev) => onInput(ev, i))
+						mfe.addEventListener('change', (ev) => onChange(ev, i))
 					}
 				})
 				console.log('mfs', mfs)
 				console.log('')
 				if (!masked && mfs && mfs.length) {
+					console.log('focus')
 					mfs[0].focus()
 				}
 			}
@@ -208,24 +217,39 @@
 
 	// console.log('question', question)
 	$: showExp =
-		question.expression_latex &&
-		!(question.options && question.options.includes('no-exp'))
+		expression && !(question.options && question.options.includes('no-exp'))
 
 	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
 
-	$: enounce2 = createLatex(question.enounce2)
+	$: enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
 
 	$: {
-		expression = question.expression_latex || ''
+		if (
+			interactive &&
+			!question.expression_latex &&
+			question.type !== 'choice' &&
+			question.type !== 'choices'
+		) {
+			expression = '\\ldots'
+		} else {
+			expression = question.expression_latex
+		}
 		if (interactive && question.type === 'result') expression += '=\\ldots'
-
-		expression = $toMarkup(expression)
+		expression = $toMarkup(expression || '')
 		if (interactive) {
 			expression = expression.replace(/…/g, addMathfield)
 		}
 	}
 
-	$: expression2 = createMarkup(question.expression2_latex)
+	$: {
+		expression2 = question.expression2_latex
+
+		if (interactive && question.type === 'equation') expression2 += '=\\ldots'
+		expression2 = $toMarkup(expression2 || '')
+		if (interactive) {
+			expression2 = expression2.replace(/…/g, addMathfield)
+		}
+	}
 </script>
 
 <div class="flex flex-col items-center">
@@ -260,7 +284,7 @@
 					<div id="expression" class="my-3">
 						{@html expression}
 					</div>
-					{#if expression2}
+					{#if expression2 && !(!interactive && question.type==='equation')}
 						<div id="expression2" class="mt-4">
 							{@html expression2}
 						</div>

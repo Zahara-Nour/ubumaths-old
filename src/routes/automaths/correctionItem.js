@@ -30,9 +30,9 @@ export function createCorrection(item) {
 		expression_latex,
 		expression2_latex,
 		solutions,
-		answers_latex,
+		answers_latex =[],
 		correctionFormat,
-		status,
+		status = STATUS_EMPTY,
 		choices,
 	} = item
 
@@ -151,7 +151,7 @@ export function createCorrection(item) {
 			})
 
 			// le commentaire avec la réponse de l'utilisateur
-			if (status !== STATUS_EMPTY) {
+			if (status !== STATUS_EMPTY && item.answers) {
 				if (correctionFormat.answer === 'image') {
 					let img = choices[answer_choice].imageBase64
 					item.coms.unshift(
@@ -198,23 +198,23 @@ export function createCorrection(item) {
 				// let exp = '$$\\begin{align*}x & =5-3 \\\\  & =2\\end{align*}$$'
 				line = `La solution de $$${expression_latex}$$ est :`
 				lines.push(line)
-				line = `$$\\begin{align*}  x`
+				line = `$$\\begin{align*}  ${expression2_latex}`
 				if (status === STATUS_EMPTY) {
 					line +=
 						`=\\textcolor{green}{${solutions_latex[0]}}` + '\\end{align*}$$'
 				} else if (status === STATUS_INCORRECT) {
 					line +=
-						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{red}{${answer_latex}}}` +
+						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{red}{${answers_latex[0]}}}` +
 						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
 				} else if (
 					status === STATUS_BAD_FORM ||
 					status === STATUS_UNOPTIMAL_FORM
 				) {
 					line +=
-						`&= \\textcolor{orange}{${answer_latex}}` +
+						`&= \\textcolor{orange}{${answers_latex[0]}}` +
 						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
 				} else {
-					line += `=\\textcolor{green}{${answer_latex}}\\end{align*}$$`
+					line += `=\\textcolor{green}{${answers_latex[0]}}\\end{align*}$$`
 				}
 				lines.push(line)
 
@@ -230,30 +230,7 @@ export function createCorrection(item) {
 				lines.push(line)
 				break
 
-			case 'decomposition':
-				// let exp = '$$\\begin{align*}x & =5-3 \\\\  & =2\\end{align*}$$'
-
-				line = `$$\\begin{align*}  ${expression_latex}`
-				if (status === STATUS_EMPTY) {
-					line +=
-						`=\\textcolor{green}{${solutions_latex[0]}}` + '\\end{align*}$$'
-				} else if (status === STATUS_INCORRECT) {
-					line +=
-						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{red}{${answer_latex}}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
-				} else if (
-					status === STATUS_BAD_FORM ||
-					status === STATUS_UNOPTIMAL_FORM
-				) {
-					line +=
-						`&= \\textcolor{orange}{${answer_latex}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
-				} else {
-					line += `=\\textcolor{green}{${answer_latex}}\\end{align*}$$`
-				}
-				lines.push(line)
-				break
-
+			
 			case 'trou':
 				//TODO : empty ?
 				if (status === STATUS_CORRECT) {
@@ -302,9 +279,11 @@ export function createCorrection(item) {
 
 	lines = lines.map(get(formatLatex))
 
-	item.coms = item.coms.map((com) =>
-		get(formatLatex)(com).replace(/_COLORANSWER_/g, answerColor),
-	)
+	if (item.answers) {
+		item.coms = item.coms.map((com) =>
+			get(formatLatex)(com).replace(/_COLORANSWER_/g, answerColor),
+		)
+	}
 
 	return lines
 }

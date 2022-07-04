@@ -346,7 +346,6 @@ const questions = {
 					expressions: ['[_&1*10+&2_]'],
 					solutions: [['[_&1*10_]+&2']],
 					variables: [{ '&1': '$e[1;9]', '&2': '$e[1;9]' }],
-					type: 'decomposition',
 					defaultDelay: 20,
 					grade: CP,
 				},
@@ -362,7 +361,6 @@ const questions = {
 						'no-penalty-for-factor-one',
 						'no-penalty-for-factor-zero',
 					],
-					type: 'decomposition',
 					defaultDelay: 20,
 					grade: CE1,
 				},
@@ -390,7 +388,6 @@ const questions = {
 						'no-penalty-for-extraneous-brackets',
 						'no-penalty-for-factor-one',
 					],
-					type: 'decomposition',
 					defaultDelay: 30,
 					grade: CE1,
 				},
@@ -410,7 +407,6 @@ const questions = {
 							'&4': '$e[1;9]',
 						},
 					],
-					type: 'decomposition',
 					defaultDelay: 20,
 					grade: CE2,
 				},
@@ -440,7 +436,6 @@ const questions = {
 						'no-penalty-for-extraneous-brackets',
 						'no-penalty-for-factor-one',
 					],
-					type: 'decomposition',
 					defaultDelay: 40,
 					grade: CE2,
 				},
@@ -507,7 +502,6 @@ const questions = {
 						},
 					],
 
-					type: 'decomposition',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -536,7 +530,6 @@ const questions = {
 						'no-penalty-for-extraneous-brackets',
 						'no-penalty-for-factor-one',
 					],
-					type: 'decomposition',
 					defaultDelay: 50,
 					grade: CM1,
 				},
@@ -4605,7 +4598,6 @@ const questions = {
 					],
 					options: ['multiples'],
 					format: '$e[2;9]*$e[2;9]',
-					type: 'decomposition',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -5731,7 +5723,6 @@ const questions = {
 					expressions: ['[._&1+&2/10+&3/100_]'],
 					solutions: [['&1+[._&2*0,1_]+[._&3*0,01_]']],
 					options: ['no-penalty-for-null-terms'],
-					type: 'decomposition',
 					defaultDelay: 25,
 					grade: CM1,
 				},
@@ -5766,7 +5757,6 @@ const questions = {
 						'no-penalty-for-factor-zero',
 						'no-penalty-for-factor-one',
 					],
-					type: 'decomposition',
 
 					defaultDelay: 25,
 					grade: CM1,
@@ -5788,7 +5778,6 @@ const questions = {
 					expressions: ['[._&1+&2/10+&3/100+&4/1000_]'],
 					solutions: [['&1+[._&2*0,1_]+[._&3*0,01_]+[._&4*0,001_]']],
 					options: ['no-penalty-for-null-terms'],
-					type: 'decomposition',
 
 					defaultDelay: 30,
 					grade: CM2,
@@ -5827,7 +5816,6 @@ const questions = {
 						'no-penalty-for-factor-zero',
 						'no-penalty-for-factor-one',
 					],
-					type: 'decomposition',
 
 					defaultDelay: 30,
 					grade: CM2,
@@ -8310,7 +8298,6 @@ const questions = {
 						{ '&1': '$l{10;100}', '&2': '$e[2;9]', '&3': '$e[1;&1-1]' },
 					],
 					solutions: [['&2+&3/&1']],
-					type: 'decomposition',
 					correctionDetails: [
 						[
 							{
@@ -8342,7 +8329,6 @@ const questions = {
 						],
 					],
 					options: ['no-penalty-for-non-reduced-fractions'],
-					type: 'decomposition',
 					defaultDelay: 30,
 					grade: CM2,
 				},
@@ -8364,7 +8350,6 @@ const questions = {
 						],
 					],
 					options: ['no-penalty-for-non-reduced-fractions'],
-					type: 'decomposition',
 					defaultDelay: 30,
 					grade: CM2,
 				},
@@ -18163,6 +18148,7 @@ const questions = {
 					description: 'Addition $$a+x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x+&1=[_&1+&2_]', '&1+x=[_&1+&2_]'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[5;9]',
@@ -18189,6 +18175,7 @@ const questions = {
 					description: 'Soustraction  $$x-a=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x-&1=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[5;9]',
@@ -18215,6 +18202,7 @@ const questions = {
 					description: 'Soustraction (2)  $$a-x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['[_&1+&2_]-x=&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[5;9]',
@@ -18241,6 +18229,7 @@ const questions = {
 					description: 'Multiplication $$a \\times x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&1x=[_&1*&2_]', 'x*&1=[_&1*&2_]'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18277,6 +18266,7 @@ const questions = {
 					description: 'Division $$x \\div a=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x/&1=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18303,6 +18293,7 @@ const questions = {
 					description: 'Division (2) $$a \\div = b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['[_&1*&2_]/x=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18335,6 +18326,7 @@ const questions = {
 					description: 'Opposé $$-x=a$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['-x=&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$er[1;9]',
@@ -18365,6 +18357,7 @@ const questions = {
 						'&1+x=[_&1+(&2)_]',
 						'x+(&1)=[_&1+(&2)_]',
 					],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18418,6 +18411,7 @@ const questions = {
 					description: 'Soustraction $$x-a=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x-&1=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18444,6 +18438,7 @@ const questions = {
 					description: 'Soustraction (2) $$a-x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['[_&1+(&2)_]-x=&1', '[_&1+(&2)_]-x=&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18489,6 +18484,7 @@ const questions = {
 						'x*&1=[_&1*(&2)_]',
 						'x*(&1)=[_&1*(&2)_]',
 					],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$er[2;9]',
@@ -18555,6 +18551,7 @@ const questions = {
 					description: 'Division',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x/{&1}=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18594,6 +18591,7 @@ const questions = {
 					description: 'Division (2) $$a/x=b',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['{[_&1*(&2)_]}/x=&2'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$er[2;9]',
@@ -18626,6 +18624,7 @@ const questions = {
 					description: 'Addition',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x+&2/&1=[_&2+&3_]/&1', '&2/&1+x=[_&3+&2_]/&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18664,6 +18663,7 @@ const questions = {
 					description: 'Soustraction',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x-&2/&1=&3/&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18692,6 +18692,7 @@ const questions = {
 					description: 'Soustraction (2)',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['[_&2+&3_]/&1-x=&2/&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18727,6 +18728,7 @@ const questions = {
 						'x*&1=&2',
 						'&1x=&2',
 					],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18834,6 +18836,7 @@ const questions = {
 					description: 'Division',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x/&2=&3/&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18863,6 +18866,7 @@ const questions = {
 					description: 'Division (2)',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&2/x=&3/&1', '&2/x=&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18912,6 +18916,7 @@ const questions = {
 					subdescription: 'Coefficients positifs - Second Membre nul',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&1x+&2=0', '&2+&1x=0'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -18961,6 +18966,7 @@ const questions = {
 						'-&1x-&2=0',
 						'-&2-&1x=0',
 					],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -19075,6 +19081,7 @@ const questions = {
 					subdescription: 'Coefficients positifs  $$ax+b=c$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&3x+&2=&1', '&2+&3x=&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -19105,6 +19112,7 @@ const questions = {
 					subdescription: 'Coefficients relatifs',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&1x[+_&2_]=&3', '&2[+_&1_]x=&3'],
+          expressions2: ['x'],
 
 					variables: [
 						{
@@ -19151,6 +19159,7 @@ const questions = {
 					subdescription: 'Coefficients positifs - Avec second membre',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&3x+&2=&4x+&1'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -19182,6 +19191,7 @@ const questions = {
 					subdescription: 'Coefficients relatifs - Avec second membre',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['&3x[+_&2_]=&4x[+_&1_]'],
+          expressions2: ['x'],
 					variables: [
 						{
 							'&1': '$er[1;9]',

@@ -7,7 +7,7 @@
 	import Paper, { Content } from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
-	import { createDetailedCorrection } from '../../routes/automaths/correctionItem'
+	import { createDetailedCorrection, createCorrection } from '../../routes/automaths/correctionItem'
 
 	export let card
 	export let toggleFlip = () => {}
@@ -32,7 +32,7 @@
 	}
 
 	$: solution = getSolution(card)
-	$: details = card.correctionDetails ? createDetailedCorrection(card) : null
+	$: details = card.correctionDetails ? createDetailedCorrection(card) : createCorrection(card)
 </script>
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
@@ -52,6 +52,7 @@
 							{/each}
 						</div>
 					{/if}
+			
 				</div>
 			</Content>
 			{#if flashcard}

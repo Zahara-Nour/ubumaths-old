@@ -316,7 +316,7 @@
 									<QuestionCard
 										card="{card}"
 										onChoice="{onChoice}"
-										interactive = !classroom
+										interactive = {!classroom}
 										commit={commit}
 									/>
 								</div>

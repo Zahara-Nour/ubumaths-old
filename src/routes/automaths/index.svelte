@@ -136,7 +136,7 @@
 			questions = basket
 		} else {
 			const q = getQuestion(theme, domain, subdomain, level)
-			questions.push({ id: q.id, count: 1 })
+			questions.push({ id: q.id, count: 10 })
 		}
 
 		let href = '/automaths/Test/?questions='
