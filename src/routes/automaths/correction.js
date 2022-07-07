@@ -261,7 +261,6 @@ function checkTermsAndFactors(item) {
 			// item.cleanedSolutions = sols.map((s) => s.string)
 			// }
 
-
 			if (
 				item.options.includes('disallow-terms-and-factors-permutation') ||
 				item.options.includes('penalty-for-terms-and-factors-permutation')
@@ -276,12 +275,16 @@ function checkTermsAndFactors(item) {
 					) {
 						item.unoptimals.push('terms and factors unordered')
 						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-						item.coms.push(item.answers.length === 1 ? TERMS_FACTORS_PERMUTATION : TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS)
+						item.coms.push(
+							item.answers.length === 1
+								? TERMS_FACTORS_PERMUTATION
+								: TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
+						)
 					} else {
 						item.statuss[i] = STATUS_BAD_FORM
-                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
-
-
+						item.coms.push(
+							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+						)
 					}
 				}
 			} else if (
@@ -298,10 +301,16 @@ function checkTermsAndFactors(item) {
 					) {
 						item.unoptimals.push('terms unordered')
 						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-                        item.coms.push(item.answers.length === 1 ? TERMS_PERMUTATION : TERMS_PERMUTATION_MULTIPLE_ANSWERS)
+						item.coms.push(
+							item.answers.length === 1
+								? TERMS_PERMUTATION
+								: TERMS_PERMUTATION_MULTIPLE_ANSWERS,
+						)
 					} else {
 						item.statuss[i] = STATUS_BAD_FORM
-                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
+						item.coms.push(
+							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+						)
 					}
 				}
 			} else if (
@@ -318,15 +327,20 @@ function checkTermsAndFactors(item) {
 					) {
 						item.unoptimals.push('factors unordered')
 						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-                        item.coms.push(item.answers.length === 1 ? FACTORS_PERMUTATION : FACTORS_PERMUTATION_MULTIPLE_ANSWERS)
+						item.coms.push(
+							item.answers.length === 1
+								? FACTORS_PERMUTATION
+								: FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
+						)
 					} else {
 						item.statuss[i] = STATUS_BAD_FORM
-                        item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS)
+						item.coms.push(
+							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+						)
 					}
 				}
 			}
 		}
-
 	})
 }
 
@@ -581,8 +595,9 @@ function checkForm(item) {
 			// il faut trouver une autre solution quand il y a des unités
 			if (!e.unit && !e.strictlyEquals(solution)) {
 				item.statuss[i] = STATUS_BAD_FORM
-                item.coms.push(item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS )
-
+				item.coms.push(
+					item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+				)
 			}
 		}
 	})
@@ -610,8 +625,8 @@ export function assessItems(questions, answerss, answerss_latex, times) {
 		score +=
 			items[i].status == STATUS_CORRECT
 				? items[i].points
-				: STATUS_UNOPTIMAL_FORM
-				? (score += items[i].points / 2)
+				: items[i].status == STATUS_UNOPTIMAL_FORM
+				? items[i].points / 2
 				: 0
 	}
 	info('corrected items', items)

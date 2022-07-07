@@ -24,9 +24,17 @@
 	let onChoice = (i) => {
 		if (interactive) {
 			answers.push(i)
+			console.log('onChoice')
 			commit()
 		}
 	}
+
+	let keyListeners = []
+	let inputListeners = []
+	let changeListeners = []
+
+	const params = getContext('question-params')
+	// console.log('context', params)
 
 	function createMarkup(s) {
 		return s ? $toMarkup(s) : null
@@ -55,7 +63,19 @@
 		trace(`answer latex: ${answers_latex[i]} asccii: ${answers[i]}`, answers)
 	}
 
+	function removeListeners() {
+		if (mfs) {
+			mfs.forEach((mfe, i) => {
+				mfe.removeEventListener('keystroke', keyListeners[i])
+				mfe.removeEventListener('input', inputListeners[i])
+				mfe.removeEventListener('change', changeListeners[i])
+			})
+		}
+	}
+
 	function onChange(ev, i) {
+		console.log('onChange', ev, i, masked, question.num)
+		removeListeners()
 		commit()
 	}
 
@@ -83,10 +103,11 @@
 		// console.log(answers_latex[i])
 		// console.log(answers_latex[i].length)
 		// console.log('+' + answers_latex[i].slice(answers_latex[i].length - 2) + '+')
-		if (keystroke === '[Enter]' || keystroke === '[NumpadEnter]') {
-			ev.preventDefault()
-			commit()
-		} else if (
+		// if (keystroke === '[Enter]' || keystroke === '[NumpadEnter]') {
+		// ev.preventDefault()
+		// commit()
+		// } else
+		if (
 			keystroke === '[Space]' &&
 			!(
 				answers_latex[i] &&
@@ -122,11 +143,15 @@
 		}
 	}
 
-	function addMathfield(match) {
+	function addMathfield() {
 		nmfs += 1
 		console.log('addMathfield', nmfs)
 		return `<span id='mf${nmfs}'/>`
 	}
+
+	onDestroy(() => {
+		removeListeners()
+	})
 
 	afterUpdate(() => {
 		if (interactive) {
@@ -173,15 +198,20 @@
 						elt.style.border = '2px dashed grey'
 						elt.style.borderRadius = '5px'
 						const i = mfs.length - 1
-						mfe.addEventListener('keystroke', (ev) => onKeystroke(ev, i))
-						mfe.addEventListener('input', (ev) => onInput(ev, i))
-						mfe.addEventListener('change', (ev) => onChange(ev, i))
+						if (!masked) {
+							const keyListener = (ev) => onKeystroke(ev, i)
+							const inputListener = (ev) => onInput(ev, i)
+							const changeListener = (ev) => onChange(ev, i)
+							keyListeners.push(keyListener)
+							inputListeners.push(inputListener)
+							changeListeners.push(changeListener)
+							mfe.addEventListener('keystroke', keyListener)
+							mfe.addEventListener('input', inputListener)
+							mfe.addEventListener('change', changeListener)
+						}
 					}
 				})
-				console.log('mfs', mfs)
-				console.log('')
 				if (!masked && mfs && mfs.length) {
-					console.log('focus')
 					mfs[0].focus()
 				}
 			}
@@ -205,13 +235,25 @@
 
 	$: if (question && !masked && interactive) {
 		console.log(question)
+
+		keyListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('key', listener),
+		)
+		inputListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('input', listener),
+		)
+		changeListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('change', listener),
+		)
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
 		mfs = []
 		nmfs = 0
-		const params = getContext('question-params')
-		console.log('context', params)
 		if (params) {
-			answers = params.answers
-			answers_latex = params.answers_latex
+			console.log('params', params)
+			answers = params.answerss[question.num - 1]
+			answers_latex = params.answerss_latex[question.num - 1]
 		}
 	}
 
@@ -284,7 +326,7 @@
 					<div id="expression" class="my-3">
 						{@html expression}
 					</div>
-					{#if expression2 && !(!interactive && question.type==='equation')}
+					{#if expression2 && !(!interactive && question.type === 'equation')}
 						<div id="expression2" class="mt-4">
 							{@html expression2}
 						</div>

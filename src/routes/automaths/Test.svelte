@@ -7,7 +7,6 @@
 	import CircularProgress from '$lib/components/CircularProgress.svelte'
 	import { onDestroy, setContext } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
-	import virtualKeyboard from './virtualKeyboard'
 	import { getLogger, shuffle } from '$lib/utils'
 	import { page } from '$app/stores'
 	import { handleKeydown, mathliveReady } from '$lib/stores'
@@ -15,29 +14,20 @@
 	import math from 'tinycas'
 	import { mdiRocketLaunchOutline, mdiRestart } from '@mdi/js'
 	import { fetchImage } from '$lib/images'
-	import { flip } from 'svelte/animate'
-	import { fly } from 'svelte/transition'
 	import Correction from './Correction.svelte'
 	import QuestionCard from '$lib/components/QuestionCard.svelte'
 
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
-	let current = 0
-	let answer
-	let answer_latex
-	let answers = []
+	let current
 	let answerss = []
-	let answers_latex = []
 	let answerss_latex = []
 	let times = []
-	// let generated
-	let generateds = []
 	let delay
 	let elapsed
 	let start
 	let percentage
 	let timer
-	let mf
 	let finish = false
 	let subdomain
 	let domain
@@ -51,12 +41,13 @@
 	let previous
 	let showExemple = false
 	let showCorrection = false
-	let generatedExemple
 	let alert
 	let slider
 	let min = 0,
 		max = 60
 	let cards, card
+
+	setContext('question-params', { answerss, answerss_latex })
 
 	const togglePause = () => {
 		if (pause) {
@@ -87,12 +78,13 @@
 
 	function initTest() {
 		info('init test')
-		current = 0
+		current = -1
 		restart = false
 		finish = false
-		generateds = []
-		answerss = []
-		answerss_latex = []
+		cards = []
+		answerss.splice(0, answerss.length)
+		answerss_latex.splice(0, answerss_latex.length)
+
 		const basket = JSON.parse(
 			decodeURI($page.url.searchParams.get('questions')),
 		)
@@ -108,15 +100,18 @@
 			question.delay = q.delay || question.delay || question.defaultDelay
 
 			for (let i = 0; i < q.count; i++) {
-				const generated = generate(question, generateds, q.count, offset)
+				const generated = generate(question, cards, q.count, offset)
 
-				generateds.push(generated)
+				cards.push(generated)
 			}
 			offset += q.count
 		})
-		shuffle(generateds)
+		shuffle(cards)
 
-		generateds.forEach((q) => {
+		cards.forEach((q, i) => {
+			answerss.push([])
+			answerss_latex.push([])
+			q.num = i + 1
 			if (q.image) {
 				q.imageBase64P = fetchImage(q.image)
 			}
@@ -132,8 +127,7 @@
 			}
 		})
 
-		cards = [...generateds]
-		cards.unshift(null)
+		// cards.unshift(null)
 		if (classroom && theme) {
 			showExemple = true
 			generatedExemple = generate(getQuestion(theme, domain, subdomain, level))
@@ -141,26 +135,20 @@
 			change()
 		}
 
-		info('Begining test with questions :', generateds)
+		info('Begining test with questions :', cards)
 	}
 
 	function onChoice(choice) {
-		// answer = choice
-		// answer_latex = choice
-		answers.push(choice)
 		change()
 	}
 
 	function onChoices(choice) {
-		// answer = choice
-		// answer_latex = choice
-		
+
 		change()
 	}
 
-	
-
 	function commit() {
+		console.log('commit')
 		change()
 	}
 
@@ -179,31 +167,21 @@
 		change()
 	}
 
-
 	// on passe à la question suivante
 	async function change() {
 		current++
+		console.log('change', current)
 		if (timer) clearInterval(timer)
 		// if (timeout) clearTimeout(timeout)
 
-		if (cards.length <= generateds.length) {
-			answerss.push(answers)
-			answerss_latex.push(answers_latex)
+		if (current !==0) {
 			let time = Math.min(Math.round(elapsed / 1000), delay)
 			if (time === 0) time = 1
 			times.push(time)
-			console.log('answerss', answerss)
 		}
-		if (cards.length > 1) {
-			answers = []
-			answers_latex = []
-			setContext('question-params', {answers, answers_latex})
+		if (current < cards.length) {
+			card = cards[current]
 
-			cards = [...cards.slice(1, cards.length)]
-			card = cards[0]
-
-			// generated = generate(question, generateds)
-			// if (generateds) generateds.push(generated)
 			if (slider && theme && domain && subdomain && level) {
 				delay = slider * 1000
 			} else {
@@ -220,14 +198,27 @@
 		}
 	}
 
+	function cardIn(node, { delay = 0, duration = 400 }) {
+		return {
+			delay,
+			duration,
+			css: (t, u) => `left: ${u * 100}%`,
+		}
+	}
+	function cardOut(node, { delay = 0, duration = 400 }) {
+		return {
+			delay,
+			duration,
+			css: (t, u) => `left: ${t * 100}%`,
+		}
+	}
+
 	initTest()
 
 	// le bouton restart a été appuyé après la correction
 	$: if (restart) {
 		initTest()
 	}
-
-
 
 	$: delay = slider * 1000
 </script>
@@ -257,7 +248,7 @@
 {:else if finish}
 	{#if showCorrection}
 		<Correction
-			questions="{generateds}"
+			questions="{cards}"
 			answerss="{answerss}"
 			answerss_latex="{answerss_latex}"
 			times="{times}"
@@ -285,7 +276,7 @@
 	<div>
 		<div class="{' my-1 flex justify-start'}">
 			<CircularProgress
-				number="{current}"
+				number="{current + 1}"
 				fontSize="{20}"
 				strokeWidth="{7}"
 				percentage="{percentage}"
@@ -302,31 +293,28 @@
 				/>
 			{/if}
 		</div>
-		<div>
-			{#if cards}
-				<div id="cards-container">
-					<div id="cards">
-						{#each cards as card (card.id + card.num)}
-							<div
-								class="card"
-								animate:flip="{{ duration: 700 }}"
-								out:fly="{{ x: -500, duration: cards.length > 1 ? 700 : 0 }}"
-							>
-								<div class=" p-2 elevation-{4} rounded-lg">
-									<QuestionCard
-										card="{card}"
-										onChoice="{onChoice}"
-										interactive = {!classroom}
-										commit={commit}
-									/>
-								</div>
-							</div>
-						{/each}
-					</div>
-				</div>
-			{/if}
 
-			<!-- {#if !card.choices && !classroom}
+		{#if cards}
+			<div id="cards-container">
+				<!-- <div id="cards"> -->
+					{#each [cards[current]] as card (current)}
+				
+						<div class="card">
+							<div class=" p-2 elevation-{4} rounded-lg">
+								<QuestionCard
+									card="{card}"
+									onChoice="{onChoice}"
+									interactive="{!classroom}"
+									commit="{commit}"
+								/>
+							</div>
+						</div>
+					{/each}
+				<!-- </div> -->
+			</div>
+		{/if}
+
+		<!-- {#if !card.choices && !classroom}
 				<div class="flex items-center justify-center " style="width:80%">
 					<span class="mr-4">Ta réponse:</span>
 					<div class="flex-grow-1" style="width:70%">
@@ -355,7 +343,6 @@
 					</div>
 				</div>
 			{/if} -->
-		</div>
 	</div>
 {:else}
 	Pas de questions
@@ -382,6 +369,7 @@
 		width: 100%;
 	}
 	.card {
+		/* left:300px; */
 		min-width: calc(100% - 24px);
 		/* min-width: 95%; */
 		/* min-width: 400px; */
