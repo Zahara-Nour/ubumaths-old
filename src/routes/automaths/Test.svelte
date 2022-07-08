@@ -9,7 +9,7 @@
 	import datas, { getQuestion } from './questions.js'
 	import { getLogger, shuffle } from '$lib/utils'
 	import { page } from '$app/stores'
-	import { handleKeydown, mathliveReady } from '$lib/stores'
+	import { mathliveReady } from '$lib/stores'
 
 	import math from 'tinycas'
 	import { mdiRocketLaunchOutline, mdiRestart } from '@mdi/js'
@@ -20,8 +20,8 @@
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
 	let current
-	let answerss = []
-	let answerss_latex = []
+	let answerss
+	let answerss_latex
 	let times = []
 	let delay
 	let elapsed
@@ -46,24 +46,18 @@
 	let min = 0,
 		max = 60
 	let cards, card
+	let generatedExemple
+	let basket
+	const paramsAnswers = {}
 
-	setContext('question-params', { answerss, answerss_latex })
-
-	const togglePause = () => {
-		if (pause) {
-			start = Date.now()
-		} else {
-			previous = elapsed
-		}
-		pause = !pause
-	}
+	setContext('question-params', paramsAnswers)
 
 	function countDown() {
 		if (!pause) {
 			elapsed = Date.now() - start + previous
 			if (delay >= elapsed) {
 				percentage = ((delay - elapsed) * 100) / delay
-				if (delay - elapsed < 5000) alert = true
+				alert = (delay - elapsed < 5000)
 			} else {
 				change()
 			}
@@ -73,7 +67,6 @@
 	onDestroy(() => {
 		if (timer) clearInterval(timer)
 		// if (timeout) clearTimeout(timeout)
-		handleKeydown.set(() => {})
 	})
 
 	function initTest() {
@@ -82,14 +75,16 @@
 		restart = false
 		finish = false
 		cards = []
-		answerss.splice(0, answerss.length)
-		answerss_latex.splice(0, answerss_latex.length)
+		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
+		answerss = classroom ? null : []
+		answerss_latex = classroom ? null : []
+		paramsAnswers.answerss =answerss
+		paramsAnswers.answerss_latex = answerss_latex
 
-		const basket = JSON.parse(
-			decodeURI($page.url.searchParams.get('questions')),
-		)
-		classroom =
-			JSON.parse(decodeURI($page.url.searchParams.get('classroom'))) === 'true'
+		// answerss.splice(0, answerss.length)
+		// answerss_latex.splice(0, answerss_latex.length)
+
+		basket = JSON.parse(decodeURI($page.url.searchParams.get('questions')))
 
 		showCorrection = !classroom
 
@@ -109,8 +104,8 @@
 		shuffle(cards)
 
 		cards.forEach((q, i) => {
-			answerss.push([])
-			answerss_latex.push([])
+			if (answerss) answerss.push([])
+			if (answerss_latex) answerss_latex.push([])
 			q.num = i + 1
 			if (q.image) {
 				q.imageBase64P = fetchImage(q.image)
@@ -127,10 +122,9 @@
 			}
 		})
 
-		// cards.unshift(null)
-		if (classroom && theme) {
+		if (classroom && basket.length === 1) {
 			showExemple = true
-			generatedExemple = generate(getQuestion(theme, domain, subdomain, level))
+			generateExemple()
 		} else {
 			change()
 		}
@@ -138,12 +132,17 @@
 		info('Begining test with questions :', cards)
 	}
 
+	function generateExemple() {
+		const { theme, domain, subdomain, level } = ids[basket[0].id]
+		const question = getQuestion(theme, domain, subdomain, level)
+		generatedExemple = generate(question)
+	}
+
 	function onChoice(choice) {
 		change()
 	}
 
 	function onChoices(choice) {
-
 		change()
 	}
 
@@ -153,16 +152,6 @@
 	}
 
 	function beginTest() {
-		if (classroom) {
-			handleKeydown.set((event) => {
-				event.preventDefault()
-				if (event.code === 'Space') {
-					togglePause()
-				} else if (event.code === 'ArrowRight') {
-					change()
-				}
-			})
-		}
 		showExemple = false
 		change()
 	}
@@ -174,7 +163,7 @@
 		if (timer) clearInterval(timer)
 		// if (timeout) clearTimeout(timeout)
 
-		if (current !==0) {
+		if (current !== 0) {
 			let time = Math.min(Math.round(elapsed / 1000), delay)
 			if (time === 0) time = 1
 			times.push(time)
@@ -182,12 +171,17 @@
 		if (current < cards.length) {
 			card = cards[current]
 
-			if (slider && theme && domain && subdomain && level) {
+			if (slider && basket.length === 1) {
 				delay = slider * 1000
 			} else {
-				delay = card.delay ? card.delay * 1000 : card.defaultDelay * 1000
+				delay = card.delay
+					? card.delay * 1000
+					: card.defaultDelay
+					? card.defaultDelay * 1000
+					: 20000
 				slider = delay / 1000
 			}
+
 			percentage = 0
 			alert = false
 			start = Date.now()
@@ -213,6 +207,25 @@
 		}
 	}
 
+	function togglePause() {
+		if (pause) {
+			start = Date.now()
+		} else {
+			previous = elapsed
+		}
+		pause = !pause
+	}
+	function handleKeydown(ev) {
+		if (classroom) {
+			ev.preventDefault()
+			if (ev.code === 'Space') {
+				togglePause()
+			} else if (ev.code === 'ArrowRight') {
+				change()
+			}
+		}
+	}
+
 	initTest()
 
 	// le bouton restart a été appuyé après la correction
@@ -223,18 +236,12 @@
 	$: delay = slider * 1000
 </script>
 
+<svelte:window on:keydown="{handleKeydown}" />
+
 {#if showExemple}
+	<QuestionCard card="{generatedExemple}" flashcard="{true}" magnify="{2.5}" />
 	<div class="mt-2 flex justify-end">
-		<Fab
-			class="m-2"
-			color="primary"
-			on:click="{() => {
-				generatedExemple = generate(
-					getQuestion(theme, domain, subdomain, level),
-				)
-			}}"
-			mini
-		>
+		<Fab class="m-2" color="primary" on:click="{generateExemple}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiRestart}"></path>
 			</Icon>
@@ -287,9 +294,11 @@
 					bind:value="{slider}"
 					min="{min}"
 					max="{max}"
-					step="{1}"
+					step="{5}"
 					discrete
+					tickMarks
 					input$aria-label="Discrete slider"
+					style="width:150px;"
 				/>
 			{/if}
 		</div>
@@ -297,19 +306,19 @@
 		{#if cards}
 			<div id="cards-container">
 				<!-- <div id="cards"> -->
-					{#each [cards[current]] as card (current)}
-				
-						<div class="card">
-							<div class=" p-2 elevation-{4} rounded-lg">
-								<QuestionCard
-									card="{card}"
-									onChoice="{onChoice}"
-									interactive="{!classroom}"
-									commit="{commit}"
-								/>
-							</div>
+				{#each [cards[current]] as card (current)}
+					<div class="card">
+						<div class=" p-2 elevation-{4} rounded-lg">
+							<QuestionCard
+								card="{card}"
+								onChoice="{onChoice}"
+								interactive="{!classroom}"
+								commit="{commit}"
+								magnify="{classroom ? 2.5 : 1}"
+							/>
 						</div>
-					{/each}
+					</div>
+				{/each}
 				<!-- </div> -->
 			</div>
 		{/if}
@@ -360,14 +369,7 @@
 		/* max-height: 70vh; */
 		width: 100%;
 	}
-	#cards {
-		display: flex;
-		flex-wrap: nowrap;
-		/* height: 600px; */
-		overflow-x: hidden;
-		/* height: 100%; */
-		width: 100%;
-	}
+
 	.card {
 		/* left:300px; */
 		min-width: calc(100% - 24px);

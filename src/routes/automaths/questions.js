@@ -485,10 +485,7 @@ const questions = {
 					subdescription:
 						'En dizaines de milliers, milliers, centaines, dizaines et unités',
 					enounces: [
-						'Décomposer ce nombre en dieaines de milliers, milliers, centaines, dizaines et unités.',
-					],
-					enounces: [
-						'Décompose ce nombre comme dans cet exemple : $$23\\,456 = 20\\,000 + 3\\,000 + 400 + 50 + 6$$.',
+						'Décompose ce nombre en dizaines de milliers, milliers, centaines, dizaines et unités, comme dans cet exemple : $$23\\,456 = 20\\,000 + 3\\,000 + 400 + 50 + 6$$.',
 					],
 					expressions: ['[_&1*10000+&2*1000+&3*100+&4*10+&5_]'],
 					solutions: [['[_&1*10000_]+[_&2*1000_]+[_&3*100_]+[_&4*10_]+&5']],
@@ -7858,7 +7855,6 @@ const questions = {
 					],
 					type: 'trou',
 					solutions: [['&2']],
-					type: 'trou',
 					options: [
 						'no-penalty-for-extraneous-brackets-in-first-negative-term',
 					],
@@ -10247,12 +10243,11 @@ const questions = {
 							},
 						],
 					],
-					// bug de mathlive sur les puissances
-					// qui rajoute des parenthèses à l'exposant
-					options: ['no-penalty-for-extraneous-brackets'],
+					
 
 					// bug de mathlive sur les puissances
 					// qui rajoute des parenthèses à l'exposant
+					// TODO: a vérifier si le bug existe toujours
 					options: ['no-penalty-for-extraneous-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -12340,7 +12335,6 @@ const questions = {
 						],
 					],
 					units: ['HMS'],
-					options: ['require-specific-unit'],
 
 					'result-type': 'decimal',
 					correctionFormat: [

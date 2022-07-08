@@ -31,15 +31,13 @@
 	let score
 	let total
 
-	if (!classroom) {
 		// inititalisation
-		;({ items, score, total } = assessItems(
-			questions,
-			answerss,
-			answerss_latex,
-			times,
-		))
-	}
+	;({ items, score, total } = assessItems(
+		questions,
+		answerss,
+		answerss_latex,
+		times,
+	))
 
 	// Quand le composant de correction a fini de s'afficher,
 	// le score a déjà été calculé, on l'enregistre
@@ -102,7 +100,7 @@
 		</div>
 	{/if}
 
-	{#if $mode !== 'classroom'}
+	{#if !classroom}
 		<div
 			class="{'p-2 flex items-center  justify-around'}"
 			style="{`background:${colorResult}`}"

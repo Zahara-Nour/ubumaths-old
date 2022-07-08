@@ -13,10 +13,10 @@
 	export let flashcard
 	export let height = 0
 	export let h = 0
-	export let onChoice = () => {}
 	export let masked = false
 	export let interactive
 	export let commit
+	export let magnify
 
 	let choices
 
@@ -60,6 +60,7 @@
 					masked="{masked}"
 					interactive="{interactive}"
 					commit="{commit}"
+					magnify={magnify}
 				/>
 			</Content>
 

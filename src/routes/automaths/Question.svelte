@@ -10,6 +10,7 @@
 	export let interactive = false
 	export let masked = false
 	export let commit = () => {}
+	export let magnify = 1
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
 	let enounce
@@ -292,16 +293,18 @@
 			expression2 = expression2.replace(/…/g, addMathfield)
 		}
 	}
+
+	
 </script>
 
 <div class="flex flex-col items-center">
 	{#each question.order_elements as element}
 		{#if element === 'enounce' && enounce}
-			<div id="enounce" class="mt-3 mb-3 text-center max-w-4xl leading-normal">
+			<div id="enounce" class="mt-3 mb-3 text-center max-w-4xl leading-normal" style = {`font-size:${magnify}rem`}>
 				{@html enounce}
 			</div>
 		{:else if element === 'enounce2' && enounce2}
-			<div id="enounce2" class="mt-3 mb-3  text-center max-w-4xl">
+			<div id="enounce2" class="mt-3 mb-3  text-center max-w-4xl" style = {`font-size:${magnify}rem`}>
 				{@html enounce2}
 			</div>
 		{:else if element === 'enounce-image' && question.image}
@@ -323,11 +326,11 @@
 					id="expressions"
 					class="my-3 flex flex-col items-center justify-center"
 				>
-					<div id="expression" class="my-3">
+					<div id="expression" class="my-3" style = {`font-size:${magnify}rem`}>
 						{@html expression}
 					</div>
 					{#if expression2 && !(!interactive && question.type === 'equation')}
-						<div id="expression2" class="mt-4">
+						<div id="expression2" class="mt-4" style = {`font-size:${magnify}rem`}>
 							{@html expression2}
 						</div>
 					{/if}
@@ -356,7 +359,7 @@
 							{/await}
 						{/if}
 						{#if choice.text}
-							<div class="text-base ">
+							<div class="text-base " style = {`font-size:${magnify}rem`}>
 								{@html $formatLatex(choice.text)}
 							</div>
 						{/if}

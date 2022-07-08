@@ -614,8 +614,8 @@ export function assessItems(questions, answerss, answerss_latex, times) {
 		// console.log('question', question)
 		items[i] = {
 			...question,
-			answers: answerss[i],
-			answers_latex: answerss_latex[i],
+			answers: answerss ? answerss[i] : null,
+			answers_latex: answerss_latex ? answerss_latex[i] : null,
 			time: times[i],
 			number: i + 1,
 		}
@@ -639,7 +639,7 @@ export function assessItem(item) {
 	// console.log('correcting', item)
 
 	// essentiellement pour les tests
-	if (!item.answers_latex) {
+	if (!item.answers_latex && item.answers) {
 		item.answers_latex = item.answers.map((answer) =>
 			math(answer).toLatex({ addSpaces: false }),
 		)
@@ -655,14 +655,19 @@ export function assessItem(item) {
 
 	// le statut de chaque réponse si il y a plusieurs champs réponses
 	// initialisée à CORRECT ou EMPTY
-	item.statuss = item.answers.map((answer) =>
-		(item.type === 'choice' && answer >= 0) || answer
-			? STATUS_CORRECT
-			: STATUS_EMPTY,
-	)
+	if (!item.answers) {
+		item.statuss = [STATUS_EMPTY]
+	} else {
+		item.statuss = item.answers.map((answer) =>
+			(item.type === 'choice' && answer >= 0) || answer
+				? STATUS_CORRECT
+				: STATUS_EMPTY,
+		)
+	}
 	// si toutes les réponses sont vides, pas besoin d'aller plus loin
 	if (item.statuss.every((status) => status === STATUS_EMPTY)) {
-		item.coms.push(EMPTY_ANSWER)
+		console.log('answers', item.answers)
+		if (item.answers) item.coms.push(EMPTY_ANSWER)
 		item.status = STATUS_EMPTY
 	}
 	// le cas simple à traiter des réponses à choix (multiples ou non)
