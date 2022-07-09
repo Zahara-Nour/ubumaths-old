@@ -16,7 +16,6 @@
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
 	import { darkmode } from '$lib/stores'
-import { mdiCardAccountDetailsOutline } from '@mdi/js';
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions

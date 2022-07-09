@@ -9,11 +9,12 @@
 	import { mdc_colors } from '$lib/colors'
 	import { createDetailedCorrection, createCorrection } from '../../routes/automaths/correctionItem'
 
+
 	export let card
 	export let toggleFlip = () => {}
 	export let flashcard = true
-	export let h
-	export let height
+	export let h = 0
+	export let height = 0
 	export let magnify
 
 	function getSolution(card) {

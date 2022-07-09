@@ -3,6 +3,7 @@
 
 <script>
 	import '../app.scss'
+	import { supabase } from '$lib/db'
 	import { mdc_colors } from '$lib/colors'
 	import links from './navlinks.js'
 	import TopAppBar, { Row, Section, Title as TitleBar } from '@smui/top-app-bar'
@@ -17,7 +18,12 @@
 		Subtitle,
 		Scrim,
 	} from '@smui/drawer'
-	import { mdiFormatFontSizeDecrease, mdiFormatFontSizeIncrease } from '@mdi/js'
+	import {
+		mdiLogin,
+		mdiLogout,
+		mdiFormatFontSizeDecrease,
+		mdiFormatFontSizeIncrease,
+	} from '@mdi/js'
 	import { A, Svg } from '@smui/common/elements'
 	import {
 		darkmode,
@@ -27,12 +33,15 @@
 		formatLatex,
 		handleKeydown,
 		mathliveReady,
-		MathfieldElement
+		MathfieldElement,
+		user,
 	} from '$lib/stores'
+	import { getLogger } from '$lib/utils'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { get } from 'svelte/store'
 
+	let { info, fail, warn } = getLogger('Layout', 'info')
 	let active = links[0].text
 
 	let prominent = false
@@ -48,6 +57,48 @@
 	const setActive = (value) => {
 		active = value
 		showDrawer = false
+	}
+
+	const u = supabase.auth.user()
+	const session = supabase.auth.session()
+	if (u && !$user) {
+		user.set({email:u.email})
+	}
+
+	supabase.auth.onAuthStateChange((event, session) => {
+		if (event === 'SIGNED_IN') {
+			const u = { email: session.user.email }
+			user.set(u)
+			info(`User ${u.email} logged in.`)
+		} else {
+			const email = $user.email
+			user.set(null)
+			info(`User ${email} logged out.`)
+		}
+	})
+
+	async function signOut() {
+		try {
+			const { error } = await supabase.auth.signOut()
+			if (error) {
+				throw error
+			}
+		} catch (err) {
+			fail('Error', err)
+		}
+	}
+
+	async function signInWithGoogle() {
+		try {
+			const { error } = await supabase.auth.signIn({
+				provider: 'google',
+			})
+			if (error) {
+				throw error
+			}
+		} catch (err) {
+			fail('Error', err)
+		}
 	}
 
 	onMount(() => {
@@ -191,6 +242,19 @@
 						on:click="{switchTheme}">dark_mode</IconButton
 					>
 				{/if}
+				{#if $user}
+					<IconButton on:click="{signOut}">
+						<Icon component="{Svg}" viewBox="0 0 24 24">
+							<path fill="currentColor" d="{mdiLogout}"></path>
+						</Icon>
+					</IconButton>
+				{:else}
+					<IconButton on:click="{signInWithGoogle}">
+						<Icon component="{Svg}" viewBox="0 0 24 24">
+							<path fill="currentColor" d="{mdiLogin}"></path>
+						</Icon>
+					</IconButton>
+				{/if}
 				{#if miniWindow}
 					<IconButton on:click="{toggleDrawer}" class="material-icons"
 						>menu
@@ -209,7 +273,11 @@
 	</div>
 	<div style="{`width:100vw;height:80px;background:${mdc_colors['grey-200']}`}">
 		<div class="h-full p-2 flex items-center justify-between">
-			<a style='height:100%' target="_blank" href="https://www.lyceevoltaire.org/">
+			<a
+				style="height:100%"
+				target="_blank"
+				href="https://www.lyceevoltaire.org/"
+			>
 				<img
 					height="100%"
 					alt="logo lycée voltaire"

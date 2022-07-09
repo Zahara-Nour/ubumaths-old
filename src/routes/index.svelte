@@ -4,6 +4,8 @@
 	import data, { getQuestion } from './automaths/questions'
 	import generate from './automaths/generateQuestion'
 	import { mathliveReady } from '$lib/stores'
+	import Button, { Label } from '@smui/button'
+
 	let markup = ''
 
 	const ids = data.ids
@@ -13,6 +15,7 @@
 
 	// console.log('page', $page.url)
 	let mf
+
 </script>
 
 <h1>Headline 1</h1>
@@ -27,9 +30,7 @@
 <p><big>big text</big></p>
 <p><strong>bold text</strong></p>
 
-<code>
-	du code informatique
-</code>
+<code> du code informatique </code>
 <div class="ma-4" style="z-index:0; position:relative">
 	{@html markup}
 </div>
@@ -38,4 +39,4 @@
 	<math-field virtual-keyboard-mode="manual" bind:this="{mf}"></math-field>
 {/if}
 
-<QuestionCard card="{generate(q)}" flashcard description />
+<QuestionCard card="{generate(q)}" flashcard showDescription />

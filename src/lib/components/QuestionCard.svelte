@@ -7,8 +7,7 @@
 	export let interactive = false
 	export let flashcard = false
 	export let showDescription = false
-	export let onChoice = () => {}
-	export let commit
+	export let commit = () => {}
 	export let magnify = 1
 
 	let flip = false
@@ -61,10 +60,9 @@
 				flashcard="{flashcard}"
 				showDescription="{showDescription}"
 				height="{height}"
-				onChoice="{onChoice}"
 				interactive="{interactive}"
-				commit={commit}
-				magnify={magnify}
+				commit="{commit}"
+				magnify="{magnify}"
 			/>
 		</div>
 		{#if flashcard}
@@ -74,7 +72,7 @@
 					toggleFlip="{toggleFlip}"
 					flashcard="{flashcard}"
 					height="{height}"
-					magnify={magnify}
+					magnify="{magnify}"
 				/>
 			</div>
 		{/if}
@@ -90,12 +88,12 @@
 		bind:h="{hfront}"
 		masked="{true}"
 		interactive="{interactive}"
-		magnify={magnify}
+		commit="{commit}"
+		magnify="{magnify}"
 	/>
 
 	{#if flashcard}
-		<BackCard card="{card}" bind:h="{hback}" />
-		magnify={magnify}
+		<BackCard card="{card}" bind:h="{hback}" magnify="{magnify}" />
 	{/if}
 </div>
 
