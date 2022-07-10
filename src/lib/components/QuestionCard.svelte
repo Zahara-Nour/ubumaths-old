@@ -7,7 +7,7 @@
 	export let interactive = false
 	export let flashcard = false
 	export let showDescription = false
-	export let commit = () => {}
+	export let commit = {}
 	export let magnify = 1
 
 	let flip = false
@@ -88,7 +88,7 @@
 		bind:h="{hfront}"
 		masked="{true}"
 		interactive="{interactive}"
-		commit="{commit}"
+		commit="{{}}"
 		magnify="{magnify}"
 	/>
 

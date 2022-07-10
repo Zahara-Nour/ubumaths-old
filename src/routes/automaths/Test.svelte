@@ -49,6 +49,12 @@
 	let generatedExemple
 	let basket
 	const paramsAnswers = {}
+	const commit = {
+		f: function () {
+			if (this.hook) this.hook()
+			change()
+		},
+	}
 
 	setContext('question-params', paramsAnswers)
 
@@ -57,9 +63,9 @@
 			elapsed = Date.now() - start + previous
 			if (delay >= elapsed) {
 				percentage = ((delay - elapsed) * 100) / delay
-				alert = (delay - elapsed < 5000)
+				alert = delay - elapsed < 5000
 			} else {
-				change()
+				commit.f()
 			}
 		}
 	}
@@ -78,7 +84,7 @@
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
 		answerss = classroom ? null : []
 		answerss_latex = classroom ? null : []
-		paramsAnswers.answerss =answerss
+		paramsAnswers.answerss = answerss
 		paramsAnswers.answerss_latex = answerss_latex
 
 		// answerss.splice(0, answerss.length)
@@ -146,10 +152,7 @@
 		change()
 	}
 
-	function commit() {
-		console.log('commit')
-		change()
-	}
+	
 
 	function beginTest() {
 		showExemple = false
@@ -215,6 +218,7 @@
 		}
 		pause = !pause
 	}
+
 	function handleKeydown(ev) {
 		if (classroom) {
 			ev.preventDefault()

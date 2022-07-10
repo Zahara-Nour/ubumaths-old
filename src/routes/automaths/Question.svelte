@@ -9,7 +9,7 @@
 	export let question
 	export let interactive = false
 	export let masked = false
-	export let commit = () => {}
+	export let commit
 	export let magnify = 1
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
@@ -26,13 +26,17 @@
 		if (interactive) {
 			answers.push(i)
 			console.log('onChoice')
-			commit()
+			commit.f()
 		}
 	}
 
 	let keyListeners = []
 	let inputListeners = []
 	let changeListeners = []
+
+	commit.hook = () => {
+		removeListeners()
+	}
 
 	const params = getContext('question-params')
 	// console.log('context', params)
@@ -46,7 +50,6 @@
 	}
 
 	function recordAnswer(i) {
-		console.log('record', i)
 		answers_latex[i] = mfs[i]
 			.getValue()
 			// on remplace plusieurs espaces par un seul, bizarrz normalement pas besoin
@@ -76,8 +79,8 @@
 
 	function onChange(ev, i) {
 		console.log('onChange', ev, i, masked, question.num)
-		removeListeners()
-		commit()
+		// removeListeners()
+		commit.f()
 	}
 
 	function onInput(ev, i) {
@@ -146,7 +149,6 @@
 
 	function addMathfield() {
 		nmfs += 1
-		console.log('addMathfield', nmfs)
 		return `<span id='mf${nmfs}'/>`
 	}
 
@@ -178,6 +180,7 @@
 					if (!elt.hasChildNodes()) {
 						const mfe = new $MathfieldElement()
 						mfe.setOptions({
+							soundsDirectory:'/sounds',
 							virtualKeyboardMode: 'onfocus',
 							// virtualKeyboardMode: 'manual',
 							decimalSeparator: ',',
@@ -234,6 +237,8 @@
 	// 	correct = !math(answer).isIncorrect()
 	// }
 
+   
+
 	$: if (question && !masked && interactive) {
 		console.log(question)
 
@@ -252,7 +257,6 @@
 		mfs = []
 		nmfs = 0
 		if (params) {
-			console.log('params', params)
 			answers = params.answerss[question.num - 1]
 			answers_latex = params.answerss_latex[question.num - 1]
 		}
