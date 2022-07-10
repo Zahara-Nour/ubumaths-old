@@ -659,7 +659,7 @@ export function assessItem(item) {
 		item.statuss = [STATUS_EMPTY]
 	} else {
 		item.statuss = item.answers.map((answer) =>
-			(item.type === 'choice' && answer >= 0) || answer
+			((item.type === 'choice'|| item.type === 'choices') && answer >= 0) || answer
 				? STATUS_CORRECT
 				: STATUS_EMPTY,
 		)

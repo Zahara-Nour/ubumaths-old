@@ -9,7 +9,7 @@
 		image,
 		imageBase64P,
 		imageCorrection,
-		imageCorrectionBase64
+		imageCorrectionBase64P
 
 	let correction = createCorrection(item)
 	let detailedCorrection = correctionDetails
@@ -28,7 +28,7 @@
 			image,
 			imageBase64P,
 			imageCorrection,
-			imageCorrectionBase64,
+			imageCorrectionBase64P,
 		} = item)
 	}
 
@@ -42,7 +42,7 @@
 	>
 		{#if image}
 			{#if imageCorrection}
-				{#await imageCorrectionBase64}
+				{#await imageCorrectionBase64P}
 					loading image
 				{:then base64}
 					<img

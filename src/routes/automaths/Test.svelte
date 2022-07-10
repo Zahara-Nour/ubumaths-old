@@ -123,6 +123,9 @@
 				q.choices.forEach((choice) => {
 					if (choice.image) {
 						choice.imageBase64P = fetchImage(choice.image)
+						choice.imageBase64P.then(base64 => {
+							choice.base64 = base64
+						})
 					}
 				})
 			}

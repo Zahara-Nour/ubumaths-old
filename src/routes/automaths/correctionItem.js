@@ -30,7 +30,8 @@ export function createCorrection(item) {
 		expression_latex,
 		expression2_latex,
 		solutions,
-		answers_latex =[],
+		answers,
+		answers_latex = [],
 		correctionFormat,
 		status = STATUS_EMPTY,
 		choices,
@@ -230,7 +231,41 @@ export function createCorrection(item) {
 				lines.push(line)
 				break
 
-			
+			case 'choices':
+				line = '<div class="flex flex-wrap justify-start">'
+				item.choices.forEach((choice, i) => {
+					let border = 'solid'
+					let color = 'grey'
+					if (solutions.includes(i)) {
+						color = correct_color
+						if (!answers || !answers.includes(i)) {
+							border = 'dashed'
+						}
+					} else if (answers && answers.includes(i)) {
+						color = incorrect_color
+					}
+
+					line += `<span
+					class="rounded-lg  m-2 p-1"
+					style="border: 4px ${border} ${color}"
+				>`
+
+					if (choice.image) {
+						line += `<img src="${choice.base64}" style="max-width:min(400px,80%);max-height:40vh;" alt="choice ${i}"/>`
+					} else {
+						line += `<div class="text-base " style="{font-size:1rem}">`
+						line += choice.text
+						line += '</div>'
+					}
+					line += '</span>'
+				})
+
+				line += '</div>'
+
+				console.log('line', line)
+				lines.push(line)
+				break
+
 			case 'trou':
 				//TODO : empty ?
 				if (status === STATUS_CORRECT) {

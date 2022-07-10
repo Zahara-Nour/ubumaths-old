@@ -7,8 +7,12 @@
 	import Paper, { Content } from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
-	import { createDetailedCorrection, createCorrection } from '../../routes/automaths/correctionItem'
-
+	import {
+		createDetailedCorrection,
+		createCorrection,
+	} from '../../routes/automaths/correctionItem'
+	import Question from '../../routes/automaths/Question.svelte'
+import { correct_color } from '../colors';
 
 	export let card
 	export let toggleFlip = () => {}
@@ -18,43 +22,79 @@
 	export let magnify
 
 	function getSolution(card) {
-		
-		let s = card.solutions[0]
+		let s
 		if (card.choices) {
-			s = $formatLatex(card.choices[s])
-			if (s.text) {
-				s = s.text
-			} else if (s.image) {
-				s = `<img src=${s.image}>`
+			if (card.type === 'choices') {
+				s = '<div class="flex flex-wrap justify-start">'
+				card.choices.forEach((choice, i) => {
+					let color = 'grey'
+					if (card.solutions.includes(i)) {
+						color = correct_color
+					}
+
+					s += `<span
+					class="rounded-lg  m-2 p-1"
+					style="border: 4px solid ${color}"
+				>`
+
+					if (choice.image) {
+						s += `<img src="${choice.base64}" style="max-width:min(400px,80%);max-height:40vh;" alt="choice ${i}"/>`
+					} else {
+						s += `<div class="text-base " style="{font-size:1rem}">`
+						s += choice.text
+						s += '</div>'
+					}
+					s += '</span>'
+				})
+
+				s += '</div>'
+			} else {
+				s = card.solutions[0]
+				s = card.choices[s]
+				if (s.text) {
+					s = s.text
+				} else if (s.image) {
+					s = `<img src=${s.image}>`
+				}
 			}
 		} else {
-			s = $formatLatex('$$' + math(s).latex + '$$')
+			s = card.solutions[0]
+			s = '$$' + math(s).latex + '$$'
 		}
 		return s
 	}
 
-	$: solution = getSolution(card)
-	$: details = card.correctionDetails ? createDetailedCorrection(card) : createCorrection(card)
+	$: solution = $formatLatex(getSolution(card))
+	$: details = card.correctionDetails
+		? createDetailedCorrection(card)
+		: createCorrection(card)
 </script>
+
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
 		<div class="h-full flex flex-col justify-between">
 			<Content class="h-full">
 				<div class="h-full flex flex-col items-center justify-around">
-					<div style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}">Réponse :</div>
-					<div class="my-5 z-O relative"  style = {`font-size:${2*magnify}rem`}>
+					<div
+						style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}"
+					>
+						Réponse :
+					</div>
+					<div
+						class="my-5 z-O relative"
+						style="{`font-size:${2 * magnify}rem`}"
+					>
 						{@html solution}
 					</div>
 					{#if details}
-						<div class="my-2 z-0 relative" style = {`font-size:${magnify}rem`}>
+						<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
 							{#each details as detail}
-							<p>
-								{@html detail.text ? detail.text : detail}
-							</p>
+								<p>
+									{@html detail.text ? detail.text : detail}
+								</p>
 							{/each}
 						</div>
 					{/if}
-			
 				</div>
 			</Content>
 			{#if flashcard}

@@ -5,6 +5,8 @@
 	import { afterUpdate, onMount, onDestroy, getContext } from 'svelte'
 	import { getLogger } from '$lib/utils'
 	import virtualKeyboard from './virtualKeyboard'
+	import Button, { Label } from '@smui/button'
+
 
 	export let question
 	export let interactive = false
@@ -22,11 +24,23 @@
 	let answers
 	let answers_latex
 	let choices
+	let selecteds
 	let onChoice = (i) => {
 		if (interactive) {
-			answers.push(i)
-			console.log('onChoice')
-			commit.f()
+			if (question.type === 'choices') {
+				selecteds[i] = !selecteds[i]
+				answers.splice(0, answers.length)
+				selecteds.forEach((selected, i) => {
+					if (selected) {
+						answers.push(i)
+					}
+				})
+				console.log('answers', answers)
+			} else {
+				answers.push(i)
+				console.log('onChoice')
+				commit.f()
+			}
 		}
 	}
 
@@ -180,7 +194,7 @@
 					if (!elt.hasChildNodes()) {
 						const mfe = new $MathfieldElement()
 						mfe.setOptions({
-							soundsDirectory:'/sounds',
+							soundsDirectory: '/sounds',
 							virtualKeyboardMode: 'onfocus',
 							// virtualKeyboardMode: 'manual',
 							decimalSeparator: ',',
@@ -237,8 +251,6 @@
 	// 	correct = !math(answer).isIncorrect()
 	// }
 
-   
-
 	$: if (question && !masked && interactive) {
 		console.log(question)
 
@@ -254,6 +266,7 @@
 		keyListeners = []
 		inputListeners = []
 		changeListeners = []
+		selecteds = []
 		mfs = []
 		nmfs = 0
 		if (params) {
@@ -282,8 +295,10 @@
 			expression = question.expression_latex
 		}
 		if (interactive && question.type === 'result') expression += '=\\ldots'
-		expression = $toMarkup(expression || '')
-		if (interactive) {
+		if (expression) {
+			expression = $toMarkup(expression)
+		}
+		if (expression && interactive) {
 			expression = expression.replace(/…/g, addMathfield)
 		}
 	}
@@ -297,18 +312,24 @@
 			expression2 = expression2.replace(/…/g, addMathfield)
 		}
 	}
-
-	
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center justify-around">
 	{#each question.order_elements as element}
 		{#if element === 'enounce' && enounce}
-			<div id="enounce" class="mt-3 mb-3 text-center max-w-4xl leading-normal" style = {`font-size:${magnify}rem`}>
+			<div
+				id="enounce"
+				class="mt-3 mb-3 text-center max-w-4xl leading-normal"
+				style="{`font-size:${magnify}rem`}"
+			>
 				{@html enounce}
 			</div>
 		{:else if element === 'enounce2' && enounce2}
-			<div id="enounce2" class="mt-3 mb-3  text-center max-w-4xl" style = {`font-size:${magnify}rem`}>
+			<div
+				id="enounce2"
+				class="mt-3 mb-3  text-center max-w-4xl"
+				style="{`font-size:${magnify}rem`}"
+			>
 				{@html enounce2}
 			</div>
 		{:else if element === 'enounce-image' && question.image}
@@ -330,11 +351,15 @@
 					id="expressions"
 					class="my-3 flex flex-col items-center justify-center"
 				>
-					<div id="expression" class="my-3" style = {`font-size:${magnify}rem`}>
+					<div id="expression" class="my-3" style="{`font-size:${magnify}rem`}">
 						{@html expression}
 					</div>
 					{#if expression2 && !(!interactive && question.type === 'equation')}
-						<div id="expression2" class="mt-4" style = {`font-size:${magnify}rem`}>
+						<div
+							id="expression2"
+							class="mt-4"
+							style="{`font-size:${magnify}rem`}"
+						>
 							{@html expression2}
 						</div>
 					{/if}
@@ -345,7 +370,11 @@
 				{#each question.choices as choice, i}
 					<button
 						class="rounded-lg  m-2 p-1"
-						style="border: 4px solid var(--mdc-theme-primary);"
+						style="{`border: 4px solid ${
+							selecteds && i < selecteds.length && selecteds[i]
+								? 'var(--mdc-theme-primary)'
+								: 'var(--mdc-theme-secondary)'
+						};`}"
 						on:click="{() => onChoice(i)}"
 					>
 						{#if choice.image}
@@ -363,13 +392,21 @@
 							{/await}
 						{/if}
 						{#if choice.text}
-							<div class="text-base " style = {`font-size:${magnify}rem`}>
+							<div class="text-base " style="{`font-size:${magnify}rem`}">
 								{@html $formatLatex(choice.text)}
 							</div>
 						{/if}
 					</button>
 				{/each}
 			</div>
+			{#if question.type === 'choices'}
+				<Button
+					on:click="{commit.f}"
+					variant="raised"
+				>
+					<Label>Valider</Label>
+				</Button>
+			{/if}
 		{/if}
 	{/each}
 </div>
