@@ -15,7 +15,7 @@
 	import { fetchImage } from '$lib/images'
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
-	import { darkmode } from '$lib/stores'
+	import { darkmode, formatLatex } from '$lib/stores'
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -245,7 +245,7 @@
 						<div class="pl-5">
 							{#each Object.keys(availableLevels[theme][d]) as subd}
 								<div class="my-5 flex items-center">
-									{subd}
+									<span>{@html $formatLatex(subd)}</span>
 									<div flex flex-wrap>
 										{#each availableLevels[theme][d][subd] as i}
 											{@const q = questions[theme][d][subd][i - 1]}
