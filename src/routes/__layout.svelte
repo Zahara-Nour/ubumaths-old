@@ -1,108 +1,30 @@
-<script context="module">
-</script>
-
 <script>
 	import '../app.scss'
-	import { supabase } from '$lib/db'
-	import { mdc_colors } from '$lib/colors'
-	import links from './navlinks.js'
-	import TopAppBar, { Row, Section, Title as TitleBar } from '@smui/top-app-bar'
-	import IconButton from '@smui/icon-button'
-	import { Icon } from '@smui/common'
-	import List, { Item, Text } from '@smui/list'
-	import Drawer, {
-		AppContent,
-		Content,
-		Header,
-		Title,
-		Subtitle,
-		Scrim,
-	} from '@smui/drawer'
 	import {
-		mdiLogin,
-		mdiLogout,
-		mdiFormatFontSizeDecrease,
-		mdiFormatFontSizeIncrease,
-	} from '@mdi/js'
-	import { A, Svg } from '@smui/common/elements'
-	import {
-		darkmode,
 		touchDevice,
 		toMarkup,
-		fontSize,
 		formatLatex,
-		handleKeydown,
 		mathliveReady,
 		MathfieldElement,
-		user,
 	} from '$lib/stores'
+	import { user, connected } from '$lib/sessionStore'
 	import { getLogger } from '$lib/utils'
-	import { onMount } from 'svelte'
-	import { goto } from '$app/navigation'
-	import { get } from 'svelte/store'
+	import { onMount, onDestroy } from 'svelte'
 
-	let { info, fail, warn } = getLogger('Layout', 'info')
-	let active = links[0].text
+	import { session } from '$app/stores'
+	import { supabaseClient } from '$lib/supabase'
+	import { SupaAuthHelper } from '@supabase/auth-helpers-svelte'
+	import {selectDB} from '$lib/db'
 
-	let prominent = false
-	let dense = false
-	let secondaryColor = false
-	let miniWindow = false
-	let showDrawer = false
-	const setMiniWindow = () => (miniWindow = window.innerWidth < 720)
-	const toggleDrawer = () => {
-		showDrawer = !showDrawer
-	}
-	const switchTheme = () => darkmode.update((mode) => !mode)
-	const setActive = (value) => {
-		active = value
-		showDrawer = false
-	}
+	let { info, fail, warn } = getLogger('Global layout', 'info')
 
-	const u = supabase.auth.user()
-	const session = supabase.auth.session()
-	if (u && !$user) {
-		user.set({email:u.email})
-	}
+	info('Initialization')
 
-	supabase.auth.onAuthStateChange((event, session) => {
-		if (event === 'SIGNED_IN') {
-			const u = { email: session.user.email }
-			user.set(u)
-			info(`User ${u.email} logged in.`)
-		} else {
-			const email = $user.email
-			user.set(null)
-			info(`User ${email} logged out.`)
-		}
+	supabaseClient.auth.onAuthStateChange(() => {
+		connected.set(!!supabaseClient.auth.user())
 	})
 
-	async function signOut() {
-		try {
-			const { error } = await supabase.auth.signOut()
-			if (error) {
-				throw error
-			}
-		} catch (err) {
-			fail('Error', err)
-		}
-	}
-
-	async function signInWithGoogle() {
-		try {
-			const { error } = await supabase.auth.signIn({
-				provider: 'google',
-			})
-			if (error) {
-				throw error
-			}
-		} catch (err) {
-			fail('Error', err)
-		}
-	}
-
 	onMount(() => {
-		setMiniWindow()
 		// detects a touche screen device at the first touch
 		//  https://codeburst.io/the-only-way-to-detect-touch-with-javascript-7791a3346685
 		window.addEventListener(
@@ -138,156 +60,73 @@
 				formatLatex.set(_formatLatex)
 			})
 			.catch((e) => {
-				console.log('erreur', e)
+				fail('erreur', e)
 			})
 	})
 
-	function increase() {
-		const newSize = get(fontSize) + 1
-		fontSize.set(newSize)
-		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
+	async function updateUser(connected) {
+		let new_u
+		if (connected) {
+			const u = supabaseClient.auth.user()
+			new_u = {
+				email: u.email,
+				user_id: u.id,
+				avatar_url: u.user_metadata.avatar_url,
+			}
+			const data = await selectDB({table:'users', single:true})
+			// let { data, error } = await supabaseClient
+			// 	.from('users')
+			// 	.select('*')
+			// 	.eq('user_id', u.id)
+			// 	.maybeSingle()
+
+			// if (error) {
+				// fail(error)
+			// } else 
+			if (data) {
+				new_u = {
+					...new_u,
+					firstname: data.firstname,
+					lastname: data.lastname,
+					school_id: data.school_id,
+					roles: data.roles,
+					grade: data.grade,
+					classes: data.classes,
+					teacher_id: data.teacher_id,
+				}
+			} else {
+				fail('User not found.')
+			}
+			new_u.navadra = {}
+			let { data:data2, error:error2 } = await supabaseClient
+				.from('navadra_joueurs')
+				.select('*')
+				.eq('user_id', u.id)
+				.maybeSingle()
+			if (error2) {
+				fail(error2)
+			} else if (data2) {
+				new_u.navadra.profile = data2
+			} 
+
+			user.set(new_u)
+			info(`User ${u.email} logged in`, new_u)
+		} else {
+			if ($user) {
+				const email = $user.email
+				info(`user ${email} logged out`)
+			}
+			user.set(null)
+		}
 	}
 
-	function decrease() {
-		const newSize = get(fontSize) - 1
-		fontSize.set(newSize)
-		document.getElementsByTagName('html')[0].style.fontSize = `${newSize}px`
-	}
+	$: updateUser($connected)
 </script>
 
-<svelte:window on:resize="{setMiniWindow}" on:keydown="{$handleKeydown}" />
 <svelte:head>
 	<title>UbuMaths - Les maths de la chandelle verte</title>
-	{#if $darkmode}
-		<!-- SMUI Styles -->
-		<link rel="stylesheet" href="/smui-dark.css" />
-		<!-- Site Styles -->
-		<link rel="stylesheet" href="/site-dark.css" />
-	{:else}
-		<!-- SMUI Styles -->
-		<link rel="stylesheet" href="/smui.css" />
-		<!-- Site Styles -->
-		<link rel="stylesheet" href="/site.css" />
-	{/if}
 </svelte:head>
 
-<Drawer variant="modal" bind:open="{showDrawer}">
-	<Header>
-		<TitleBar>Ubumaths</TitleBar>
-		<Subtitle>Les maths de la chandelle verte</Subtitle>
-	</Header>
-	<Content>
-		<List>
-			{#each links as link}
-				<Item
-					href="javascript:void(0)"
-					on:click="{() => {
-						setActive(link.text)
-						goto(`${link.url}`)
-					}}"
-					activated="{active === link.text}"
-				>
-					<Text>{link.text}</Text>
-				</Item>
-			{/each}
-		</List>
-	</Content>
-</Drawer>
-
-<Scrim />
-<AppContent class="app-content">
-	<TopAppBar
-		variant="static"
-		prominent="{prominent}"
-		dense="{dense}"
-		color="{secondaryColor ? 'secondary' : 'primary'}"
-	>
-		<Row>
-			<Section>
-				<TitleBar component="{A}" href="/" on:click="{() => {}}">
-					UbuMaths
-				</TitleBar>
-			</Section>
-			<Section>
-				{#if !miniWindow}
-					<div>
-						{#each links as link}
-							<a class="mx-2" href="{link.url}">{link.text}</a>
-						{/each}
-					</div>
-				{/if}
-			</Section>
-			<Section align="end" toolbar>
-				<IconButton on:click="{decrease}">
-					<Icon component="{Svg}" viewBox="0 0 24 24">
-						<path fill="currentColor" d="{mdiFormatFontSizeDecrease}"></path>
-					</Icon>
-				</IconButton>
-				<IconButton on:click="{increase}">
-					<Icon component="{Svg}" viewBox="0 0 24 24">
-						<path fill="currentColor" d="{mdiFormatFontSizeIncrease}"></path>
-					</Icon>
-				</IconButton>
-
-				{#if $darkmode}
-					<IconButton
-						class="material-icons"
-						aria-label="Switch to light mode"
-						on:click="{switchTheme}">light_mode</IconButton
-					>
-				{:else}
-					<IconButton
-						class="material-icons"
-						aria-label="switch to dark mode"
-						on:click="{switchTheme}">dark_mode</IconButton
-					>
-				{/if}
-				{#if $user}
-					<IconButton on:click="{signOut}">
-						<Icon component="{Svg}" viewBox="0 0 24 24">
-							<path fill="currentColor" d="{mdiLogout}"></path>
-						</Icon>
-					</IconButton>
-				{:else}
-					<IconButton on:click="{signInWithGoogle}">
-						<Icon component="{Svg}" viewBox="0 0 24 24">
-							<path fill="currentColor" d="{mdiLogin}"></path>
-						</Icon>
-					</IconButton>
-				{/if}
-				{#if miniWindow}
-					<IconButton on:click="{toggleDrawer}" class="material-icons"
-						>menu
-					</IconButton>
-				{/if}
-			</Section>
-		</Row>
-	</TopAppBar>
-	<!-- <div p-2> -->
-	<!-- <div style="overflow:auto;"> -->
-	<div style="min-height: calc(100vh - 144px);">
-		<!-- to remove extra margin from child -->
-		<div style="height:1px"></div>
-		<slot />
-		<div style="height:1px"></div>
-	</div>
-	<div style="{`width:100vw;height:80px;background:${mdc_colors['grey-200']}`}">
-		<div class="h-full p-2 flex items-center justify-between">
-			<a
-				style="height:100%"
-				target="_blank"
-				href="https://www.lyceevoltaire.org/"
-			>
-				<img
-					height="100%"
-					alt="logo lycée voltaire"
-					src="/images/logo-voltaire.png"
-				/>
-			</a>
-			<span style="color:var(--mdc-theme-secondary)">D. Le Jolly</span>
-		</div>
-	</div>
-</AppContent>
-
-<style>
-</style>
+<SupaAuthHelper supabaseClient="{supabaseClient}" session="{session}">
+	<slot />
+</SupaAuthHelper>

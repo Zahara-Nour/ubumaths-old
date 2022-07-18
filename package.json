@@ -56,7 +56,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/auth-helpers-svelte": "^0.4.5",
+		"@supabase/auth-helpers-sveltekit": "^0.6.7",
 		"@supabase/supabase-js": "^1.35.3",
+		"supabase-ui-svelte": "^0.1.1",
 		"svelte-viewport-info": "^1.0.0",
 		"tinycas": "^0.8.14",
 		"tinymathlive": "^0.73.8"

@@ -1,4 +1,4 @@
-import { supabase } from '$lib/db'
+import { supabaseClient } from '$lib/supabase'
 import { getLogger } from '$lib/utils'
 let { info, fail, warn } = getLogger('images', 'info')
 export async function fetchImage(name) {
@@ -6,7 +6,7 @@ export async function fetchImage(name) {
     const img = sessionStorage.getItem(name)
     if (!img) {
         info('fetching image', name)
-        const { data: blob, error } = await supabase.storage
+        const { data: blob, error } = await supabaseClient.storage
             .from('public/mental')
             .download(name)
 

@@ -104,5 +104,9 @@ export function isTouchScreendevice() {
   return 'ontouchstart' in window || navigator.maxTouchPoints(navigator.msMaxTouchPoints > 0) || window.matchMedia("(pointer: coarse)").matches
 };
 
-
+export function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min +1)) + min;
+}
 export { getLogger, shuffle, isEmpty, getPropertyName, lexicoSort, cleanString }
