@@ -58,7 +58,7 @@ let sorts ={
         </div>
         {/each}
     </div>
-
+{/each}
   
 
 		<div id="upgradeSpells" class="ib l80 mh1">
@@ -127,19 +127,19 @@ let sorts ={
 
 		<a href="/index.php"><img id="closeWindow" class="titles" src="/images/navadra/icones/refuser.png" title="Revenir à l'île" /></a>
 
-		<?php if($sorts_manager->spellsToBuy($joueur) == 1){
+		<!-- <?php if($sorts_manager->spellsToBuy($joueur) == 1){
 			echo('<div id="spellsToBuy" class="p4">Apprends encore <span class="p6 g">'.$sorts_manager->spellsToBuy($joueur).'</span> sort.</div>');
 		} elseif($sorts_manager->spellsToBuy($joueur) > 1){
 			echo('<div id="spellsToBuy" class="p4">Apprends encore <span class="p6 g">'.$sorts_manager->spellsToBuy($joueur).'</span> sorts.</div>');
-		}?>
+		}?> -->
 
 </div>
 
-<div id="spellDescription" class="descriptif_sort absolu">
+<!-- <div id="spellDescription" class="descriptif_sort absolu">
 		<span class="p0"></span>
-</div>
+</div> -->
 
-<?php if($achat == "oui"){
+<!-- <?php if($achat == "oui"){
 	$caracs = $spellBought->carac_sort();	?>
 <div id="displaySpellBought">
 	<span class="p3 ib l100">Tu viens d'apprendre le sort :</span>
@@ -147,24 +147,14 @@ let sorts ={
 	<span class="ib l100 mh2"><img id="spellBoughtIcon" class="l20" src="<?= $spellBought->icone(); ?>"/></span>
 	<span id="spellBoughtElement" class="cache"><?= $spellBought->element1(); ?></span>
 </div>
-<?php } ?>
+<?php } ?> -->
 
 <!-- Div cachées utilisées par JS-->
-<div id="etape_tuto" class="cache"><?= $joueur->tuto(); ?></div>
+<!-- <div id="etape_tuto" class="cache"><?= $joueur->tuto(); ?></div>
 <div id="nom_tuteur" class="cache"><?= $joueur->tuteur(); ?></div>
 <div id="sexe_joueur" class="cache"><?= $joueur->sexe(); ?></div>
 <div id="pseudo" class="cache"><?= $joueur->pseudo(); ?></div>
 <?php if(isset($challenge)){
 	echo('<div id="challengeElement" class="cache">'.$challenge->getElement().'</div>');
-} ?>
+} ?> -->
 
-<audio preload="auto" id="son_nouveau_sort">
-	 <source src = "/webroot/sons/nouveau_sort.ogg" type="audio/ogg" />
-     <source src = "/webroot/sons/nouveau_sort.mp3" type="audio/mp3" />
-</audio>
-
-<script src="/webroot/js/utils/anim.js?nvd_r=xxx"></script>
-<script src="/webroot/js/utils/grimoireTools.js?nvd_r=xxx"></script>
-<script src="/webroot/js/utils/math.js?nvd_r=xxx"></script>
-<script src="/webroot/js/utils/spells.js?nvd_r=xxx"></script>
-<script src="/webroot/js/grimoire.js?nvd_r=xxx"></script>
