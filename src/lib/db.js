@@ -71,10 +71,12 @@ export async function updateDB({
 
 		try {
 			const { data, error } = await request
+			console.log('update data', data)
+			console.log('update error', error)
 			if (error) throw error
 			return data
 		} catch (err) {
-			fail('Error while select database : ', err)
+			fail('Error while update database : ', err)
 			return null
 		}
 	} else {

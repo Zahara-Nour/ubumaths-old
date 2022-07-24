@@ -2,8 +2,9 @@
 	import { supabaseClient } from '$lib/supabase'
 	import { getLogger } from '$lib/utils'
 	import { user } from '$lib/sessionStore'
-    import {insertDB} from '$lib/db'
-    import {determiner_position_joueur} from './js/joueur.js'
+	import { insertDB } from '$lib/db'
+	import { determiner_position_joueur, determine_element } from './js/joueur.js'
+	import { getRandomIntInclusive } from '../../lib/utils.js'
 
 	let { info, fail, warn } = getLogger('Inscription', 'info')
 	let pseudo = ''
@@ -19,20 +20,50 @@
 	function checkPseudo() {}
 
 	async function createPlayer() {
-        console.log('user', $user)
-        const position = determiner_position_joueur($user)
+		console.log('user', $user)
+        
 		const profile = {
-			pseudo,
-			avatar_entier: `/images/navadra/avatars/${avatar_entier}`,
-			avatar_tete: `/images/navadra/avatars/portraits/${avatar_tete}`,
+            pseudo,
+			avatar_entier: `/avatars/${avatar_entier}`,
+			avatar_tete: `/avatars/portraits/${avatar_tete}`,
 			sexe,
 			user_id: $user.user_id,
-            position
+            pyrs_eau:0,
+            pyrs_terre:0,
+            pyrs_vent:0,
+            pyrs_feu:0,
+            pyrs_eau_dep:0,
+            pyrs_terre_dep:0,
+            pyrs_vent_dep:0,
+            pyrs_feu_dep:0,
+            tuto:'index_1',
+            monstres_ids: [],
+            
 		}
+        switch (getRandomIntInclusive(1, 4)) {
+            case 1:
+                profile.tuteur = 'Namuka'
+                profile.img_tuteur = '/personnages/namuka.png'
+                break
+            case 2:
+                profile.tuteur = 'Katillys'
+                profile.img_tuteur = '/personnages/katillys.png'
+                break
+            case 3:
+                profile.tuteur = 'Sivem'
+                profile.img_tuteur = '/personnages/sivem.png'
+                break
+            case 4:
+                profile.tuteur = 'Leorn'
+                profile.img_tuteur = '/personnages/leorn.png'
+                break
+        }
+        profile.element = determine_element(profile)
+        profile.position = determiner_position_joueur(profile)
 
-        const data = await insertDB({table:'navadra_joueurs', rows:[profile]})
+        const data = await insertDB({ table: 'navadra_joueurs', rows: [profile] })
         $user.navadra.profile = data
-	}
+    }
 </script>
 
 <!-- Fond contenant le formulaire -->

@@ -1764,21 +1764,23 @@ textarea {
 
 .fond_niveau_monstre {
   position: absolute;
-  left: -30px;
+  left: -26px;
   top: 0px;
   width: 30px;
+  margin-top: 5px;
 }
 
 .niveau_monstre {
   position: absolute;
-  left: -31px;
+  left: -26px;
   top: 0px;
   width: 30px;
+  margin-top: 8px;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  margin-top: 4px;
   text-align: center;
+  
 }
 
 .nom_monstre {

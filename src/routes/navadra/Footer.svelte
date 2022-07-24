@@ -18,9 +18,9 @@
 		}
 	}
 	let lvl = 15
-	let element = 'vent'
+	let element = $user.navadra.profile.element
 	let levelBackground = ornmentLvl(lvl)
-    let portrait = '/images/navadra/avatars/portraits/tete_fille_1_blond_bleu_asi.png'
+    let portrait
 </script>
 
 <!-- Bloc avatar -->
@@ -36,7 +36,7 @@
 			src="{`/images/navadra/cadres_avatars/cadres_ronds/${element}_fond.png`}"
 			alt="avatar"
 		/>
-        <img src={$user.navadra.profile.avatar_tete} alt='portrait' style='position:absolute; bottom:0; left:0 ; width:100%'/>
+        <img src={`/images/navadra/${$user.navadra.profile.avatar_tete}`} alt='portrait' style='position:absolute; bottom:0; left:0 ; width:100%'/>
 
 		<!-- {#if levelBackground > 0}
 			<img

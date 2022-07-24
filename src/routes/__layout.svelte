@@ -14,7 +14,8 @@
 	import { session } from '$app/stores'
 	import { supabaseClient } from '$lib/supabase'
 	import { SupaAuthHelper } from '@supabase/auth-helpers-svelte'
-	import {selectDB} from '$lib/db'
+	import { selectDB } from '$lib/db'
+	import { hydrateMonstre } from './navadra/js/monstres'
 
 	let { info, fail, warn } = getLogger('Global layout', 'info')
 
@@ -73,7 +74,7 @@
 				user_id: u.id,
 				avatar_url: u.user_metadata.avatar_url,
 			}
-			const data = await selectDB({table:'users', single:true})
+			const data = await selectDB({ table: 'users', single: true })
 			// let { data, error } = await supabaseClient
 			// 	.from('users')
 			// 	.select('*')
@@ -81,8 +82,8 @@
 			// 	.maybeSingle()
 
 			// if (error) {
-				// fail(error)
-			// } else 
+			// fail(error)
+			// } else
 			if (data) {
 				new_u = {
 					...new_u,
@@ -98,7 +99,7 @@
 				fail('User not found.')
 			}
 			new_u.navadra = {}
-			let { data:data2, error:error2 } = await supabaseClient
+			let { data: data2, error: error2 } = await supabaseClient
 				.from('navadra_joueurs')
 				.select('*')
 				.eq('user_id', u.id)
@@ -107,7 +108,20 @@
 				fail(error2)
 			} else if (data2) {
 				new_u.navadra.profile = data2
-			} 
+			}
+			new_u.navadra.profile.monstres = []
+			if (new_u.navadra.profile.monstres_ids.length) {
+				new_u.navadra.profile.monstres_ids.forEach(async (id) => {
+					const monstre_params = await selectDB({
+						table: 'navadra_monstres',
+						eqs: [['id', id]],
+						single: true,
+					})
+					const monstre = hydrateMonstre(monstre_params)
+					new_u.navadra.profile.monstres.push(monstre)
+					console.log('monstre', monstre)
+				})
+			}
 
 			user.set(new_u)
 			info(`User ${u.email} logged in`, new_u)

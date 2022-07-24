@@ -5,9 +5,41 @@ import { insertDB } from '../../../lib/db'
 
 // prototype des montres
 const PMonstre = {
+
+	couleur_bordure_hex()
+	{
+		switch(this.element)
+		{
+		case "feu" :
+			return "#ad0101";
+		case "eau" :
+			return "#016dad";
+		case "vent" :
+			return "#f2b819";
+		case "terre" :
+			return "#0aae02";
+		}
+	},
+
+	couleur_nom_hex() {
+		switch(this.element)
+		{
+		case "feu" :
+			return "#eec2c3";
+		case "eau" :
+			return "#caecf6";
+		case "vent" :
+			return "#f1eec1";
+		case "terre" :
+			return "#ccf7ca";
+		}
+	},
+
 	determiner_position() {
-		const player = get(user).navadra
+		const player = get(user).navadra.profile
+        console.log('player', player)
 		const position_joueur = player.position
+        console.log('position_joueur', position_joueur)
 		let ok = 1
 		const largeur_joueur = 10 //On prend la largeur du joueur et des monstres
 		const hauteur_joueur = 10
@@ -55,7 +87,7 @@ const PMonstre = {
 				ok++
 			}
 			//On récupère chaque monstre pour tester le chevauchement de position
-			player.monstres.foreach((monstre) => {
+			player.monstres.forEach((monstre) => {
 				if (
 					Math.abs(x - monstre.position.x) <= largeur_monstre &&
 					Math.abs(y - monstre.position.y) <= hauteur_monstre
@@ -69,22 +101,35 @@ const PMonstre = {
 			x,
 			y,
 		}
-		return position
+		this.position = position
 	},
 }
-export function createMonstre(params = {}) {
+
+
+export function hydrateMonstre(params = {}) {
+	const monstre = Object.create(PMonstre)
+	Object.assign(monstre, {
+		...params,
+	})
+	return monstre
+
+}
+export async function createMonstre(params = {}) {
 	const monstre = Object.create(PMonstre)
 	const nb_chasseurs = params.nb_chasseurs || 1
+    const niveau = params.niveau || 1
 	const caracs = carac_monstre(nb_chasseurs)
 	Object.assign(monstre, {
 		nb_chasseurs,
-		monstres: [],
+        niveau,
+        user_id:get(user).user_id,
 		...caracs,
 		...params,
 	})
 	monstre.determiner_position()
-	const data = insertDB({ table: 'navadra_monstres', rows: [monstre] })
-	monstre.id = data.id
+	const data = await insertDB({ table: 'navadra_monstres', rows: [monstre], single:true })
+    console.log('data', data)
+	Object.assign(monstre, data)
 	return monstre
 }
 
