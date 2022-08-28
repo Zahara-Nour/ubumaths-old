@@ -85,18 +85,24 @@
 				<CorrectionListItems
 					items="{items.filter((_, i) => i + 1 <= items.length / 2)}"
 					displayDetails="{displayDetails}"
+					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
 			<div>
 				<CorrectionListItems
 					items="{items.filter((_, i) => i + 1 > items.length / 2)}"
 					displayDetails="{displayDetails}"
+					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
 		</div>
 	{:else}
 		<div class="flex flex-col w-full">
-			<CorrectionListItems items="{items}" displayDetails="{displayDetails}" />
+			<CorrectionListItems
+				items="{items}"
+				displayDetails="{displayDetails}"
+				magnify="{classroom ? 2.5 : 1}"
+			/>
 		</div>
 	{/if}
 
