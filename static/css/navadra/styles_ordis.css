@@ -1321,7 +1321,7 @@ textarea {
   background-repeat: no-repeat;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
+  /* text-align: center; */
   -moz-border-radius: 14px;
   -webkit-border-radius: 14px;
   border-radius: 14px;
@@ -3279,7 +3279,7 @@ html>body tbody.scrollContent td + td + td + td {
   position: absolute;
   top: 1%;
   left: 2%;
-  text-align: center;
+  /* text-align: center; */
   width: 130px;
 }
 

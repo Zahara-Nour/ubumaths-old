@@ -1,5 +1,6 @@
-import {user} from '$lib/sessionStore'
+import {player} from '$lib/navadraStore'
 import {get} from 'svelte/store'
+import {tuto} from '$lib/navadraState'
 
 let changement
 let nouveau_tuteur
@@ -12,10 +13,11 @@ let spellNum
 let win
 
 export function tutoriel(etape){
-    const etape_tuto = get(user).navadra.profile.tuto
-    const uprofile = get(user).navadra.profile
+	
+    
     let msg
-	switch(etape_tuto){
+	console.log('tuto', tuto)
+	switch(tuto.state.value) {
 		case "index_1" :
 			switch(etape)	{
 				case 1 :
@@ -51,24 +53,24 @@ export function tutoriel(etape){
 			else if(changement)	{
 				switch(etape)	{
 					case 1 :
-						if(uprofile.tuteur === "Namuka") 
+						if(profile.tuteur === "Namuka") 
 							{ msg = "QUOI, TU N'AS PAS CHOISI LE FEU ?! C'est un scandale !<br>Je te laisse donc te débrouiller tout"+e+" seul"+e+", ciao !";}
-						if(uprofile.tuteur === "Katillys")
+						if(profile.tuteur === "Katillys")
 							{ msg = "QUOI, TU N'AS PAS CHOISI L'EAU ?! C'est un scandale !<br>Je te laisse donc te débrouiller tout"+e+" seul"+e+", ciao !";}
-						if(uprofile.tuteur === "Sivem")
+						if(profile.tuteur === "Sivem")
 							{ msg = "QUOI, TU N'AS PAS CHOISI LE VENT ?! C'est un scandale !<br>Je te laisse donc te débrouiller tout"+e+" seul"+e+", ciao !";}
-						if(uprofile.tuteur === "Leorn")
+						if(profile.tuteur === "Leorn")
 							{ msg = "QUOI, TU N'AS PAS CHOISI LA TERRE ?! C'est un scandale !<br>Je te laisse donc te débrouiller tout"+e+" seul"+e+", ciao !";}
 						break;
 					case 2 :
 						if(nouveau_tuteur === "Namuka")
-							{msg = "Salut "+uprofile.pseudo+", alors comme ça la magie du Feu t'intéresse ?<br>Je m’appelle Namuka et je suis l’ancienne cheffe de la tribu Shakor, passée maître dans la magie du Feu.";}
+							{msg = "Salut "+profile.pseudo+", alors comme ça la magie du Feu t'intéresse ?<br>Je m’appelle Namuka et je suis l’ancienne cheffe de la tribu Shakor, passée maître dans la magie du Feu.";}
 						if(nouveau_tuteur === "Katillys")
-							{msg = "Salut "+uprofile.pseudo+", alors comme ça la magie de l'Eau t'intéresse ?<br>Je m’appelle Katillys et je suis une ancienne Membre du Conseil de la tribu des Lyréens, passée maître dans la magie de l’Eau.";}
+							{msg = "Salut "+profile.pseudo+", alors comme ça la magie de l'Eau t'intéresse ?<br>Je m’appelle Katillys et je suis une ancienne Membre du Conseil de la tribu des Lyréens, passée maître dans la magie de l’Eau.";}
 						if(nouveau_tuteur === "Sivem")
-							{msg = "Salut "+uprofile.pseudo+", alors comme ça la magie du Vent t'intéresse ?<br>Je m’appelle Sivem et je suis l’ancien chef de la tribu des Ataliis, passée maître dans la magie du Vent.";}
+							{msg = "Salut "+profile.pseudo+", alors comme ça la magie du Vent t'intéresse ?<br>Je m’appelle Sivem et je suis l’ancien chef de la tribu des Ataliis, passée maître dans la magie du Vent.";}
 						if(nouveau_tuteur === "Leorn")
-							{msg = "Salut "+uprofile.pseudo+", alors comme ça la magie de la Terre t'intéresse ?<br>Je m’appelle Leorn et je suis l’ancien chef de la tribu des Keodenns, passée maître dans la magie de la Terre.";}
+							{msg = "Salut "+profile.pseudo+", alors comme ça la magie de la Terre t'intéresse ?<br>Je m’appelle Leorn et je suis l’ancien chef de la tribu des Keodenns, passée maître dans la magie de la Terre.";}
 						break;
 					case 3 :
 						msg = "Si tu te sens déjà affuté"+e+" mentalement tu peux directement commencer le défi et sinon, un peu d'entraînement ne te fera pas de mal.<br>On y va ?";
@@ -79,13 +81,13 @@ export function tutoriel(etape){
 		case "fin_defi_5" :
 			switch(etape)	{
 				case 1 :
-					if(uprofile.pyrs_feu > 0){
+					if(profile.pyrs_feu > 0){
 						msg = "Tu viens de pratiquer la magie du Feu, tu récoltes donc des Pyrs de Feu (<img class='img_20' src='/webroot/img/icones/pyrs_feu.png' />).<br>C'est grâce à elles que tu vas pouvoir apprendre des sorts de Feu et devenir plus puissant"+e+" !";
-					} else if(uprofile.pyrs_eau > 0){
+					} else if(profile.pyrs_eau > 0){
 						msg = "Tu viens de pratiquer la magie de l'Eau, tu récoltes donc des Pyrs d'Eau (<img class='img_20' src='/webroot/img/icones/pyrs_eau.png' />).<br>C'est grâce à elles que tu vas pouvoir apprendre des sorts d'Eau et devenir plus puissant"+e+" !";
-					} else if(uprofile.pyrs_vent > 0){
+					} else if(profile.pyrs_vent > 0){
 						msg = "Tu viens de pratiquer la magie du Vent, tu récoltes donc des Pyrs de Vent (<img class='img_20' src='/webroot/img/icones/pyrs_vent.png' />).<br>C'est grâce à elles que tu vas pouvoir apprendre des sorts de Vent et devenir plus puissant"+e+" !";
-					} else if(uprofile.pyrs_terre > 0){
+					} else if(profile.pyrs_terre > 0){
 						msg = "Tu viens de pratiquer la magie de la Terre, tu récoltes donc des Pyrs de Terre (<img class='img_20' src='/webroot/img/icones/pyrs_terre.png' />).<br>C'est grâce à elles que tu vas pouvoir apprendre des sorts de Terre et devenir plus puissant"+e+" !";
 					}
 					break;
@@ -131,13 +133,13 @@ export function tutoriel(etape){
 					msg = "Plutôt que de te cacher dans ton coin en attendant qu'un monstre ne te tombe dessus, je te propose d'aller au devant du danger !";
 					break;
 				case 2 :
-					if(uprofile.tuteur === "Namuka")
+					if(profile.tuteur === "Namuka")
 						{msg = "Tiens, regarde moi ce vilain serpent... Il devrait parfaitement faire l'affaire!";}
-					if(uprofile.tuteur === "Katillys")
+					if(profile.tuteur === "Katillys")
 						{msg = "Tiens, regarde moi ce vilain serpent... Il devrait parfaitement faire l'affaire!";}
-					if(uprofile.tuteur === "Sivem")
+					if(profile.tuteur === "Sivem")
 						{msg = "Tiens, regarde moi ce vilain serpent... Il devrait parfaitement faire l'affaire!";}
-					if(uprofile.tuteur === "Leorn")
+					if(profile.tuteur === "Leorn")
 						{msg = "Tiens, regarde moi ce vilain rapace... Il devrait parfaitement faire l'affaire!";}
 					break;
 			}

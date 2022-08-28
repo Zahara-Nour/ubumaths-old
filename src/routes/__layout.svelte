@@ -15,12 +15,14 @@
 	import { supabaseClient } from '$lib/supabase'
 	import { SupaAuthHelper } from '@supabase/auth-helpers-svelte'
 	import { selectDB } from '$lib/db'
-	import { hydrateMonstre } from './navadra/js/monstres'
+	import { hydrateMonstre } from './navadra/js/monsters'
 
 	let { info, fail, warn } = getLogger('Global layout', 'info')
 
 	info('Initialization')
 
+	// probleme de persistance entre l'instance de supabase et le jeton fourni par google Auth
+	// le test de connexion doit se faire par supabase, quitte à refaire une authentification google
 	supabaseClient.auth.onAuthStateChange(() => {
 		connected.set(!!supabaseClient.auth.user())
 	})
@@ -66,65 +68,44 @@
 	})
 
 	async function updateUser(connected) {
-		let new_u
+		let newUser
 		if (connected) {
+			// l'id de l'utilisateur est donné par supabase
+			// on retrouve ensuite cet id dans les différentes tables avec l'entrée userId
 			const u = supabaseClient.auth.user()
-			new_u = {
+			newUser = {
 				email: u.email,
-				user_id: u.id,
-				avatar_url: u.user_metadata.avatar_url,
+				userId: u.id,
+				avatarUrl: u.user_metadata.avatarUrl,
 			}
 			const data = await selectDB({ table: 'users', single: true })
 			// let { data, error } = await supabaseClient
 			// 	.from('users')
 			// 	.select('*')
-			// 	.eq('user_id', u.id)
+			// 	.eq('userId', u.id)
 			// 	.maybeSingle()
 
 			// if (error) {
 			// fail(error)
 			// } else
 			if (data) {
-				new_u = {
-					...new_u,
+				newUser = {
+					...newUser,
 					firstname: data.firstname,
 					lastname: data.lastname,
-					school_id: data.school_id,
+					schoolId: data.schoolId,
 					roles: data.roles,
 					grade: data.grade,
 					classes: data.classes,
-					teacher_id: data.teacher_id,
+					teacherId: data.teacherId,
 				}
+
 			} else {
 				fail('User not found.')
 			}
-			new_u.navadra = {}
-			let { data: data2, error: error2 } = await supabaseClient
-				.from('navadra_joueurs')
-				.select('*')
-				.eq('user_id', u.id)
-				.maybeSingle()
-			if (error2) {
-				fail(error2)
-			} else if (data2) {
-				new_u.navadra.profile = data2
-			}
-			new_u.navadra.profile.monstres = []
-			if (new_u.navadra.profile.monstres_ids.length) {
-				new_u.navadra.profile.monstres_ids.forEach(async (id) => {
-					const monstre_params = await selectDB({
-						table: 'navadra_monstres',
-						eqs: [['id', id]],
-						single: true,
-					})
-					const monstre = hydrateMonstre(monstre_params)
-					new_u.navadra.profile.monstres.push(monstre)
-					console.log('monstre', monstre)
-				})
-			}
 
-			user.set(new_u)
-			info(`User ${u.email} logged in`, new_u)
+			user.set(newUser)
+			info(`User ${u.email} logged in`, newUser)
 		} else {
 			if ($user) {
 				const email = $user.email
@@ -134,6 +115,7 @@
 		}
 	}
 
+	// on met à jour le profil utilisateur suivant l'état de connexion
 	$: updateUser($connected)
 </script>
 

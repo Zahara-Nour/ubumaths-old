@@ -17,7 +17,7 @@ export async function selectDB({
 		eqs.forEach((eq) => {
 			request = request.eq(...eq)
 		})
-		request = request.eq('user_id', user.id)
+		request = request.eq('userId', user.id)
 		if (single) {
 			request = request.maybeSingle()
 		}
@@ -31,6 +31,7 @@ export async function selectDB({
 			return null
 		}
 	} else {
+		fail('user not logged in for selecting in database')
 		return null
 	}
 }
@@ -38,7 +39,7 @@ export async function selectDB({
 export async function insertDB({ table, rows }) {
 	if (get(connected)) {
 		let request = supabaseClient.from(table).insert(rows)
-		// request = request.eq('user_id', user.id)
+		// request = request.eq('userId', user.id)
 
 		try {
 			const { data, error } = await request
@@ -46,10 +47,11 @@ export async function insertDB({ table, rows }) {
 			if (error) throw error
 			return rows.length === 1 ? data[0] : data
 		} catch (err) {
-			fail('Error while insert database : ', err)
+			fail('Error while inserting in database : ', err)
 			return null
 		}
 	} else {
+		fail('user not logged in for inserting in database')
 		return null
 	}
 }
@@ -66,7 +68,7 @@ export async function updateDB({
 		eqs.forEach((eq) => {
 			request = request.eq(...eq)
 		})
-		request = request.eq('user_id', user.id)
+		request = request.eq('userId', user.id)
 		
 
 		try {
@@ -80,6 +82,7 @@ export async function updateDB({
 			return null
 		}
 	} else {
+		fail('user not logged in for updating in database')
 		return null
 	}
 }

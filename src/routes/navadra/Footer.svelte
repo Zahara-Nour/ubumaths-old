@@ -1,5 +1,5 @@
 <script>
-	import {user} from '$lib/sessionStore'
+	import {player} from '$lib/navadraStore'
 	let nb = ''
 
 	function ornmentLvl(lvl) {
@@ -18,7 +18,7 @@
 		}
 	}
 	let lvl = 15
-	let element = $user.navadra.profile.element
+	let element = $player.element
 	let levelBackground = ornmentLvl(lvl)
     let portrait
 </script>
@@ -36,7 +36,7 @@
 			src="{`/images/navadra/cadres_avatars/cadres_ronds/${element}_fond.png`}"
 			alt="avatar"
 		/>
-        <img src={`/images/navadra/${$user.navadra.profile.avatar_tete}`} alt='portrait' style='position:absolute; bottom:0; left:0 ; width:100%'/>
+        <img src={`/images/navadra/${$player.profile.avatarHead}`} alt='portrait' style='position:absolute; bottom:0; left:0 ; width:100%'/>
 
 		<!-- {#if levelBackground > 0}
 			<img
@@ -52,7 +52,7 @@
 	alt="niveau"
 	src="/images/navadra/icones/avatar_niveau.png"
 />
-<div id="niveau_joueur" class="g">{$user.navadra.profile.niveau}</div>
+<div id="niveau_joueur" class="g">{$player.profile.level}</div>
 
 <div id="xp_joueur" class="cache" title="XP : 34%">34%</div>
 
@@ -69,7 +69,7 @@
 						src="/images/navadra/icones/pyrs_feu.png"
 					/></span
 				>
-				<span id="pyrs_feu" class="ib l100 mh15 g">{$user.navadra.profile.pyrs_feu}</span>
+				<span id="pyrs_feu" class="ib l100 mh15 g">{$player.profile.firePyrs}</span>
 			</a>
 		</span>
 		<!-- Pyrs d'eau -->
@@ -82,7 +82,7 @@
 						src="/images/navadra/icones/pyrs_eau.png"
 					/></span
 				>
-				<span id="pyrs_eau" class="ib l100 mh15 g">{$user.navadra.profile.pyrs_eau}</span>
+				<span id="pyrs_eau" class="ib l100 mh15 g">{$player.profile.waterPyrs}</span>
 			</a>
 		</span>
 		<!-- Pyrs du vent -->
@@ -95,7 +95,7 @@
 						src="/images/navadra/icones/pyrs_vent.png"
 					/></span
 				>
-				<span id="pyrs_vent" class="ib l100 mh15 g">{$user.navadra.profile.pyrs_vent}</span>
+				<span id="pyrs_vent" class="ib l100 mh15 g">{$player.profile.windPyrs}</span>
 			</a>
 		</span>
 		<!-- Pyrs de terre -->
@@ -108,7 +108,7 @@
 						src="/images/navadra/icones/pyrs_terre.png"
 					/></span
 				>
-				<span id="pyrs_terre" class="ib l100 mh15 g">{$user.navadra.profile.pyrs_terre}</span>
+				<span id="pyrs_terre" class="ib l100 mh15 g">{$player.profile.earthPyrs}</span>
 			</a>
 		</span>
 	</span>
@@ -125,7 +125,7 @@
 				/></a
 			></span
 		>
-		<span id="prestige" class="ib l100 mh15 g">{$user.navadra.profile.prestige}</span>
+		<span id="prestige" class="ib l100 mh15 g">{$player.profile.prestige}</span>
 	</span>
 </div>
 
