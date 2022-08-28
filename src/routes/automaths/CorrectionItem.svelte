@@ -2,6 +2,7 @@
   import {createCorrection, createDetailedCorrection} from './correctionItem'
 	export let item
 	export let displayDetails
+	
 
 	let number,
 		correctionDetails,
