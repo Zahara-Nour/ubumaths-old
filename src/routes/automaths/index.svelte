@@ -16,6 +16,9 @@
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
 	import { darkmode, formatLatex } from '$lib/stores'
+	import {dev } from '$app/env';
+	
+	console.log('dev mode', dev)
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -160,7 +163,8 @@
 			questions.push({ id: q.id, count: 10 })
 		}
 
-		let href = 'http://localhost:3000/automaths/Test/?questions='
+		const domain = dev ? 'http://localhost:3000/' : 'http://ubumaths.net/'
+		let href = domain + 'automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
 		navigator.clipboard
 			.writeText(href)
