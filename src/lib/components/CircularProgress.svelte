@@ -1,7 +1,6 @@
 <script>
   export let number
   export let fontSize
-  export let strokeWidth
   export let percentage
   export let pulse
 
@@ -61,6 +60,8 @@
 
   $: sqSize = fontSize * 3
 
+  $: strokeWidth = fontSize/4+2
+
   $: radius = sqSize / 3.6
 
   // Arc length at 100% coverage is the circle circumference
@@ -97,7 +98,7 @@
     </circle>
   </svg>
   <div
-    style="{`font-size: ${fontSize}px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -70%);font-family:'pacifico'`}"
+    style="{`font-size: ${fontSize}px;position: absolute;left: 50%;top: 48%;transform: translate(-50%, -70%);font-family:'pacifico'`}"
   >
     {number}
   </div>
