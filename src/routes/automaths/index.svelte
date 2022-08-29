@@ -163,9 +163,11 @@
 			questions.push({ id: q.id, count: 10 })
 		}
 
-		const domain = dev ? 'http://localhost:3000/' : 'http://ubumaths.net/'
-		let href = domain + 'automaths/Test/?questions='
+		const base = dev ? 'http://localhost:3000/' : 'http://ubumaths.net/'
+
+		let href = base + 'automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
+		if (classroom) href += '&classroom=true'
 		navigator.clipboard
 			.writeText(href)
 			.then(function () {

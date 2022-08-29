@@ -253,7 +253,7 @@
 		}
 	}
 
-	initTest()
+	
 
 	// le bouton restart a été appuyé après la correction
 	$: if (restart) {
@@ -310,6 +310,7 @@
 	<div style="height:90vh" class="flex justify-center items-center">
 		<Button
 			on:click="{() => {
+				initTest()
 				go = true
 			}}"
 			variant="raised"
