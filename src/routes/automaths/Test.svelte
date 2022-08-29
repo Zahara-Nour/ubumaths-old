@@ -5,7 +5,7 @@
 	import Button, { Label } from '@smui/button'
 	import generate from './generateQuestion'
 	import CircularProgress from '$lib/components/CircularProgress.svelte'
-	import { onDestroy, setContext } from 'svelte'
+	import { afterUpdate, onDestroy, onMount, setContext } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
 	import { getLogger, shuffle } from '$lib/utils'
 	import { page } from '$app/stores'
@@ -48,6 +48,7 @@
 	let cards, card
 	let generatedExemple
 	let basket
+	let go = false
 	const paramsAnswers = {}
 	const commit = {
 		f: function () {
@@ -55,9 +56,30 @@
 			change()
 		},
 	}
+	let ref
+	let fontSize
 
 	setContext('question-params', paramsAnswers)
 
+	onMount(() => {
+		if (ref) {
+			const style = window.getComputedStyle(ref)
+			fontSize = parseInt(
+				style.getPropertyValue('font-size').replace('px', ''),
+				10,
+			)
+		}
+	})
+
+	afterUpdate(() => {
+		if (ref) {
+			const style = window.getComputedStyle(ref)
+			fontSize = parseInt(
+				style.getPropertyValue('font-size').replace('px', ''),
+				10,
+			)
+		}
+	})
 	function countDown() {
 		if (!pause) {
 			elapsed = Date.now() - start + previous
@@ -123,7 +145,7 @@
 				q.choices.forEach((choice) => {
 					if (choice.image) {
 						choice.imageBase64P = fetchImage(choice.image)
-						choice.imageBase64P.then(base64 => {
+						choice.imageBase64P.then((base64) => {
 							choice.base64 = base64
 						})
 					}
@@ -154,8 +176,6 @@
 	function onChoices(choice) {
 		change()
 	}
-
-	
 
 	function beginTest() {
 		showExemple = false
@@ -286,13 +306,23 @@
 			</Button>
 		</div>
 	{/if}
+{:else if !go}
+	<div style="height:90vh" class="flex justify-center items-center">
+		<Button
+			on:click="{() => {
+				go = true
+			}}"
+			variant="raised"
+		>
+			<Label>Let's go !</Label>
+		</Button>
+	</div>
 {:else if card}
-	<div>
+	<div bind:this="{ref}">
 		<div class="{' my-1 flex justify-start'}">
 			<CircularProgress
 				number="{current + 1}"
-				fontSize="{20}"
-				strokeWidth="{7}"
+				fontSize="{classroom ? 2.5 * fontSize : fontSize + 5}"
 				percentage="{percentage}"
 				pulse="{alert}"
 			/>
