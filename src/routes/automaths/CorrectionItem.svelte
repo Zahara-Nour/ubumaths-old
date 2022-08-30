@@ -78,7 +78,7 @@
 			{/each}
 		{:else}
 			{#each correction as line}
-				<div class=" mb-1 z-0 relative">
+				<div class=" mb-8 z-0 relative">
 					{@html line}
 				</div>
 			{/each}
