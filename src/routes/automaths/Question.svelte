@@ -7,7 +7,6 @@
 	import virtualKeyboard from './virtualKeyboard'
 	import Button, { Label } from '@smui/button'
 
-
 	export let question
 	export let interactive = false
 	export let masked = false
@@ -48,8 +47,10 @@
 	let inputListeners = []
 	let changeListeners = []
 
-	commit.hook = () => {
-		removeListeners()
+	if (commit) {
+		commit.hook = () => {
+			removeListeners()
+		}
 	}
 
 	const params = getContext('question-params')
@@ -400,10 +401,7 @@
 				{/each}
 			</div>
 			{#if question.type === 'choices'}
-				<Button
-					on:click="{commit.f}"
-					variant="raised"
-				>
+				<Button on:click="{commit.f}" variant="raised">
 					<Label>Valider</Label>
 				</Button>
 			{/if}

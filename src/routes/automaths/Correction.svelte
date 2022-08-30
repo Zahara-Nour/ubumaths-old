@@ -83,14 +83,14 @@
 		<div class="flex  justify-around w-full" style="overflow-x:auto;">
 			<div>
 				<CorrectionListItems
-					items="{items.filter((_, i) => i + 1 <= items.length / 2)}"
+					items="{items.filter((_, i) => i % 2 === 0)}"
 					displayDetails="{displayDetails}"
 					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
 			<div>
 				<CorrectionListItems
-					items="{items.filter((_, i) => i + 1 > items.length / 2)}"
+					items="{items.filter((_, i) => i % 2 === 1)}"
 					displayDetails="{displayDetails}"
 					magnify="{classroom ? 2.5 : 1}"
 				/>
