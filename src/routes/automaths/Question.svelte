@@ -42,6 +42,7 @@
 			}
 		}
 	}
+	let showExp
 
 	let keyListeners = []
 	let inputListeners = []
@@ -277,30 +278,50 @@
 	}
 
 	// console.log('question', question)
-	$: showExp =
-		expression && !(question.options && question.options.includes('no-exp'))
+	$: {
+		showExp =
+			(expression &&
+				!(question.options && question.options.includes('no-exp'))) ||
+			(interactive &&
+				question.type === 'result' &&
+				(!question.expression_latex ||
+					(question.options && question.options.includes('no-exp'))))
+		console.log('showExp', showExp)
+	}
 
 	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
 
 	$: enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
 
 	$: {
-		if (
-			interactive &&
-			!question.expression_latex &&
-			question.type !== 'choice' &&
-			question.type !== 'choices'
-		) {
-			expression = '\\ldots'
-		} else {
-			expression = question.expression_latex
+		if (interactive) {
+			if (
+				question.type !== 'choice' &&
+				question.type !== 'choices' &&
+				(!question.expression_latex ||
+					(question.options && question.options.includes('no-exp')))
+			) {
+				expression = '\\ldots'
+			} else {
+				expression = question.expression_latex
+				if (question.type === 'result') {
+					expression += '=\\ldots'
+				}
+			}
 		}
-		if (interactive && question.type === 'result') expression += '=\\ldots'
+
+		if (interactive && question.prefix) {
+			expression = question.prefix+expression
+		}
+		console.log('expression', expression, interactive, question.type)
+
+		
+
 		if (expression) {
 			expression = $toMarkup(expression)
-		}
-		if (expression && interactive) {
-			expression = expression.replace(/…/g, addMathfield)
+			if (interactive) {
+				expression = expression.replace(/…/g, addMathfield)
+			}
 		}
 	}
 
