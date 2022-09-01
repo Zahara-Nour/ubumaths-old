@@ -330,6 +330,7 @@ export function createDetailedCorrection(item) {
 	let lines = []
 	let line
 	let solutions_latex = createSolutionsLatex(item)
+	console.log('correctionDetails', correctionDetails)
 
 	correctionDetails.forEach((detail) => {
 		if (detail.type === 'image') {
@@ -358,6 +359,7 @@ export function createDetailedCorrection(item) {
 								'}}',
 				)
 		}
+		console.log('correction line', line)
 		lines.push(line)
 	})
 	lines = lines.map(get(formatLatex))
