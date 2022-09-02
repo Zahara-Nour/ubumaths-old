@@ -19393,7 +19393,150 @@ const questions = {
 					grade: PREMIERE_SPE_MATHS,
 				},
 			],
+			'Deviner le terme général': [
+				{
+					description: "Deviner le terme général à partir d'une liste des premiers termes",
+					enounces: [
+						'Quel semble être le terme général de la suite dont les premiers termes sont:',
+					],
+					enounces2: [
+						'$$&3\\,&4\\,&5\\,&6\\,&7$$',
+					],
+					// expressions: ['&2*&1+(&3)'],
+					solutions:[['[_&2*&1+(&3)_]'], ['[_&2*&1^2_]'], ['[_(-1)^&1_]'], ], 
+					prefix: ['u_n='],
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$er[2;9]',
+							'&3': '[_&1_]',
+							'&4': '[_&1+&2_]',
+							'&5': '[_&1+(&2)*2_]',
+							'&6': '[_&1+(&2)*3_]',
+						},
+						
+					],
+					options: ['no-exp'],
+					correctionFormat: [
+						{
+							correct: [`Avec $$u_n=&2n[+_&3_]$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+						{
+							correct: [`Avec $$u_n=&2n^2$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+						{
+							correct: [`Avec $$u_n=(-1)^n$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+					],
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 0, 2, 4, 6, ou 8.',
+					// 		},
+					// 	],
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 1, 3, 5, 7, ou 9.',
+					// 		},
+					// 	],
+					// ],
+					correctionDetails: [
+						[
+							{
+								text: `Avec $$u_n=&2n[+_&3_]$$, $$u_\\textcolor{${color1}}{&1}=&2 \\times \\textcolor{${color1}}{&1} [+_&3_]=&sol$$`,
+							},
+						],
+						[
+							{
+								text: `Avec $$u_n=&2n^2$$, $$u_\\textcolor{${color1}}{&1}=&2 \\times \\textcolor{${color1}}{&1}^2=&sol$$`,
+							},
+						],
+						[
+							{
+								text: `Avec $$u_n=(-1)^&1$$, $$u_\\textcolor{${color1}}{&1}=(-1)^\\textcolor{${color1}}{&1}=&sol$$`,
+							},
+						],
+					],
+
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+					// 		},
+					// 	],
+
+					// ],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: 'Calculer un terme',
+					subdescription: "A l'aide d'une formule de récurrence",
+					enounces: [
+						'Calculer $$u_2$$ pour la suite $$(u_n)$$ définie par $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$',
+					],
+					expressions: ['&5'],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[2;3]',
+							'&3': '$er[1;3]',
+							'&4': '[_&2*(&1)+(&3)_]',
+							'&5': '[_&2*(&4)+(&3)_]',
+						},
+					],
+					options: ['no-exp'],
+					correctionFormat: [
+						{
+							correct: [
+								`Avec $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$, $$u_2=&ans$$`,
+							],
+							answer: '$$u_2=&ans$$',
+						},
+					],
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 0, 2, 4, 6, ou 8.',
+					// 		},
+					// 	],
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 1, 3, 5, 7, ou 9.',
+					// 		},
+					// 	],
+					// ],
+					correctionDetails: [
+						[
+							{
+								text: `Avec $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$`,
+							},
+							{
+								text: `$$u_1=&2u_0[+_&3_]= &2 \\times &1 [+_&3_]=&4$$`,
+							},
+							{
+								text: `$$u_2=&2u_1[+_&3_]= &2 \\times &4 [+_&3_]=&sol$$`,
+							},
+						],
+					],
+
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+					// 		},
+					// 	],
+
+					// ],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
 		},
+		
 	},
 }
 
