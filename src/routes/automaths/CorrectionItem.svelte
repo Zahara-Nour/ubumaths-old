@@ -12,9 +12,9 @@
 		imageCorrectionBase64P
 
 	let correction = createCorrection(item)
-	let detailedCorrection = item.correctionDetails
+	let detailedCorrection = item.correctionDetails.length
 		? createDetailedCorrection(item)
-		: []
+		: correction
 	// const validateFractions = checkFractions()
 
 	// if (seemsCorrect && !validateAnswer) {

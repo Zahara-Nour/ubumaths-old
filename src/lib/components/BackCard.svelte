@@ -27,8 +27,6 @@
 
 		function replaceSol() {
 			nSol += 1
-			console.log('card solution',card.solutions[nSol] )
-			console.log('card solution string', math(card.solutions[nSol]))
 			return math(card.solutions[nSol]).latex
 		}
 		
@@ -79,7 +77,7 @@
 	}
 
 	$: solution = $formatLatex(getSolution(card))
-	$: details = card.correctionDetails
+	$: details = card.correctionDetails.length
 		? createDetailedCorrection(card)
 		: createCorrection(card)
 </script>

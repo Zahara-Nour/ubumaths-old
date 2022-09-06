@@ -19769,11 +19769,7 @@ const questions = {
 								text: "La suite de terme général $$&exp$$ est constante donc sa limite est &solution.",
 							},
 						],
-						[
-							{
-								text: "La suite de terme général $$&exp$$ est constante donc sa limite est &solution.",
-							},
-						],
+						[],
 						
 
 					],
