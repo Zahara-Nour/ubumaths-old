@@ -193,7 +193,6 @@
 	})
 
 	afterUpdate(() => {
-		console.log('****  update masked', masked, !!answerFields)
 		if (interactive) {
 			const elements = []
 			if (showExp && expression) {
@@ -430,7 +429,7 @@
 				{#each question.choices as choice, i}
 					<button
 						class="rounded-lg  m-2 p-1"
-						style="{`border: 4px solid ${
+						style="{`min-width:4em;border: 4px solid ${
 							selecteds && i < selecteds.length && selecteds[i]
 								? 'var(--mdc-theme-primary)'
 								: 'var(--mdc-theme-secondary)'

@@ -686,6 +686,7 @@ export function assessItem(item) {
 		item.type === 'choice' &&
 		item.solutions.toString() !== item.answers.toString()
 	) {
+		item.statuss = [STATUS_INCORRECT]
 		item.status = STATUS_INCORRECT
 	}
 	// choix multiples

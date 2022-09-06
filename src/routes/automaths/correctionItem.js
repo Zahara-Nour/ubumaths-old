@@ -334,7 +334,6 @@ export function createDetailedCorrection(item) {
 	let lines = []
 	let line
 	let solutions_latex = createSolutionsLatex(item)
-	console.log('correctionDetails', correctionDetails)
 
 	const regexSolution = /&solution([1-9]?)/g
 	function replaceSolution(match, p1) {
