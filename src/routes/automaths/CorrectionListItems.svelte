@@ -12,10 +12,15 @@
 	{@const color =
 		item.status === STATUS_CORRECT
 			? correct_color
-			: item.status === STATUS_UNOPTIMAL_FORM
+			: item.status === STATUS_UNOPTIMAL_FORM ||
+			  item.statuss.filter((status) => status === STATUS_CORRECT).length >=
+					item.answers.length / 2
 			? unoptimal_color
 			: incorrect_color}
-	<div class="flex justify-start items-start mb-3" style={`font-size:${magnify}rem`}>
+	<div
+		class="flex justify-start items-start mb-3"
+		style="{`font-size:${magnify}rem`}"
+	>
 		<div
 			class="mt-1 mr-3 relative"
 			style="{`font-size:1.1em;font-family:'pacifico';color:white;background:${color}; border-radius: 50%;width:3ch; height:3ch`}"
@@ -27,9 +32,6 @@
 				{item.number}
 			</span>
 		</div>
-		<CorrectionItem
-			item="{item}"
-			displayDetails="{displayDetails}"
-		/>
+		<CorrectionItem item="{item}" displayDetails="{displayDetails}" />
 	</div>
 {/each}

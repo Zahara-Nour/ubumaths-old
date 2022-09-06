@@ -12,7 +12,7 @@
 		createCorrection,
 	} from '../../routes/automaths/correctionItem'
 	import Question from '../../routes/automaths/Question.svelte'
-import { correct_color } from '../colors';
+	import { correct_color } from '../colors'
 
 	export let card
 	export let toggleFlip = () => {}
@@ -22,7 +22,16 @@ import { correct_color } from '../colors';
 	export let magnify
 
 	function getSolution(card) {
+		let nSol = -1
 		let s
+
+		function replaceSol() {
+			nSol += 1
+			console.log('card solution',card.solutions[nSol] )
+			console.log('card solution string', math(card.solutions[nSol]))
+			return math(card.solutions[nSol]).latex
+		}
+		
 		if (card.choices) {
 			if (card.type === 'choices') {
 				s = '<div class="flex flex-wrap justify-start">'
@@ -58,8 +67,13 @@ import { correct_color } from '../colors';
 				}
 			}
 		} else {
-			s = card.solutions[0]
-			s = '$$' + math(s).latex + '$$'
+			if (card.answerFields) {
+				s = card.answerFields.replace(/\\ldots/g, replaceSol)
+				console.log('s', s)
+			} else {
+				s = card.solutions[0]
+				s = '$$' + math(s).latex + '$$'
+			}
 		}
 		return s
 	}
