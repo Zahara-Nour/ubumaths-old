@@ -5,7 +5,6 @@
 	
 
 	let number,
-		correctionDetails,
 		coms,
 		image,
 		imageBase64P,
@@ -13,9 +12,9 @@
 		imageCorrectionBase64P
 
 	let correction = createCorrection(item)
-	let detailedCorrection = correctionDetails
+	let detailedCorrection = item.correctionDetails && item.correctionDetails.length
 		? createDetailedCorrection(item)
-		: null
+		: correction
 	// const validateFractions = checkFractions()
 
 	// if (seemsCorrect && !validateAnswer) {
@@ -24,7 +23,6 @@
 	function updateItem() {
 		;({	
 			number,
-			correctionDetails,
 			coms,
 			image,
 			imageBase64P,
@@ -72,13 +70,13 @@
 		{/if}
 		{#if displayDetails && item.correctionDetails}
 			{#each detailedCorrection as line}
-				<p class="mb-1 z-0 relative" >
+				<div class="mb-1 z-0 relative" >
 					{@html line}
-				</p>
+				</div>
 			{/each}
 		{:else}
 			{#each correction as line}
-				<div class=" mb-8 z-0 relative">
+				<div class=" mb-1 z-0 relative">
 					{@html line}
 				</div>
 			{/each}

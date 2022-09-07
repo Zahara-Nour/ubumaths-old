@@ -581,7 +581,12 @@ function checkForm(item) {
 				.removeMultOperator()
 				.sortTermsAndFactors()
 
-			const solution = math(item.solutions[i])
+			const indexSolution = item.options?.includes(
+				'solutions-order-not-important',
+			)
+				? item.solutionsIndexs[i]
+				: i
+			const solution = math(item.solutions[indexSolution])
 				.removeZerosAndSpaces()
 				.reduceFractions()
 				.simplifyNullProducts()
@@ -625,7 +630,10 @@ export function assessItems(questions, answerss, answerss_latex, times) {
 		score +=
 			items[i].status == STATUS_CORRECT
 				? items[i].points
-				: items[i].status == STATUS_UNOPTIMAL_FORM
+				: items[i].status == STATUS_UNOPTIMAL_FORM ||
+				  items[i].statuss.filter((status) => status === STATUS_CORRECT)
+						.length >=
+						items[i].answers.length / 2
 				? items[i].points / 2
 				: 0
 	}
@@ -659,7 +667,8 @@ export function assessItem(item) {
 		item.statuss = [STATUS_EMPTY]
 	} else {
 		item.statuss = item.answers.map((answer) =>
-			((item.type === 'choice'|| item.type === 'choices') && answer >= 0) || answer
+			((item.type === 'choice' || item.type === 'choices') && answer >= 0) ||
+			answer
 				? STATUS_CORRECT
 				: STATUS_EMPTY,
 		)
@@ -675,6 +684,7 @@ export function assessItem(item) {
 		item.type === 'choice' &&
 		item.solutions.toString() !== item.answers.toString()
 	) {
+		item.statuss = [STATUS_INCORRECT]
 		item.status = STATUS_INCORRECT
 	}
 	// choix multiples
@@ -764,11 +774,31 @@ export function assessItem(item) {
 				item.answers.forEach((answer, i) => {
 					if (
 						item.statuss[i] !== STATUS_EMPTY &&
-						item.statuss[i] !== STATUS_INCORRECT &&
-						!math(answer).equals(math(item.solutions[i]))
+						item.statuss[i] !== STATUS_INCORRECT
 					) {
-						item.statuss[i] = STATUS_INCORRECT
-						item.status = STATUS_INCORRECT
+						if (item.options?.includes('solutions-order-not-important')) {
+							if (!item.solutionsUsed) {
+								item.solutionsUsed = []
+							}
+							if (!item.solutionsIndexs) {
+								item.solutionsIndexs = {}
+							}
+							const index = item.solutions.findIndex(
+								(solution, j) =>
+									!item.solutionsUsed.includes(j) &&
+									math(answer).equals(math(solution)),
+							)
+							if (index === -1) {
+								item.statuss[i] = STATUS_INCORRECT
+								item.status = STATUS_INCORRECT
+							} else {
+								item.solutionsUsed.push(index)
+								item.solutionsIndexs[i] = index
+							}
+						} else if (!math(answer).equals(math(item.solutions[i]))) {
+							item.statuss[i] = STATUS_INCORRECT
+							item.status = STATUS_INCORRECT
+						}
 					}
 				})
 			}

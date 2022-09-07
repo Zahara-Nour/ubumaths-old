@@ -18,7 +18,7 @@
 	let enounce2
 	let expression
 	let expression2
-	let mfs
+	let mfs = []
 	let nmfs = 0
 	let answers
 	let answers_latex
@@ -34,18 +34,19 @@
 						answers.push(i)
 					}
 				})
-				console.log('answers', answers)
 			} else {
 				answers.push(i)
-				console.log('onChoice')
 				commit.f()
 			}
 		}
 	}
+	let showExp
+	let answerFields
 
 	let keyListeners = []
 	let inputListeners = []
 	let changeListeners = []
+	let fieldsNb = 0
 
 	if (commit) {
 		commit.hook = () => {
@@ -88,14 +89,28 @@
 				mfe.removeEventListener('keystroke', keyListeners[i])
 				mfe.removeEventListener('input', inputListeners[i])
 				mfe.removeEventListener('change', changeListeners[i])
+				mfe.blur()
 			})
+			
 		}
 	}
 
+	// onChange est appelée quand :
+	// - l'utilisateur appuie sur entrée du clavier virtuel ou du clavier physique
+	//  (même si le mathfield est vide)
+	// - quand le mathfield perd le focus et que le contenu a changé
+	// - quand la touche entrée du clavier virtuel
 	function onChange(ev, i) {
-		console.log('onChange', ev, i, masked, question.num)
 		// removeListeners()
-		commit.f()
+		if (mfs[i].hasFocus()) {
+			// TODO: empêcher le commit quand le mathfield est vide
+			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
+			if (mfs.length === 1) {
+				commit.f()
+			} else {
+				mfs[(i + 1) % mfs.length].focus()
+			}
+		}
 	}
 
 	function onInput(ev, i) {
@@ -104,6 +119,7 @@
 
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
+		const mf = mfs[i]
 		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
 		const key_allowed2 = [
 			'Backspace',
@@ -135,8 +151,6 @@
 			)
 		) {
 			ev.preventDefault()
-			console.log('mfs', mfs)
-			console.log('i', i)
 			mfs[i].insert('\\,')
 		} else if (key === '%') {
 			ev.preventDefault()
@@ -164,7 +178,9 @@
 
 	function addMathfield() {
 		nmfs += 1
-		return `<span id='mf${nmfs}'/>`
+		let id = `mf${nmfs}`
+		if (masked) id = id + '-masked'
+		return `<span id='${id}'}/>`
 	}
 
 	onDestroy(() => {
@@ -173,8 +189,8 @@
 
 	afterUpdate(() => {
 		if (interactive) {
+			const elements = []
 			if (showExp && expression) {
-				const elements = []
 				for (let i of document
 					.querySelector('#expression')
 					.querySelectorAll('*')) {
@@ -191,49 +207,62 @@
 						}
 					}
 				}
-				elements.forEach((elt) => {
-					if (!elt.hasChildNodes()) {
-						const mfe = new $MathfieldElement()
-						mfe.setOptions({
-							soundsDirectory: '/sounds',
-							virtualKeyboardMode: 'onfocus',
-							// virtualKeyboardMode: 'manual',
-							decimalSeparator: ',',
-							...virtualKeyboard,
-							inlineShortcuts: {
-								xx: {},
-							},
-							keypressVibration: false,
-							removeExtraneousParentheses: false,
-							smartFence: false,
-							superscript: false,
-						})
-						mfs.push(mfe)
-						// answers.push('')
-						// answers_latex.push('')
-						elt.appendChild(mfe)
-						elt.style.display = 'inline-block'
-						elt.style.minWidth = '2em'
-						elt.style.border = '2px dashed grey'
-						elt.style.borderRadius = '5px'
-						const i = mfs.length - 1
-						if (!masked) {
-							const keyListener = (ev) => onKeystroke(ev, i)
-							const inputListener = (ev) => onInput(ev, i)
-							const changeListener = (ev) => onChange(ev, i)
-							keyListeners.push(keyListener)
-							inputListeners.push(inputListener)
-							changeListeners.push(changeListener)
-							mfe.addEventListener('keystroke', keyListener)
-							mfe.addEventListener('input', inputListener)
-							mfe.addEventListener('change', changeListener)
-						}
+			}
+			if (answerFields) {
+				for (let i of document
+					.querySelector('#answerFields' + (masked ? '-masked' : ''))
+					.querySelectorAll('*')) {
+					if (/^mf/g.test(i.id)) {
+						elements.push(i)
 					}
-				})
-				if (!masked && mfs && mfs.length) {
-					mfs[0].focus()
 				}
 			}
+			elements.forEach((elt) => {
+				if (!elt.hasChildNodes()) {
+					const mfe = new $MathfieldElement()
+					mfe.setOptions({
+						soundsDirectory: '/sounds',
+						virtualKeyboardMode: 'onfocus',
+						// virtualKeyboardMode: 'manual',
+						decimalSeparator: ',',
+						...virtualKeyboard,
+						inlineShortcuts: {
+							xx: {},
+						},
+						keypressVibration: false,
+						removeExtraneousParentheses: false,
+						smartFence: false,
+						superscript: false,
+					})
+					mfs.push(mfe)
+					// answers.push('')
+					// answers_latex.push('')
+					elt.appendChild(mfe)
+					elt.style.display = 'inline-block'
+					elt.style.minWidth = '2em'
+					elt.style.border = '2px dashed grey'
+					elt.style.borderRadius = '5px'
+					const i = mfs.length - 1
+					if (!masked) {
+						answers[i] = null
+						answers_latex[i] = null
+						const keyListener = (ev) => onKeystroke(ev, i)
+						const inputListener = (ev) => onInput(ev, i)
+						const changeListener = (ev) => onChange(ev, i)
+						keyListeners.push(keyListener)
+						inputListeners.push(inputListener)
+						changeListeners.push(changeListener)
+						mfe.addEventListener('keystroke', keyListener)
+						mfe.addEventListener('input', inputListener)
+						mfe.addEventListener('change', changeListener)
+					}
+				}
+			})
+			if (!masked && mfs?.length) {
+				mfs[0].focus()
+			}
+
+			fieldsNb = mfs?.length || 0
 		}
 	})
 
@@ -252,24 +281,25 @@
 	// 	correct = !math(answer).isIncorrect()
 	// }
 
-	$: if (question && !masked && interactive) {
+	$: if (question && interactive) {
 		console.log(question)
-
-		keyListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('key', listener),
-		)
-		inputListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('input', listener),
-		)
-		changeListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('change', listener),
-		)
-		keyListeners = []
-		inputListeners = []
-		changeListeners = []
-		selecteds = []
 		mfs = []
 		nmfs = 0
+		if (!masked) {
+			keyListeners.forEach((listener, i) =>
+				mfs[i].removeEventListener('key', listener),
+			)
+			inputListeners.forEach((listener, i) =>
+				mfs[i].removeEventListener('input', listener),
+			)
+			changeListeners.forEach((listener, i) =>
+				mfs[i].removeEventListener('change', listener),
+			)
+			keyListeners = []
+			inputListeners = []
+			changeListeners = []
+			selecteds = []
+		}
 		if (params) {
 			answers = params.answerss[question.num - 1]
 			answers_latex = params.answerss_latex[question.num - 1]
@@ -277,30 +307,50 @@
 	}
 
 	// console.log('question', question)
-	$: showExp =
-		expression && !(question.options && question.options.includes('no-exp'))
+	$: {
+		showExp =
+			(question.expression_latex &&
+				!(question.options && question.options.includes('no-exp'))) ||
+			(interactive &&
+				question.type === 'result' &&
+				(!question.expression_latex ||
+					(question.options && question.options.includes('no-exp'))))
+	}
 
 	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
 
 	$: enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
 
 	$: {
-		if (
-			interactive &&
-			!question.expression_latex &&
-			question.type !== 'choice' &&
-			question.type !== 'choices'
-		) {
-			expression = '\\ldots'
-		} else {
-			expression = question.expression_latex
+		expression = question.expression_latex
+		if (interactive && !question.answerFields) {
+			if (
+				question.type !== 'choice' &&
+				question.type !== 'choices' &&
+				(!question.expression_latex ||
+					(question.options && question.options.includes('no-exp')))
+			) {
+				expression = '\\ldots'
+			} else {
+				if (question.type === 'result') {
+					expression += '=\\ldots'
+				}
+			}
+		} else if (interactive && question.answerFields) {
+			answerFields = question.answerFields
+			answerFields = $formatLatex(answerFields)
+			answerFields = answerFields.replace(/…/g, addMathfield)
 		}
-		if (interactive && question.type === 'result') expression += '=\\ldots'
+
+		if (interactive && question.prefix) {
+			expression = question.prefix + expression
+		}
+
 		if (expression) {
 			expression = $toMarkup(expression)
-		}
-		if (expression && interactive) {
-			expression = expression.replace(/…/g, addMathfield)
+			if (interactive) {
+				expression = expression.replace(/…/g, addMathfield)
+			}
 		}
 	}
 
@@ -346,32 +396,30 @@
 			{:catch error}
 				{error}
 			{/await}
-		{:else if element === 'expression' && expression}
-			{#if showExp}
-				<div
-					id="expressions"
-					class="my-3 flex flex-col items-center justify-center"
-				>
-					<div id="expression" class="my-3" style="{`font-size:${magnify}rem`}">
-						{@html expression}
-					</div>
-					{#if expression2 && !(!interactive && question.type === 'equation')}
-						<div
-							id="expression2"
-							class="mt-4"
-							style="{`font-size:${magnify}rem`}"
-						>
-							{@html expression2}
-						</div>
-					{/if}
+		{:else if element === 'expression' && expression && showExp}
+			<div
+				id="expressions"
+				class="my-3 flex flex-col items-center justify-center"
+			>
+				<div id="expression" class="my-3" style="{`font-size:${magnify}rem`}">
+					{@html expression}
 				</div>
-			{/if}
+				{#if expression2 && !(!interactive && question.type === 'equation')}
+					<div
+						id="expression2"
+						class="mt-4"
+						style="{`font-size:${magnify}rem`}"
+					>
+						{@html expression2}
+					</div>
+				{/if}
+			</div>
 		{:else if element === 'choices' && question.choices}
 			<div class="mt-3 flex flex-wrap justify-around">
 				{#each question.choices as choice, i}
 					<button
 						class="rounded-lg  m-2 p-1"
-						style="{`border: 4px solid ${
+						style="{`min-width:4em;border: 4px solid ${
 							selecteds && i < selecteds.length && selecteds[i]
 								? 'var(--mdc-theme-primary)'
 								: 'var(--mdc-theme-secondary)'
@@ -407,4 +455,25 @@
 			{/if}
 		{/if}
 	{/each}
+	{#if answerFields}
+		<div
+			id="{'answerFieldss' + (masked ? '-masked' : '')}"
+			class="my-3 flex flex-col items-center justify-center"
+		>
+			<div
+				id="{'answerFields' + (masked ? '-masked' : '')}"
+				class="my-3"
+				style="{`font-size:${magnify}rem`}"
+			>
+				{@html answerFields}
+			</div>
+		</div>
+	{/if}
+	{#if interactive && fieldsNb > 1}
+		<div>
+			<button class="rounded-lg  m-2 p-1" on:click="{commit.f}">
+				Valider
+			</button>
+		</div>
+	{/if}
 </div>

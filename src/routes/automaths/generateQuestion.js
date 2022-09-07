@@ -28,6 +28,7 @@ export default function generateQuestion(
 	let imageCorrection
 	let unit
 	let tests
+	let answerFields
 
 	const { options = [] } = question
 
@@ -42,8 +43,7 @@ export default function generateQuestion(
 	const generatedImages = generateds ? generateds.map((g) => g.image) : []
 
 	// les regex correpondant aux expressions à évaluer
-
-	const regexEval = /\[([.+]*)_([^_]*?)(_(.+?))??_\]/g
+	const regexEval = /\[([.+(]*)_([^_]*?)(_(.+?))??_\]/g
 
 	// [° °] : simple mise en forme LaTeX
 	const regexLatex = /\[°(.*?)°\]/g
@@ -71,6 +71,12 @@ export default function generateQuestion(
 		if (modifiers.includes('+') && !e.isOpposite()) {
 			e = e.positive()
 		}
+
+		if (modifiers.includes('(') && (e.isOpposite() || e.isPositive() )) {
+			e = e.bracket()
+		}
+
+
 		return e
 	}
 
@@ -500,6 +506,7 @@ export default function generateQuestion(
 	correctionDetails = getSelectedElement('correctionDetails')
 	correctionFormat = getSelectedElement('correctionFormat')
 	unit = getSelectedElement('units')
+	answerFields = getSelectedElement('answerFields')
 
 	let correct, uncorrect, answer
 	if (correctionFormat) {
@@ -514,6 +521,7 @@ export default function generateQuestion(
 	correct = replaceVariables(correct)
 	uncorrect = replaceVariables(uncorrect)
 	answer = replaceVariables(answer)
+	answerFields = replaceVariables(answerFields)
 
 	solutions = evaluate(solutions)
 	correctionDetails = toLatex(correctionDetails)
@@ -542,9 +550,9 @@ export default function generateQuestion(
 				const found = solution.match(regex)
 				if (found) {
 					const test = math(found[1]).eval()
-					const success = math(found[2]).eval().value.toNumber()
-					const failure = math(found[3]).eval().value.toNumber()
-					return test.isTrue() ? success : failure
+					const success = math(replaceVariables(found[2]))
+					const failure = math(replaceVariables(found[3]))
+					return test.isTrue() ? success.string : failure.string
 				}
 			}
 			// if (question.type === 'choice' && typeof solution === 'number') {
@@ -674,6 +682,8 @@ export default function generateQuestion(
 			'choices',
 		],
 	}
+
+	
 	if (choices) generated.choices = choices
 	if (solutions) generated.solutions = solutions
 	if (details) generated.details = details
@@ -688,6 +698,8 @@ export default function generateQuestion(
 	if (correctionDetails) generated.correctionDetails = correctionDetails
 	if (expression2) generated.expression2 = expression2
 	if (testAnswer) generated.testAnswer = testAnswer
+	if (answerFields) generated.answerFields = answerFields
+	
 	if (image) {
 		generated.image = image
 		// generated.imageBase64P = fetchImage(image)

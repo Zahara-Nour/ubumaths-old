@@ -9,6 +9,7 @@ import {
 	CE1,
 	CE2,
 	TROISIEME,
+	PREMIERE_SPE_MATHS,
 } from '$lib/grades.js'
 import { color1, color2, color3 } from '$lib/colors'
 import { correct_color } from '../../lib/colors'
@@ -17,6 +18,10 @@ const UNKNOWN = 'a determiner'
 // OPTIONS
 //
 // pour les réponses de l'utilisateur :
+
+// l'ordre des solutions n'est pas toujours important
+// solutions-order-not-important
+
 // require et no-penalty :
 // require : la réponse est considérée fausse si ce critère n'est pas respecté
 //           si require n'est pas utilisé, le critère correspondant non respecté
@@ -14162,1113 +14167,6 @@ const questions = {
 			],
 		},
 	},
-
-	Fonctions: {
-		'Fonctions affines': {
-			Apprivoiser: [
-				{
-					description: 'Reconnaître une fonction affine',
-					subdescription: "A partir de l'expression algébrique",
-					enounces: ['Cette fonction est-elle une fonction affine ?'],
-					expressions: [
-						'f(x)=[_&1x_][+_&2_]',
-						'f(x)=&2[+_&1x_]',
-						'f(x)={[_&1/&3_]}x[+_&2/&4_]',
-						'f(x)=&2/&4+{[_abs(&1)/&3_]}x',
-						'f(x)=[_&1x_]',
-						'f(x)=&2',
-						'f(x)=[_&1x^2_][+_&2_]',
-						'f(x)=&2[+_&1x^3_]',
-						'f(x)=&1/x[+_&2_]',
-					],
-					variables: [
-						{
-							'&1': '$er[1;9]',
-							'&2': '$er[1;9]',
-							'&3': '$e[2;9]\\{cd(&1)}',
-							'&4': '$e[2;9]\\{cd(&2)}',
-						},
-					],
-
-					type: 'choice',
-
-					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: ['$$&exp$$ est-elle une fonction affine ? &answer'],
-							answer: " C'est une fonction affine ? &answer",
-						},
-					],
-
-					solutions: [[0], [0], [0], [0], [0], [0], [1], [1], [1]],
-					options: ['no-shuffle-choices'],
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-				{
-					description: 'Reconnaître une fonction affine',
-					subdescription: 'A partir de la représentation graphique',
-					enounces: ['Cette courbe représente-t-elle une fonction affine ?'],
-					images: [
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-0-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-1-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-2-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-3-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-4-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-5-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-6-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-7-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-8-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-9-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-10-600.png',
-						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-11-600.png',
-					],
-
-					type: 'choice',
-					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: [
-								"Est-ce la courbe représentative d'une fonction affine ? &answer",
-							],
-							answer: ' &answer',
-						},
-					],
-
-					solutions: [
-						[0],
-						[0],
-						[0],
-						[0],
-						[0],
-						[0],
-						[1],
-						[1],
-						[1],
-						[1],
-						[1],
-						[1],
-					],
-					options: ['no-shuffle-choices'],
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-				{
-					description: 'Vocabulaire des fonctions affines',
-					enounces: [
-						"Dans la fonction affine $$f(x)=&1x[+_&2_]$$, le nombre $$&1$$ s'appelle ...",
-						"Dans la fonction affine $$f(x)=&1x[+_&2_]$$, le nombre $$&2$$ s'appelle ...",
-						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&1$$ s'appelle ...",
-						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&2$$ s'appelle ...",
-					],
-					expressions: [
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&2[+_&1_]x',
-						'f(x)=&2[+_&1_]x',
-					],
-
-					variables: [
-						{
-							'&1': '$er[2;9]',
-							'&2': '$e[1;9]\\{&1;-(&1)}',
-						},
-					],
-					type: 'choice',
-					choices: [
-						[
-							{ text: 'le coefficient directeur' },
-							{ text: "l'ordonnée à l'origine " },
-						],
-					],
-					options: ['no-exp', 'no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								"Dans la fonction affine $$&exp$$, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine $$&exp$$, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine $$&exp$$, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine $$&exp$$, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-					],
-
-					solutions: [[0], [1], [0], [1]],
-
-					defaultDelay: 10,
-					grade: TROISIEME,
-				},
-				{
-					description: "Déterminer l'ordonnée à l'origine",
-					subdescription: 'Graphiquement',
-					enounces: [
-						"Quelle est l'ordonnée à l'origine de cette fonction affine ?",
-					],
-					// expressions:['1'],
-					images: [
-						'fonctions-affines/exemples/fonction_affine-0-600.png',
-						'fonctions-affines/exemples/fonction_affine-1-600.png',
-						'fonctions-affines/exemples/fonction_affine-2-600.png',
-						'fonctions-affines/exemples/fonction_affine-3-600.png',
-						'fonctions-affines/exemples/fonction_affine-4-600.png',
-						'fonctions-affines/exemples/fonction_affine-5-600.png',
-						'fonctions-affines/exemples/fonction_affine-6-600.png',
-						'fonctions-affines/exemples/fonction_affine-7-600.png',
-						'fonctions-affines/exemples/fonction_affine-8-600.png',
-						'fonctions-affines/exemples/fonction_affine-9-600.png',
-						'fonctions-affines/exemples/fonction_affine-10-600.png',
-						'fonctions-affines/exemples/fonction_affine-11-600.png',
-						'fonctions-affines/exemples/fonction_affine-12-600.png',
-						'fonctions-affines/exemples/fonction_affine-13-600.png',
-						'fonctions-affines/exemples/fonction_affine-14-600.png',
-						'fonctions-affines/exemples/fonction_affine-15-600.png',
-						'fonctions-affines/exemples/fonction_affine-16-600.png',
-						'fonctions-affines/exemples/fonction_affine-17-600.png',
-						'fonctions-affines/exemples/fonction_affine-18-600.png',
-						'fonctions-affines/exemples/fonction_affine-19-600.png',
-						'fonctions-affines/exemples/fonction_affine-20-600.png',
-						'fonctions-affines/exemples/fonction_affine-21-600.png',
-						'fonctions-affines/exemples/fonction_affine-22-600.png',
-						'fonctions-affines/exemples/fonction_affine-23-600.png',
-						'fonctions-affines/exemples/fonction_affine-24-600.png',
-						'fonctions-affines/exemples/fonction_affine-25-600.png',
-						'fonctions-affines/exemples/fonction_affine-26-600.png',
-						'fonctions-affines/exemples/fonction_affine-27-600.png',
-						'fonctions-affines/exemples/fonction_affine-28-600.png',
-						'fonctions-affines/exemples/fonction_affine-29-600.png',
-					],
-					imagesCorrection: [
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-0-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-1-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-2-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-3-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-4-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-5-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-6-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-7-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-8-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-9-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-10-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-11-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-12-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-13-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-14-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-15-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-16-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-17-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-18-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-19-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-20-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-21-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-22-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-23-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-24-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-25-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-26-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-27-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-28-600.png',
-						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-29-600.png',
-					],
-					solutions: [
-						['0'],
-						['2'],
-						['0'],
-						['2'],
-						['-2'],
-						['-1'],
-						['0'],
-						['1'],
-						['0'],
-						['1'],
-						['-2'],
-						['0'],
-						['2'],
-						['1'],
-						['-2'],
-						['1'],
-						['2'],
-						['0'],
-						['-2'],
-						['-2'],
-						['1'],
-						['-2'],
-						['1'],
-						['0'],
-						['0'],
-						['-1'],
-						['0'],
-						['2'],
-						['0'],
-						['0'],
-					],
-					correctionFormat: [
-						{
-							correct: ["L'ordonnée à l'origine est &answer."],
-						},
-					],
-					options: ['no-exp'],
-
-					defaultDelay: 10,
-					grade: SECONDE,
-				},
-				{
-					description: 'Déterminer le coefficient directeur',
-					subdescription: 'Graphiquement',
-					enounces: [
-						'Quel est le coefficient directeur de cette fonction affine ?',
-					],
-					// expressions:['1'],
-					images: [
-						'fonctions-affines/exemples/fonction_affine-0-600.png',
-						'fonctions-affines/exemples/fonction_affine-1-600.png',
-						'fonctions-affines/exemples/fonction_affine-2-600.png',
-						'fonctions-affines/exemples/fonction_affine-3-600.png',
-						'fonctions-affines/exemples/fonction_affine-4-600.png',
-						'fonctions-affines/exemples/fonction_affine-5-600.png',
-						'fonctions-affines/exemples/fonction_affine-6-600.png',
-						'fonctions-affines/exemples/fonction_affine-7-600.png',
-						'fonctions-affines/exemples/fonction_affine-8-600.png',
-						'fonctions-affines/exemples/fonction_affine-9-600.png',
-						'fonctions-affines/exemples/fonction_affine-10-600.png',
-						'fonctions-affines/exemples/fonction_affine-11-600.png',
-						'fonctions-affines/exemples/fonction_affine-12-600.png',
-						'fonctions-affines/exemples/fonction_affine-13-600.png',
-						'fonctions-affines/exemples/fonction_affine-14-600.png',
-						'fonctions-affines/exemples/fonction_affine-15-600.png',
-						'fonctions-affines/exemples/fonction_affine-16-600.png',
-						'fonctions-affines/exemples/fonction_affine-17-600.png',
-						'fonctions-affines/exemples/fonction_affine-18-600.png',
-						'fonctions-affines/exemples/fonction_affine-19-600.png',
-						'fonctions-affines/exemples/fonction_affine-20-600.png',
-						'fonctions-affines/exemples/fonction_affine-21-600.png',
-						'fonctions-affines/exemples/fonction_affine-22-600.png',
-						'fonctions-affines/exemples/fonction_affine-23-600.png',
-						'fonctions-affines/exemples/fonction_affine-24-600.png',
-						'fonctions-affines/exemples/fonction_affine-25-600.png',
-						'fonctions-affines/exemples/fonction_affine-26-600.png',
-						'fonctions-affines/exemples/fonction_affine-27-600.png',
-						'fonctions-affines/exemples/fonction_affine-28-600.png',
-						'fonctions-affines/exemples/fonction_affine-29-600.png',
-					],
-					imagesCorrection: [
-						'fonctions-affines/coef-directeur/correction_coef_directeur-0-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-1-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-2-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-3-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-4-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-5-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-6-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-7-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-8-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-9-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-10-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-11-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-12-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-13-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-14-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-15-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-16-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-17-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-18-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-19-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-20-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-21-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-22-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-23-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-24-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-25-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-26-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-27-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-28-600.png',
-						'fonctions-affines/coef-directeur/correction_coef_directeur-29-600.png',
-					],
-					solutions: [
-						['-3'],
-						['3'],
-						['-2'],
-						['-2'],
-						['-4'],
-						['2'],
-						['4'],
-						['4'],
-						['-4'],
-						['2'],
-						['-1'],
-						['3'],
-						['2'],
-						['-2'],
-						['-3'],
-						['1/2'],
-						['-3/2'],
-						['-4/3'],
-						['4/3'],
-						['2/3'],
-						['-4/3'],
-						['-2/3'],
-						['2/3'],
-						['-3/2'],
-						['-1/3'],
-						['-1/2'],
-						['-1/2'],
-						['3/4'],
-						['-3/4'],
-						['2/3'],
-					],
-					correctionFormat: [
-						{
-							correct: ['Le coefficent directeur est &answer.'],
-						},
-					],
-					options: ['no-exp'],
-
-					defaultDelay: 20,
-					grade: SECONDE,
-				},
-				{
-					description: 'Déterminer une image par une fonction affine',
-					enounces: ["Quelle est l'image de $$&3$$ par la fonction affine :"],
-					expressions: ['f(x)=&1x[+_&2_]'],
-
-					variables: [
-						{
-							'&1': '$er[2;9]',
-							'&2': '$er[1;9]',
-							'&3': '$er[0;9]',
-							'&4': '&1*(&3)+(&2)',
-						},
-					],
-					type: 'rewrite',
-					solutions: [['[_&4_]']],
-
-					correctionFormat: [
-						{
-							correct: [
-								"L'image de $$&3$$ par la fonction $$&exp$$ est &answer.",
-							],
-							answer: "L'image de $$&3$$ est &answer.",
-						},
-					],
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-				{
-					description:
-						"Déterminer si un point appartient à la courbe représentative d'un fonction affine",
-					enounces: [
-						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentatice de la fonction affine :',
-					],
-					expressions: [
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&1x[+_&2_]', // pour correspondre au nombre de variables
-					],
-
-					variables: [
-						{
-							'&1': '$er[2;6]',
-							'&2': '$er[1;9]',
-							'&3': '$er[0;5]',
-							'&4': '&1*(&3)+(&2)',
-						},
-						{
-							'&1': '$er[2;6]',
-							'&2': '$er[1;9]',
-							'&3': '$er[0;5]',
-							'&4': '&1*(&3)+(&2)+($er[1;3])',
-						},
-					],
-					type: 'choice',
-					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'&answer, le point $$A(&3;[_&4_])$$ est sur la courbe représentative de la fonction $$&exp$$.',
-							],
-							answer: "&answer, le point $$A$$ n'appartient pas à la courbe.",
-						},
-						{
-							correct: [
-								"&answer, le point $$A(&3;[_&4_])$$ n'est pas sur la courbe représentative de la fonction $$&exp$$.",
-							],
-							answer: '&answer, le point $$A$$ appartient à la courbe.',
-						},
-					],
-
-					solutions: [[0], [1]],
-
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-			],
-			'Variations-Signe': [
-				{
-					description: "Déterminer le sens de variation d'une fonction affine",
-					enounces: ['Quel est le sens de variation de cette fonction?'],
-					expressions: [
-						'f(x)=&1x[+_&4_]',
-						'f(x)=-&1x[+_&4_]',
-						'f(x)=[_&4_]+&1x',
-						'f(x)=[_&4_]-&1x',
-						'f(x)={&3}x[+_&7_]',
-						'f(x)={-&3}x[+_&7_]',
-						'f(x)=[_&7_]+{&3}x',
-						'f(x)=[_&7_]-{&3}x',
-					],
-					variables: [
-						{
-							'&1': '$e[2;9]',
-							'&2': '$e[1;9]\\{&1}',
-							'&3': '$l{-1;1}',
-							'&4': '&2*(&3)',
-						},
-						{
-							'&1': '$e[2;9]',
-							'&2': '$e[1;9]\\{&1}',
-							'&3': '$l{-1;1}',
-							'&4': '&2*(&3)',
-						},
-						{
-							'&1': '$e[2;9]',
-							'&2': '$e[1;9]\\{&1}',
-							'&3': '$l{-1;1}',
-							'&4': '&2*(&3)',
-						},
-						{
-							'&1': '$e[2;9]',
-							'&2': '$e[1;9]\\{&1}',
-							'&3': '$l{-1;1}',
-							'&4': '&2*(&3)',
-						},
-
-						{
-							'&1': '$e[1;9]',
-							'&2': '$e[2;9]\\{cd(&1)}',
-							'&3': '&1/&2',
-							'&4': '$e[1;9]',
-							'&5': '$e[2;9]\\{cd(&4)}',
-							'&6': '$l{-1;1}',
-							'&7': '&6*&4/&5',
-						},
-						{
-							'&1': '$e[1;9]',
-							'&2': '$e[2;9]\\{cd(&1)}',
-							'&3': '&1/&2',
-							'&4': '$e[1;9]',
-							'&5': '$e[2;9]\\{cd(&4)}',
-							'&6': '$l{-1;1}',
-							'&7': '&6*&4/&5',
-						},
-						{
-							'&1': '$e[1;9]',
-							'&2': '$e[2;9]\\{cd(&1)}',
-							'&3': '&1/&2',
-							'&4': '$e[1;9]',
-							'&5': '$e[2;9]\\{cd(&4)}',
-							'&6': '$l{-1;1}',
-							'&7': '&6*&4/&5',
-						},
-						{
-							'&1': '$e[1;9]',
-							'&2': '$e[2;9]\\{cd(&1)}',
-							'&3': '&1/&2',
-							'&4': '$e[1;9]',
-							'&5': '$e[2;9]\\{cd(&4)}',
-							'&6': '$l{-1;1}',
-							'&7': '&6*&4/&5',
-						},
-					],
-
-					choices: [[{ text: 'croissante' }, { text: 'décroissante' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-						{
-							correct: [
-								'La fonction $$&exp$$ est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction $$&exp$$ est &answer.',
-						},
-					],
-					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
-					type: 'choice',
-					options: ['no-shuffle-choices'],
-					defaultDelay: 10,
-					grade: TROISIEME,
-				},
-				{
-					description:
-						'Déterminer si deux fonctions affines ont des droites représentatives parallèles',
-					enounces: [
-						'Les droites représentatives de ces 2 fonctions affines sont-elles parallèles?',
-					],
-					expressions: ['f(x)=&1x[+_&2_]'],
-					expressions2: [
-						'g(x)=&1x[+_&3_]',
-						'g(x)=&3[+_&1_]x',
-						'g(x)=&3x[+_&2_]',
-						'g(x)=&2[+_&3_]x',
-						'g(x)=[_-(&1)_]x[+_&3_]',
-						'g(x)=&3[+_-(&1)_]x',
-					],
-					variables: [
-						{
-							'&1': '$er[2;9]',
-							'&2': '$e[1;9]\\{&1}',
-							'&3': '$er[2;9]',
-						},
-					],
-					type: 'choice',
-					choices: [
-						[{ text: 'parallèles' }, { text: '<b>non</b> parallèles' }],
-					],
-					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'Les droites représentatives des fonctions $$&exp$$ et $$&exp2$$ sont &answer.',
-							],
-							answer: 'Les droites sont &answer.',
-						},
-					],
-
-					solutions: [[0], [0], [1], [1], [1], [1]],
-
-					defaultDelay: 10,
-					grade: TROISIEME,
-				},
-				{
-					description: "Reconnaître le tableau de signe d'une fonction affine",
-					enounces: [
-						'Quel est le tableau de signe correspondant à la fonction affine:',
-					],
-					expressions: [
-						'f(x)=-6x+7',
-						'f(x)=-9x-1',
-						'f(x)=-5x+9',
-						'f(x)=3x+3',
-						'f(x)=7x-8',
-						'f(x)=-2x-4',
-						'f(x)=6x+8',
-						'f(x)=4x+9',
-						'f(x)=-7x+2',
-						'f(x)=2x+5',
-						'f(x)=8x-1',
-						'f(x)=-4x',
-						'f(x)=-5x-1',
-						'f(x)=-x+7',
-						'f(x)=x-8',
-						'f(x)=-7x+6',
-						'f(x)=x',
-						'f(x)=-3x+4',
-						'f(x)=-5x-5',
-						'f(x)=5x-7',
-					],
-
-					type: 'choice',
-					choices: [
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-0-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-0-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-1-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-1-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-2-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-2-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-3-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-3-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-4-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-4-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-5-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-5-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-6-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-6-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-7-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-7-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-8-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-8-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-9-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-9-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-10-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-10-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-11-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-11-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-12-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-12-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-13-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-13-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-14-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-14-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-15-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-15-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-16-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-16-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-17-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-17-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-18-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-18-600.png',
-							},
-						],
-						[
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-19-600.png',
-							},
-							{
-								image:
-									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-19-600.png',
-							},
-						],
-					],
-					correctionFormat: [
-						{
-							correct: [
-								'Le tableau de signe de la fonction $$&exp$$ est :',
-								'image',
-							],
-							answer: 'image',
-						},
-					],
-
-					solutions: [[0]],
-
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-			],
-			Equations: [
-				{
-					description: "Racine d'une fonction affine",
-					enounces: [
-						"Pour quelle valeur de $$x$$ la fonction $$f$$ s'annulle-t-elle?",
-					],
-					expressions: ['f(x)=&1x[+_&2_]', 'f(x)=&2[+_&1_]x'],
-					variables: [
-						{
-							'&1': '$er[2;9]',
-							'&2': '$er[1;9]',
-						},
-					],
-					type: 'rewrite',
-					correctionFormat: [
-						{
-							correct: ["La fonction $$&exp$$ s'annule en &answer"],
-						},
-					],
-					solutions: [['[_-(&2)/(&1)_]']],
-					defaultDelay: 20,
-					grade: TROISIEME,
-				},
-				{
-					description: "Résoudre l'équation $$f(x)=k$$",
-					subdescription: 'Graphiquement',
-					enounces: ["Résoudre graphiquement l'équation $$f(x)=&1$$"],
-					expressions: ['f(x)=&1'],
-					variables: [
-						{
-							'&1': '-3',
-						},
-						{
-							'&1': '-1',
-						},
-						{
-							'&1': '2',
-						},
-						{
-							'&1': '-4',
-						},
-						{
-							'&1': '2',
-						},
-						{
-							'&1': '-1',
-						},
-						{
-							'&1': '4',
-						},
-						{
-							'&1': '-3',
-						},
-						{
-							'&1': '4',
-						},
-						{
-							'&1': '1',
-						},
-						{
-							'&1': '1',
-						},
-						{
-							'&1': '3',
-						},
-						{
-							'&1': '-4',
-						},
-						{
-							'&1': '-1',
-						},
-						{
-							'&1': '-2',
-						},
-						{
-							'&1': '2',
-						},
-						{
-							'&1': '-1',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '2',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '-3',
-						},
-						{
-							'&1': '-2',
-						},
-						{
-							'&1': '1',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '-2',
-						},
-						{
-							'&1': '2',
-						},
-						{
-							'&1': '0',
-						},
-						{
-							'&1': '2',
-						},
-					],
-					images: [
-						'fonctions-affines/exemples/fonction_affine-0-600.png',
-						'fonctions-affines/exemples/fonction_affine-1-600.png',
-						'fonctions-affines/exemples/fonction_affine-2-600.png',
-						'fonctions-affines/exemples/fonction_affine-3-600.png',
-						'fonctions-affines/exemples/fonction_affine-4-600.png',
-						'fonctions-affines/exemples/fonction_affine-5-600.png',
-						'fonctions-affines/exemples/fonction_affine-6-600.png',
-						'fonctions-affines/exemples/fonction_affine-7-600.png',
-						'fonctions-affines/exemples/fonction_affine-8-600.png',
-						'fonctions-affines/exemples/fonction_affine-9-600.png',
-						'fonctions-affines/exemples/fonction_affine-10-600.png',
-						'fonctions-affines/exemples/fonction_affine-11-600.png',
-						'fonctions-affines/exemples/fonction_affine-12-600.png',
-						'fonctions-affines/exemples/fonction_affine-13-600.png',
-						'fonctions-affines/exemples/fonction_affine-14-600.png',
-						'fonctions-affines/exemples/fonction_affine-15-600.png',
-						'fonctions-affines/exemples/fonction_affine-16-600.png',
-						'fonctions-affines/exemples/fonction_affine-17-600.png',
-						'fonctions-affines/exemples/fonction_affine-18-600.png',
-						'fonctions-affines/exemples/fonction_affine-19-600.png',
-						'fonctions-affines/exemples/fonction_affine-20-600.png',
-						'fonctions-affines/exemples/fonction_affine-21-600.png',
-						'fonctions-affines/exemples/fonction_affine-22-600.png',
-						'fonctions-affines/exemples/fonction_affine-23-600.png',
-						'fonctions-affines/exemples/fonction_affine-24-600.png',
-						'fonctions-affines/exemples/fonction_affine-25-600.png',
-						'fonctions-affines/exemples/fonction_affine-26-600.png',
-						'fonctions-affines/exemples/fonction_affine-27-600.png',
-						'fonctions-affines/exemples/fonction_affine-28-600.png',
-						'fonctions-affines/exemples/fonction_affine-29-600.png',
-					],
-					imagesCorrection: [
-						'fonctions-affines/equation/correction_equation-0-600.png',
-						'fonctions-affines/equation/correction_equation-1-600.png',
-						'fonctions-affines/equation/correction_equation-2-600.png',
-						'fonctions-affines/equation/correction_equation-3-600.png',
-						'fonctions-affines/equation/correction_equation-4-600.png',
-						'fonctions-affines/equation/correction_equation-5-600.png',
-						'fonctions-affines/equation/correction_equation-6-600.png',
-						'fonctions-affines/equation/correction_equation-7-600.png',
-						'fonctions-affines/equation/correction_equation-8-600.png',
-						'fonctions-affines/equation/correction_equation-9-600.png',
-						'fonctions-affines/equation/correction_equation-10-600.png',
-						'fonctions-affines/equation/correction_equation-11-600.png',
-						'fonctions-affines/equation/correction_equation-12-600.png',
-						'fonctions-affines/equation/correction_equation-13-600.png',
-						'fonctions-affines/equation/correction_equation-14-600.png',
-						'fonctions-affines/equation/correction_equation-15-600.png',
-						'fonctions-affines/equation/correction_equation-16-600.png',
-						'fonctions-affines/equation/correction_equation-17-600.png',
-						'fonctions-affines/equation/correction_equation-18-600.png',
-						'fonctions-affines/equation/correction_equation-19-600.png',
-						'fonctions-affines/equation/correction_equation-20-600.png',
-						'fonctions-affines/equation/correction_equation-21-600.png',
-						'fonctions-affines/equation/correction_equation-22-600.png',
-						'fonctions-affines/equation/correction_equation-23-600.png',
-						'fonctions-affines/equation/correction_equation-24-600.png',
-						'fonctions-affines/equation/correction_equation-25-600.png',
-						'fonctions-affines/equation/correction_equation-26-600.png',
-						'fonctions-affines/equation/correction_equation-27-600.png',
-						'fonctions-affines/equation/correction_equation-28-600.png',
-						'fonctions-affines/equation/correction_equation-29-600.png',
-					],
-					solutions: [
-						['1'],
-						['-1'],
-						['-1'],
-						['3'],
-						['-1'],
-						['0'],
-						['1'],
-						['-1'],
-						['-1'],
-						['0'],
-						['-3'],
-						['1'],
-						['-3'],
-						['1'],
-						['0'],
-						['2'],
-						['2'],
-						['0'],
-						['3'],
-						['0'],
-						['3'],
-						['0'],
-						['0'],
-						['0'],
-						['0'],
-						['-2'],
-						['4'],
-						['0'],
-						['0'],
-						['3'],
-					],
-					correctionFormat: [
-						{
-							correct: ["La solution de l'équation $$&exp$$ est &answer."],
-							answer: 'La solution est &answer.',
-						},
-					],
-					options: ['no-exp'],
-
-					defaultDelay: 20,
-					grade: SECONDE,
-				},
-			],
-		},
-	},
 	'Calcul littéral': {
 		Calculs: {
 			'Par substitution': [
@@ -19241,6 +18139,1760 @@ const questions = {
 					type: 'equation',
 					defaultDelay: 30,
 					grade: QUATRIEME,
+				},
+			],
+		},
+	},
+
+	Fonctions: {
+		'Fonctions affines': {
+			Apprivoiser: [
+				{
+					description: 'Reconnaître une fonction affine',
+					subdescription: "A partir de l'expression algébrique",
+					enounces: ['Cette fonction est-elle une fonction affine ?'],
+					expressions: [
+						'f(x)=[_&1x_][+_&2_]',
+						'f(x)=&2[+_&1x_]',
+						'f(x)={[_&1/&3_]}x[+_&2/&4_]',
+						'f(x)=&2/&4+{[_abs(&1)/&3_]}x',
+						'f(x)=[_&1x_]',
+						'f(x)=&2',
+						'f(x)=[_&1x^2_][+_&2_]',
+						'f(x)=&2[+_&1x^3_]',
+						'f(x)=&1/x[+_&2_]',
+					],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$er[1;9]',
+							'&3': '$e[2;9]\\{cd(&1)}',
+							'&4': '$e[2;9]\\{cd(&2)}',
+						},
+					],
+
+					type: 'choice',
+
+					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
+					correctionFormat: [
+						{
+							correct: ['$$&exp$$ est-elle une fonction affine ? &answer'],
+							answer: " C'est une fonction affine ? &answer",
+						},
+					],
+
+					solutions: [[0], [0], [0], [0], [0], [0], [1], [1], [1]],
+					options: ['no-shuffle-choices'],
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+				{
+					description: 'Reconnaître une fonction affine',
+					subdescription: 'A partir de la représentation graphique',
+					enounces: ['Cette courbe représente-t-elle une fonction affine ?'],
+					images: [
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-0-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-1-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-2-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-3-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-4-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-5-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-6-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-7-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-8-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-9-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-10-600.png',
+						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-11-600.png',
+					],
+
+					type: 'choice',
+					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
+					correctionFormat: [
+						{
+							correct: [
+								"Est-ce la courbe représentative d'une fonction affine ? &answer",
+							],
+							answer: ' &answer',
+						},
+					],
+
+					solutions: [
+						[0],
+						[0],
+						[0],
+						[0],
+						[0],
+						[0],
+						[1],
+						[1],
+						[1],
+						[1],
+						[1],
+						[1],
+					],
+					options: ['no-shuffle-choices'],
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+				{
+					description: 'Vocabulaire des fonctions affines',
+					enounces: [
+						"Dans la fonction affine $$f(x)=&1x[+_&2_]$$, le nombre $$&1$$ s'appelle ...",
+						"Dans la fonction affine $$f(x)=&1x[+_&2_]$$, le nombre $$&2$$ s'appelle ...",
+						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&1$$ s'appelle ...",
+						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&2$$ s'appelle ...",
+					],
+					expressions: [
+						'f(x)=&1x[+_&2_]',
+						'f(x)=&1x[+_&2_]',
+						'f(x)=&2[+_&1_]x',
+						'f(x)=&2[+_&1_]x',
+					],
+
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$e[1;9]\\{&1;-(&1)}',
+						},
+					],
+					type: 'choice',
+					choices: [
+						[
+							{ text: 'le coefficient directeur' },
+							{ text: "l'ordonnée à l'origine " },
+						],
+					],
+					options: ['no-exp', 'no-shuffle-choices'],
+					correctionFormat: [
+						{
+							correct: [
+								"Dans la fonction affine $$&exp$$, le nombre $$&1$$ s'appelle &answer.",
+							],
+							answer: "Le nombre s'appelle &answer.",
+						},
+						{
+							correct: [
+								"Dans la fonction affine $$&exp$$, le nombre $$&2$$ s'appelle &answer.",
+							],
+							answer: "Le nombre s'appelle &answer.",
+						},
+						{
+							correct: [
+								"Dans la fonction affine $$&exp$$, le nombre $$&1$$ s'appelle &answer.",
+							],
+							answer: "Le nombre s'appelle &answer.",
+						},
+						{
+							correct: [
+								"Dans la fonction affine $$&exp$$, le nombre $$&2$$ s'appelle &answer.",
+							],
+							answer: "Le nombre s'appelle &answer.",
+						},
+					],
+
+					solutions: [[0], [1], [0], [1]],
+
+					defaultDelay: 10,
+					grade: TROISIEME,
+				},
+				{
+					description: "Déterminer l'ordonnée à l'origine",
+					subdescription: 'Graphiquement',
+					enounces: [
+						"Quelle est l'ordonnée à l'origine de cette fonction affine ?",
+					],
+					// expressions:['1'],
+					images: [
+						'fonctions-affines/exemples/fonction_affine-0-600.png',
+						'fonctions-affines/exemples/fonction_affine-1-600.png',
+						'fonctions-affines/exemples/fonction_affine-2-600.png',
+						'fonctions-affines/exemples/fonction_affine-3-600.png',
+						'fonctions-affines/exemples/fonction_affine-4-600.png',
+						'fonctions-affines/exemples/fonction_affine-5-600.png',
+						'fonctions-affines/exemples/fonction_affine-6-600.png',
+						'fonctions-affines/exemples/fonction_affine-7-600.png',
+						'fonctions-affines/exemples/fonction_affine-8-600.png',
+						'fonctions-affines/exemples/fonction_affine-9-600.png',
+						'fonctions-affines/exemples/fonction_affine-10-600.png',
+						'fonctions-affines/exemples/fonction_affine-11-600.png',
+						'fonctions-affines/exemples/fonction_affine-12-600.png',
+						'fonctions-affines/exemples/fonction_affine-13-600.png',
+						'fonctions-affines/exemples/fonction_affine-14-600.png',
+						'fonctions-affines/exemples/fonction_affine-15-600.png',
+						'fonctions-affines/exemples/fonction_affine-16-600.png',
+						'fonctions-affines/exemples/fonction_affine-17-600.png',
+						'fonctions-affines/exemples/fonction_affine-18-600.png',
+						'fonctions-affines/exemples/fonction_affine-19-600.png',
+						'fonctions-affines/exemples/fonction_affine-20-600.png',
+						'fonctions-affines/exemples/fonction_affine-21-600.png',
+						'fonctions-affines/exemples/fonction_affine-22-600.png',
+						'fonctions-affines/exemples/fonction_affine-23-600.png',
+						'fonctions-affines/exemples/fonction_affine-24-600.png',
+						'fonctions-affines/exemples/fonction_affine-25-600.png',
+						'fonctions-affines/exemples/fonction_affine-26-600.png',
+						'fonctions-affines/exemples/fonction_affine-27-600.png',
+						'fonctions-affines/exemples/fonction_affine-28-600.png',
+						'fonctions-affines/exemples/fonction_affine-29-600.png',
+					],
+					imagesCorrection: [
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-0-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-1-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-2-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-3-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-4-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-5-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-6-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-7-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-8-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-9-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-10-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-11-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-12-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-13-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-14-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-15-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-16-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-17-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-18-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-19-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-20-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-21-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-22-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-23-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-24-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-25-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-26-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-27-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-28-600.png',
+						'fonctions-affines/ordonnee-origine/correction_ordonnee_origine-29-600.png',
+					],
+					solutions: [
+						['0'],
+						['2'],
+						['0'],
+						['2'],
+						['-2'],
+						['-1'],
+						['0'],
+						['1'],
+						['0'],
+						['1'],
+						['-2'],
+						['0'],
+						['2'],
+						['1'],
+						['-2'],
+						['1'],
+						['2'],
+						['0'],
+						['-2'],
+						['-2'],
+						['1'],
+						['-2'],
+						['1'],
+						['0'],
+						['0'],
+						['-1'],
+						['0'],
+						['2'],
+						['0'],
+						['0'],
+					],
+					correctionFormat: [
+						{
+							correct: ["L'ordonnée à l'origine est &answer."],
+						},
+					],
+					options: ['no-exp'],
+
+					defaultDelay: 10,
+					grade: SECONDE,
+				},
+				{
+					description: 'Déterminer le coefficient directeur',
+					subdescription: 'Graphiquement',
+					enounces: [
+						'Quel est le coefficient directeur de cette fonction affine ?',
+					],
+					// expressions:['1'],
+					images: [
+						'fonctions-affines/exemples/fonction_affine-0-600.png',
+						'fonctions-affines/exemples/fonction_affine-1-600.png',
+						'fonctions-affines/exemples/fonction_affine-2-600.png',
+						'fonctions-affines/exemples/fonction_affine-3-600.png',
+						'fonctions-affines/exemples/fonction_affine-4-600.png',
+						'fonctions-affines/exemples/fonction_affine-5-600.png',
+						'fonctions-affines/exemples/fonction_affine-6-600.png',
+						'fonctions-affines/exemples/fonction_affine-7-600.png',
+						'fonctions-affines/exemples/fonction_affine-8-600.png',
+						'fonctions-affines/exemples/fonction_affine-9-600.png',
+						'fonctions-affines/exemples/fonction_affine-10-600.png',
+						'fonctions-affines/exemples/fonction_affine-11-600.png',
+						'fonctions-affines/exemples/fonction_affine-12-600.png',
+						'fonctions-affines/exemples/fonction_affine-13-600.png',
+						'fonctions-affines/exemples/fonction_affine-14-600.png',
+						'fonctions-affines/exemples/fonction_affine-15-600.png',
+						'fonctions-affines/exemples/fonction_affine-16-600.png',
+						'fonctions-affines/exemples/fonction_affine-17-600.png',
+						'fonctions-affines/exemples/fonction_affine-18-600.png',
+						'fonctions-affines/exemples/fonction_affine-19-600.png',
+						'fonctions-affines/exemples/fonction_affine-20-600.png',
+						'fonctions-affines/exemples/fonction_affine-21-600.png',
+						'fonctions-affines/exemples/fonction_affine-22-600.png',
+						'fonctions-affines/exemples/fonction_affine-23-600.png',
+						'fonctions-affines/exemples/fonction_affine-24-600.png',
+						'fonctions-affines/exemples/fonction_affine-25-600.png',
+						'fonctions-affines/exemples/fonction_affine-26-600.png',
+						'fonctions-affines/exemples/fonction_affine-27-600.png',
+						'fonctions-affines/exemples/fonction_affine-28-600.png',
+						'fonctions-affines/exemples/fonction_affine-29-600.png',
+					],
+					imagesCorrection: [
+						'fonctions-affines/coef-directeur/correction_coef_directeur-0-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-1-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-2-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-3-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-4-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-5-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-6-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-7-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-8-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-9-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-10-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-11-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-12-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-13-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-14-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-15-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-16-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-17-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-18-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-19-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-20-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-21-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-22-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-23-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-24-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-25-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-26-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-27-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-28-600.png',
+						'fonctions-affines/coef-directeur/correction_coef_directeur-29-600.png',
+					],
+					solutions: [
+						['-3'],
+						['3'],
+						['-2'],
+						['-2'],
+						['-4'],
+						['2'],
+						['4'],
+						['4'],
+						['-4'],
+						['2'],
+						['-1'],
+						['3'],
+						['2'],
+						['-2'],
+						['-3'],
+						['1/2'],
+						['-3/2'],
+						['-4/3'],
+						['4/3'],
+						['2/3'],
+						['-4/3'],
+						['-2/3'],
+						['2/3'],
+						['-3/2'],
+						['-1/3'],
+						['-1/2'],
+						['-1/2'],
+						['3/4'],
+						['-3/4'],
+						['2/3'],
+					],
+					correctionFormat: [
+						{
+							correct: ['Le coefficent directeur est &answer.'],
+						},
+					],
+					options: ['no-exp'],
+
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+				{
+					description: 'Déterminer une image par une fonction affine',
+					enounces: ["Quelle est l'image de $$&3$$ par la fonction affine :"],
+					expressions: ['f(x)=&1x[+_&2_]'],
+
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$er[1;9]',
+							'&3': '$er[0;9]',
+							'&4': '&1*(&3)+(&2)',
+						},
+					],
+					type: 'rewrite',
+					solutions: [['[_&4_]']],
+
+					correctionFormat: [
+						{
+							correct: [
+								"L'image de $$&3$$ par la fonction $$&exp$$ est &answer.",
+							],
+							answer: "L'image de $$&3$$ est &answer.",
+						},
+					],
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+				{
+					description:
+						"Déterminer si un point appartient à la courbe représentative d'un fonction affine",
+					enounces: [
+						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentatice de la fonction affine :',
+					],
+					expressions: [
+						'f(x)=&1x[+_&2_]',
+						'f(x)=&1x[+_&2_]', // pour correspondre au nombre de variables
+					],
+
+					variables: [
+						{
+							'&1': '$er[2;6]',
+							'&2': '$er[1;9]',
+							'&3': '$er[0;5]',
+							'&4': '&1*(&3)+(&2)',
+						},
+						{
+							'&1': '$er[2;6]',
+							'&2': '$er[1;9]',
+							'&3': '$er[0;5]',
+							'&4': '&1*(&3)+(&2)+($er[1;3])',
+						},
+					],
+					type: 'choice',
+					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
+					options: ['no-shuffle-choices'],
+					correctionFormat: [
+						{
+							correct: [
+								'&answer, le point $$A(&3;[_&4_])$$ est sur la courbe représentative de la fonction $$&exp$$.',
+							],
+							answer: "&answer, le point $$A$$ n'appartient pas à la courbe.",
+						},
+						{
+							correct: [
+								"&answer, le point $$A(&3;[_&4_])$$ n'est pas sur la courbe représentative de la fonction $$&exp$$.",
+							],
+							answer: '&answer, le point $$A$$ appartient à la courbe.',
+						},
+					],
+
+					solutions: [[0], [1]],
+
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+			],
+			'Variations-Signe': [
+				{
+					description: "Déterminer le sens de variation d'une fonction affine",
+					enounces: ['Quel est le sens de variation de cette fonction?'],
+					expressions: [
+						'f(x)=&1x[+_&4_]',
+						'f(x)=-&1x[+_&4_]',
+						'f(x)=[_&4_]+&1x',
+						'f(x)=[_&4_]-&1x',
+						'f(x)={&3}x[+_&7_]',
+						'f(x)={-&3}x[+_&7_]',
+						'f(x)=[_&7_]+{&3}x',
+						'f(x)=[_&7_]-{&3}x',
+					],
+					variables: [
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[1;9]\\{&1}',
+							'&3': '$l{-1;1}',
+							'&4': '&2*(&3)',
+						},
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[1;9]\\{&1}',
+							'&3': '$l{-1;1}',
+							'&4': '&2*(&3)',
+						},
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[1;9]\\{&1}',
+							'&3': '$l{-1;1}',
+							'&4': '&2*(&3)',
+						},
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[1;9]\\{&1}',
+							'&3': '$l{-1;1}',
+							'&4': '&2*(&3)',
+						},
+
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '&1/&2',
+							'&4': '$e[1;9]',
+							'&5': '$e[2;9]\\{cd(&4)}',
+							'&6': '$l{-1;1}',
+							'&7': '&6*&4/&5',
+						},
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '&1/&2',
+							'&4': '$e[1;9]',
+							'&5': '$e[2;9]\\{cd(&4)}',
+							'&6': '$l{-1;1}',
+							'&7': '&6*&4/&5',
+						},
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '&1/&2',
+							'&4': '$e[1;9]',
+							'&5': '$e[2;9]\\{cd(&4)}',
+							'&6': '$l{-1;1}',
+							'&7': '&6*&4/&5',
+						},
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '&1/&2',
+							'&4': '$e[1;9]',
+							'&5': '$e[2;9]\\{cd(&4)}',
+							'&6': '$l{-1;1}',
+							'&7': '&6*&4/&5',
+						},
+					],
+
+					choices: [[{ text: 'croissante' }, { text: 'décroissante' }]],
+					correctionFormat: [
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_&1_]$$ est positif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_-&1_]$$ est négatif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_&1_]$$ est positif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_-&1_]$$ est négatif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_&3_]$$ est positif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_-&3_]$$ est négatif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_&3_]$$ est positif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+						{
+							correct: [
+								'La fonction $$&exp$$ est &answer car $$[_-&3_]$$ est négatif.',
+							],
+							answer: 'La fonction $$&exp$$ est &answer.',
+						},
+					],
+					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
+					type: 'choice',
+					options: ['no-shuffle-choices'],
+					defaultDelay: 10,
+					grade: TROISIEME,
+				},
+				{
+					description:
+						'Déterminer si deux fonctions affines ont des droites représentatives parallèles',
+					enounces: [
+						'Les droites représentatives de ces 2 fonctions affines sont-elles parallèles?',
+					],
+					expressions: ['f(x)=&1x[+_&2_]'],
+					expressions2: [
+						'g(x)=&1x[+_&3_]',
+						'g(x)=&3[+_&1_]x',
+						'g(x)=&3x[+_&2_]',
+						'g(x)=&2[+_&3_]x',
+						'g(x)=[_-(&1)_]x[+_&3_]',
+						'g(x)=&3[+_-(&1)_]x',
+					],
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$e[1;9]\\{&1}',
+							'&3': '$er[2;9]',
+						},
+					],
+					type: 'choice',
+					choices: [
+						[{ text: 'parallèles' }, { text: '<b>non</b> parallèles' }],
+					],
+					options: ['no-shuffle-choices'],
+					correctionFormat: [
+						{
+							correct: [
+								'Les droites représentatives des fonctions $$&exp$$ et $$&exp2$$ sont &answer.',
+							],
+							answer: 'Les droites sont &answer.',
+						},
+					],
+
+					solutions: [[0], [0], [1], [1], [1], [1]],
+
+					defaultDelay: 10,
+					grade: TROISIEME,
+				},
+				{
+					description: "Reconnaître le tableau de signe d'une fonction affine",
+					enounces: [
+						'Quel est le tableau de signe correspondant à la fonction affine:',
+					],
+					expressions: [
+						'f(x)=-6x+7',
+						'f(x)=-9x-1',
+						'f(x)=-5x+9',
+						'f(x)=3x+3',
+						'f(x)=7x-8',
+						'f(x)=-2x-4',
+						'f(x)=6x+8',
+						'f(x)=4x+9',
+						'f(x)=-7x+2',
+						'f(x)=2x+5',
+						'f(x)=8x-1',
+						'f(x)=-4x',
+						'f(x)=-5x-1',
+						'f(x)=-x+7',
+						'f(x)=x-8',
+						'f(x)=-7x+6',
+						'f(x)=x',
+						'f(x)=-3x+4',
+						'f(x)=-5x-5',
+						'f(x)=5x-7',
+					],
+
+					type: 'choice',
+					choices: [
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-0-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-0-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-1-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-1-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-2-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-2-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-3-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-3-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-4-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-4-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-5-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-5-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-6-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-6-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-7-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-7-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-8-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-8-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-9-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-9-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-10-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-10-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-11-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-11-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-12-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-12-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-13-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-13-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-14-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-14-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-15-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-15-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-16-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-16-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-17-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-17-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-18-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-18-600.png',
+							},
+						],
+						[
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_correct-19-600.png',
+							},
+							{
+								image:
+									'fonctions-affines/tableau-de-signe/tableau_de_signe_fonction_affine_uncorrect-19-600.png',
+							},
+						],
+					],
+					correctionFormat: [
+						{
+							correct: [
+								'Le tableau de signe de la fonction $$&exp$$ est :',
+								'image',
+							],
+							answer: 'image',
+						},
+					],
+
+					solutions: [[0]],
+
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+			],
+			Equations: [
+				{
+					description: "Racine d'une fonction affine",
+					enounces: [
+						"Pour quelle valeur de $$x$$ la fonction $$f$$ s'annulle-t-elle?",
+					],
+					expressions: ['f(x)=&1x[+_&2_]', 'f(x)=&2[+_&1_]x'],
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$er[1;9]',
+						},
+					],
+					type: 'rewrite',
+					correctionFormat: [
+						{
+							correct: ["La fonction $$&exp$$ s'annule en &answer"],
+						},
+					],
+					solutions: [['[_-(&2)/(&1)_]']],
+					defaultDelay: 20,
+					grade: TROISIEME,
+				},
+				{
+					description: "Résoudre l'équation $$f(x)=k$$",
+					subdescription: 'Graphiquement',
+					enounces: ["Résoudre graphiquement l'équation $$f(x)=&1$$"],
+					expressions: ['f(x)=&1'],
+					variables: [
+						{
+							'&1': '-3',
+						},
+						{
+							'&1': '-1',
+						},
+						{
+							'&1': '2',
+						},
+						{
+							'&1': '-4',
+						},
+						{
+							'&1': '2',
+						},
+						{
+							'&1': '-1',
+						},
+						{
+							'&1': '4',
+						},
+						{
+							'&1': '-3',
+						},
+						{
+							'&1': '4',
+						},
+						{
+							'&1': '1',
+						},
+						{
+							'&1': '1',
+						},
+						{
+							'&1': '3',
+						},
+						{
+							'&1': '-4',
+						},
+						{
+							'&1': '-1',
+						},
+						{
+							'&1': '-2',
+						},
+						{
+							'&1': '2',
+						},
+						{
+							'&1': '-1',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '2',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '-3',
+						},
+						{
+							'&1': '-2',
+						},
+						{
+							'&1': '1',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '-2',
+						},
+						{
+							'&1': '2',
+						},
+						{
+							'&1': '0',
+						},
+						{
+							'&1': '2',
+						},
+					],
+					images: [
+						'fonctions-affines/exemples/fonction_affine-0-600.png',
+						'fonctions-affines/exemples/fonction_affine-1-600.png',
+						'fonctions-affines/exemples/fonction_affine-2-600.png',
+						'fonctions-affines/exemples/fonction_affine-3-600.png',
+						'fonctions-affines/exemples/fonction_affine-4-600.png',
+						'fonctions-affines/exemples/fonction_affine-5-600.png',
+						'fonctions-affines/exemples/fonction_affine-6-600.png',
+						'fonctions-affines/exemples/fonction_affine-7-600.png',
+						'fonctions-affines/exemples/fonction_affine-8-600.png',
+						'fonctions-affines/exemples/fonction_affine-9-600.png',
+						'fonctions-affines/exemples/fonction_affine-10-600.png',
+						'fonctions-affines/exemples/fonction_affine-11-600.png',
+						'fonctions-affines/exemples/fonction_affine-12-600.png',
+						'fonctions-affines/exemples/fonction_affine-13-600.png',
+						'fonctions-affines/exemples/fonction_affine-14-600.png',
+						'fonctions-affines/exemples/fonction_affine-15-600.png',
+						'fonctions-affines/exemples/fonction_affine-16-600.png',
+						'fonctions-affines/exemples/fonction_affine-17-600.png',
+						'fonctions-affines/exemples/fonction_affine-18-600.png',
+						'fonctions-affines/exemples/fonction_affine-19-600.png',
+						'fonctions-affines/exemples/fonction_affine-20-600.png',
+						'fonctions-affines/exemples/fonction_affine-21-600.png',
+						'fonctions-affines/exemples/fonction_affine-22-600.png',
+						'fonctions-affines/exemples/fonction_affine-23-600.png',
+						'fonctions-affines/exemples/fonction_affine-24-600.png',
+						'fonctions-affines/exemples/fonction_affine-25-600.png',
+						'fonctions-affines/exemples/fonction_affine-26-600.png',
+						'fonctions-affines/exemples/fonction_affine-27-600.png',
+						'fonctions-affines/exemples/fonction_affine-28-600.png',
+						'fonctions-affines/exemples/fonction_affine-29-600.png',
+					],
+					imagesCorrection: [
+						'fonctions-affines/equation/correction_equation-0-600.png',
+						'fonctions-affines/equation/correction_equation-1-600.png',
+						'fonctions-affines/equation/correction_equation-2-600.png',
+						'fonctions-affines/equation/correction_equation-3-600.png',
+						'fonctions-affines/equation/correction_equation-4-600.png',
+						'fonctions-affines/equation/correction_equation-5-600.png',
+						'fonctions-affines/equation/correction_equation-6-600.png',
+						'fonctions-affines/equation/correction_equation-7-600.png',
+						'fonctions-affines/equation/correction_equation-8-600.png',
+						'fonctions-affines/equation/correction_equation-9-600.png',
+						'fonctions-affines/equation/correction_equation-10-600.png',
+						'fonctions-affines/equation/correction_equation-11-600.png',
+						'fonctions-affines/equation/correction_equation-12-600.png',
+						'fonctions-affines/equation/correction_equation-13-600.png',
+						'fonctions-affines/equation/correction_equation-14-600.png',
+						'fonctions-affines/equation/correction_equation-15-600.png',
+						'fonctions-affines/equation/correction_equation-16-600.png',
+						'fonctions-affines/equation/correction_equation-17-600.png',
+						'fonctions-affines/equation/correction_equation-18-600.png',
+						'fonctions-affines/equation/correction_equation-19-600.png',
+						'fonctions-affines/equation/correction_equation-20-600.png',
+						'fonctions-affines/equation/correction_equation-21-600.png',
+						'fonctions-affines/equation/correction_equation-22-600.png',
+						'fonctions-affines/equation/correction_equation-23-600.png',
+						'fonctions-affines/equation/correction_equation-24-600.png',
+						'fonctions-affines/equation/correction_equation-25-600.png',
+						'fonctions-affines/equation/correction_equation-26-600.png',
+						'fonctions-affines/equation/correction_equation-27-600.png',
+						'fonctions-affines/equation/correction_equation-28-600.png',
+						'fonctions-affines/equation/correction_equation-29-600.png',
+					],
+					solutions: [
+						['1'],
+						['-1'],
+						['-1'],
+						['3'],
+						['-1'],
+						['0'],
+						['1'],
+						['-1'],
+						['-1'],
+						['0'],
+						['-3'],
+						['1'],
+						['-3'],
+						['1'],
+						['0'],
+						['2'],
+						['2'],
+						['0'],
+						['3'],
+						['0'],
+						['3'],
+						['0'],
+						['0'],
+						['0'],
+						['0'],
+						['-2'],
+						['4'],
+						['0'],
+						['0'],
+						['3'],
+					],
+					correctionFormat: [
+						{
+							correct: ["La solution de l'équation $$&exp$$ est &answer."],
+							answer: 'La solution est &answer.',
+						},
+					],
+					options: ['no-exp'],
+
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+			],
+		},
+		'Valeur absolue': {
+			Apprivoiser: [
+				{
+					description: "Calculer la valeur d'une valeur absolue",
+					subdescription: 'Nombres entiers',
+					enounces: ['Calcule.'],
+					expressions: ['abs(&1)'],
+					variables: [
+						{
+							'&1': '$er[0;9]',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: ['$$&exp=$$&answer'],
+							answer: " $$&exp=$$&answer'",
+						},
+					],
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+				{
+					description: "Calculer la valeur d'une valeur absolue",
+					subdescription: 'Nombres variés',
+					enounces: ['Calcule.'],
+					expressions: [
+						'abs(&1/&2)',
+						'abs(-&1/&2)',
+						'abs(sqrt(&3))',
+						'abs(-sqrt(&3))',
+						'abs(&4)',
+						'abs(-&4)',
+					],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '$l{2;3;5;7}',
+							'&4': '$d{1;1}',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: ['$$&exp=$$&answer'],
+							answer: " $$&exp=$$&answer'",
+						},
+					],
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+				{
+					description: "Calculer la valeur d'une valeur absolue",
+					subdescription: "D'une expression simple à calculer",
+					enounces: ['Calcule.'],
+					expressions: ['abs(&1[+_&2_])', 'abs(&1*[(_&2_])'],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$er[1;9]',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: ['$$&exp=$$&answer'],
+							answer: " $$&exp=$$&answer'",
+						},
+					],
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+				{
+					description: "Calculer la valeur d'une valeur absolue",
+					subdescription: "D'une expression dont il faut étudier le signe",
+					enounces: ['Calcule.'],
+					expressions: ['abs(sqrt(&1)-&2)'],
+					variables: [
+						{
+							'&1': '$l{2;3;5;7}',
+							'&2': '$e[1;3]',
+						},
+					],
+					solutions: [['&1>&2^2 ?? sqrt(&1)-&2 :: &2-sqrt(&1)']],
+					correctionFormat: [
+						{
+							correct: ['$$&exp=$$&answer'],
+							answer: " $$&exp=$$&answer'",
+						},
+					],
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
+			],
+			Equations: [
+				{
+					description: 'Résoudre une équation avec une valeur absolue',
+					enounces: ['Résouds cette équation.'],
+					expressions: ['abs(x[+_-(&1)_])=&2'],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$e[1;9]',
+						},
+					],
+					conditions: ['abs(&1) != abs(&2)'],
+					solutions: [['[_&1+&2_]', '[_&1-&2_]']],
+					answerFields: ['$$x=\\ldots$$ ou $$x=\\ldots$$'],
+					correctionFormat: [
+						{
+							correct: [
+								"L'équation  $$&exp$$ a pour solutions $$x=$$&answer1 et $$x=$$&answer2",
+							],
+							answer: ' Les solutions sont &answer1 et &answer2',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								\\left\\lvert x[+_-(&1)_] \\right\\rvert=&2 \
+								& \\quad \\lrArr \\quad \
+								    \\begin{cases} \
+								       x[+_-(&1)_]= &2 \\\\ \
+									   \\text{ou} \\\\ \
+								       x[+_-(&1)_]= -&2  \
+							        \\end{cases} \\\\ \
+								& \\quad \\lrArr \\quad \
+								    \\begin{cases} \
+								       x= &2[+_&1_] \\\\ \
+									   \\text{ou} \\\\ \
+								       x= -&2[+_&1_]  \
+							        \\end{cases} \\\\ \
+								& \\quad \\lrArr \\quad \
+								    \\begin{cases} \
+								       x= &sol1 \\\\ \
+									   \\text{ou} \\\\ \
+								       x= &sol2  \
+							        \\end{cases} \\\\ \
+							 \\end{align}$$`,
+							},
+						],
+					],
+					defaultDelay: 20,
+					options: ['solutions-order-not-important'],
+					grade: SECONDE,
+				},
+			],
+		},
+	},
+
+	Suites: {
+		Apprivoiser: {
+			'Calculer un terme': [
+				{
+					description: 'Calculer un terme',
+					subdescription: "A l'aide d'une formule explicite",
+					enounces: [
+						'Calculer $$u_&1$$ pour la suite $$(u_n)$$ définie par $$u_n=&2n[+_&3_]$$ pour $$n \\ge 0$$',
+						'Calculer $$u_&1$$ pour la suite $$(u_n)$$ définie par $$u_n=&2n^2$$ pour $$n \\ge 0$$',
+						'Calculer $$u_&1$$ pour la suite $$(u_n)$$ définie par $$u_n=(-1)^n$$ pour $$n  \\ge 0$$',
+					],
+					// expressions: ['&2*&1+(&3)'],
+					solutions: [['[_&2*&1+(&3)_]'], ['[_&2*&1^2_]'], ['[_(-1)^&1_]']],
+					prefix: ['u_n='],
+					variables: [
+						{
+							'&1': '$e[2;9]',
+							'&2': '$er[2;9]',
+							'&3': '$er[2;9]',
+						},
+						{
+							'&1': '$e[3;7]',
+							'&2': '$l{2;-2}',
+						},
+						{
+							'&1': '$e[2;9]',
+						},
+					],
+					options: ['no-exp'],
+					correctionFormat: [
+						{
+							correct: [`Avec $$u_n=&2n[+_&3_]$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+						{
+							correct: [`Avec $$u_n=&2n^2$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+						{
+							correct: [`Avec $$u_n=(-1)^n$$, $$u_&1=&ans$$`],
+							answer: '$$u_&1=&ans$$',
+						},
+					],
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 0, 2, 4, 6, ou 8.',
+					// 		},
+					// 	],
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 1, 3, 5, 7, ou 9.',
+					// 		},
+					// 	],
+					// ],
+					correctionDetails: [
+						[
+							{
+								text: `Avec $$u_n=&2n[+_&3_]$$, $$u_\\textcolor{${color1}}{&1}=&2 \\times \\textcolor{${color1}}{&1} [+_&3_]=&sol$$`,
+							},
+						],
+						[
+							{
+								text: `Avec $$u_n=&2n^2$$, $$u_\\textcolor{${color1}}{&1}=&2 \\times \\textcolor{${color1}}{&1}^2=&sol$$`,
+							},
+						],
+						[
+							{
+								text: `Avec $$u_n=(-1)^&1$$, $$u_\\textcolor{${color1}}{&1}=(-1)^\\textcolor{${color1}}{&1}=&sol$$`,
+							},
+						],
+					],
+
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+					// 		},
+					// 	],
+
+					// ],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: 'Calculer un terme',
+					subdescription: "A l'aide d'une formule de récurrence",
+					enounces: [
+						'Calculer $$u_2$$ pour la suite $$(u_n)$$ définie par $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$',
+					],
+					expressions: ['&5'],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[2;3]',
+							'&3': '$er[1;3]',
+							'&4': '[_&2*(&1)+(&3)_]',
+							'&5': '[_&2*(&4)+(&3)_]',
+						},
+					],
+					options: ['no-exp'],
+					correctionFormat: [
+						{
+							correct: [
+								`Avec $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$, $$u_2=&ans$$`,
+							],
+							answer: '$$u_2=&ans$$',
+						},
+					],
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 0, 2, 4, 6, ou 8.',
+					// 		},
+					// 	],
+					// 	[
+					// 		{
+					// 			text: '$$&exp$$ est &solution car il se termine par 1, 3, 5, 7, ou 9.',
+					// 		},
+					// 	],
+					// ],
+					correctionDetails: [
+						[
+							{
+								text: `Avec $$u_0=&1$$ et $$u_{n+1}=&2u_n[+_&3_]$$`,
+							},
+							{
+								text: `$$u_1=&2u_0[+_&3_]= &2 \\times &1 [+_&3_]=&4$$`,
+							},
+							{
+								text: `$$u_2=&2u_1[+_&3_]= &2 \\times &4 [+_&3_]=&sol$$`,
+							},
+						],
+					],
+
+					// correctionDetails: [
+					// 	[
+					// 		{
+					// 			text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+					// 		},
+					// 	],
+
+					// ],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
+			'Deviner le terme général': [
+				{
+					description:
+						"Deviner le terme général à partir d'une liste des premiers termes",
+					subdescription: 'Suite arithmétique',
+					enounces: [
+						'Quel semble être le terme général de la suite dont les premiers termes sont:',
+					],
+					enounces2: ['$$&3 \\quad &4 \\quad &5 \\quad &6 \\quad &7$$'],
+					solutions: [['&1[+_&2_]n']],
+					answerFields: ['$$u_n=\\ldots$$'],
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$er[2;9]',
+							'&3': '[_&1_]',
+							'&4': '[_&1+(&2)_]',
+							'&5': '[_&1+(&2)*2_]',
+							'&6': '[_&1+(&2)*3_]',
+							'&7': '[_&1+(&2)*4_]',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								`La suite de termes $$&3 \\quad &4 \\quad &5 \\quad &6 \\quad &7$$ peut être représentée par la suite arithmétique de terme général $$u_n=$$&answer `,
+							],
+							answer: 'Le terme général est $$u_n=&ans$$',
+						},
+					],
+
+					correctionDetails: [
+						[
+							{
+								text: `@@ &2>=0 ?? Le premier terme de la suite est $$u_0=&3$$ et on ajoute &2 entre chaque terme, donc $$u_n=$$&solution.@@ \
+								@@ &2<0 ?? Le premier terme de la suite est $$u_0=&3$$ et on enlève [_-(&2)_] entre chaque terme, donc $$u_n=$$&solution.@@`,
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description:
+						"Deviner le terme général à partir d'une liste des premiers termes",
+					subdescription: 'Suite géométrique',
+					enounces: [
+						'Quel semble être le terme général de la suite dont les premiers termes sont:',
+					],
+					enounces2: ['$$&3 \\quad &4 \\quad &5 \\quad &6 \\quad &7$$'],
+					solutions: [['[_&1*(&2)^n_]']],
+					answerFields: ['$$u_n=\\ldots$$'],
+					variables: [
+						{
+							'&1': '$er[1;4]',
+							'&2': '$er[2;3]',
+							'&3': '[_&1_]',
+							'&4': '[_&1*(&2)_]',
+							'&5': '[_&1*(&2)^2_]',
+							'&6': '[_&1*(&2)^3_]',
+							'&7': '[_&1*(&2)^4_]',
+						},
+					],
+					conditions: ['abs(&1) != abs(&2)'],
+					correctionFormat: [
+						{
+							correct: [
+								`La suite de termes $$&3 \\quad &4 \\quad &5 \\quad &6 \\quad &7$$ peut être représentée par la suite géométrique de terme général $$u_n=$$&answer `,
+							],
+							answer: 'Le terme général est $$u_n=&ans$$',
+						},
+					],
+
+					correctionDetails: [
+						[
+							{
+								text: `Le premier terme de la suite est $$u_0=&3$$ et on multiplie par &2 entre chaque terme, donc $$u_n=$$&solution.`,
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description:
+						"Deviner le terme général à partir d'une liste des premiers termes",
+					subdescription: 'Suite géométrique - raison fractionnaire',
+					enounces: [
+						'Quel semble être le terme général de la suite dont les premiers termes sont:',
+					],
+					enounces2: [
+						'$$[°&4°] \\quad [°&5°] \\quad [°&6°] \\quad [°&7°] \\quad [°&8°]$$',
+					],
+					solutions: [['&1*(&3)^n']],
+					answerFields: ['$$u_n=\\ldots$$'],
+					variables: [
+						{
+							'&1': '$er[2;9]',
+							'&2': '$er[2;5]\\{cd(&1)}',
+							'&3': '[_1/(&2)_]',
+							'&4': '[_&1_]',
+							'&5': '[_&1*(&3)_]',
+							'&6': '[_&1*(&3)^2_]',
+							'&7': '[_&1*(&3)^3_]',
+							'&8': '[_&1*(&3)^4_]',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: [
+								`La suite de termes $$&4 \\quad &5 \\quad &6 \\quad &7 \\quad &8$$ peut être représentée par la suite géométrique de terme général $$u_n=$$&answer `,
+							],
+							answer: 'Le terme général est $$u_n=&ans$$',
+						},
+					],
+
+					correctionDetails: [
+						[
+							{
+								text: `Le premier terme de la suite est $$u_0=&4$$ et on multiplie par $$[°&3°]$$ entre chaque terme, donc $$u_n=$$&solution.`,
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
+		},
+		Limites: {
+			'Determiner une limite': [
+				{
+					description: "Déterminer la limite d'une suite",
+					subdescription: 'Suites usuelles',
+					enounces: [
+						'Quelle est la limite de la suite dont le terme général est :',
+					],
+					expressions: ['(-1)^n', '&1', 'n', 'n^&2', 'sqrt(n)', '1/n', '1/n^&2', '&2^n', '(1/&2)^n', '&3^n' ],
+					choices: [
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$-1$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$&1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+					],
+					type: 'choice',
+					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3],[3]],
+					variables: [
+						{
+							'&1': '$er[1;9]','&2':'$e[2;9]', '&3':'$d{0;1}'
+						},
+					],
+					correctionFormat: [
+						
+						{
+							correct: ["Limite de la suite de terme général $$&exp$$  : &answer"],
+							answer: "Limite de la suite : &answer",
+						},
+						
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La suite de terme général $$&exp$$ oscille entre les valeurs $$1$$ et $$-1$$ : &solution.",
+							},
+						],
+						[
+							{
+								text: "La suite de terme général $$&exp$$ est constante donc sa limite est &solution.",
+							},
+						],
+						[],
+						[],
+						[],
+						[],
+						[],
+						[],
+						[],
+						[],
+					],
+					options:['no-shuffle-choices'],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
 				},
 			],
 		},

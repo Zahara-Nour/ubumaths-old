@@ -97,6 +97,8 @@ export function createCorrection(item) {
 			`<span style="color:${
 				item.statuss[p1 ? p1 - 1 : 0] === STATUS_UNOPTIMAL_FORM
 					? unoptimal_color
+					: item.statuss[p1 ? p1 - 1 : 0] === STATUS_CORRECT
+					? correct_color
 					: incorrect_color
 			};display:inline-block">` +
 			(item.type === 'choice'
@@ -111,6 +113,8 @@ export function createCorrection(item) {
 			`\\textcolor{${
 				item.statuss[p1 ? p1 - 1 : 0] === STATUS_UNOPTIMAL_FORM
 					? unoptimal_color
+					: item.statuss[p1 ? p1 - 1 : 0] === STATUS_CORRECT
+					? correct_color
 					: incorrect_color
 			}}{` +
 			answers_latex[p1 ? p1 - 1 : 0] +
@@ -331,6 +335,26 @@ export function createDetailedCorrection(item) {
 	let line
 	let solutions_latex = createSolutionsLatex(item)
 
+	const regexSolution = /&solution([1-9]?)/g
+	function replaceSolution(match, p1) {
+		return (
+			`<span style="color:${correct_color}; border:2px solid ${correct_color}; border-radius: 5px; margin:2px;padding:5px;display:inline-block">` +
+			(item.type === 'choice'
+				? get(formatLatex)(item.choices[solutions[p1 ? p1 - 1 : 0]].text)
+				: get(toMarkup)(solutions_latex[p1 ? p1 - 1 : 0])) +
+			'</span>'
+		)
+	}
+
+	const regexSol = /&sol([1-9]?)/g
+	function replaceSol(match, p1) {
+		return item.type === 'choice'
+			? item.choices[solutions[p1 ? p1 - 1 : 0]].text
+			: `\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{` +
+					solutions_latex[p1 ? p1 - 1 : 0] +
+					'}}'
+	}
+
 	correctionDetails.forEach((detail) => {
 		if (detail.type === 'image') {
 			// le base64 de l'image a été préparé lors de la génération de la question
@@ -340,6 +364,8 @@ export function createDetailedCorrection(item) {
 			line = detail.text
 				.replace(new RegExp('&exp2', 'g'), expression2_latex)
 				.replace(new RegExp('&exp', 'g'), expression_latex)
+				.replace(regexSolution, replaceSolution)
+						.replace(regexSol, replaceSol)
 				.replace(
 					'&solution',
 					() =>
