@@ -19,7 +19,7 @@
 	let init
 
 	async function updateHeight() {
-		// console.log('updateHeight')
+		// console.log('updateHeight')npm 
 		height = Math.max(hfront, hback)
 		// console.log('height', height)
 	}
