@@ -77,7 +77,7 @@
 	}
 
 	$: solution = $formatLatex(getSolution(card))
-	$: details = card.correctionDetails.length
+	$: details = card.correctionDetails && card.correctionDetails.length
 		? createDetailedCorrection(card)
 		: createCorrection(card)
 </script>
