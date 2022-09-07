@@ -625,15 +625,17 @@ export function assessItems(questions, answerss, answerss_latex, times) {
 			number: i + 1,
 		}
 
+		// on a besoin de récupérer au moins le statut par defaut
 		assessItem(items[i])
 
 		score +=
 			items[i].status == STATUS_CORRECT
 				? items[i].points
 				: items[i].status == STATUS_UNOPTIMAL_FORM ||
-				  items[i].statuss.filter((status) => status === STATUS_CORRECT)
-						.length >=
-						items[i].answers.length / 2
+				  (items[i].answers &&
+						items[i].statuss.filter((status) => status === STATUS_CORRECT)
+							.length >=
+							items[i].answers.length / 2)
 				? items[i].points / 2
 				: 0
 	}

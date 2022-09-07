@@ -13,8 +13,9 @@
 		item.status === STATUS_CORRECT
 			? correct_color
 			: item.status === STATUS_UNOPTIMAL_FORM ||
-			  item.statuss.filter((status) => status === STATUS_CORRECT).length >=
-					item.answers.length / 2
+			  (item.answers &&
+					item.statuss.filter((status) => status === STATUS_CORRECT).length >=
+						item.answers.length / 2)
 			? unoptimal_color
 			: incorrect_color}
 	<div
