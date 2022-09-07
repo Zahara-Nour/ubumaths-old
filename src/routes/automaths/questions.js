@@ -19682,7 +19682,7 @@ const questions = {
 					enounces: [
 						'Quelle est la limite de la suite dont le terme général est :',
 					],
-					expressions: ['(-1)^n', '&1', 'n'],
+					expressions: ['(-1)^n', '&1', 'n', 'n^&2', 'sqrt(n)', '1/n', '1/n^&2', '&2^n', '(1/&2)^n', '&3^n' ],
 					choices: [
 						[
 							{
@@ -19735,33 +19735,145 @@ const questions = {
 								text: "Cette suite n'a pas de limite",
 							},
 						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$1$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: "Cette suite n'a pas de limite",
+							},
+						],
 					],
 					type: 'choice',
-					solutions: [[4], [2], [0]],
+					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3],[3]],
 					variables: [
 						{
-							'&1': '$er[1;9]',
+							'&1': '$er[1;9]','&2':'$e[2;9]', '&3':'$d{0;1}'
 						},
 					],
 					correctionFormat: [
 						
 						{
-							correct: [`La suite de terme général $$&exp$$ n'a pas de limite.`],
-							answer: "La suite n'a pas de limite.",
+							correct: ["Limite de la suite de terme général $$&exp$$  : &answer"],
+							answer: "Limite de la suite : &answer",
 						},
-						{
-							correct: [`La suite de terme général $$&exp$$ a pour limite &answer`],
-							answer: "La suite a pour limite &answer.",
-						},
-						{
-							correct: [`La suite de terme général $$&exp$$ a pour limite &answer`],
-							answer: "La suite a pour limite &answer.",
-						},
+						
 					],
 					correctionDetails: [
 						[
 							{
-								text: "La suite de terme général $$&exp$$ oscille entre les valeurs $$1$$ et $$-1$$ donc n'a pas de limite.",
+								text: "La suite de terme général $$&exp$$ oscille entre les valeurs $$1$$ et $$-1$$ : &solution.",
 							},
 						],
 						[
@@ -19770,9 +19882,15 @@ const questions = {
 							},
 						],
 						[],
-						
-
+						[],
+						[],
+						[],
+						[],
+						[],
+						[],
+						[],
 					],
+					options:['no-shuffle-choices'],
 					defaultDelay: 30,
 					grade: PREMIERE_SPE_MATHS,
 				},

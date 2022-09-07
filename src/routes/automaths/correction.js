@@ -627,8 +627,6 @@ export function assessItems(questions, answerss, answerss_latex, times) {
 
 		assessItem(items[i])
 
-		console.log('score ', items[i].statuss.filter((status) => status === STATUS_CORRECT)
-		.length,items[i].answers.length / 2 )
 		score +=
 			items[i].status == STATUS_CORRECT
 				? items[i].points

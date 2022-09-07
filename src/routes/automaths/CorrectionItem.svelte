@@ -12,7 +12,7 @@
 		imageCorrectionBase64P
 
 	let correction = createCorrection(item)
-	let detailedCorrection = item.correctionDetails.length
+	let detailedCorrection = item.correctionDetails && item.correctionDetails.length
 		? createDetailedCorrection(item)
 		: correction
 	// const validateFractions = checkFractions()

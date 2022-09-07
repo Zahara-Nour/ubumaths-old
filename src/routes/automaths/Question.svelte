@@ -34,10 +34,8 @@
 						answers.push(i)
 					}
 				})
-				console.log('answers', answers)
 			} else {
 				answers.push(i)
-				console.log('onChoice')
 				commit.f()
 			}
 		}
@@ -91,7 +89,9 @@
 				mfe.removeEventListener('keystroke', keyListeners[i])
 				mfe.removeEventListener('input', inputListeners[i])
 				mfe.removeEventListener('change', changeListeners[i])
+				mfe.blur()
 			})
+			
 		}
 	}
 
@@ -101,13 +101,11 @@
 	// - quand le mathfield perd le focus et que le contenu a changé
 	// - quand la touche entrée du clavier virtuel
 	function onChange(ev, i) {
-		console.log('onChange', ev, i, masked, question.num)
 		// removeListeners()
 		if (mfs[i].hasFocus()) {
 			// TODO: empêcher le commit quand le mathfield est vide
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
 			if (mfs.length === 1) {
-				console.log('on commit')
 				commit.f()
 			} else {
 				mfs[(i + 1) % mfs.length].focus()
@@ -153,8 +151,6 @@
 			)
 		) {
 			ev.preventDefault()
-			console.log('mfs', mfs)
-			console.log('i', i)
 			mfs[i].insert('\\,')
 		} else if (key === '%') {
 			ev.preventDefault()
@@ -184,7 +180,6 @@
 		nmfs += 1
 		let id = `mf${nmfs}`
 		if (masked) id = id + '-masked'
-		console.log('id', `<span id='${id}'}/>`)
 		return `<span id='${id}'}/>`
 	}
 
@@ -218,7 +213,6 @@
 					.querySelector('#answerFields' + (masked ? '-masked' : ''))
 					.querySelectorAll('*')) {
 					if (/^mf/g.test(i.id)) {
-						console.log('add element', i)
 						elements.push(i)
 					}
 				}
@@ -240,7 +234,6 @@
 						smartFence: false,
 						superscript: false,
 					})
-					console.log('push mfe')
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -322,7 +315,6 @@
 				question.type === 'result' &&
 				(!question.expression_latex ||
 					(question.options && question.options.includes('no-exp'))))
-		console.log('showExp', showExp)
 	}
 
 	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
@@ -347,14 +339,12 @@
 		} else if (interactive && question.answerFields) {
 			answerFields = question.answerFields
 			answerFields = $formatLatex(answerFields)
-			console.log('answerFields', answerFields)
 			answerFields = answerFields.replace(/…/g, addMathfield)
 		}
 
 		if (interactive && question.prefix) {
 			expression = question.prefix + expression
 		}
-		console.log('expression', expression, interactive, question.type)
 
 		if (expression) {
 			expression = $toMarkup(expression)
