@@ -9,10 +9,10 @@
 	import datas, { getQuestion } from './questions.js'
 	import { getLogger, shuffle } from '$lib/utils'
 	import { page } from '$app/stores'
-	import { mathliveReady } from '$lib/stores'
+	import { virtualKeyboardMode, touchDevice } from '$lib/stores'
 
 	import math from 'tinycas'
-	import { mdiRocketLaunchOutline, mdiRestart } from '@mdi/js'
+	import { mdiRocketLaunchOutline, mdiRestart, mdiKeyboard } from '@mdi/js'
 	import { fetchImage } from '$lib/images'
 	import Correction from './Correction.svelte'
 	import QuestionCard from '$lib/components/QuestionCard.svelte'
@@ -253,14 +253,21 @@
 		}
 	}
 
-	
-
 	// le bouton restart a été appuyé après la correction
 	$: if (restart) {
 		initTest()
 	}
 
 	$: delay = slider * 1000
+
+	$: {
+		console.log(' virtual keybord mode')
+		virtualKeyboardMode.set($touchDevice)
+	}
+	$ :{
+		console.log(' virtual keybord mode', $virtualKeyboardMode)
+
+	}
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -339,6 +346,22 @@
 					style="width:150px;"
 				/>
 			{/if}
+			<Fab
+				class="mx-1"
+				color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
+				on:click="{() => {
+					console.log('trigger keyboard mode')
+					virtualKeyboardMode.update((state) => {
+						console.log('new state', !state)
+						return !state
+					})
+				}}"
+				mini
+			>
+				<Icon component="{Svg}" viewBox="2 2 20 20">
+					<path fill="currentColor" d="{mdiKeyboard}"></path>
+				</Icon>
+			</Fab>
 		</div>
 
 		{#if cards}

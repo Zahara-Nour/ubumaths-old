@@ -10005,22 +10005,42 @@ const questions = {
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},
-				{
-					description: "Ecrire un nombre entier à l'aide d'une puissance de 10",
-					subdescription: "de la forme avec puissances de 10 à la forme décimale.",
-					enounces: ["Ecris ce nombre sous la forme d'un seul nombre entier."],
-					expressions: ['&2*10^{&1}'],
-
-					variables: [
-						{
-							'&1': '$e[0;5]',
-							'&2': '$e[2;9]'
-						},
-					],
-					defaultDelay: 20,
-					grade: QUATRIEME,
-				},
 			],
+			'Puissances de 10': [{
+				description: "Ecrire un nombre entier à l'aide d'une puissance de 10",
+				subdescription:
+					'de la forme avec puissances de 10 à la forme décimale.',
+				enounces: ["Ecris ce nombre sous la forme d'un seul nombre entier."],
+				expressions: ['&2*10^{&1}'],
+
+				variables: [
+					{
+						'&1': '$e[0;5]',
+						'&2': '$e[2;9]',
+					},
+				],
+				defaultDelay: 20,
+				grade: QUATRIEME,
+			},
+			{
+				description: "Ecrire un nombre entier à l'aide d'une puissance de 10",
+				subdescription:
+					'De la forme décimale à la forme avec puissances de 10.',
+				enounces: ["Ecris ce nombre à l'aide d'une puissance de 10."],
+				enounces2: ["Exemple : $$400 = 4\\times 10^2$$"],
+				expressions: ['[_&2*10^{&1}_]'],
+				solutions:[['&2*10^{&1}']],
+
+				variables: [
+					{
+						'&1': '$e[1;5]',
+						'&2': '$e[2;9]',
+					},
+				],
+				defaultDelay: 20,
+				grade: QUATRIEME,
+			},
+		]
 		},
 		Calculer: {
 			Multiplier: [
@@ -19960,6 +19980,71 @@ const questions = {
 				},
 				{
 					description: "Calculer un terme d'une suite arithmétique",
+					subdescription: 'Calculer le terme précédent',
+					enounces: [
+						'Pour une suite arithmétique de raison &1, quel est le terme précédant &2 ?',
+					],
+					solutions: [['[_&2-(&1)_]']],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$er[2;9]',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si la raison est $$&1$$, le terme précédant &2 est &answer',
+							],
+							answer: 'Le terme précédent est &answer',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: 'Si la raison est $$&1$$, le terme précédent est $$&2[+_-(&1)_]=$$&solution',
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Calculer un terme d'une suite arithmétique",
+					subdescription: "Calculer un terme à partir d'un autre",
+					enounces: [
+						'Pour une suite $$(u_n)$$ arithmétique de raison $$&3$$, que vaut $$u_&2$$ si $$u_&1=[_&1*(&3)_]$$ ?',
+					],
+					solutions: [['[_&2*(&3)_]']],
+					variables: [
+						{
+							'&1': '$e[1;8]',
+							'&2': '$e[&1+1;9]',
+							'&3': '$er[2;9]\\{&1}',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si la raison est $$&3$$ et $$u_&1=[_&1*(&3)_]$$, alors $$u_&2=$$&answer',
+							],
+							answer: '$$u_&2=$$&answer',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `Si la raison est $$\\textcolor{${color1}}{&3}$$ et $$u_&1=[_&1*(&3)_]$$, alors $$u_&2=u_&1\\textcolor{${color1}}{[+_&3_]} \\times [_&2-&1_]=u_&1[+_(&2-&1)*(&3)_]=$$&solution`,
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Calculer un terme d'une suite arithmétique",
 					subdescription: "Calculer un terme à partir d'un autre",
 					enounces: [
 						'Pour une suite $$(u_n)$$ arithmétique de raison $$&3$$, que vaut $$u_&2$$ si $$u_&1=[_&1*(&3)_]$$ ?',
@@ -20003,7 +20088,7 @@ const questions = {
 					variables: [
 						{
 							'&1': '$e[1;8]',
-							'&2': '[_&1+1_]]',
+							'&2': '[_&1+1_]',
 							'&3': '$er[2;9]',
 							'&4': '$er[2;9]',
 						},
@@ -20020,14 +20105,48 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&4)_]$$, alors la raison est &solution.',
+								text: 'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&4)_]$$, alors la raison est $$[_&3+(&4)_]-[(_&3_]$$=&solution.',
 							},
 						],
 					],
 					defaultDelay: 30,
 					grade: PREMIERE_SPE_MATHS,
 				},
-			]
+				{
+					description: "Déterminer la raison d'une suite arithmétique",
+					subdescription: 'A partir de deux termes',
+					enounces: [
+						"Quelle est la raison d'une suite arithmétique où $$u_&1=&3$$ et $$u_&2=[_&3+(&2-&1)*(&4)_]$$ ?",
+					],
+					solutions: [['&4']],
+					variables: [
+						{
+							'&1': '$e[1;5]',
+							'&2': '$e[&1+2;9]',
+							'&3': '$er[2;9]',
+							'&4': '$er[2;9]',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&2-&1)*(&4)_]$$, alors la raison est &answer.',
+							],
+							answer: 'La raison est &answer.',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: 'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&2-&1)*(&4)_]$$, alors la raison est $$\\frac{[_&3+(&2-&1)*(&4)_]-[(_&3_]}{[_&2-&1_]}$$=&solution.',
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
 		},
 	},
 }

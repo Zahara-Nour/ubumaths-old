@@ -38,6 +38,7 @@
 			},
 			false,
 		)
+		
 
 		import('tinymathlive/dist/mathlive.min.mjs')
 			.then((m) => {

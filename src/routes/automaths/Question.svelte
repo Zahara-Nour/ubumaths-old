@@ -4,6 +4,7 @@
 	import { MathfieldElement } from '$lib/stores'
 	import { afterUpdate, onMount, onDestroy, getContext } from 'svelte'
 	import { getLogger } from '$lib/utils'
+	import { touchDevice, virtualKeyboardMode } from '$lib/stores.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import Button, { Label } from '@smui/button'
 
@@ -14,6 +15,7 @@
 	export let magnify = 1
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
+
 	let enounce
 	let enounce2
 	let expression
@@ -24,6 +26,7 @@
 	let answers_latex
 	let choices
 	let selecteds
+
 	let onChoice = (i) => {
 		if (interactive) {
 			if (question.type === 'choices') {
@@ -91,7 +94,6 @@
 				mfe.removeEventListener('change', changeListeners[i])
 				mfe.blur()
 			})
-			
 		}
 	}
 
@@ -222,7 +224,8 @@
 					const mfe = new $MathfieldElement()
 					mfe.setOptions({
 						soundsDirectory: '/sounds',
-						virtualKeyboardMode: 'onfocus',
+						// virtualKeyboardMode: 'onfocus',
+						virtualKeyboardMode: 'off',
 						// virtualKeyboardMode: 'manual',
 						decimalSeparator: ',',
 						...virtualKeyboard,
@@ -234,6 +237,8 @@
 						smartFence: false,
 						superscript: false,
 					})
+					mfe.addEventListener('focus', manageFocus)
+					mfe.addEventListener('blur', manageFocus)
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -280,6 +285,21 @@
 	// $: if (answer) {
 	// 	correct = !math(answer).isIncorrect()
 	// }
+
+	function manageFocus() {
+		console.log('manageFocus')
+		mfs.forEach((mfe) => {
+			mfe.virtualKeyboardState =
+				mfe.hasFocus() &&
+				(($touchDevice && !$virtualKeyboardMode) ||
+					(!$touchDevice && $virtualKeyboardMode)) ? "visible" : "hidden"
+		})
+	}
+	
+
+
+	$: console.log('touchdevice', $touchDevice)
+	$: console.log('virtualKeyBoardMode', $virtualKeyboardMode)
 
 	$: if (question && interactive) {
 		console.log(question)
