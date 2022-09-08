@@ -290,9 +290,8 @@
 		console.log('manageFocus')
 		mfs.forEach((mfe) => {
 			mfe.virtualKeyboardState =
-				mfe.hasFocus() &&
-				(($touchDevice && !$virtualKeyboardMode) ||
-					(!$touchDevice && $virtualKeyboardMode)) ? "visible" : "hidden"
+				mfe.hasFocus() && $virtualKeyboardMode
+				 ? "visible" : "hidden"
 		})
 	}
 	
