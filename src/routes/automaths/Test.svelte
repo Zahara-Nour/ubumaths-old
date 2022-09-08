@@ -260,14 +260,7 @@
 
 	$: delay = slider * 1000
 
-	$: {
-		console.log(' virtual keybord mode')
-		virtualKeyboardMode.set($touchDevice)
-	}
-	$ :{
-		console.log(' virtual keybord mode', $virtualKeyboardMode)
-
-	}
+	$: virtualKeyboardMode.set($touchDevice)
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -350,9 +343,7 @@
 				class="mx-1"
 				color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
 				on:click="{() => {
-					console.log('trigger keyboard mode')
 					virtualKeyboardMode.update((state) => {
-						console.log('new state', !state)
 						return !state
 					})
 				}}"

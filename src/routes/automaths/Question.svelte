@@ -287,7 +287,6 @@
 	// }
 
 	function manageFocus() {
-		console.log('manageFocus')
 		mfs.forEach((mfe) => {
 			mfe.virtualKeyboardState =
 				mfe.hasFocus() && $virtualKeyboardMode
@@ -297,8 +296,6 @@
 	
 
 
-	$: console.log('touchdevice', $touchDevice)
-	$: console.log('virtualKeyBoardMode', $virtualKeyboardMode)
 
 	$: if (question && interactive) {
 		console.log(question)
