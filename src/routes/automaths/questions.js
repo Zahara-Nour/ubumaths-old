@@ -10005,6 +10005,21 @@ const questions = {
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},
+				{
+					description: "Ecrire un nombre entier à l'aide d'une puissance de 10",
+					subdescription: "de la forme avec puissances de 10 à la forme décimale.",
+					enounces: ["Ecris ce nombre sous la forme d'un seul nombre entier."],
+					expressions: ['&2*10^{&1}'],
+
+					variables: [
+						{
+							'&1': '$e[0;5]',
+							'&2': '$e[2;9]'
+						},
+					],
+					defaultDelay: 20,
+					grade: QUATRIEME,
+				},
 			],
 		},
 		Calculer: {
@@ -19682,7 +19697,18 @@ const questions = {
 					enounces: [
 						'Quelle est la limite de la suite dont le terme général est :',
 					],
-					expressions: ['(-1)^n', '&1', 'n', 'n^&2', 'sqrt(n)', '1/n', '1/n^&2', '&2^n', '(1/&2)^n', '&3^n' ],
+					expressions: [
+						'(-1)^n',
+						'&1',
+						'n',
+						'n^&2',
+						'sqrt(n)',
+						'1/n',
+						'1/n^&2',
+						'&2^n',
+						'(1/&2)^n',
+						'&3^n',
+					],
 					choices: [
 						[
 							{
@@ -19856,29 +19882,31 @@ const questions = {
 						],
 					],
 					type: 'choice',
-					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3],[3]],
+					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3], [3]],
 					variables: [
 						{
-							'&1': '$er[1;9]','&2':'$e[2;9]', '&3':'$d{0;1}'
+							'&1': '$er[1;9]',
+							'&2': '$e[2;9]',
+							'&3': '$d{0;1}',
 						},
 					],
 					correctionFormat: [
-						
 						{
-							correct: ["Limite de la suite de terme général $$&exp$$  : &answer"],
-							answer: "Limite de la suite : &answer",
+							correct: [
+								'Limite de la suite de terme général $$&exp$$  : &answer',
+							],
+							answer: 'Limite de la suite : &answer',
 						},
-						
 					],
 					correctionDetails: [
 						[
 							{
-								text: "La suite de terme général $$&exp$$ oscille entre les valeurs $$1$$ et $$-1$$ : &solution.",
+								text: 'La suite de terme général $$&exp$$ oscille entre les valeurs $$1$$ et $$-1$$ : &solution.',
 							},
 						],
 						[
 							{
-								text: "La suite de terme général $$&exp$$ est constante donc sa limite est &solution.",
+								text: 'La suite de terme général $$&exp$$ est constante donc sa limite est &solution.',
 							},
 						],
 						[],
@@ -19890,11 +19918,116 @@ const questions = {
 						[],
 						[],
 					],
-					options:['no-shuffle-choices'],
+					options: ['no-shuffle-choices'],
 					defaultDelay: 30,
 					grade: PREMIERE_SPE_MATHS,
 				},
 			],
+		},
+		'Suites arithmétiques': {
+			'Calculer un terme': [
+				{
+					description: "Calculer un terme d'une suite arithmétique",
+					subdescription: 'Calculer le terme suivant',
+					enounces: [
+						'Pour une suite arithmétique de raison &1, quel est le terme suivant &2 ?',
+					],
+					solutions: [['[_&1+(&2)_]']],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$er[2;9]',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si la raison est $$&1$$, le terme suivant &2 est &answer',
+							],
+							answer: 'Le terme suivant est &answer',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: 'Si la raison est $$&1$$, le terme suivant est $$&2[+_&1_]=$$&solution',
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Calculer un terme d'une suite arithmétique",
+					subdescription: "Calculer un terme à partir d'un autre",
+					enounces: [
+						'Pour une suite $$(u_n)$$ arithmétique de raison $$&3$$, que vaut $$u_&2$$ si $$u_&1=[_&1*(&3)_]$$ ?',
+					],
+					solutions: [['[_&2*(&3)_]']],
+					variables: [
+						{
+							'&1': '$e[1;8]',
+							'&2': '$e[&1+1;9]',
+							'&3': '$er[2;9]\\{&1}',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si la raison est $$&3$$ et $$u_&1=[_&1*(&3)_]$$, alors $$u_&2=$$&answer',
+							],
+							answer: '$$u_&2=$$&answer',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `Si la raison est $$\\textcolor{${color1}}{&3}$$ et $$u_&1=[_&1*(&3)_]$$, alors $$u_&2=u_&1\\textcolor{${color1}}{[+_&3_]} \\times [_&2-&1_]=u_&1[+_(&2-&1)*(&3)_]=$$&solution`,
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
+			'Determiner la raison': [
+				{
+					description: "Déterminer la raison d'une suite arithmétique",
+					subdescription: 'A partir de deux termes consécutifs',
+					enounces: [
+						"Quelle est la raison d'une suite arithmétique où $$u_&1=&3$$ et $$u_&2=[_&3+(&4)_]$$ ?",
+					],
+					solutions: [['&4']],
+					variables: [
+						{
+							'&1': '$e[1;8]',
+							'&2': '[_&1+1_]]',
+							'&3': '$er[2;9]',
+							'&4': '$er[2;9]',
+						},
+					],
+
+					correctionFormat: [
+						{
+							correct: [
+								'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&4)_]$$, alors la raison est &answer.',
+							],
+							answer: 'La raison est &answer.',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: 'Si $$u_&1=&3$$ et $$u_&2=[_&3+(&4)_]$$, alors la raison est &solution.',
+							},
+						],
+					],
+					defaultDelay: 30,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			]
 		},
 	},
 }
