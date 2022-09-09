@@ -188,7 +188,6 @@
 	// on passe à la question suivante
 	async function change() {
 		current++
-		console.log('change', current)
 		if (timer) clearInterval(timer)
 		// if (timeout) clearTimeout(timeout)
 

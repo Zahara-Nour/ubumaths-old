@@ -15,12 +15,12 @@
 	import { supabaseClient } from '$lib/supabase'
 	import { SupaAuthHelper } from '@supabase/auth-helpers-svelte'
 	import { selectDB } from '$lib/db'
-	import { hydrateMonstre } from './navadra/js/monsters'
+	import {dev } from '$app/env';
 
 	let { info, fail, warn } = getLogger('Global layout', 'info')
 
-	info('Initialization')
-
+	info('-- Initialization --')
+	info(dev ? '. developpement version' : '. production version')
 	// probleme de persistance entre l'instance de supabase et le jeton fourni par google Auth
 	// le test de connexion doit se faire par supabase, quitte à refaire une authentification google
 	supabaseClient.auth.onAuthStateChange(() => {
@@ -118,6 +118,9 @@
 
 	// on met à jour le profil utilisateur suivant l'état de connexion
 	$: updateUser($connected)
+	
+	
+	
 </script>
 
 <svelte:head>

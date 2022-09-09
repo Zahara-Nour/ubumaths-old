@@ -677,7 +677,6 @@ export function assessItem(item) {
 	}
 	// si toutes les réponses sont vides, pas besoin d'aller plus loin
 	if (item.statuss.every((status) => status === STATUS_EMPTY)) {
-		console.log('answers', item.answers)
 		if (item.answers) item.coms.push(EMPTY_ANSWER)
 		item.status = STATUS_EMPTY
 	}
