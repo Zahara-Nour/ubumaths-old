@@ -133,10 +133,10 @@
 					</Icon>
 				</Fab>
 			</div>
-			<div class="flex flex-col items-center">
+			<div class="flex flex-col items-center" style="color:white">
 				<div
 					class="my-2"
-					style="font-size:2em;color:white; font-family:'pacifico'"
+					style="font-size:2em; font-family:'pacifico'"
 				>
 					{messageResult}
 				</div>
