@@ -12,7 +12,12 @@
 	import { virtualKeyboardMode, touchDevice } from '$lib/stores'
 
 	import math from 'tinycas'
-	import { mdiRocketLaunchOutline, mdiRestart, mdiKeyboard } from '@mdi/js'
+	import {
+		mdiRocketLaunchOutline,
+		mdiRestart,
+		mdiKeyboard,
+		mdiLaunch,
+	} from '@mdi/js'
 	import { fetchImage } from '$lib/images'
 	import Correction from './Correction.svelte'
 	import QuestionCard from '$lib/components/QuestionCard.svelte'
@@ -43,7 +48,7 @@
 	let showExemple = false
 	let showCorrection = false
 	let alert
-	let slider =0
+	let slider = 0
 	let min = 0,
 		max = 60
 	let cards, card
@@ -103,9 +108,12 @@
 		current = -1
 		restart = false
 		finish = false
+		go = false
 		cards = []
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
-		courseAuxNombres = JSON.parse(decodeURI($page.url.searchParams.get('courseAuxNombres')))
+		courseAuxNombres = JSON.parse(
+			decodeURI($page.url.searchParams.get('courseAuxNombres')),
+		)
 		answerss = classroom ? null : []
 		answerss_latex = classroom ? null : []
 		paramsAnswers.answerss = answerss
@@ -125,7 +133,7 @@
 			question.delay = q.delay || question.delay || question.defaultDelay
 			//  check that delay is a multiple of five
 			const rest = question.delay % 5
-			question.delay = question.delay + 5 - rest 
+			question.delay = question.delay + 5 - rest
 
 			for (let i = 0; i < q.count; i++) {
 				const generated = generate(question, cards, q.count, offset)
@@ -161,8 +169,6 @@
 		if (classroom && basket.length === 1) {
 			showExemple = true
 			generateExemple()
-		} else {
-			change()
 		}
 
 		info('Begining test with questions :', cards)
@@ -184,7 +190,12 @@
 
 	function beginTest() {
 		showExemple = false
-		change()
+		go = true
+		if (courseAuxNombres) {
+		} else {
+			// on passe à la première question
+			change()
+		}
 	}
 
 	// on passe à la question suivante
@@ -257,6 +268,8 @@
 		}
 	}
 
+	initTest()
+
 	// le bouton restart a été appuyé après la correction
 	$: if (restart) {
 		initTest()
@@ -315,8 +328,7 @@
 	<div style="height:90vh" class="flex justify-center items-center">
 		<Button
 			on:click="{() => {
-				initTest()
-				go = true
+				beginTest()
 			}}"
 			variant="raised"
 		>
