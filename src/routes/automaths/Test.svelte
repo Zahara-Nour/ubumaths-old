@@ -42,7 +42,7 @@
 	let showExemple = false
 	let showCorrection = false
 	let alert
-	let slider
+	let slider =0
 	let min = 0,
 		max = 60
 	let cards, card
@@ -121,6 +121,9 @@
 			const { theme, domain, subdomain, level } = ids[q.id]
 			const question = getQuestion(theme, domain, subdomain, level)
 			question.delay = q.delay || question.delay || question.defaultDelay
+			//  check that delay is a multiple of five
+			const rest = question.delay % 5
+			question.delay = question.delay + 5 - rest 
 
 			for (let i = 0; i < q.count; i++) {
 				const generated = generate(question, cards, q.count, offset)
@@ -261,6 +264,7 @@
 	$: delay = slider * 1000
 
 	$: virtualKeyboardMode.set($touchDevice)
+	$: console.log('slider', slider)
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -320,7 +324,7 @@
 	</div>
 {:else if card}
 	<div bind:this="{ref}">
-		<div class="{' my-1 flex justify-start'}">
+		<div class="{' my-1 flex justify-start items-center'}">
 			<CircularProgress
 				number="{current + 1}"
 				fontSize="{classroom ? 2.5 * fontSize : fontSize + 5}"
