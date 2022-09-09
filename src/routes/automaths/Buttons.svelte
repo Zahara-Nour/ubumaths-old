@@ -7,6 +7,7 @@
 		mdiBasket,
 		mdiLink,
 		mdiTrashCanOutline,
+		mdiRunFast
 	} from '@mdi/js'
 	import Fab from '@smui/fab'
 	import Badge from '@smui-extra/badge'
@@ -22,10 +23,12 @@
 	export let classroom
 	export let displayExemple
 	export let flushBasket
+	export let courseAuxNombres
 
 	const toggleExemple = () => (displayExemple = !displayExemple)
 	const toggleBasket = () => (showBasket = !showBasket)
 	const toggleClassroom = () => (classroom = !classroom)
+	const toggleCourseAuxNombres = () => (courseAuxNombres = !courseAuxNombres)
 
 	// $: isLoggedIn = $user.id != 'guest'
 	// $: isTeacher = isLoggedIn && $user.roles.includes('teacher')
@@ -38,6 +41,12 @@
 		<Fab class="mx-1" color="secondary" on:click="{copyLink}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiLink}"></path>
+			</Icon>
+		</Fab>
+		
+		<Fab class="mx-1" color="{courseAuxNombres ? 'primary' : 'secondary'}" on:click="{toggleCourseAuxNombres}" mini>
+			<Icon component="{Svg}" viewBox="2 2 20 20">
+				<path fill="currentColor" d="{mdiRunFast}"></path>
 			</Icon>
 		</Fab>
 

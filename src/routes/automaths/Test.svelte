@@ -37,6 +37,7 @@
 	let correct = false
 	let restart = false
 	let classroom
+	let courseAuxNombres
 	let pause = false
 	let previous
 	let showExemple = false
@@ -104,6 +105,7 @@
 		finish = false
 		cards = []
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
+		courseAuxNombres = JSON.parse(decodeURI($page.url.searchParams.get('courseAuxNombres')))
 		answerss = classroom ? null : []
 		answerss_latex = classroom ? null : []
 		paramsAnswers.answerss = answerss
