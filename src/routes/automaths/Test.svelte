@@ -8,6 +8,7 @@
 	import { afterUpdate, onDestroy, onMount, setContext } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
 	import { getLogger, shuffle } from '$lib/utils'
+	import { createTimer } from '$lib/timer'
 	import { page } from '$app/stores'
 	import { virtualKeyboardMode, touchDevice } from '$lib/stores'
 
@@ -55,17 +56,13 @@
 	let generatedExemple
 	let basket
 	let go = false
-	const paramsAnswers = {}
-	const commit = {
-		f: function () {
-			if (this.hook) this.hook()
-			change()
-		},
-	}
+	const testParams = {}
+	let commit
 	let ref
 	let fontSize
+	let remaining
 
-	setContext('question-params', paramsAnswers)
+	setContext('test-params', testParams)
 
 	onMount(() => {
 		if (ref) {
@@ -86,6 +83,7 @@
 			)
 		}
 	})
+
 	function countDown() {
 		if (!pause) {
 			elapsed = Date.now() - start + previous
@@ -99,7 +97,13 @@
 	}
 
 	onDestroy(() => {
-		if (timer) clearInterval(timer)
+		if (timer) {
+			if (timer.stop) {
+				timer.stop()
+			} else {
+				clearInterval(timer)
+			}
+		}
 		// if (timeout) clearTimeout(timeout)
 	})
 
@@ -116,8 +120,10 @@
 		)
 		answerss = classroom ? null : []
 		answerss_latex = classroom ? null : []
-		paramsAnswers.answerss = answerss
-		paramsAnswers.answerss_latex = answerss_latex
+		testParams.answerss = answerss
+		testParams.answerss_latex = answerss_latex
+		testParams.courseAuxNombres = courseAuxNombres
+		testParams.classroom = classroom
 
 		// answerss.splice(0, answerss.length)
 		// answerss_latex.splice(0, answerss_latex.length)
@@ -166,6 +172,15 @@
 			}
 		})
 
+		commit = {
+			f: function () {
+				if (this.hook) this.hook()
+				if (!courseAuxNombres) {
+					change()
+				}
+			},
+		}
+
 		if (classroom && basket.length === 1) {
 			showExemple = true
 			generateExemple()
@@ -192,6 +207,15 @@
 		showExemple = false
 		go = true
 		if (courseAuxNombres) {
+			const tick = () => {
+				remaining = timer.getTime()
+			}
+			if (timer && timer.stop) {
+				timer.stop()
+			}
+			timer = createTimer(7 * 60, tick, commit.f)
+			remaining = timer.getTime()
+			timer.start()
 		} else {
 			// on passe à la première question
 			change()
@@ -276,9 +300,7 @@
 	}
 
 	$: delay = slider * 1000
-
 	$: virtualKeyboardMode.set($touchDevice)
-	$: console.log('slider', slider)
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -333,6 +355,38 @@
 			variant="raised"
 		>
 			<Label>Let's go !</Label>
+		</Button>
+	</div>
+{:else if courseAuxNombres}
+	Course aux nombres
+	{#if remaining}
+		{`${remaining.minutes}:${remaining.seconds < 10 ? '0' : ''}${
+			remaining.seconds
+		}`}
+	{/if}
+	{#each cards as card}
+		<div class="card">
+			<div class=" p-2 elevation-{4} rounded-lg">
+				<QuestionCard
+					card="{card}"
+					onChoice="{onChoice}"
+					interactive="{true}"
+					commit="{commit}"
+				/>
+			</div>
+		</div>
+	{/each}
+	<div class="flex justify-center items-center">
+		<Button
+			on:click="{() => {
+				console.log(answerss)
+				timer.stop()
+				commit.f()
+				finish = true
+			}}"
+			variant="raised"
+		>
+			<Label>Valider</Label>
 		</Button>
 	</div>
 {:else if card}

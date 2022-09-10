@@ -20,6 +20,7 @@
 	export let h = 0
 	export let height = 0
 	export let magnify
+	export let correction
 
 	function getSolution(card) {
 		let nSol = -1
@@ -29,7 +30,7 @@
 			nSol += 1
 			return math(card.solutions[nSol]).latex
 		}
-		
+
 		if (card.choices) {
 			if (card.type === 'choices') {
 				s = '<div class="flex flex-wrap justify-start">'
@@ -77,39 +78,57 @@
 	}
 
 	$: solution = $formatLatex(getSolution(card))
-	$: details = card.correctionDetails && card.correctionDetails.length
-		? createDetailedCorrection(card)
-		: createCorrection(card)
+	$: details =
+		card.correctionDetails && card.correctionDetails.length
+			? createDetailedCorrection(card)
+			: createCorrection(card)
 </script>
 
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
-		<div class="h-full flex flex-col justify-between">
-			<Content class="h-full">
-				<div class="h-full flex flex-col items-center justify-around">
-					<div
-						style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}"
-					>
-						Réponse :
-					</div>
-					<div
-						class="my-5 z-O relative"
-						style="{`font-size:${2 * magnify}rem`}"
-					>
-						{@html solution}
-					</div>
-					{#if details}
-						<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
-							{#each details as detail}
-								<p>
-									{@html detail.text ? detail.text : detail}
-								</p>
-							{/each}
-						</div>
-					{/if}
+		<div class="h-full flex flex-col items-center justify-between">
+			<!-- correction des réponses de l'utilisateur -->
+			{#if correction}
+				<div
+					class="correction-title"
+					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem; position:absolute;top:1em; left:0px`}"
+				>
+					Détails
 				</div>
-			</Content>
-			{#if flashcard}
+				<div class="z-0 relative" style="{`font-size:${magnify}rem`}">
+					{#each details as detail}
+						<div class="correction-line">
+							{@html detail.text ? detail.text : detail}
+						</div>
+					{/each}
+				</div>
+
+				<div class=" w-full flex justify-end">
+					<Fab color="secondary" on:click="{toggleFlip}" mini>
+						<Icon component="{Svg}" viewBox="2 2 20 20">
+							<path fill="currentColor" d="{mdiOrbitVariant}"></path>
+						</Icon>
+					</Fab>
+				</div>
+			{:else}
+				<!-- solution générique -->
+				<div
+					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}"
+				>
+					Réponse :
+				</div>
+				<div class="my-5 z-O relative" style="{`font-size:${2 * magnify}rem`}">
+					{@html solution}
+				</div>
+				{#if details}
+					<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
+						{#each details as detail}
+							<p>
+								{@html detail.text ? detail.text : detail}
+							</p>
+						{/each}
+					</div>
+				{/if}
 				<div class="buttons flex justify-center">
 					<Fab color="secondary" on:click="{toggleFlip}" mini>
 						<Icon component="{Svg}" viewBox="2 2 20 20">
@@ -137,5 +156,23 @@
 <style>
 	.buttons {
 		margin-top: 2em;
+	}
+	.correction-line {
+		margin-top: 9px;
+		margin-bottom: 9px;
+	}
+
+	.correction-line:first-child {
+		margin-top: 0px;
+		margin-bottom: 9px;
+	}
+
+	.correction-line:last-child {
+		margin-top: 9px;
+		margin-bottom: 0px;
+	}
+
+	.correction-title {
+		transform: rotate(-45deg);
 	}
 </style>

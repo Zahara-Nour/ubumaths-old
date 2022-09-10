@@ -17554,6 +17554,14 @@ const questions = {
 						},
 					],
 					solutions: [['&1']],
+					correctionFormat: [
+						{
+							correct: [
+								"La solution de l'équation est &answer.",
+							],
+							answer: 'La solution est &answer.',
+						},
+					],
 					correctionDetails: [
 						[
 							{

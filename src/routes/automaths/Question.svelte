@@ -7,12 +7,15 @@
 	import { touchDevice, virtualKeyboardMode } from '$lib/stores.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import Button, { Label } from '@smui/button'
+	import { createCorrection, createDetailedCorrection } from './correctionItem'
+	import { mdc_colors as colors } from '$lib/colors'
 
 	export let question
 	export let interactive = false
 	export let masked = false
-	export let commit
+	export let commit = {}
 	export let magnify = 1
+	export let correction
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
 
@@ -28,6 +31,7 @@
 	let selecteds
 
 	let onChoice = (i) => {
+		console.log('onchoice', interactive)
 		if (interactive) {
 			if (question.type === 'choices') {
 				selecteds[i] = !selecteds[i]
@@ -38,8 +42,12 @@
 					}
 				})
 			} else {
+				selecteds[i] = !selecteds[i]
+				selecteds = selecteds.map((value, j) => (j === i ? !!value : false))
+				console.log(selecteds)
+				answers.pop()
 				answers.push(i)
-				commit.f()
+				commit?.f()
 			}
 		}
 	}
@@ -51,13 +59,6 @@
 	let changeListeners = []
 	let fieldsNb = 0
 
-	if (commit) {
-		commit.hook = () => {
-			removeListeners()
-		}
-	}
-
-	const params = getContext('question-params')
 	// console.log('context', params)
 
 	function createMarkup(s) {
@@ -104,13 +105,15 @@
 	// - quand la touche entrée du clavier virtuel
 	function onChange(ev, i) {
 		// removeListeners()
-		if (mfs[i].hasFocus()) {
-			// TODO: empêcher le commit quand le mathfield est vide
-			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
-			if (mfs.length === 1) {
-				commit.f()
-			} else {
-				mfs[(i + 1) % mfs.length].focus()
+		if (!courseAuxNombres) {
+			if (mfs[i].hasFocus()) {
+				// TODO: empêcher le commit quand le mathfield est vide
+				// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
+				if (mfs.length === 1 && !courseAuxNombres) {
+					commit.f()
+				} else {
+					mfs[(i + 1) % mfs.length].focus()
+				}
 			}
 		}
 	}
@@ -179,8 +182,7 @@
 	}
 
 	function addMathfield() {
-		nmfs += 1
-		let id = `mf${nmfs}`
+		let id = `mf-${question.num}-${mfs.length}`
 		if (masked) id = id + '-masked'
 		return `<span id='${id}'}/>`
 	}
@@ -194,7 +196,9 @@
 			const elements = []
 			if (showExp && expression) {
 				for (let i of document
-					.querySelector('#expression')
+					.querySelector(
+						`#expression-${question.num}${masked ? '-masked' : ''}`,
+					)
 					.querySelectorAll('*')) {
 					if (/^mf/g.test(i.id)) {
 						elements.push(i)
@@ -202,7 +206,9 @@
 				}
 				if (expression2) {
 					for (let i of document
-						.querySelector('#expression2')
+						.querySelector(
+							`#expression2-${question.num}${masked ? '-masked' : ''}`,
+						)
 						.querySelectorAll('*')) {
 						if (/^mf/g.test(i.id)) {
 							elements.push(i)
@@ -212,7 +218,9 @@
 			}
 			if (answerFields) {
 				for (let i of document
-					.querySelector('#answerFields' + (masked ? '-masked' : ''))
+					.querySelector(
+						`#answerFields-${question.num}${masked ? '-masked' : ''}`,
+					)
 					.querySelectorAll('*')) {
 					if (/^mf/g.test(i.id)) {
 						elements.push(i)
@@ -289,13 +297,9 @@
 	function manageFocus() {
 		mfs.forEach((mfe) => {
 			mfe.virtualKeyboardState =
-				mfe.hasFocus() && $virtualKeyboardMode
-				 ? "visible" : "hidden"
+				mfe.hasFocus() && $virtualKeyboardMode ? 'visible' : 'hidden'
 		})
 	}
-	
-
-
 
 	$: if (question && interactive) {
 		console.log(question)
@@ -379,6 +383,21 @@
 			expression2 = expression2.replace(/…/g, addMathfield)
 		}
 	}
+
+	if (commit) {
+		commit.hook = () => {
+			removeListeners()
+		}
+	}
+
+	const params = getContext('test-params')
+	const courseAuxNombres = params ? params.courseAuxNombres : false
+
+	let simpleCorrection = createCorrection(question)
+	let detailedCorrection =
+		question.correctionDetails && question.correctionDetails.length
+			? createDetailedCorrection(question)
+			: simpleCorrection
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -386,16 +405,19 @@
 		{#if element === 'enounce' && enounce}
 			<div
 				id="enounce"
-				class="mt-3 mb-3 text-center max-w-4xl leading-normal"
-				style="{`font-size:${magnify}rem`}"
+				class="{(correction ? 'mb-1' : 'my-3') +
+					' text-center max-w-4xl leading-normal'}"
+				style="{`font-size:${magnify}rem;` +
+					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce}
 			</div>
 		{:else if element === 'enounce2' && enounce2}
 			<div
 				id="enounce2"
-				class="mt-3 mb-3  text-center max-w-4xl"
-				style="{`font-size:${magnify}rem`}"
+				class="{(correction ? 'my-1' : 'my-3') + ' text-center max-w-4xl'}"
+				style="{`font-size:${magnify}rem` +
+					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce2}
 			</div>
@@ -412,25 +434,29 @@
 			{:catch error}
 				{error}
 			{/await}
-		{:else if element === 'expression' && expression && showExp}
+		{:else if element === 'expression' && expression && showExp && (!correction || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
 			<div
 				id="expressions"
-				class="my-3 flex flex-col items-center justify-center"
+				class=" flex flex-col items-center justify-center"
+				style="{`font-size:${magnify}rem;` +
+					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
-				<div id="expression" class="my-3" style="{`font-size:${magnify}rem`}">
+				<div
+					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
+					class="{correction ? 'my-1' : 'my-3'}"
+				>
 					{@html expression}
 				</div>
 				{#if expression2 && !(!interactive && question.type === 'equation')}
 					<div
-						id="expression2"
-						class="mt-4"
-						style="{`font-size:${magnify}rem`}"
+						id="{`expression2-${question.num}${masked ? '-masked' : ''}`}"
+						class="{correction ? 'my-1' : 'my-3'}"
 					>
 						{@html expression2}
 					</div>
 				{/if}
 			</div>
-		{:else if element === 'choices' && question.choices}
+		{:else if !correction && element === 'choices' && question.choices}
 			<div class="mt-3 flex flex-wrap justify-around">
 				{#each question.choices as choice, i}
 					<button
@@ -464,20 +490,27 @@
 					</button>
 				{/each}
 			</div>
-			{#if question.type === 'choices'}
+			{#if !courseAuxNombres && question.type === 'choices' && interactive}
 				<Button on:click="{commit.f}" variant="raised">
 					<Label>Valider</Label>
 				</Button>
+			{/if}
+			{#if correction}
+				{#each simpleCorrection as line}
+					<div class=" mb-1 z-0 relative">
+						{@html line}
+					</div>
+				{/each}
 			{/if}
 		{/if}
 	{/each}
 	{#if answerFields}
 		<div
-			id="{'answerFieldss' + (masked ? '-masked' : '')}"
+			id="{`answerFieldss-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"
 		>
 			<div
-				id="{'answerFields' + (masked ? '-masked' : '')}"
+				id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 				class="my-3"
 				style="{`font-size:${magnify}rem`}"
 			>
@@ -485,11 +518,20 @@
 			</div>
 		</div>
 	{/if}
-	{#if interactive && fieldsNb > 1}
+	{#if !courseAuxNombres && interactive && fieldsNb > 1}
 		<div>
 			<button class="rounded-lg  m-2 p-1" on:click="{commit.f}">
 				Valider
 			</button>
+		</div>
+	{/if}
+	{#if correction}
+		<div class="mt-3">
+			{#each simpleCorrection as line}
+				<div class=" my-1 z-0 relative">
+					{@html line}
+				</div>
+			{/each}
 		</div>
 	{/if}
 </div>

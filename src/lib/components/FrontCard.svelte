@@ -6,6 +6,7 @@
 	import Paper, { Title, Subtitle, Content } from '@smui/paper'
 	import Question from '/src/routes/automaths/Question.svelte'
 	import { formatLatex } from '$lib/stores'
+	import { mdc_colors } from '$lib/colors'
 
 	export let toggleFlip = () => {}
 	export let card
@@ -17,67 +18,100 @@
 	export let interactive
 	export let commit
 	export let magnify
+	export let correction
 
 	let choices
 
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)
-
-	
 </script>
 
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}">
-		<div
-			class="flex flex-col justify-between"
-			style="{height ? `height:${height - 48}px;` : ''}"
-		>
-			{#if showDescription}
-				<div>
-					<Title>
-						<div class="flex justify-between">
-							<span
-								class="z-0 relative"
-								style="{'color:var(--mdc-theme-primary'}"
-								>{@html $formatLatex(description)}</span
-							> <span>{card.id} </span>
-						</div>
-					</Title>
-					{#if subdescription}
-						<Subtitle>
-							<span
-								class="z-0 relative"
-								style="{'color:var(--mdc-theme-on-surface'}"
-								>{@html $formatLatex(subdescription)}</span
-							>
-						</Subtitle>
-					{/if}
+		{#if correction}
+			<div class="flex flex-col  justify-between" style="{height ? `height:${height - 48}px;` : ''}">
+				<div
+					class="correction-title"
+					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem; position:absolute;top:1.5em;left:-6px`}"
+				>
+					Correction
 				</div>
-			{/if}
-			<Content>
-				<Question
-					question="{card}"
-					masked="{masked}"
-					interactive="{interactive}"
-					commit="{commit}"
-					magnify={magnify}
-				/>
-			</Content>
+				<div class="flex flex-col justify-between items-center">
+					<Content>
+						<Question
+							question="{card}"
+							masked="{masked}"
+							magnify="{magnify}"
+							correction="{true}"
+						/>
+					</Content>
+				</div>
+				{#if flashcard}
+					<div class=" flex justify-end">
+						<Fab color="secondary" on:click="{toggleFlip}" mini>
+							<Icon component="{Svg}" viewBox="2 2 20 20">
+								<path fill="currentColor" d="{mdiOrbitVariant}"></path>
+							</Icon>
+						</Fab>
+					</div>
+				{/if}
+			</div>
+		{:else}
+			<div
+				class="flex flex-col justify-between"
+				style="{height ? `height:${height - 48}px;` : ''}"
+			>
+				{#if showDescription}
+					<div>
+						<Title>
+							<div class="flex justify-between">
+								<span
+									class="z-0 relative"
+									style="{'color:var(--mdc-theme-primary'}"
+									>{@html $formatLatex(description)}</span
+								> <span>{card.id} </span>
+							</div>
+						</Title>
+						{#if subdescription}
+							<Subtitle>
+								<span
+									class="z-0 relative"
+									style="{'color:var(--mdc-theme-on-surface'}"
+									>{@html $formatLatex(subdescription)}</span
+								>
+							</Subtitle>
+						{/if}
+					</div>
+				{/if}
+				<Content>
+					<Question
+						question="{card}"
+						masked="{masked}"
+						interactive="{interactive}"
+						commit="{commit}"
+						magnify="{magnify}"
+					/>
+				</Content>
 
-			{#if flashcard}
-				<div class="buttons flex justify-center">
-					<Fab color="secondary" on:click="{toggleFlip}" mini>
-						<Icon component="{Svg}" viewBox="2 2 20 20">
-							<path fill="currentColor" d="{mdiOrbitVariant}"></path>
-						</Icon>
-					</Fab>
-				</div>
-			{/if}
-		</div>
+				{#if flashcard}
+					<div class="buttons flex justify-center">
+						<Fab color="secondary" on:click="{toggleFlip}" mini>
+							<Icon component="{Svg}" viewBox="2 2 20 20">
+								<path fill="currentColor" d="{mdiOrbitVariant}"></path>
+							</Icon>
+						</Fab>
+					</div>
+				{/if}
+			</div>
+		{/if}
 	</Paper>
 </div>
 
 <style>
+	.correction-title {
+		transform: rotate(-45deg);
+	}
+
 	.buttons {
 		margin-top: 2em;
 	}

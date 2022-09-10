@@ -165,7 +165,7 @@ export function createCorrection(item) {
 					item.coms.unshift('Ta réponse:')
 				} else {
 					item.coms.unshift(
-						'Ta réponse : ' +
+						'Ta réponse coco : ' +
 							correctionFormat.answer
 								.replace(new RegExp('&exp2', 'g'), expression2_latex)
 								.replace(new RegExp('&exp', 'g'), expression_latex)
@@ -277,7 +277,7 @@ export function createCorrection(item) {
 						'$$' +
 						expression_latex.replace(
 							/\\ldots/,
-							`\\textcolor{green}{${answers_latex[0]}}`,
+							`\\enclose{roundedbox}[2px solid ${correct_color}]{\\textcolor{${correct_color}}{${answers_latex[0]}}}`,
 						) +
 						'$$'
 				} else {
@@ -285,7 +285,7 @@ export function createCorrection(item) {
 						'$$' +
 						expression_latex.replace(
 							/\\ldots/,
-							`\\textcolor{green}{${solutions_latex[0]}}`,
+							`\\enclose{roundedbox}[2px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}`,
 						) +
 						'$$'
 

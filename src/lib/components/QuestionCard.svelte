@@ -7,8 +7,9 @@
 	export let interactive = false
 	export let flashcard = false
 	export let showDescription = false
-	export let commit = {}
+	export let commit = null
 	export let magnify = 1
+	export let correction = false
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
@@ -19,7 +20,7 @@
 	let init
 
 	async function updateHeight() {
-		// console.log('updateHeight')npm 
+		// console.log('updateHeight')npm
 		height = Math.max(hfront, hback)
 		// console.log('height', height)
 	}
@@ -63,6 +64,7 @@
 				interactive="{interactive}"
 				commit="{commit}"
 				magnify="{magnify}"
+				correction="{correction}"
 			/>
 		</div>
 		{#if flashcard}
@@ -73,6 +75,7 @@
 					flashcard="{flashcard}"
 					height="{height}"
 					magnify="{magnify}"
+					correction="{correction}"
 				/>
 			</div>
 		{/if}
@@ -90,10 +93,16 @@
 		interactive="{interactive}"
 		commit="{{}}"
 		magnify="{magnify}"
+		correction="{correction}"
 	/>
 
 	{#if flashcard}
-		<BackCard card="{card}" bind:h="{hback}" magnify="{magnify}" />
+		<BackCard
+			card="{card}"
+			bind:h="{hback}"
+			magnify="{magnify}"
+			correction="{correction}"
+		/>
 	{/if}
 </div>
 
