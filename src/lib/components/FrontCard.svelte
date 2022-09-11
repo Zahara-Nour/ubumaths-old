@@ -7,6 +7,7 @@
 	import Question from '/src/routes/automaths/Question.svelte'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
+	import Button, { Label } from '@smui/button'
 
 	export let toggleFlip = () => {}
 	export let card
@@ -29,7 +30,46 @@
 <div bind:clientHeight="{h}">
 	<Paper elevation="{12}">
 		{#if correction}
-			<div class="flex flex-col  justify-between" style="{height ? `height:${height - 48}px;` : ''}">
+			<div
+				class="flex flex-col  justify-between"
+				style="{height ? `height:${height - 48}px;` : ''}"
+			>
+				{#if showDescription}
+					<div>
+						<div class="flex items-center justify-between">
+							<div class="flex justify-left items-center">
+								<div>
+									<Title>
+										<span
+											class="z-0 relative"
+											style="{'color:var(--mdc-theme-primary'}"
+										>
+											{@html $formatLatex(description)}
+										</span>
+									</Title>
+									{#if subdescription}
+										<Subtitle>
+											<span
+												class="z-0 relative"
+												style="{'color:var(--mdc-theme-on-surface'}"
+												>{@html $formatLatex(subdescription)}</span
+											>
+										</Subtitle>
+									{/if}
+								</div>
+								<Button
+									class="ml-3"
+									on:click="{() => (correction = !correction)}"
+									variant="raised"
+								>
+									<Label>Mode correction</Label>
+								</Button>
+							</div>
+							<span>{card.id}</span>
+						</div>
+						<hr class='my-3 mx-0' />
+					</div>
+				{/if}
 				<div
 					class="correction-title"
 					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem; position:absolute;top:1.5em;left:-6px`}"
@@ -63,24 +103,38 @@
 			>
 				{#if showDescription}
 					<div>
-						<Title>
-							<div class="flex justify-between">
-								<span
-									class="z-0 relative"
-									style="{'color:var(--mdc-theme-primary'}"
-									>{@html $formatLatex(description)}</span
-								> <span>{card.id} </span>
-							</div>
-						</Title>
-						{#if subdescription}
-							<Subtitle>
-								<span
-									class="z-0 relative"
-									style="{'color:var(--mdc-theme-on-surface'}"
-									>{@html $formatLatex(subdescription)}</span
+						<div class="flex items-center justify-between">
+							<div class="flex justify-left items-center">
+								<div>
+									<Title>
+										<span
+											class="z-0 relative"
+											style="{'color:var(--mdc-theme-primary'}"
+										>
+											{@html $formatLatex(description)}
+										</span>
+									</Title>
+									{#if subdescription}
+										<Subtitle>
+											<span
+												class="z-0 relative"
+												style="{'color:var(--mdc-theme-on-surface'}"
+												>{@html $formatLatex(subdescription)}</span
+											>
+										</Subtitle>
+									{/if}
+								</div>
+								<Button
+									class="ml-3"
+									on:click="{() => (correction = !correction)}"
+									variant="raised"
 								>
-							</Subtitle>
-						{/if}
+									<Label>Mode correction</Label>
+								</Button>
+							</div>
+							<span>{card.id}</span>
+						</div>
+						<hr class='my-3 mx-0' />
 					</div>
 				{/if}
 				<Content>
@@ -94,7 +148,7 @@
 				</Content>
 
 				{#if flashcard}
-					<div class="buttons flex justify-center">
+					<div class="buttons flex justify-end">
 						<Fab color="secondary" on:click="{toggleFlip}" mini>
 							<Icon component="{Svg}" viewBox="2 2 20 20">
 								<path fill="currentColor" d="{mdiOrbitVariant}"></path>

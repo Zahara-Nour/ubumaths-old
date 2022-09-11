@@ -81,7 +81,7 @@
 	$: details =
 		card.correctionDetails && card.correctionDetails.length
 			? createDetailedCorrection(card)
-			: createCorrection(card)
+			: createCorrection(card).correction
 </script>
 
 <div bind:clientHeight="{h}">

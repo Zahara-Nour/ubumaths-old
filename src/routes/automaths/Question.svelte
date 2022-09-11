@@ -9,6 +9,7 @@
 	import Button, { Label } from '@smui/button'
 	import { createCorrection, createDetailedCorrection } from './correctionItem'
 	import { mdc_colors as colors } from '$lib/colors'
+import CorrectionLine from './CorrectionLine.svelte'
 
 	export let question
 	export let interactive = false
@@ -393,11 +394,9 @@
 	const params = getContext('test-params')
 	const courseAuxNombres = params ? params.courseAuxNombres : false
 
-	let simpleCorrection = createCorrection(question)
-	let detailedCorrection =
-		question.correctionDetails && question.correctionDetails.length
-			? createDetailedCorrection(question)
-			: simpleCorrection
+	const correct = createCorrection(question)
+	const simpleCorrection = correct.correction
+	
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -495,13 +494,6 @@
 					<Label>Valider</Label>
 				</Button>
 			{/if}
-			{#if correction}
-				{#each simpleCorrection as line}
-					<div class=" mb-1 z-0 relative">
-						{@html line}
-					</div>
-				{/each}
-			{/if}
 		{/if}
 	{/each}
 	{#if answerFields}
@@ -529,7 +521,7 @@
 		<div class="mt-3">
 			{#each simpleCorrection as line}
 				<div class=" my-1 z-0 relative">
-					{@html line}
+					<CorrectionLine line={line}/>
 				</div>
 			{/each}
 		</div>

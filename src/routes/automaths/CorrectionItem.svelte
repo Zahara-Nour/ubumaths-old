@@ -1,33 +1,11 @@
 <script>
 	import QuestionCard from '../../lib/components/QuestionCard.svelte'
-	import { createCorrection, createDetailedCorrection } from './correctionItem'
+	import { createCorrection } from './correctionItem'
 	export let item
-	export let displayDetails
 
-	let number, coms, image, imageBase64P, imageCorrection, imageCorrectionBase64P
-
-	let correction = createCorrection(item)
-	let detailedCorrection =
-		item.correctionDetails && item.correctionDetails.length
-			? createDetailedCorrection(item)
-			: correction
-	// const validateFractions = checkFractions()
-
-	// if (seemsCorrect && !validateAnswer) {
-	//   coms.push(FORM)
-	// }
-	function updateItem() {
-		;({
-			number,
-			coms,
-			image,
-			imageBase64P,
-			imageCorrection,
-			imageCorrectionBase64P,
-		} = item)
-	}
-
-	$: if (item) updateItem()
+	const {correction, coms} = createCorrection(item)
+	
+	console.log('coms', coms)
 </script>
 
 {#if correction}

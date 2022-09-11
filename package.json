@@ -20,7 +20,7 @@
 		"@mdi/js": "^6.7.96",
 		"@playwright/test": "^1.21.0",
 		"@smui-extra/accordion": "^6.0.0-beta.16",
-		"@smui-extra/badge": "^6.0.0-beta.16",
+		"@smui-extra/badge": "^6.1.0",
 		"@smui/button": "^6.0.0-beta.16",
 		"@smui/common": "^6.0.0-beta.16",
 		"@smui/drawer": "^6.0.0-beta.16",

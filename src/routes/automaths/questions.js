@@ -110,7 +110,7 @@ const questions = {
 			Ecriture: [
 				{
 					description: 'Essai choix mlultiples',
-					enounces: ['Choisis les bonnes réponses.'],
+					enounces: ['Choisis les bonnes réponses $$&1$$.'],
 					variables: [
 						{
 							'&1': '$e[1;9]',
@@ -122,17 +122,13 @@ const questions = {
 					choices: [[{ text: '1' }, { text: '2' }, { text: '3' }]],
 					solutions: [[1, 2]],
 					type: 'choices',
-					correctionFormat: [
-						{
-							correct: [
-								'Dans $$[._&4_]$$ le chiffre des dizaines est &answer.',
-							],
-							answer: 'Le chiffre des dizaines est &answer.',
-						},
-						{
-							correct: ['Dans $$[._&4_]$$ le chiffre des unités est &answer.'],
-							answer: 'Le chiffre des unités est &answer.',
-						},
+					correctionDetails: [
+						[
+							{
+								text: 'La correction en détails.',
+							},
+						],
+					
 					],
 					defaultDelay: 60,
 					grade: CP,

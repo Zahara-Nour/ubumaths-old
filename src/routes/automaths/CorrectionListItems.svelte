@@ -2,15 +2,9 @@
 	import { STATUS_CORRECT, STATUS_UNOPTIMAL_FORM } from './correction'
 	import CorrectionItem from './CorrectionItem.svelte'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
-	import QuestionCard from '$lib/components/QuestionCard.svelte'
-	import { getContext } from 'svelte'
 
 	export let items
-	export let displayDetails
 	export let magnify = 1
-
-	const params = getContext('test-params')
-	const classroom = params.classroom
 </script>
 
 {#each items as item}
@@ -38,6 +32,6 @@
 				{item.number}
 			</span>
 		</div>
-		<CorrectionItem item="{item}" displayDetails="{displayDetails}" />
+		<CorrectionItem item="{item}" />
 	</div>
 {/each}
