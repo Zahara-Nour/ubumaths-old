@@ -203,46 +203,36 @@ export function createCorrection(item) {
 
 			case 'equation': {
 				// let exp = '$$\\begin{align*}x & =5-3 \\\\  & =2\\end{align*}$$'
-				line = `La solution de $$${expression_latex}$$ est :`
-				lines.push(line)
+				
 				line = `$$\\begin{align*}  ${expression2_latex}`
 				if (status === STATUS_EMPTY) {
 					line +=
-						`=\\textcolor{green}{${solutions_latex[0]}}` + '\\end{align*}$$'
+						`=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}` + '\\end{align*}$$'
 				} else if (status === STATUS_INCORRECT) {
 					line +=
-						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{red}{${answers_latex[0]}}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
+						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{${incorrect_color}}{${answers_latex[0]}}}` +
+						`\\\\&= \\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}\\end{align*}$$`
 				} else if (
 					status === STATUS_BAD_FORM ||
 					status === STATUS_UNOPTIMAL_FORM
 				) {
 					line +=
-						`&= \\textcolor{orange}{${answers_latex[0]}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
+						`&= \\textcolor{${unoptimal_color}}{${answers_latex[0]}}` +
+						`\\\\&= \\textcolor{${correct_color}}{${solutions_latex[0]}}\\end{align*}$$`
 				} else {
-					line += `=\\textcolor{green}{${answers_latex[0]}}\\end{align*}$$`
+					line += `=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${answers_latex[0]}}}\\end{align*}$$`
 				}
 				lines.push({ html: line })
 
 				break
 			}
 			case 'choice':
-				line =
-					correction_latex +
-					'<span class="green-text">' +
-					solutions_latex[0] +
-					'</span>'
-
-				lines.push({ html: line })
-				break
-
 			case 'choices': {
 				// line = '<div class="flex flex-wrap justify-start">'
 				let choices = []
 				item.choices.forEach((choice, i) => {
 					choices[i] = {}
-
+					console.log('solutions', solutions)
 					if (solutions.includes(i)) {
 						choices[i].solution = true
 						if (answers && answers.includes(i)) {
@@ -314,7 +304,7 @@ export function createCorrection(item) {
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{red}{${answers_latex[0]}}`,
+									`\\textcolor{${incorrect_color}}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)
@@ -326,7 +316,7 @@ export function createCorrection(item) {
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{orange}{${answers_latex[0]}}`,
+									`\\textcolor{${unoptimal_color}}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)
@@ -338,7 +328,7 @@ export function createCorrection(item) {
 
 	lines = lines.map((line) => {
 		if (line.html) {
-			return { html: get(formatLatex)(line) }
+			return { html: get(formatLatex)(line.html) }
 		} else if (line.choices) {
 			return {
 				choices: line.choices.map((choice) => ({

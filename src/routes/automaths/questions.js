@@ -616,14 +616,14 @@ const questions = {
 					],
 					conditions: ['&5!=&6'],
 					choices: [[{ text: '$$[._&5_]$$' }, { text: '$$[._&6_]$$' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est &answer',
-							],
-							answer: 'Le plus petit est &answer',
-						},
-					],
+					// correctionFormat: [
+					// 	{
+					// 		correct: [
+					// 			'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est &answer',
+					// 		],
+					// 		answer: 'Le plus petit est &answer',
+					// 	},
+					// ],
 					// corrections: [
 					//   'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est ',
 					// ],
@@ -1283,23 +1283,6 @@ const questions = {
 			],
 			Décomposition: [],
 			'A trou': [
-				{
-					description: 'Compléter une addition à trou',
-					subdescription:
-						'Nombres à 1 chiffre. Nombre plus grand en premier. Somme inférieure ou égale à 10',
-					enounces: ['Complète.'],
-					expressions: ['? + ? + &1= ?'],
-					variables: [
-						{
-							'&1': '$e[3;8]',
-							//  '&3':'$e[2;&2]'
-						},
-					],
-					type: 'trou',
-					solutions: [['&2']],
-					defaultDelay: 120,
-					grade: CP,
-				},
 				{
 					description: 'Compléter une addition à trou',
 					subdescription:
@@ -14229,22 +14212,22 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\textcolor{${color1}}{&1} \\times &3 &= \\textcolor{${color1}}{&2} \\times &3 \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} \\textcolor{${color1}}{&1} \\times &3 &= \\textcolor{${color1}}{&2} \\times &3 \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} &3 + \\textcolor{${color1}}{&1} &= &3 + \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} &3 + \\textcolor{${color1}}{&1} &= &3 + \\textcolor{${color1}}{&2} \\\\ &=  &sol   \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\textcolor{${color1}}{&1} + &3 &= \\textcolor{${color1}}{&2} + &3 \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} \\textcolor{${color1}}{&1} + &3 &= \\textcolor{${color1}}{&2} + &3 \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 					],

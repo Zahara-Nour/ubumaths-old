@@ -36,6 +36,7 @@
 	let classroom = false
 	let basket = []
 	let courseAuxNombres = false
+	let correction = false
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
@@ -312,6 +313,7 @@
 				card="{generated}"
 				flashcard="{true}"
 				showDescription="{true}"
+				bind:correction={correction}
 			/>
 		</div>
 	</div>

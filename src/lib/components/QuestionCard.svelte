@@ -64,7 +64,7 @@
 				interactive="{interactive}"
 				commit="{commit}"
 				magnify="{magnify}"
-				correction="{correction}"
+				bind:correction="{correction}"
 			/>
 		</div>
 		{#if flashcard}
@@ -72,10 +72,10 @@
 				<BackCard
 					card="{card}"
 					toggleFlip="{toggleFlip}"
-					flashcard="{flashcard}"
 					height="{height}"
 					magnify="{magnify}"
 					correction="{correction}"
+					showDescription="{showDescription}"
 				/>
 			</div>
 		{/if}
@@ -102,6 +102,7 @@
 			bind:h="{hback}"
 			magnify="{magnify}"
 			correction="{correction}"
+			showDescription="{showDescription}"
 		/>
 	{/if}
 </div>

@@ -9,7 +9,7 @@
 	import Button, { Label } from '@smui/button'
 	import { createCorrection, createDetailedCorrection } from './correctionItem'
 	import { mdc_colors as colors } from '$lib/colors'
-import CorrectionLine from './CorrectionLine.svelte'
+	import CorrectionLine from './CorrectionLine.svelte'
 
 	export let question
 	export let interactive = false
@@ -59,6 +59,8 @@ import CorrectionLine from './CorrectionLine.svelte'
 	let inputListeners = []
 	let changeListeners = []
 	let fieldsNb = 0
+	let correct
+	let simpleCorrection
 
 	// console.log('context', params)
 
@@ -378,10 +380,12 @@ import CorrectionLine from './CorrectionLine.svelte'
 	$: {
 		expression2 = question.expression2_latex
 
-		if (interactive && question.type === 'equation') expression2 += '=\\ldots'
-		expression2 = $toMarkup(expression2 || '')
-		if (interactive) {
-			expression2 = expression2.replace(/…/g, addMathfield)
+		if (expression2) {
+			if (interactive && question.type === 'equation') expression2 += '=\\ldots'
+			expression2 = $toMarkup(expression2)
+			if (interactive) {
+				expression2 = expression2.replace(/…/g, addMathfield)
+			}
 		}
 	}
 
@@ -394,9 +398,10 @@ import CorrectionLine from './CorrectionLine.svelte'
 	const params = getContext('test-params')
 	const courseAuxNombres = params ? params.courseAuxNombres : false
 
-	const correct = createCorrection(question)
-	const simpleCorrection = correct.correction
-	
+	$: {
+		correct = createCorrection(question)
+		simpleCorrection = correct.correction
+	}
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -521,7 +526,7 @@ import CorrectionLine from './CorrectionLine.svelte'
 		<div class="mt-3">
 			{#each simpleCorrection as line}
 				<div class=" my-1 z-0 relative">
-					<CorrectionLine line={line}/>
+					<CorrectionLine line="{line}" />
 				</div>
 			{/each}
 		</div>

@@ -72,10 +72,9 @@ export default function generateQuestion(
 			e = e.positive()
 		}
 
-		if (modifiers.includes('(') && (e.isOpposite() || e.isPositive() )) {
+		if (modifiers.includes('(') && (e.isOpposite() || e.isPositive())) {
 			e = e.bracket()
 		}
-
 
 		return e
 	}
@@ -550,9 +549,17 @@ export default function generateQuestion(
 				const found = solution.match(regex)
 				if (found) {
 					const test = math(found[1]).eval()
-					const success = math(replaceVariables(found[2]))
-					const failure = math(replaceVariables(found[3]))
-					return test.isTrue() ? success.string : failure.string
+					let success = math(replaceVariables(found[2]))
+					let failure = math(replaceVariables(found[3]))
+					if (question.type === 'choices' || question.type === 'choice') {
+						success = success.value.toNumber()
+						failure = failure.value.toNumber()
+					}
+					else {
+						success = success.string
+						failure = failure.string
+					}
+					return test.isTrue() ? success : failure
 				}
 			}
 			// if (question.type === 'choice' && typeof solution === 'number') {
@@ -683,7 +690,6 @@ export default function generateQuestion(
 		],
 	}
 
-	
 	if (choices) generated.choices = choices
 	if (solutions) generated.solutions = solutions
 	if (details) generated.details = details
@@ -699,7 +705,7 @@ export default function generateQuestion(
 	if (expression2) generated.expression2 = expression2
 	if (testAnswer) generated.testAnswer = testAnswer
 	if (answerFields) generated.answerFields = answerFields
-	
+
 	if (image) {
 		generated.image = image
 		// generated.imageBase64P = fetchImage(image)
