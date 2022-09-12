@@ -88,7 +88,7 @@
 					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
-			<div class="w-full">
+			<div class="ml-12 w-full">
 				<CorrectionListItems
 					items="{items.filter((_, i) => i % 2 === 1)}"
 					displayDetails="{displayDetails}"

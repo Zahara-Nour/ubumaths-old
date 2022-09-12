@@ -13,8 +13,8 @@
 		{#each line.choices as choice, i}
 			{#if choice.solution}
 				<span
-					class="rounded-lg m-2 p-1"
-					style="{`display:inline-block;text-align: center;min-width:2em;position:relative; border: 4px solid ${correct_color}`}"
+					class="rounded-lg m-2 p-2"
+					style="{`display:inline-block;text-align: center;min-width:2em;position:relative; border: 6px solid ${correct_color}`}"
 				>
 					{#if choice.html}
 						{@html choice.html}
@@ -34,7 +34,7 @@
 				</span>
 			{:else}
 				<span
-					class="rounded-lg m-2 p-1"
+					class="rounded-lg m-2 p-2"
 					style="display:inline-block;text-align:center;min-width:2em;position:relative; border:4px solid grey"
 				>
 					{#if choice.html}

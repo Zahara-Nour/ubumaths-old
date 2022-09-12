@@ -451,7 +451,7 @@
 			<div
 				id="expressions"
 				class=" flex flex-col items-center justify-center"
-				style="{`font-size:${correction ? 1 : magnify===1 ? 2 : 1}rem;` +
+				style="{`font-size:${correction ? 1 : magnify===1 ? 2 : magnify*1.5}rem;` +
 					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				<div
@@ -473,7 +473,7 @@
 			<div class="mt-3 flex flex-wrap justify-around" style="{`font-size:${magnify}rem`}">
 				{#each question.choices as choice, i}
 					<button
-						class="rounded-lg  m-2 p-1"
+						class="rounded-lg  m-2 p-2"
 						style="{`font-size:1em; min-width:2em;border: 4px solid ${
 							selecteds && i < selecteds.length && selecteds[i]
 								? 'var(--mdc-theme-primary)'
@@ -531,7 +531,7 @@
 			{#each simpleCorrection as line}
 				<div
 					class=" my-1 z-0 relative"
-					style="{`word-break: break-word ;white-space: normal;font-size:${magnify === 1 ? 1.4 : magnify}rem`}"
+					style="{`word-break: break-word ;white-space: normal;font-size:${magnify === 1 ? 1.2 : magnify}rem`}"
 				>
 					<CorrectionLine line="{line}" />
 				</div>

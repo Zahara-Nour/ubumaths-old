@@ -231,21 +231,25 @@ export function createCorrection(item) {
 				// line = '<div class="flex flex-wrap justify-start">'
 				let choices = []
 				item.choices.forEach((choice, i) => {
-					choices[i] = {}
+					const c= {}
+					
 					console.log('solutions', solutions)
 					if (solutions.includes(i)) {
-						choices[i].solution = true
+						c.solution = true
 						if (answers && answers.includes(i)) {
-							choices[i].badge = 'correct'
+							c.badge = 'correct'
 						}
 					} else if (answers && answers.includes(i)) {
-						choices[i].badge = 'incorrect'
+						c.badge = 'incorrect'
 					}
 
 					if (choice.image) {
-						choices[i].image = choice.base64
+						c.image = choice.base64
 					} else {
-						choices[i].text = choice.text
+						c.text = choice.text
+					}
+					if (answers || c.solution) {
+						choices.push(c)
 					}
 				})
 

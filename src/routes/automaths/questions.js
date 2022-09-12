@@ -210,7 +210,7 @@ const questions = {
 				},
 				{
 					description: "Parité d'un nombre entier",
-					enounces: ['Ce nombre est-il pair ou impair ?'],
+					enounces: ['Quelle est la parité de ce nombre ?'],
 					expressions: ['&2', '&3'],
 					variables: [
 						{
@@ -220,11 +220,7 @@ const questions = {
 						},
 					],
 					choices: [[{ text: 'pair' }, { text: 'impair' }]],
-					correctionFormat: [
-						{
-							correct: ['Le nombre $$&exp$$ est &answer'],
-						},
-					],
+					
 					correctionDetails: [
 						[
 							{
