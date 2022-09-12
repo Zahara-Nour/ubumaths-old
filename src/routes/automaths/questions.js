@@ -119,7 +119,7 @@ const questions = {
 						},
 					],
 
-					choices: [[{ text: '1' }, { text: '2' }, { text: '3' }]],
+					choices: [[{ text: '$$1$$' }, { text: '$$2$$' }, { text: '$$3$$' }]],
 					solutions: [[1, 2]],
 					type: 'choices',
 					correctionDetails: [

@@ -81,14 +81,14 @@
 
 	{#if classroom}
 		<div class="flex  justify-around w-full" style="overflow-x:auto;">
-			<div>
+			<div class="w-full">
 				<CorrectionListItems
 					items="{items.filter((_, i) => i % 2 === 0)}"
 					displayDetails="{displayDetails}"
 					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
-			<div>
+			<div class="w-full">
 				<CorrectionListItems
 					items="{items.filter((_, i) => i % 2 === 1)}"
 					displayDetails="{displayDetails}"

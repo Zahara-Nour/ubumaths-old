@@ -73,7 +73,7 @@
 			{#if correction}
 				<div
 					class="correction-title"
-					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem; position:absolute;top:1.5em;left:-6px`}"
+					style="{` color:${mdc_colors['lime-500']}; font-size:1rem; position:absolute;top:1.5em;left:-6px`}"
 				>
 					Correction
 				</div>
@@ -84,6 +84,8 @@
 					masked="{masked}"
 					magnify="{magnify}"
 					correction="{correction}"
+					interactive="{interactive}"
+					commit={commit}
 				/>
 			</Content>
 			{#if flashcard && !(correction && (!card.correctionDetails || !card.correctionDetails.length))}

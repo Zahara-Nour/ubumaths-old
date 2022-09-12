@@ -32,7 +32,6 @@
 	let selecteds
 
 	let onChoice = (i) => {
-		console.log('onchoice', interactive)
 		if (interactive) {
 			if (question.type === 'choices') {
 				selecteds[i] = !selecteds[i]
@@ -48,7 +47,7 @@
 				console.log(selecteds)
 				answers.pop()
 				answers.push(i)
-				commit?.f()
+				commit.f()
 			}
 		}
 	}
@@ -197,22 +196,30 @@
 	afterUpdate(() => {
 		if (interactive) {
 			const elements = []
-			if (showExp && expression) {
-				for (let i of document
-					.querySelector(
-						`#expression-${question.num}${masked ? '-masked' : ''}`,
-					)
-					.querySelectorAll('*')) {
-					if (/^mf/g.test(i.id)) {
-						elements.push(i)
+			if (
+				showExp &&
+				expression &&
+				(!correction ||
+					(question.type !== 'result' &&
+						question.type !== 'trou' &&
+						question.type !== 'rewrite'))
+			) {
+				console.log(`${question.num}${masked ? '-masked' : ''}`)
+				const expressionElements = document.querySelector(
+					`#expression-${question.num}${masked ? '-masked' : ''}`,
+				)
+				if (expressionElements) {
+					for (let i of expressionElements.querySelectorAll('*')) {
+						if (/^mf/g.test(i.id)) {
+							elements.push(i)
+						}
 					}
 				}
 				if (expression2) {
-					for (let i of document
-						.querySelector(
-							`#expression2-${question.num}${masked ? '-masked' : ''}`,
-						)
-						.querySelectorAll('*')) {
+					const expression2Elements = document.querySelector(
+						`#expression2-${question.num}${masked ? '-masked' : ''}`,
+					)
+					for (let i of expression2Elements.querySelectorAll('*')) {
 						if (/^mf/g.test(i.id)) {
 							elements.push(i)
 						}
@@ -402,6 +409,8 @@
 		correct = createCorrection(question)
 		simpleCorrection = correct.correction
 	}
+
+	console.log('magnify', magnify)
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -411,7 +420,7 @@
 				id="enounce"
 				class="{(correction ? 'mb-1' : 'my-3') +
 					' text-center max-w-4xl leading-normal'}"
-				style="{`font-size:${magnify}rem;` +
+				style="{`font-size:${correction ? 1 : magnify}rem;` +
 					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce}
@@ -420,7 +429,7 @@
 			<div
 				id="enounce2"
 				class="{(correction ? 'my-1' : 'my-3') + ' text-center max-w-4xl'}"
-				style="{`font-size:${magnify}rem` +
+				style="{`font-size:${correction ? 1 : magnify}rem` +
 					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce2}
@@ -442,7 +451,7 @@
 			<div
 				id="expressions"
 				class=" flex flex-col items-center justify-center"
-				style="{`font-size:${magnify}rem;` +
+				style="{`font-size:${correction ? 1 : magnify===1 ? 2 : 1}rem;` +
 					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				<div
@@ -461,11 +470,11 @@
 				{/if}
 			</div>
 		{:else if !correction && element === 'choices' && question.choices}
-			<div class="mt-3 flex flex-wrap justify-around">
+			<div class="mt-3 flex flex-wrap justify-around" style="{`font-size:${magnify}rem`}">
 				{#each question.choices as choice, i}
 					<button
 						class="rounded-lg  m-2 p-1"
-						style="{`min-width:4em;border: 4px solid ${
+						style="{`font-size:1em; min-width:2em;border: 4px solid ${
 							selecteds && i < selecteds.length && selecteds[i]
 								? 'var(--mdc-theme-primary)'
 								: 'var(--mdc-theme-secondary)'
@@ -487,18 +496,14 @@
 							{/await}
 						{/if}
 						{#if choice.text}
-							<div class="text-base " style="{`font-size:${magnify}rem`}">
+							<div >
 								{@html $formatLatex(choice.text)}
 							</div>
 						{/if}
 					</button>
 				{/each}
 			</div>
-			{#if !courseAuxNombres && question.type === 'choices' && interactive}
-				<Button on:click="{commit.f}" variant="raised">
-					<Label>Valider</Label>
-				</Button>
-			{/if}
+			
 		{/if}
 	{/each}
 	{#if answerFields}
@@ -515,17 +520,19 @@
 			</div>
 		</div>
 	{/if}
-	{#if !courseAuxNombres && interactive && fieldsNb > 1}
-		<div>
-			<button class="rounded-lg  m-2 p-1" on:click="{commit.f}">
-				Valider
-			</button>
-		</div>
-	{/if}
+	{#if !courseAuxNombres && interactive && (question.type === 'choices' || fieldsNb > 1) }
+				<Button class="mt-3 p-1" on:click="{commit.f}" variant="raised">
+					<Label>Valider</Label>
+				</Button>
+			{/if}
+	
 	{#if correction}
 		<div class="mt-3">
 			{#each simpleCorrection as line}
-				<div class=" my-1 z-0 relative">
+				<div
+					class=" my-1 z-0 relative"
+					style="{`word-break: break-word ;white-space: normal;font-size:${magnify === 1 ? 1.4 : magnify}rem`}"
+				>
 					<CorrectionLine line="{line}" />
 				</div>
 			{/each}

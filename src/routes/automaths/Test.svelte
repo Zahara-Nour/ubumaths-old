@@ -246,7 +246,7 @@
 					: 20000
 				slider = delay / 1000
 			}
-
+			slider = Math.min(slider, 60)
 			percentage = 0
 			alert = false
 			start = Date.now()
@@ -301,6 +301,7 @@
 
 	$: delay = slider * 1000
 	$: virtualKeyboardMode.set($touchDevice)
+	$: console.log("slider", slider)
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />

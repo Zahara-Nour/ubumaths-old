@@ -1,18 +1,20 @@
 <script>
 	import Badge from '@smui-extra/badge'
-	import {correct_color } from '$lib/colors'
+	import { correct_color } from '$lib/colors'
 	export let line
 </script>
 
 {#if line}
 	{#if line.html}
-		{@html line.html}
+		<span style="word-break:break-word;white-space:normal;">
+			{@html line.html}
+		</span>
 	{:else if line.choices}
 		{#each line.choices as choice, i}
 			{#if choice.solution}
 				<span
 					class="rounded-lg m-2 p-1"
-					style="{`display:inline-block;text-align: center;min-width:3rem;position:relative; border: 4px solid ${correct_color}`}"
+					style="{`display:inline-block;text-align: center;min-width:2em;position:relative; border: 4px solid ${correct_color}`}"
 				>
 					{#if choice.html}
 						{@html choice.html}
@@ -33,7 +35,7 @@
 			{:else}
 				<span
 					class="rounded-lg m-2 p-1"
-					style="display:inline-block;text-align: center;min-width:3rem;position:relative; border: 4px solid grey"
+					style="display:inline-block;text-align:center;min-width:2em;position:relative; border:4px solid grey"
 				>
 					{#if choice.html}
 						{@html choice.html}
@@ -51,7 +53,9 @@
 			{/if}
 		{/each}
 	{:else}
-		{@html line}
+		<span style="display:inline-block;word-break:break-word;white-space:normal;">
+			{@html line}
+		</span>
 	{/if}
 {:else}
 	ligne vide

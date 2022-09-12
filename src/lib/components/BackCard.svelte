@@ -96,7 +96,7 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 			{#if correction}
 				<div
 					class="correction-title"
-					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem; position:absolute;top:1em; left:0px`}"
+					style="{` color:${mdc_colors['lime-500']};  position:absolute;top:1em; left:0px`}"
 				>
 					Détails
 				</div>

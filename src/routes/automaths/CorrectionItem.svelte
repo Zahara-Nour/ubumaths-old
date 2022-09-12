@@ -3,18 +3,20 @@
 	import { createCorrection } from './correctionItem'
 	export let item
 
-	const {correction, coms} = createCorrection(item)
-	
+	const { correction, coms } = createCorrection(item)
+	export let magnify
+
 	console.log('coms', coms)
 </script>
 
 {#if correction}
-	<div class="ml-3 flex flex-wrap " >
-		<div  class="mr-3 mb-3" style="width:400px;">
+	<div class="ml-3 grow flex flex-wrap ">
+		<div class="mr-3 w-full"  style="word-break: break-word ;min-width: 100px;w-full; white-space: normal;">
 			<QuestionCard
 				card="{item}"
 				correction="{true}"
 				flashcard="{!!item.correctionDetails}"
+				magnify="{magnify}"
 			/>
 		</div>
 		<div>
