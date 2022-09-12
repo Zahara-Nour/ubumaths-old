@@ -18,7 +18,9 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 	export let card
 	export let toggleFlip = () => {}
 	export let h = 0
+	export let w = 0
 	export let height = 0
+	export let width = 0
 	export let magnify
 	export let correction
 	export let showDescription
@@ -88,8 +90,8 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 	$: console.log('details', details)
 </script>
 
-<div bind:clientHeight="{h}">
-	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
+<div bind:clientHeight="{h}" bind:clientWidth="{w}">
+	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''+ width ? `width:${width - 48}px;` : ''}">
 		<div class="h-full flex flex-col items-center justify-between">
 			<!-- correction des réponses de l'utilisateur -->
 

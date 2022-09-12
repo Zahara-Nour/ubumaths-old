@@ -14,15 +14,26 @@
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
 
-	let hfront = 0
-	let hback = 0
-	let height
-	let init
+	let hfront_masked = 0 // height front masked
+	let hback_masked = 0 // width back masked
+	let w_masked
+
+	let height // height for displayed card
+	let width = 0
 
 	async function updateHeight() {
 		// console.log('updateHeight')npm
-		height = Math.max(hfront, hback)
+		height = Math.max(hfront_masked, hback_masked)
+		// console.log('updated height', height)
 		// console.log('height', height)
+	}
+
+	async function updateWidthMasked() {
+		// console.log('updateHeight')npm
+		w_masked = width
+		// console.log('height', height)
+		// console.log('updated width', w_masked)
+		
 	}
 
 	$: if (card) {
@@ -34,16 +45,19 @@
 		// fontSize.update((size) => size - 1)
 	}
 
-	// $: console.log('hback', hback)
-	// $: console.log('hfront', hfront)
+	// $: console.log('hback_masked', hback_masked)
+	// $: console.log('hfront_masked', hfront_masked)
 	// $: console.log('height', height)
-	// $: console.log('init', init)
-	$: if (flashcard && hfront && hback) {
+	$: if (flashcard && hfront_masked && hback_masked) {
 		updateHeight()
 	}
 
-	$: if (!flashcard && hfront) {
+	$: if (!flashcard && hfront_masked) {
 		updateHeight()
+	}
+
+	$: if (width) {
+		updateWidthMasked()
 	}
 
 	$: if ($fontSize) {
@@ -52,8 +66,8 @@
 	}
 </script>
 
-<div class="card" style="{height ? `height:${height}px` : ''}">
-	<div class="flipper" class:flip style="{height ? 'height:100%' : ''}">
+<div class="card" style="{height ? `height:${height}px;` : ''}">
+	<div class="flipper" class:flip style="{height ? 'height:100%;' : ''}">
 		<div class="front" style="{height ? 'height:100%' : ''}">
 			<FrontCard
 				card="{card}"
@@ -64,11 +78,12 @@
 				interactive="{interactive}"
 				commit="{commit}"
 				magnify="{magnify}"
-				bind:correction="{correction}"
+				bind:correction
+				bind:w={width}
 			/>
 		</div>
 		{#if flashcard}
-			<div class="back" style="{height ? 'height:100%' : ''}">
+			<div class="back" style="{height ? 'height:100%;' : ''}">
 				<BackCard
 					card="{card}"
 					toggleFlip="{toggleFlip}"
@@ -82,13 +97,13 @@
 	</div>
 </div>
 
-<div class="absolute" style="{'width:95vw;top:-100%;left:-100000%;'}">
+<div class="absolute" style="{(width ? `width:${width}px;` : '' )+ 'top:-100%;left:-100000%;'}">
 	<!-- <div > -->
 	<FrontCard
 		card="{card}"
 		flashcard="{flashcard}"
 		showDescription="{showDescription}"
-		bind:h="{hfront}"
+		bind:h="{hfront_masked}"
 		masked="{true}"
 		interactive="{interactive}"
 		commit="{{}}"
@@ -99,7 +114,7 @@
 	{#if flashcard}
 		<BackCard
 			card="{card}"
-			bind:h="{hback}"
+			bind:h="{hback_masked}"
 			magnify="{magnify}"
 			correction="{correction}"
 			showDescription="{showDescription}"

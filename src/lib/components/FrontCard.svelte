@@ -14,7 +14,9 @@
 	export let showDescription
 	export let flashcard
 	export let height = 0
+	export let width = 0
 	export let h = 0
+	export let w = 0
 	export let masked = false
 	export let interactive
 	export let commit
@@ -27,11 +29,11 @@
 	$: subdescription = $formatLatex(card.subdescription)
 </script>
 
-<div bind:clientHeight="{h}">
+<div bind:clientHeight="{h}" bind:clientWidth="{w}">
 	<Paper elevation="{12}">
 		<div
 			class="flex flex-col  justify-between"
-			style="{height ? `height:${height - 48}px;` : ''}"
+			style="{height ? `height:${height - 48}px;` : '' + width ? `width:${width - 48}px;` : ''}"
 		>
 			{#if showDescription}
 				<div>
