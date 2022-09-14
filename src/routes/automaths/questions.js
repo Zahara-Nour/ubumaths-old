@@ -17078,7 +17078,7 @@ const questions = {
 					description: 'Addition $$a+x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x+&1=[_&1+&2_]', '&1+x=[_&1+&2_]'],
-					expressions2: ['x'],
+					answerFields: ['$$x=?$$'],
 					variables: [
 						{
 							'&1': '$e[5;9]',

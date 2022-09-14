@@ -203,14 +203,13 @@
 	afterUpdate(() => {
 		// il faut créer les mathfields
 		console.log('afterUpdate')
-		if (interactive) {
+		if (!correction && interactive) {
 			const elements = []
 			if (
 				expression &&
-				(!correction ||
-					(question.type !== 'result' &&
-						question.type !== 'trou' &&
-						question.type !== 'rewrite'))
+				question.type !== 'result' &&
+				question.type !== 'trou' &&
+				question.type !== 'rewrite'
 			) {
 				console.log(`${question.num}${masked ? '-masked' : ''}`)
 				const expressionElements = document.querySelector(
@@ -318,7 +317,7 @@
 	function initQuestion(question) {
 		console.log('new question')
 		removeListeners()
-		
+
 		mfs = []
 		nmfs = 0
 
@@ -350,7 +349,9 @@
 				answerFields = '\\ldots'
 			}
 			if (answerFields) {
-				answerFields = $formatLatex(answerFields).replace(/…/g, addMathfield)
+				answerFields = $formatLatex(
+					answerFields.replace(/\?/g, '\\ldots'),
+				).replace(/…/g, addMathfield)
 			}
 		}
 
@@ -392,8 +393,8 @@
 
 	function prepareInteractive() {
 		console.log('$: interactive')
-			mfs = []
-			nmfs = 0
+		mfs = []
+		nmfs = 0
 
 		expression = question.expression_latex
 		expression2 = question.expression2_latex
@@ -412,9 +413,11 @@
 			answerFields = '\\ldots'
 		}
 		if (answerFields) {
-			answerFields = $formatLatex(answerFields).replace(/…/g, addMathfield)
+			answerFields = $formatLatex(
+				answerFields.replace(/\?/g, '\\ldots'),
+			).replace(/…/g, addMathfield)
 		}
-
+		console.log('answerFields', answerFields)
 		if (expression) {
 			expression = $toMarkup(expression).replace(/…/g, addMathfield)
 		}
@@ -431,7 +434,7 @@
 	function stopInteractive() {
 		console.log('stop interactive')
 		removeListeners()
-		
+
 		mfs = null
 
 		expression = question.expression_latex
@@ -458,7 +461,7 @@
 		stopInteractive()
 	} else if (correction) {
 		removeListeners()
-		
+
 		mfs = null
 		resetAnswers()
 	}
@@ -562,9 +565,9 @@
 			</div>
 		{/if}
 	{/each}
-	{#if answerFields}
+	{#if !correction && (interactive || question.type !== 'equation') && answerFields}
 		<div
-			id="{`answerFieldss-${question.num}${masked ? '-masked' : ''}`}"
+			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"
 		>
 			<div

@@ -69,7 +69,7 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 				}
 			}
 		} else {
-			if (card.answerFields) {
+			if (card.answerFields && card.type !== 'equation') {
 				s = card.answerFields.replace(/\\ldots/g, replaceSol)
 				console.log('s', s)
 			} else {

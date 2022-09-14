@@ -204,7 +204,7 @@ export function createCorrection(item) {
 			case 'equation': {
 				// let exp = '$$\\begin{align*}x & =5-3 \\\\  & =2\\end{align*}$$'
 				
-				line = `$$\\begin{align*}  ${expression2_latex}`
+				line = `$$\\begin{align*}  x`
 				if (status === STATUS_EMPTY) {
 					line +=
 						`=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}` + '\\end{align*}$$'
