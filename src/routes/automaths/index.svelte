@@ -37,6 +37,10 @@
 	let basket = []
 	let courseAuxNombres = false
 	let correction = false
+
+	// mode interactif pour l'exemple
+	let interactive = false
+	
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
@@ -78,7 +82,9 @@
 	function changeLevel(subd, l) {
 		subdomain = subd
 		level = l
+		console.log('generate')
 		generated = generateExemple(theme, domain, subdomain, level)
+		
 		if (generated.image) {
 			generated.imageBase64P = fetchImage(generated.image)
 		}
@@ -92,6 +98,7 @@
 				}
 			})
 		}
+
 		// console.log('generated', generated)
 	}
 
@@ -198,7 +205,7 @@
 	}
 
 	$: if (courseAuxNombres) {
-		basket.forEach(item => {
+		basket.forEach((item) => {
 			item.count = 1
 		})
 		basket = basket
@@ -313,7 +320,8 @@
 				card="{generated}"
 				flashcard="{true}"
 				showDescription="{true}"
-				bind:correction={correction}
+				bind:correction
+				bind:interactive
 			/>
 		</div>
 	</div>

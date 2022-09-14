@@ -233,7 +233,6 @@ export function createCorrection(item) {
 				item.choices.forEach((choice, i) => {
 					const c= {}
 					
-					console.log('solutions', solutions)
 					if (solutions.includes(i)) {
 						c.solution = true
 						if (answers && answers.includes(i)) {

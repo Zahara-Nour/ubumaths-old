@@ -2,6 +2,7 @@
 	import BackCard from './BackCard.svelte'
 	import FrontCard from './FrontCard.svelte'
 	import { fontSize } from '$lib/stores'
+import { createCorrection, createDetailedCorrection } from '../../routes/automaths/correctionItem';
 
 	export let card
 	export let interactive = false
@@ -21,6 +22,9 @@
 	let height // height for displayed card
 	let width = 0
 
+	let simpleCorrection
+	let detailedCorrection
+
 	async function updateHeight() {
 		// console.log('updateHeight')npm
 		height = Math.max(hfront_masked, hback_masked)
@@ -33,16 +37,11 @@
 		w_masked = width
 		// console.log('height', height)
 		// console.log('updated width', w_masked)
-		
 	}
 
 	$: if (card) {
 		// console.log('changing card')
 		flip = false
-
-		// Kludge to trigger an updateHeight
-		// fontSize.update((size) => size + 1)
-		// fontSize.update((size) => size - 1)
 	}
 
 	// $: console.log('hback_masked', hback_masked)
@@ -75,11 +74,13 @@
 				flashcard="{flashcard}"
 				showDescription="{showDescription}"
 				height="{height}"
-				interactive="{interactive}"
 				commit="{commit}"
 				magnify="{magnify}"
+				bind:interactive
 				bind:correction
-				bind:w={width}
+				bind:w="{width}"
+				bind:simpleCorrection
+				bind:detailedCorrection
 			/>
 		</div>
 		{#if flashcard}
@@ -97,7 +98,10 @@
 	</div>
 </div>
 
-<div class="absolute" style="{(width ? `width:${width}px;` : '' )+ 'top:-100%;left:-100000%;'}">
+<div
+	class="absolute"
+	style="{(width ? `width:${width}px;` : '') + 'top:-100%;left:-100000%;'}"
+>
 	<!-- <div > -->
 	<FrontCard
 		card="{card}"

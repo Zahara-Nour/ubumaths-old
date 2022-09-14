@@ -10,13 +10,17 @@
 	import { createCorrection, createDetailedCorrection } from './correctionItem'
 	import { mdc_colors as colors } from '$lib/colors'
 	import CorrectionLine from './CorrectionLine.svelte'
+	import { assessItem } from './correction'
 
 	export let question
 	export let interactive = false
 	export let masked = false
-	export let commit = {}
 	export let magnify = 1
-	export let correction
+	export let correction = false
+	export let simpleCorrection = []
+	export let detailedCorrection
+	export let commit
+	export let immediateCommit
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
 
@@ -29,56 +33,49 @@
 	let answers
 	let answers_latex
 	let choices
-	let selecteds
+	let num
 
 	let onChoice = (i) => {
 		if (interactive) {
 			if (question.type === 'choices') {
-				selecteds[i] = !selecteds[i]
-				answers.splice(0, answers.length)
-				selecteds.forEach((selected, i) => {
-					if (selected) {
-						answers.push(i)
-					}
-				})
+				if (answers.includes(i)) {
+					answers = answers.filter((a) => a != i)
+				} else {
+					answers = [...answers, i]
+				}
 			} else {
-				selecteds[i] = !selecteds[i]
-				selecteds = selecteds.map((value, j) => (j === i ? !!value : false))
-				console.log(selecteds)
-				answers.pop()
-				answers.push(i)
-				commit.f()
+				answers = answers[0] = i ? [] : [i]
+				if (immediateCommit) commit()
 			}
 		}
 	}
-	let showExp
 	let answerFields
 
 	let keyListeners = []
 	let inputListeners = []
 	let changeListeners = []
 	let fieldsNb = 0
-	let correct
-	let simpleCorrection
 
 	// console.log('context', params)
 
-	function createMarkup(s) {
-		return s ? $toMarkup(s) : null
-	}
-
-	function createLatex(s) {
-		return s ? $formatLatex(s) : null
+	if (commit) {
+		commit = () => {
+			commitAnswers()
+			commit()
+		}
+	} else {
+		commit = commitAnswers
 	}
 
 	function recordAnswer(i) {
+		console.log('i', i)
 		answers_latex[i] = mfs[i]
 			.getValue()
 			// on remplace plusieurs espaces par un seul, bizarrz normalement pas besoin
 			.replace(/(\\,){2,}/g, '\\,')
 			.trim()
-		answers[i] = mfs[i].getValue('ascii-math')
-		answers[i] = answers[i]
+		answers[i] = mfs[i]
+			.getValue('ascii-math')
 			// .replace(/xx/g, '*')
 			.replace(/÷/g, ':')
 			.replace(/\((\d+(,\d+)*)\)\//g, (_, p1) => p1 + '/')
@@ -90,14 +87,18 @@
 	}
 
 	function removeListeners() {
-		if (mfs) {
-			mfs.forEach((mfe, i) => {
-				mfe.removeEventListener('keystroke', keyListeners[i])
-				mfe.removeEventListener('input', inputListeners[i])
-				mfe.removeEventListener('change', changeListeners[i])
-				mfe.blur()
-			})
-		}
+		// console.log('**removeListeners')
+		// console.log('keyListeners', keyListeners)
+		// console.log('mfs', mfs)
+		keyListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('key', listener),
+		)
+		inputListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('input', listener),
+		)
+		changeListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('change', listener),
+		)
 	}
 
 	// onChange est appelée quand :
@@ -111,8 +112,8 @@
 			if (mfs[i].hasFocus()) {
 				// TODO: empêcher le commit quand le mathfield est vide
 				// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
-				if (mfs.length === 1 && !courseAuxNombres) {
-					commit.f()
+				if (mfs.length === 1 && immediateCommit) {
+					commit()
 				} else {
 					mfs[(i + 1) % mfs.length].focus()
 				}
@@ -126,6 +127,7 @@
 
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
+		console.log('keystroke', i)
 		const mf = mfs[i]
 		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
 		const key_allowed2 = [
@@ -184,20 +186,25 @@
 	}
 
 	function addMathfield() {
-		let id = `mf-${question.num}-${mfs.length}`
+		let id = `mf-${question.num}-${nmfs}`
 		if (masked) id = id + '-masked'
+		nmfs++
 		return `<span id='${id}'}/>`
 	}
 
 	onDestroy(() => {
 		removeListeners()
+		if (mfs) {
+			mfs.forEach((mfe) => mfe.blur())
+		}
 	})
 
 	afterUpdate(() => {
+		// il faut créer les mathfields
+		console.log('afterUpdate')
 		if (interactive) {
 			const elements = []
 			if (
-				showExp &&
 				expression &&
 				(!correction ||
 					(question.type !== 'result' &&
@@ -237,7 +244,8 @@
 					}
 				}
 			}
-			elements.forEach((elt) => {
+			let added
+			elements.forEach((elt, i) => {
 				if (!elt.hasChildNodes()) {
 					const mfe = new $MathfieldElement()
 					mfe.setOptions({
@@ -255,8 +263,13 @@
 						smartFence: false,
 						superscript: false,
 					})
+
+					if (answers_latex[i]) {
+						mfe.value = answers_latex[i]
+					}
 					mfe.addEventListener('focus', manageFocus)
 					mfe.addEventListener('blur', manageFocus)
+					console.log('mfs avant ajout mfs', mfs)
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -265,10 +278,8 @@
 					elt.style.minWidth = '2em'
 					elt.style.border = '2px dashed grey'
 					elt.style.borderRadius = '5px'
-					const i = mfs.length - 1
+					// const i = mfs.length - 1
 					if (!masked) {
-						answers[i] = null
-						answers_latex[i] = null
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)
 						const changeListener = (ev) => onChange(ev, i)
@@ -279,30 +290,16 @@
 						mfe.addEventListener('input', inputListener)
 						mfe.addEventListener('change', changeListener)
 					}
+					added = true
 				}
 			})
-			if (!masked && mfs?.length) {
+			if (added && !masked) {
 				mfs[0].focus()
 			}
 
 			fieldsNb = mfs?.length || 0
 		}
 	})
-
-	// $: if (question.choices) {
-	// 	choices = question.choices.map((c) => {
-	// 		if (c.text) {
-	// 			c.text = $formatLatex(c.text)
-	// 		}
-	// 		return c
-	// 	})
-	// } else {
-	// 	choices = null
-	// }
-	// test pour vérifier que l'expression est bien formée à chaque frappe
-	// $: if (answer) {
-	// 	correct = !math(answer).isIncorrect()
-	// }
 
 	function manageFocus() {
 		mfs.forEach((mfe) => {
@@ -311,106 +308,160 @@
 		})
 	}
 
-	$: if (question && interactive) {
-		console.log(question)
+	function initQuestion(question) {
+		console.log('new question')
+		removeListeners()
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
 		mfs = []
 		nmfs = 0
-		if (!masked) {
-			keyListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('key', listener),
-			)
-			inputListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('input', listener),
-			)
-			changeListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('change', listener),
-			)
-			keyListeners = []
-			inputListeners = []
-			changeListeners = []
-			selecteds = []
+
+		if (!question.detailedCorrection && question.correctionDetails) {
+			question.detailedCorrection = createDetailedCorrection(question)
 		}
-		if (params) {
-			answers = params.answerss[question.num - 1]
-			answers_latex = params.answerss_latex[question.num - 1]
-		}
-	}
+		detailedCorrection = question.detailedCorrection
+		answers = question.answers
+		// console.log('answers from question', answers)
+		
 
-	// console.log('question', question)
-	$: {
-		showExp =
-			(question.expression_latex &&
-				!(question.options && question.options.includes('no-exp'))) ||
-			(interactive &&
-				question.type === 'result' &&
-				(!question.expression_latex ||
-					(question.options && question.options.includes('no-exp'))))
-	}
+		enounce = question.enounce ? $formatLatex(question.enounce) : null
+		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
 
-	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
-
-	$: enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
-
-	$: {
 		expression = question.expression_latex
-		if (interactive && !question.answerFields) {
-			if (
-				question.type !== 'choice' &&
-				question.type !== 'choices' &&
-				(!question.expression_latex ||
-					(question.options && question.options.includes('no-exp')))
-			) {
-				expression = '\\ldots'
-			} else {
-				if (question.type === 'result') {
-					expression += '=\\ldots'
-				}
-			}
-		} else if (interactive && question.answerFields) {
-			answerFields = question.answerFields
-			answerFields = $formatLatex(answerFields)
-			answerFields = answerFields.replace(/…/g, addMathfield)
-		}
+		expression2 = question.expression2_latex
 
-		if (interactive && question.prefix) {
-			expression = question.prefix + expression
+		if (interactive) {
+			if (expression && question.type === 'result') {
+				expression += '=\\ldots'
+			}
+
+			answerFields = question.answerFields
+			if (
+				!answerFields &&
+				!expression &&
+				question.type !== 'choice' &&
+				question.type !== 'choices'
+			) {
+				answerFields = '\\ldots'
+			}
+			if (answerFields) {
+				answerFields = $formatLatex(answerFields).replace(/…/g, addMathfield)
+			}
 		}
 
 		if (expression) {
 			expression = $toMarkup(expression)
-			if (interactive) {
-				expression = expression.replace(/…/g, addMathfield)
-			}
 		}
-	}
-
-	$: {
-		expression2 = question.expression2_latex
 
 		if (expression2) {
-			if (interactive && question.type === 'equation') expression2 += '=\\ldots'
 			expression2 = $toMarkup(expression2)
-			if (interactive) {
-				expression2 = expression2.replace(/…/g, addMathfield)
-			}
 		}
+		if (interactive && expression) {
+			expression = expression.replace(/…/g, addMathfield)
+		}
+		if (interactive && !answers) {
+			answers = []
+			answers_latex = []
+		}
+
+		makeCorrection(answers)
+		console.log('answers', answers)
 	}
 
-	if (commit) {
-		commit.hook = () => {
-			removeListeners()
+	function makeCorrection(answers) {
+		const item = { ...question, answers, answers_latex }
+		console.log('item', item)
+		assessItem(item)
+		simpleCorrection = createCorrection(item).correction
+		console.log('make new correction', simpleCorrection)
+	}
+
+	function commitAnswers() {
+		question.answers = answers
+		question.answers_latex = answers_latex
+		assessItem(question)
+		question.simpleCorrection = createCorrection(question).correction
+	}
+
+	$: initQuestion(question)
+	$: makeCorrection(answers)
+
+	function prepareInteractive() {
+		console.log('$: interactive')
+		mfs = []
+		nmfs = 0
+
+		expression = question.expression_latex
+		expression2 = question.expression2_latex
+
+		if (expression && question.type === 'result') {
+			expression += '=\\ldots'
 		}
+
+		answerFields = question.answerFields
+		if (
+			!answerFields &&
+			!expression &&
+			question.type !== 'choice' &&
+			question.type !== 'choices'
+		) {
+			answerFields = '\\ldots'
+		}
+		if (answerFields) {
+			answerFields = $formatLatex(answerFields).replace(/…/g, addMathfield)
+		}
+
+		if (expression) {
+			expression = $toMarkup(expression).replace(/…/g, addMathfield)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+
+		if (!answers) answers = []
+		if (!answers_latex) answers_latex = []
+		console.log('answers', answers)
+	}
+
+	function stopInteractive() {
+		console.log('stop interactive')
+		removeListeners()
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
+		mfs = null
+
+		expression = question.expression_latex
+			? $toMarkup(question.expression_latex)
+			: null
+		expression2 = question.expression2_latex
+			? $toMarkup(question.expression2_latex)
+			: null
+	}
+
+	$: if (!correction && interactive) {
+		prepareInteractive()
+	} else if (!interactive && !correction) {
+		stopInteractive()
+	} else if (correction) {
+		removeListeners()
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
+		mfs = null
+		// if (!interactive) {
+		// 	answers = null
+		// 	answers_latex = null
+		// } else {
+		// 	if (!answers) answers = []
+		// 	if (!answers_latex) answers_latex = []
+		// }
 	}
 
 	const params = getContext('test-params')
 	const courseAuxNombres = params ? params.courseAuxNombres : false
-
-	$: {
-		correct = createCorrection(question)
-		simpleCorrection = correct.correction
-	}
-
-	console.log('magnify', magnify)
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -447,12 +498,13 @@
 			{:catch error}
 				{error}
 			{/await}
-		{:else if element === 'expression' && expression && showExp && (!correction || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
+		{:else if element === 'expression' && expression && (!correction || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
 			<div
 				id="expressions"
 				class=" flex flex-col items-center justify-center"
-				style="{`font-size:${correction ? 1 : magnify===1 ? 2 : magnify*1.5}rem;` +
-					(correction ? 'color:' + colors['grey-600'] : '')}"
+				style="{`font-size:${
+					correction ? 1 : magnify === 1 ? 2 : magnify * 1.5
+				}rem;` + (correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				<div
 					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
@@ -470,12 +522,15 @@
 				{/if}
 			</div>
 		{:else if !correction && element === 'choices' && question.choices}
-			<div class="mt-3 flex flex-wrap justify-around" style="{`font-size:${magnify}rem`}">
+			<div
+				class="mt-3 flex flex-wrap justify-around"
+				style="{`font-size:${magnify}rem`}"
+			>
 				{#each question.choices as choice, i}
 					<button
 						class="rounded-lg  m-2 p-2"
 						style="{`font-size:1em; min-width:2em;border: 4px solid ${
-							selecteds && i < selecteds.length && selecteds[i]
+							interactive && answers.includes(i)
 								? 'var(--mdc-theme-primary)'
 								: 'var(--mdc-theme-secondary)'
 						};`}"
@@ -496,14 +551,13 @@
 							{/await}
 						{/if}
 						{#if choice.text}
-							<div >
+							<div>
 								{@html $formatLatex(choice.text)}
 							</div>
 						{/if}
 					</button>
 				{/each}
 			</div>
-			
 		{/if}
 	{/each}
 	{#if answerFields}
@@ -520,18 +574,20 @@
 			</div>
 		</div>
 	{/if}
-	{#if !courseAuxNombres && interactive && (question.type === 'choices' || fieldsNb > 1) }
-				<Button class="mt-3 p-1" on:click="{commit.f}" variant="raised">
-					<Label>Valider</Label>
-				</Button>
-			{/if}
-	
+	{#if !correction && !courseAuxNombres && interactive && (question.type === 'choices' || fieldsNb > 1)}
+		<Button class="mt-3 p-1" on:click="{commit.f}" variant="raised">
+			<Label>Valider</Label>
+		</Button>
+	{/if}
+
 	{#if correction}
 		<div class="mt-3">
 			{#each simpleCorrection as line}
 				<div
 					class=" my-1 z-0 relative"
-					style="{`word-break: break-word ;white-space: normal;font-size:${magnify === 1 ? 1.2 : magnify}rem`}"
+					style="{`word-break: break-word ;white-space: normal;font-size:${
+						magnify === 1 ? 1.2 : magnify
+					}rem`}"
 				>
 					<CorrectionLine line="{line}" />
 				</div>

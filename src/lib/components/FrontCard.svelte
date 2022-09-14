@@ -22,6 +22,8 @@
 	export let commit
 	export let magnify
 	export let correction
+	export let simpleCorrection
+	export let detailedCorrection
 
 	let choices
 
@@ -64,7 +66,15 @@
 								on:click="{() => (correction = !correction)}"
 								variant="raised"
 							>
-								<Label>Mode correction</Label>
+								<Label>C</Label>
+							</Button>
+							<Button
+								color="{interactive ? 'primary' : 'secondary'}"
+								class="ml-3"
+								on:click="{() => (interactive = !interactive)}"
+								variant="raised"
+							>
+								<Label>I</Label>
 							</Button>
 						</div>
 						<span>{card.id}</span>
@@ -88,9 +98,11 @@
 					correction="{correction}"
 					interactive="{interactive}"
 					commit={commit}
+					bind:simpleCorrection
+					bind:detailedCorrection
 				/>
 			</Content>
-			{#if flashcard && !(correction && (!card.correctionDetails || !card.correctionDetails.length))}
+			{#if !interactive && !(correction && (!card.correctionDetails || !card.correctionDetails.length))}
 				<div class=" flex justify-end">
 					<Fab color="secondary" on:click="{toggleFlip}" mini>
 						<Icon component="{Svg}" viewBox="2 2 20 20">

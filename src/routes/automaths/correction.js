@@ -773,6 +773,9 @@ export function assessItem(item) {
 			// les solutions sont explicites et sont dans item.solutions
 			else {
 				item.answers.forEach((answer, i) => {
+					console.log('answer', answer)
+					console.log('solutions', item.solutions, i)
+
 					if (
 						item.statuss[i] !== STATUS_EMPTY &&
 						item.statuss[i] !== STATUS_INCORRECT
