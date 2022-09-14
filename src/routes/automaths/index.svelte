@@ -16,6 +16,7 @@
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
 	import { darkmode, formatLatex } from '$lib/stores'
+	import {dev } from '$app/env'
 	
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
