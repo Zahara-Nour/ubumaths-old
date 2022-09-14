@@ -4,8 +4,7 @@
 	import { mdiOrbitVariant } from '@mdi/js'
 	import Fab, { Icon } from '@smui/fab'
 	import { Svg } from '@smui/common/elements'
-	import Paper, { Title, Subtitle, Content } from '@smui/paper'
-	import Button, { Label } from '@smui/button'
+	import Paper from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
 	import {
@@ -13,7 +12,7 @@
 		createCorrection,
 	} from '../../routes/automaths/correctionItem'
 	import { correct_color } from '../colors'
-import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
+	import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte'
 
 	export let card
 	export let toggleFlip = () => {}
@@ -23,7 +22,6 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 	export let width = 0
 	export let magnify
 	export let correction
-	export let showDescription
 
 	function getSolution(card) {
 		let nSol = -1
@@ -91,7 +89,14 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 </script>
 
 <div bind:clientHeight="{h}" bind:clientWidth="{w}">
-	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''+ width ? `width:${width - 48}px;` : ''}">
+	<Paper
+		elevation="{12}"
+		style="{height
+			? `height:${height}px;`
+			: '' + width
+			? `width:${width - 48}px;`
+			: ''}"
+	>
 		<div class="h-full flex flex-col items-center justify-between">
 			<!-- correction des réponses de l'utilisateur -->
 
@@ -109,10 +114,10 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 						</div>
 					{/each} -->
 					{#each details as line}
-							<div class="correction-line z-0">
-								<CorrectionLine line="{line}" />
-							</div>
-						{/each}
+						<div class="correction-line z-0">
+							<CorrectionLine line="{line}" />
+						</div>
+					{/each}
 				</div>
 
 				<div class=" w-full flex justify-end">
@@ -171,7 +176,6 @@ import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte';
 	</div>
 </div> -->
 <style>
-
 	.correction-line {
 		margin-top: 9px;
 		margin-bottom: 9px;

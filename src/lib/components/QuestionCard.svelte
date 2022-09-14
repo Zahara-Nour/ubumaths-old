@@ -18,7 +18,7 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 
 	let hfront_masked = 0 // height front masked
 	let hback_masked = 0 // width back masked
-	let w_masked
+	
 
 	let height // height for displayed card
 	let width = 0
@@ -33,12 +33,7 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 		// console.log('height', height)
 	}
 
-	async function updateWidthMasked() {
-		// console.log('updateHeight')npm
-		w_masked = width
-		// console.log('height', height)
-		// console.log('updated width', w_masked)
-	}
+	
 
 	$: if (card) {
 		// console.log('changing card')
@@ -54,10 +49,6 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 
 	$: if (!flashcard && hfront_masked) {
 		updateHeight()
-	}
-
-	$: if (width) {
-		updateWidthMasked()
 	}
 
 	$: if ($fontSize) {

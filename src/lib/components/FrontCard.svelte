@@ -26,8 +26,6 @@
 	export let detailedCorrection
 	export let immediateCommit
 
-	let choices
-
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)
 </script>

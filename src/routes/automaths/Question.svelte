@@ -32,10 +32,17 @@
 	let nmfs = 0
 	let answers
 	let answers_latex
-	let choices
-	let num
+	let answerFields
+	let keyListeners = []
+	let inputListeners = []
+	let changeListeners = []
+	let fieldsNb = 0
 
-	let onChoice = (i) => {
+	// console.log('context', params)
+
+	
+
+	function onChoice (i) {
 		if (interactive) {
 			if (question.type === 'choices') {
 				if (answers.includes(i)) {
@@ -48,23 +55,6 @@
 				if (immediateCommit) commit()
 			}
 		}
-	}
-	let answerFields
-
-	let keyListeners = []
-	let inputListeners = []
-	let changeListeners = []
-	let fieldsNb = 0
-
-	// console.log('context', params)
-
-	if (commit) {
-		commit = () => {
-			commitAnswers()
-			commit()
-		}
-	} else {
-		commit = commitAnswers
 	}
 
 	function recordAnswer(i) {
@@ -193,6 +183,171 @@
 		return `<span id='${id}'}/>`
 	}
 
+	function manageFocus() {
+		mfs.forEach((mfe) => {
+			mfe.virtualKeyboardState =
+				mfe.hasFocus() && $virtualKeyboardMode ? 'visible' : 'hidden'
+		})
+	}
+
+	function initQuestion(question) {
+		console.log('new question')
+		removeListeners()
+
+		mfs = []
+		nmfs = 0
+
+		if (!question.detailedCorrection && question.correctionDetails) {
+			question.detailedCorrection = createDetailedCorrection(question)
+		}
+		detailedCorrection = question.detailedCorrection
+		answers = question.answers
+		// console.log('answers from question', answers)
+
+		enounce = question.enounce ? $formatLatex(question.enounce) : null
+		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
+
+		expression = question.expression_latex
+		expression2 = question.expression2_latex
+
+		if (interactive) {
+			if (expression && question.type === 'result') {
+				expression += '=\\ldots'
+			}
+
+			answerFields = question.answerFields
+			if (
+				!answerFields &&
+				!expression &&
+				question.type !== 'choice' &&
+				question.type !== 'choices'
+			) {
+				answerFields = '\\ldots'
+			}
+			if (answerFields) {
+				answerFields = $formatLatex(
+					answerFields.replace(/\?/g, '\\ldots'),
+				).replace(/…/g, addMathfield)
+			}
+		}
+
+		if (expression) {
+			expression = $toMarkup(expression)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+		if (interactive && expression) {
+			expression = expression.replace(/…/g, addMathfield)
+		}
+		if (interactive && !answers) {
+			answers = []
+			answers_latex = []
+		}
+
+		makeCorrection(answers)
+		console.log('init : answers', answers)
+	}
+
+	function makeCorrection(answers) {
+		const item = { ...question, answers, answers_latex }
+		console.log('item', item)
+		assessItem(item)
+		simpleCorrection = createCorrection(item).correction
+		console.log('make new correction', simpleCorrection)
+	}
+
+	function commitAnswers() {
+		question.answers = answers
+		question.answers_latex = answers_latex
+		assessItem(question)
+		question.simpleCorrection = createCorrection(question).correction
+	}
+
+	function prepareInteractive() {
+		console.log('$: interactive')
+		mfs = []
+		nmfs = 0
+
+		expression = question.expression_latex
+		expression2 = question.expression2_latex
+
+		if (expression && question.type === 'result') {
+			expression += '=\\ldots'
+		}
+
+		answerFields = question.answerFields
+		if (
+			!answerFields &&
+			!expression &&
+			question.type !== 'choice' &&
+			question.type !== 'choices'
+		) {
+			answerFields = '\\ldots'
+		}
+		if (answerFields) {
+			answerFields = $formatLatex(
+				answerFields.replace(/\?/g, '\\ldots'),
+			).replace(/…/g, addMathfield)
+		}
+		console.log('answerFields', answerFields)
+		if (expression) {
+			expression = $toMarkup(expression).replace(/…/g, addMathfield)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+
+		if (!answers) answers = []
+		if (!answers_latex) answers_latex = []
+		console.log('prepare interactive : answers', answers)
+	}
+
+	function stopInteractive() {
+		console.log('stop interactive')
+		removeListeners()
+
+		mfs = null
+
+		expression = question.expression_latex
+			? $toMarkup(question.expression_latex)
+			: null
+		expression2 = question.expression2_latex
+			? $toMarkup(question.expression2_latex)
+			: null
+	}
+
+	function resetAnswers() {
+		if (!interactive) {
+			answers = null
+			answers_latex = null
+		} else {
+			if (!answers) answers = []
+			if (!answers_latex) answers_latex = []
+		}
+	}
+
+	
+
+	
+
+	$: initQuestion(question)
+
+	$: if (!correction && interactive) {
+		prepareInteractive()
+	} else if (!interactive && !correction) {
+		stopInteractive()
+	} else if (correction) {
+		removeListeners()
+
+		mfs = null
+		resetAnswers()
+	}
+
+	$: makeCorrection(answers)
+
 	onDestroy(() => {
 		removeListeners()
 		if (mfs) {
@@ -307,166 +462,14 @@
 		}
 	})
 
-	function manageFocus() {
-		mfs.forEach((mfe) => {
-			mfe.virtualKeyboardState =
-				mfe.hasFocus() && $virtualKeyboardMode ? 'visible' : 'hidden'
-		})
+	if (commit) {
+		commit = () => {
+			commitAnswers()
+			commit()
+		}
+	} else {
+		commit = commitAnswers
 	}
-
-	function initQuestion(question) {
-		console.log('new question')
-		removeListeners()
-
-		mfs = []
-		nmfs = 0
-
-		if (!question.detailedCorrection && question.correctionDetails) {
-			question.detailedCorrection = createDetailedCorrection(question)
-		}
-		detailedCorrection = question.detailedCorrection
-		answers = question.answers
-		// console.log('answers from question', answers)
-
-		enounce = question.enounce ? $formatLatex(question.enounce) : null
-		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
-
-		expression = question.expression_latex
-		expression2 = question.expression2_latex
-
-		if (interactive) {
-			if (expression && question.type === 'result') {
-				expression += '=\\ldots'
-			}
-
-			answerFields = question.answerFields
-			if (
-				!answerFields &&
-				!expression &&
-				question.type !== 'choice' &&
-				question.type !== 'choices'
-			) {
-				answerFields = '\\ldots'
-			}
-			if (answerFields) {
-				answerFields = $formatLatex(
-					answerFields.replace(/\?/g, '\\ldots'),
-				).replace(/…/g, addMathfield)
-			}
-		}
-
-		if (expression) {
-			expression = $toMarkup(expression)
-		}
-
-		if (expression2) {
-			expression2 = $toMarkup(expression2)
-		}
-		if (interactive && expression) {
-			expression = expression.replace(/…/g, addMathfield)
-		}
-		if (interactive && !answers) {
-			answers = []
-			answers_latex = []
-		}
-
-		makeCorrection(answers)
-		console.log('init : answers', answers)
-	}
-
-	function makeCorrection(answers) {
-		const item = { ...question, answers, answers_latex }
-		console.log('item', item)
-		assessItem(item)
-		simpleCorrection = createCorrection(item).correction
-		console.log('make new correction', simpleCorrection)
-	}
-
-	function commitAnswers() {
-		question.answers = answers
-		question.answers_latex = answers_latex
-		assessItem(question)
-		question.simpleCorrection = createCorrection(question).correction
-	}
-
-	$: initQuestion(question)
-
-	function prepareInteractive() {
-		console.log('$: interactive')
-		mfs = []
-		nmfs = 0
-
-		expression = question.expression_latex
-		expression2 = question.expression2_latex
-
-		if (expression && question.type === 'result') {
-			expression += '=\\ldots'
-		}
-
-		answerFields = question.answerFields
-		if (
-			!answerFields &&
-			!expression &&
-			question.type !== 'choice' &&
-			question.type !== 'choices'
-		) {
-			answerFields = '\\ldots'
-		}
-		if (answerFields) {
-			answerFields = $formatLatex(
-				answerFields.replace(/\?/g, '\\ldots'),
-			).replace(/…/g, addMathfield)
-		}
-		console.log('answerFields', answerFields)
-		if (expression) {
-			expression = $toMarkup(expression).replace(/…/g, addMathfield)
-		}
-
-		if (expression2) {
-			expression2 = $toMarkup(expression2)
-		}
-
-		if (!answers) answers = []
-		if (!answers_latex) answers_latex = []
-		console.log('prepare interactive : answers', answers)
-	}
-
-	function stopInteractive() {
-		console.log('stop interactive')
-		removeListeners()
-
-		mfs = null
-
-		expression = question.expression_latex
-			? $toMarkup(question.expression_latex)
-			: null
-		expression2 = question.expression2_latex
-			? $toMarkup(question.expression2_latex)
-			: null
-	}
-
-	function resetAnswers() {
-		if (!interactive) {
-			answers = null
-			answers_latex = null
-		} else {
-			if (!answers) answers = []
-			if (!answers_latex) answers_latex = []
-		}
-	}
-
-	$: if (!correction && interactive) {
-		prepareInteractive()
-	} else if (!interactive && !correction) {
-		stopInteractive()
-	} else if (correction) {
-		removeListeners()
-
-		mfs = null
-		resetAnswers()
-	}
-
-	$: makeCorrection(answers)
 </script>
 
 <div class="flex flex-col items-center justify-around">
