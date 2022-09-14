@@ -40,7 +40,7 @@
 
 	// mode interactif pour l'exemple
 	let interactive = false
-	
+
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
@@ -84,7 +84,7 @@
 		level = l
 		console.log('generate')
 		generated = generateExemple(theme, domain, subdomain, level)
-		
+
 		if (generated.image) {
 			generated.imageBase64P = fetchImage(generated.image)
 		}
@@ -315,13 +315,14 @@
 			$darkmode ? 'border-radius:5px;background:#fff' : ''
 		};position:sticky; bottom:0; z-index:2;`}"
 	>
-		<div style="{'width:95vw;'}">
+		<div style="{'width:95vw;max-width:600px;'}">
 			<QuestionCard
 				card="{generated}"
 				flashcard="{true}"
 				showDescription="{true}"
 				bind:correction
 				bind:interactive
+				immediateCommit="{false}"
 			/>
 		</div>
 	</div>

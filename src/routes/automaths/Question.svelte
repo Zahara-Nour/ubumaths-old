@@ -44,7 +44,7 @@
 					answers = [...answers, i]
 				}
 			} else {
-				answers = answers[0] = i ? [] : [i]
+				answers = answers[0] === i ? [] : [i]
 				if (immediateCommit) commit()
 			}
 		}
@@ -99,24 +99,25 @@
 		changeListeners.forEach((listener, i) =>
 			mfs[i].removeEventListener('change', listener),
 		)
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
 	}
 
 	// onChange est appelée quand :
 	// - l'utilisateur appuie sur entrée du clavier virtuel ou du clavier physique
 	//  (même si le mathfield est vide)
 	// - quand le mathfield perd le focus et que le contenu a changé
-	// - quand la touche entrée du clavier virtuel
 	function onChange(ev, i) {
-		// removeListeners()
-		if (!courseAuxNombres) {
-			if (mfs[i].hasFocus()) {
-				// TODO: empêcher le commit quand le mathfield est vide
-				// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
-				if (mfs.length === 1 && immediateCommit) {
-					commit()
-				} else {
-					mfs[(i + 1) % mfs.length].focus()
-				}
+		console.log('mfs', mfs)
+		if (mfs[i].hasFocus()) {
+			// TODO: empêcher le commit quand le mathfield est vide
+			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
+			if (mfs.length === 1 && immediateCommit) {
+				// removeListeners ????
+				commit()
+			} else {
+				mfs[(i + 1) % mfs.length].focus()
 			}
 		}
 	}
@@ -246,7 +247,9 @@
 			}
 			let added
 			elements.forEach((elt, i) => {
+				console.log('found elzmznts', elt, i)
 				if (!elt.hasChildNodes()) {
+					console.log('add element')
 					const mfe = new $MathfieldElement()
 					mfe.setOptions({
 						soundsDirectory: '/sounds',
@@ -294,10 +297,14 @@
 				}
 			})
 			if (added && !masked) {
-				mfs[0].focus()
+				if (!mfs[0].hasFocus()) {
+					console.log('focus first field')
+					mfs[0].focus()
+				}
 			}
 
 			fieldsNb = mfs?.length || 0
+			console.log('mfs', mfs)
 		}
 	})
 
@@ -311,9 +318,7 @@
 	function initQuestion(question) {
 		console.log('new question')
 		removeListeners()
-		keyListeners = []
-		inputListeners = []
-		changeListeners = []
+		
 		mfs = []
 		nmfs = 0
 
@@ -323,7 +328,6 @@
 		detailedCorrection = question.detailedCorrection
 		answers = question.answers
 		// console.log('answers from question', answers)
-		
 
 		enounce = question.enounce ? $formatLatex(question.enounce) : null
 		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
@@ -366,7 +370,7 @@
 		}
 
 		makeCorrection(answers)
-		console.log('answers', answers)
+		console.log('init : answers', answers)
 	}
 
 	function makeCorrection(answers) {
@@ -385,12 +389,11 @@
 	}
 
 	$: initQuestion(question)
-	$: makeCorrection(answers)
 
 	function prepareInteractive() {
 		console.log('$: interactive')
-		mfs = []
-		nmfs = 0
+			mfs = []
+			nmfs = 0
 
 		expression = question.expression_latex
 		expression2 = question.expression2_latex
@@ -422,15 +425,13 @@
 
 		if (!answers) answers = []
 		if (!answers_latex) answers_latex = []
-		console.log('answers', answers)
+		console.log('prepare interactive : answers', answers)
 	}
 
 	function stopInteractive() {
 		console.log('stop interactive')
 		removeListeners()
-		keyListeners = []
-		inputListeners = []
-		changeListeners = []
+		
 		mfs = null
 
 		expression = question.expression_latex
@@ -441,27 +442,28 @@
 			: null
 	}
 
+	function resetAnswers() {
+		if (!interactive) {
+			answers = null
+			answers_latex = null
+		} else {
+			if (!answers) answers = []
+			if (!answers_latex) answers_latex = []
+		}
+	}
+
 	$: if (!correction && interactive) {
 		prepareInteractive()
 	} else if (!interactive && !correction) {
 		stopInteractive()
 	} else if (correction) {
 		removeListeners()
-		keyListeners = []
-		inputListeners = []
-		changeListeners = []
+		
 		mfs = null
-		// if (!interactive) {
-		// 	answers = null
-		// 	answers_latex = null
-		// } else {
-		// 	if (!answers) answers = []
-		// 	if (!answers_latex) answers_latex = []
-		// }
+		resetAnswers()
 	}
 
-	const params = getContext('test-params')
-	const courseAuxNombres = params ? params.courseAuxNombres : false
+	$: makeCorrection(answers)
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -574,7 +576,7 @@
 			</div>
 		</div>
 	{/if}
-	{#if !correction && !courseAuxNombres && interactive && (question.type === 'choices' || fieldsNb > 1)}
+	{#if !correction && !immediateCommit && interactive && (question.type === 'choices' || fieldsNb > 1)}
 		<Button class="mt-3 p-1" on:click="{commit.f}" variant="raised">
 			<Label>Valider</Label>
 		</Button>

@@ -24,6 +24,7 @@
 	export let correction
 	export let simpleCorrection
 	export let detailedCorrection
+	export let immediateCommit
 
 	let choices
 
@@ -100,6 +101,8 @@
 					commit={commit}
 					bind:simpleCorrection
 					bind:detailedCorrection
+					immediateCommit={immediateCommit}
+					
 				/>
 			</Content>
 			{#if !interactive && !(correction && (!card.correctionDetails || !card.correctionDetails.length))}

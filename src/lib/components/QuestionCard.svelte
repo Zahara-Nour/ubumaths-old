@@ -11,6 +11,7 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 	export let commit = null
 	export let magnify = 1
 	export let correction = false
+	export let immediateCommit
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
@@ -81,6 +82,7 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 				bind:w="{width}"
 				bind:simpleCorrection
 				bind:detailedCorrection
+				immediateCommit={immediateCommit}
 			/>
 		</div>
 		{#if flashcard}
