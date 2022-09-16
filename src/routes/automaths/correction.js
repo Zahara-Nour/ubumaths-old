@@ -1,5 +1,6 @@
 import math from 'tinycas'
 import { getLogger } from '$lib/utils'
+import { createCorrection } from './correctionItem'
 export const STATUS_EMPTY = 'empty'
 export const STATUS_CORRECT = 'correct'
 export const STATUS_INCORRECT = 'incorrect'
@@ -609,40 +610,6 @@ function checkForm(item) {
 	return result
 }
 
-export function assessItems(questions, answerss, answerss_latex, times) {
-	let total = 0
-	let score = 0
-	const items = []
-	for (let i = 0; i < questions.length; i++) {
-		const question = questions[i]
-		total += question.points
-		// console.log('question', question)
-		items[i] = {
-			...question,
-			answers: answerss ? answerss[i] : null,
-			answers_latex: answerss_latex ? answerss_latex[i] : null,
-			time: times[i],
-			number: i + 1,
-		}
-
-		// on a besoin de récupérer au moins le statut par defaut
-		assessItem(items[i])
-
-		score +=
-			items[i].status == STATUS_CORRECT
-				? items[i].points
-				: items[i].status == STATUS_UNOPTIMAL_FORM ||
-				  (items[i].answers &&
-						items[i].statuss.filter((status) => status === STATUS_CORRECT)
-							.length >=
-							items[i].answers.length / 2)
-				? items[i].points / 2
-				: 0
-	}
-	info('corrected items', items)
-	return { items, score, total }
-}
-
 // on évalue la réponse de l'utilisateur en donnant un statut à chaque élément de la réponse,
 // ainsi qu'à la réponse globale
 export function assessItem(item) {
@@ -821,8 +788,21 @@ export function assessItem(item) {
 					item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM)
 				) {
 					item.status = STATUS_UNOPTIMAL_FORM
+				} else if (
+					item.type === 'choices' &&
+					item.answers &&
+					item.answers.length &&
+					item.answers.length >= item.solutions.length / 2 &&
+					item.answers.length < item.solutions.length
+				) {
+					// pour les qcm ou on accorde un demi point si au moins la moitié des bonnes
+					//  ont été sélectionnées (sans erreur à côté)
+					item.status = STATUS_UNOPTIMAL_FORM
 				}
 			}
 		}
 	}
+
+	createCorrection(item)
+	console.log('assess item', item)
 }

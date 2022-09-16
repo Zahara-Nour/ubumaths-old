@@ -130,7 +130,7 @@ const questions = {
 						],
 					
 					],
-					defaultDelay: 60,
+					defaultDelay: 5,
 					grade: CP,
 				},
 				{
@@ -236,7 +236,7 @@ const questions = {
 					solutions: [[0], [1]],
 					options: ['no-shuffle-choices'],
 					type: 'choice',
-					defaultDelay: 60,
+					defaultDelay: 10,
 					grade: CE1,
 				},
 				{
@@ -1294,7 +1294,7 @@ const questions = {
 					],
 					type: 'trou',
 					solutions: [['&2']],
-					defaultDelay: 120,
+					defaultDelay: 5,
 					grade: CP,
 				},
 				{

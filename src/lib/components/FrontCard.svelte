@@ -22,9 +22,9 @@
 	export let commit
 	export let magnify
 	export let correction
-	export let simpleCorrection
-	export let detailedCorrection
-	export let immediateCommit
+	export let simpleCorrection = null
+	export let detailedCorrection = null
+	export let immediateCommit = false
 
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)

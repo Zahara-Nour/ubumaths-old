@@ -26,9 +26,6 @@
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
 	let current
-	let answerss
-	let answerss_latex
-	let times = []
 	let delay
 	let elapsed
 	let start
@@ -61,6 +58,7 @@
 	let ref
 	let fontSize
 	let remaining
+	let commits = []
 
 	setContext('test-params', testParams)
 
@@ -91,7 +89,7 @@
 				percentage = ((delay - elapsed) * 100) / delay
 				alert = delay - elapsed < 5000
 			} else {
-				commit.f()
+				commit.exec()
 			}
 		}
 	}
@@ -118,15 +116,8 @@
 		courseAuxNombres = JSON.parse(
 			decodeURI($page.url.searchParams.get('courseAuxNombres')),
 		)
-		answerss = classroom ? null : []
-		answerss_latex = classroom ? null : []
-		testParams.answerss = answerss
-		testParams.answerss_latex = answerss_latex
 		testParams.courseAuxNombres = courseAuxNombres
 		testParams.classroom = classroom
-
-		// answerss.splice(0, answerss.length)
-		// answerss_latex.splice(0, answerss_latex.length)
 
 		basket = JSON.parse(decodeURI($page.url.searchParams.get('questions')))
 
@@ -151,8 +142,7 @@
 		shuffle(cards)
 
 		cards.forEach((q, i) => {
-			if (answerss) answerss.push([])
-			if (answerss_latex) answerss_latex.push([])
+			q.results = {}
 			q.num = i + 1
 			if (q.image) {
 				q.imageBase64P = fetchImage(q.image)
@@ -171,15 +161,6 @@
 				})
 			}
 		})
-
-		commit = {
-			f: function () {
-				if (this.hook) this.hook()
-				if (!courseAuxNombres) {
-					change()
-				}
-			},
-		}
 
 		if (classroom && basket.length === 1) {
 			showExemple = true
@@ -213,7 +194,7 @@
 			if (timer && timer.stop) {
 				timer.stop()
 			}
-			timer = createTimer(7 * 60, tick, commit.f)
+			timer = createTimer(7 * 60, tick, commit)
 			remaining = timer.getTime()
 			timer.start()
 		} else {
@@ -231,7 +212,7 @@
 		if (current !== 0) {
 			let time = Math.min(Math.round(elapsed / 1000), delay)
 			if (time === 0) time = 1
-			times.push(time)
+			card.time = time
 		}
 		if (current < cards.length) {
 			card = cards[current]
@@ -301,7 +282,18 @@
 
 	$: delay = slider * 1000
 	$: virtualKeyboardMode.set($touchDevice)
-	$: console.log("slider", slider)
+	$: console.log('slider', slider)
+
+	commit = {
+		exec: function () {
+			if (this.hook) {
+				this.hook()
+			}
+			if (!courseAuxNombres) {
+				change()
+			}
+		},
+	}
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -323,10 +315,7 @@
 {:else if finish}
 	{#if showCorrection}
 		<Correction
-			questions="{cards}"
-			answerss="{answerss}"
-			answerss_latex="{answerss_latex}"
-			times="{times}"
+			items="{cards}"
 			query="{location.search}"
 			classroom="{classroom}"
 			bind:restart
@@ -372,7 +361,11 @@
 					card="{card}"
 					onChoice="{onChoice}"
 					interactive="{true}"
-					commit="{commit}"
+					commit="{(() => {
+						const c = {...commit}
+						commits.push(c)
+						return c
+					})()}"
 				/>
 			</div>
 		</div>
@@ -380,9 +373,8 @@
 	<div class="flex justify-center items-center">
 		<Button
 			on:click="{() => {
-				console.log(answerss)
 				timer.stop()
-				commit.f()
+				commits.forEach((commit) => commit.exec())
 				finish = true
 			}}"
 			variant="raised"
@@ -439,6 +431,7 @@
 								interactive="{!classroom}"
 								commit="{commit}"
 								magnify="{classroom ? 2.5 : 1}"
+								immediateCommit="{true}"
 							/>
 						</div>
 					</div>
@@ -446,36 +439,6 @@
 				<!-- </div> -->
 			</div>
 		{/if}
-
-		<!-- {#if !card.choices && !classroom}
-				<div class="flex items-center justify-center " style="width:80%">
-					<span class="mr-4">Ta réponse:</span>
-					<div class="flex-grow-1" style="width:70%">
-						{#if $mathliveReady}
-							<math-field
-								virtual-keyboard-mode="manual"
-								decimal-separator=","
-								on:keystroke="{onKeystroke}"
-								keypress-vibration="off"
-								remove-extraneous-parentheses="off"
-								smart-fence="off"
-								smart-superscript="off"
-								style="width:100%;"
-								class="{correct
-									? 'pa-2 light-green lighten-5'
-									: 'pa-2 deep-orange lighten-5'}"
-								virtual-keyboard-theme="apple"
-								on:input="{onChangeMathField}"
-								on:change="{() => {
-									if (answer !== '') commit()
-								}}"
-								bind:this="{mf}"
-							>
-							</math-field>
-						{/if}
-					</div>
-				</div>
-			{/if} -->
 	</div>
 {:else}
 	Pas de questions

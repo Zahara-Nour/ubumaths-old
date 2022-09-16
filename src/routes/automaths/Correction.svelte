@@ -5,18 +5,14 @@
 	import { Icon } from '@smui/common'
 	import { Svg } from '@smui/common/elements'
 	import { onMount } from 'svelte'
-	import { mode } from '$lib/stores'
-	import { assessItems } from './correction'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
 
 	import { getLogger } from '$lib/utils'
 	import { goto } from '$app/navigation'
 	import math from 'tinycas'
+	import { STATUS_CORRECT, STATUS_UNOPTIMAL_FORM } from './correction'
 
-	export let questions
-	export let answerss
-	export let answerss_latex
-	export let times
+	export let items
 	export let restart
 	export let query
 	export let classroom
@@ -27,17 +23,20 @@
 	const toggleDetails = () => (displayDetails = !displayDetails)
 	let colorResult
 	let messageResult
-	let items
-	let score
-	let total
 
-		// inititalisation
-	;({ items, score, total } = assessItems(
-		questions,
-		answerss,
-		answerss_latex,
-		times,
-	))
+	let total = 0
+	let score = 0
+
+	items.forEach((item) => {
+		total += item.points
+		score +=
+			item.status == STATUS_CORRECT
+				? item.points
+				: item.status == STATUS_UNOPTIMAL_FORM 
+				? item.points / 2
+				: 0
+	})
+	// inititalisation
 
 	// Quand le composant de correction a fini de s'afficher,
 	// le score a déjà été calculé, on l'enregistre
@@ -134,10 +133,7 @@
 				</Fab>
 			</div>
 			<div class="flex flex-col items-center" style="color:white">
-				<div
-					class="my-2"
-					style="font-size:2em; font-family:'pacifico'"
-				>
+				<div class="my-2" style="font-size:2em; font-family:'pacifico'">
 					{messageResult}
 				</div>
 				<div class="my-2">

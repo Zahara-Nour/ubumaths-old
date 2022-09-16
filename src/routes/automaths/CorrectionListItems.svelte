@@ -2,6 +2,7 @@
 	import { STATUS_CORRECT, STATUS_UNOPTIMAL_FORM } from './correction'
 	import CorrectionItem from './CorrectionItem.svelte'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
+import Item from '@smui/list/src/Item.svelte'
 
 	export let items
 	export let magnify = 1
@@ -11,10 +12,7 @@
 	{@const color =
 		item.status === STATUS_CORRECT
 			? correct_color
-			: item.status === STATUS_UNOPTIMAL_FORM ||
-			  (item.answers &&
-					item.statuss.filter((status) => status === STATUS_CORRECT).length >=
-						item.answers.length / 2)
+			: item.status === STATUS_UNOPTIMAL_FORM
 			? unoptimal_color
 			: incorrect_color}
 	<div
@@ -29,7 +27,7 @@
 				class="absolute"
 				style="display:inline-block; top: 50%;left: 50%;transform: translate(-50%, -70%);margin: 0;"
 			>
-				{item.number}
+				{item.num}
 			</span>
 		</div>
 		<CorrectionItem item="{item}" magnify={magnify}/>

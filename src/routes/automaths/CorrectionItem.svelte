@@ -3,15 +3,14 @@
 	import { createCorrection } from './correctionItem'
 	export let item
 
-	const { correction, coms } = createCorrection(item)
+	const { simpleCorrection:correction, coms } = item
 	export let magnify
 
-	console.log('coms', coms)
 </script>
 
 {#if correction}
 	<div class="ml-3 grow flex flex-wrap ">
-		<div class="mr-3 w-full"  style="word-break: break-word ;min-width: 100px;w-full; white-space: normal;">
+		<div class="mr-3 mb-4 w-full"  style="word-break: break-word ;min-width: 100px;w-full; white-space: normal;">
 			<QuestionCard
 				card="{item}"
 				correction="{true}"

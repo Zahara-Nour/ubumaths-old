@@ -2,12 +2,12 @@
 	import { toMarkup } from '$lib/stores'
 	import { formatLatex } from '$lib/stores'
 	import { MathfieldElement } from '$lib/stores'
-	import { afterUpdate, onMount, onDestroy, getContext } from 'svelte'
+	import { afterUpdate, onDestroy } from 'svelte'
 	import { getLogger } from '$lib/utils'
 	import { touchDevice, virtualKeyboardMode } from '$lib/stores.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import Button, { Label } from '@smui/button'
-	import { createCorrection, createDetailedCorrection } from './correctionItem'
+	import { createDetailedCorrection } from './correctionItem'
 	import { mdc_colors as colors } from '$lib/colors'
 	import CorrectionLine from './CorrectionLine.svelte'
 	import { assessItem } from './correction'
@@ -18,7 +18,7 @@
 	export let magnify = 1
 	export let correction = false
 	export let simpleCorrection = []
-	export let detailedCorrection
+	export let detailedCorrection = null
 	export let commit
 	export let immediateCommit
 
@@ -40,9 +40,7 @@
 
 	// console.log('context', params)
 
-	
-
-	function onChoice (i) {
+	function onChoice(i) {
 		if (interactive) {
 			if (question.type === 'choices') {
 				if (answers.includes(i)) {
@@ -52,13 +50,12 @@
 				}
 			} else {
 				answers = answers[0] === i ? [] : [i]
-				if (immediateCommit) commit()
+				if (immediateCommit) commit.exec()
 			}
 		}
 	}
 
 	function recordAnswer(i) {
-		console.log('i', i)
 		answers_latex[i] = mfs[i]
 			.getValue()
 			// on remplace plusieurs espaces par un seul, bizarrz normalement pas besoin
@@ -77,9 +74,6 @@
 	}
 
 	function removeListeners() {
-		// console.log('**removeListeners')
-		// console.log('keyListeners', keyListeners)
-		// console.log('mfs', mfs)
 		keyListeners.forEach((listener, i) =>
 			mfs[i].removeEventListener('key', listener),
 		)
@@ -99,13 +93,13 @@
 	//  (même si le mathfield est vide)
 	// - quand le mathfield perd le focus et que le contenu a changé
 	function onChange(ev, i) {
-		console.log('mfs', mfs)
 		if (mfs[i].hasFocus()) {
 			// TODO: empêcher le commit quand le mathfield est vide
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
 			if (mfs.length === 1 && immediateCommit) {
 				// removeListeners ????
-				commit()
+				console.log('commit', commit)
+				commit.exec()
 			} else {
 				mfs[(i + 1) % mfs.length].focus()
 			}
@@ -118,7 +112,6 @@
 
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
-		console.log('keystroke', i)
 		const mf = mfs[i]
 		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
 		const key_allowed2 = [
@@ -132,16 +125,7 @@
 
 		const keystroke = ev.detail.keystroke
 		const key = ev.detail.event.key
-		// trace('keystroke', keystroke)
-		// trace('key', key)
-		// console.log(i)
-		// console.log(answers_latex[i])
-		// console.log(answers_latex[i].length)
-		// console.log('+' + answers_latex[i].slice(answers_latex[i].length - 2) + '+')
-		// if (keystroke === '[Enter]' || keystroke === '[NumpadEnter]') {
-		// ev.preventDefault()
-		// commit()
-		// } else
+
 		if (
 			keystroke === '[Space]' &&
 			!(
@@ -191,18 +175,17 @@
 	}
 
 	function initQuestion(question) {
-		console.log('new question')
+		const q = question
 		removeListeners()
 
 		mfs = []
 		nmfs = 0
 
 		if (!question.detailedCorrection && question.correctionDetails) {
-			question.detailedCorrection = createDetailedCorrection(question)
+			q.detailedCorrection = createDetailedCorrection(question)
 		}
 		detailedCorrection = question.detailedCorrection
 		answers = question.answers
-		// console.log('answers from question', answers)
 
 		enounce = question.enounce ? $formatLatex(question.enounce) : null
 		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
@@ -247,26 +230,32 @@
 		}
 
 		makeCorrection(answers)
-		console.log('init : answers', answers)
 	}
 
 	function makeCorrection(answers) {
-		const item = { ...question, answers, answers_latex }
-		console.log('item', item)
-		assessItem(item)
-		simpleCorrection = createCorrection(item).correction
-		console.log('make new correction', simpleCorrection)
+		if (interactive) {
+			const item = { ...question, answers, answers_latex }
+			assessItem(item)
+			simpleCorrection = item.simpleCorrection
+		} else if (question.simpleCorrection) {
+			simpleCorrection = question.simpleCorrection
+		} else {
+			const q = question
+			assessItem(q)
+			simpleCorrection = q.simpleCorrection
+		}
 	}
 
 	function commitAnswers() {
-		question.answers = answers
-		question.answers_latex = answers_latex
-		assessItem(question)
-		question.simpleCorrection = createCorrection(question).correction
+		// pour prévenir un update de question
+		console.log('commitAnswer')
+		const q = question
+		q.answers = answers
+		q.answers_latex = answers_latex
+		assessItem(q)
 	}
 
 	function prepareInteractive() {
-		console.log('$: interactive')
 		mfs = []
 		nmfs = 0
 
@@ -291,7 +280,6 @@
 				answerFields.replace(/\?/g, '\\ldots'),
 			).replace(/…/g, addMathfield)
 		}
-		console.log('answerFields', answerFields)
 		if (expression) {
 			expression = $toMarkup(expression).replace(/…/g, addMathfield)
 		}
@@ -302,11 +290,9 @@
 
 		if (!answers) answers = []
 		if (!answers_latex) answers_latex = []
-		console.log('prepare interactive : answers', answers)
 	}
 
 	function stopInteractive() {
-		console.log('stop interactive')
 		removeListeners()
 
 		mfs = null
@@ -328,10 +314,6 @@
 			if (!answers_latex) answers_latex = []
 		}
 	}
-
-	
-
-	
 
 	$: initQuestion(question)
 
@@ -357,16 +339,20 @@
 
 	afterUpdate(() => {
 		// il faut créer les mathfields
-		console.log('afterUpdate')
 		if (!correction && interactive) {
 			const elements = []
-			if (
-				expression &&
-				question.type !== 'result' &&
-				question.type !== 'trou' &&
-				question.type !== 'rewrite'
-			) {
-				console.log(`${question.num}${masked ? '-masked' : ''}`)
+			if (answerFields) {
+				for (let i of document
+					.querySelector(
+						`#answerFields-${question.num}${masked ? '-masked' : ''}`,
+					)
+					.querySelectorAll('*')) {
+					if (/^mf/g.test(i.id)) {
+						elements.push(i)
+					}
+				}
+			} else if (expression) {
+				// console.log(`${question.num}${masked ? '-masked' : ''}`)
 				const expressionElements = document.querySelector(
 					`#expression-${question.num}${masked ? '-masked' : ''}`,
 				)
@@ -388,22 +374,10 @@
 					}
 				}
 			}
-			if (answerFields) {
-				for (let i of document
-					.querySelector(
-						`#answerFields-${question.num}${masked ? '-masked' : ''}`,
-					)
-					.querySelectorAll('*')) {
-					if (/^mf/g.test(i.id)) {
-						elements.push(i)
-					}
-				}
-			}
+
 			let added
 			elements.forEach((elt, i) => {
-				console.log('found elzmznts', elt, i)
 				if (!elt.hasChildNodes()) {
-					console.log('add element')
 					const mfe = new $MathfieldElement()
 					mfe.setOptions({
 						soundsDirectory: '/sounds',
@@ -426,7 +400,6 @@
 					}
 					mfe.addEventListener('focus', manageFocus)
 					mfe.addEventListener('blur', manageFocus)
-					console.log('mfs avant ajout mfs', mfs)
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -452,24 +425,20 @@
 			})
 			if (added && !masked) {
 				if (!mfs[0].hasFocus()) {
-					console.log('focus first field')
 					mfs[0].focus()
 				}
 			}
 
 			fieldsNb = mfs?.length || 0
-			console.log('mfs', mfs)
 		}
 	})
 
 	if (commit) {
-		commit = () => {
-			commitAnswers()
-			commit()
-		}
+		commit.hook = commitAnswers
 	} else {
-		commit = commitAnswers
+		commit = { exec: commitAnswers }
 	}
+	console.log('commit', commit)
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -582,9 +551,9 @@
 			</div>
 		</div>
 	{/if}
-	{#if !correction && !immediateCommit && interactive && (question.type === 'choices' || fieldsNb > 1)}
-		<Button class="mt-3 p-1" on:click="{commit.f}" variant="raised">
-			<Label>Valider</Label>
+	{#if !correction  && interactive && (question.type === 'choices' || fieldsNb > 1) && immediateCommit}
+		<Button class="mt-3 p-1" on:click="{()=> {commit.exec()}}" variant="raised">
+			<Label>Valider 2</Label>
 		</Button>
 	{/if}
 

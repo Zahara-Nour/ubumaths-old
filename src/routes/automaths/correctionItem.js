@@ -39,7 +39,7 @@ export function createCorrection(item) {
 
 	let line
 	let lines = []
-	let coms = item.coms
+	let coms = item.coms || []
 
 	let answerColor = correct_color
 	if (
@@ -218,7 +218,7 @@ export function createCorrection(item) {
 				) {
 					line +=
 						`&= \\textcolor{${unoptimal_color}}{${answers_latex[0]}}` +
-						`\\\\&= \\textcolor{${correct_color}}{${solutions_latex[0]}}\\end{align*}$$`
+						`\\\\&= \\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}\\end{align*}$$`
 				} else {
 					line += `=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${answers_latex[0]}}}\\end{align*}$$`
 				}
@@ -347,8 +347,8 @@ export function createCorrection(item) {
 			get(formatLatex)(com).replace(/_COLORANSWER_/g, answerColor),
 		)
 	}
-
-	return { correction: lines, coms }
+	item.coms = coms
+	item.simpleCorrection = lines
 }
 
 export function createDetailedCorrection(item) {

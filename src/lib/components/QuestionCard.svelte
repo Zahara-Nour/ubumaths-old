@@ -2,7 +2,6 @@
 	import BackCard from './BackCard.svelte'
 	import FrontCard from './FrontCard.svelte'
 	import { fontSize } from '$lib/stores'
-import { createCorrection, createDetailedCorrection } from '../../routes/automaths/correctionItem';
 
 	export let card
 	export let interactive = false
@@ -11,7 +10,7 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 	export let commit = null
 	export let magnify = 1
 	export let correction = false
-	export let immediateCommit
+	export let immediateCommit = false
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
@@ -23,8 +22,8 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 	let height // height for displayed card
 	let width = 0
 
-	let simpleCorrection
-	let detailedCorrection
+	let simpleCorrection = null
+	let detailedCorrection = null
 
 	async function updateHeight() {
 		// console.log('updateHeight')npm
@@ -103,9 +102,9 @@ import { createCorrection, createDetailedCorrection } from '../../routes/automat
 		bind:h="{hfront_masked}"
 		masked="{true}"
 		interactive="{interactive}"
-		commit="{{}}"
 		magnify="{magnify}"
 		correction="{correction}"
+		immediateCommit={immediateCommit}
 	/>
 
 	{#if flashcard}

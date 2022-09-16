@@ -16,6 +16,7 @@
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
 	import { darkmode, formatLatex } from '$lib/stores'
+	import { dev } from '$app/env'
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -39,7 +40,7 @@
 	let correction = false
 
 	// mode interactif pour l'exemple
-	let interactive = false
+	let interactive = true
 
 	$: changeGrade(grade)
 	$: changeTheme(theme)
@@ -318,7 +319,6 @@
 		<div style="{'width:95vw;max-width:600px;'}">
 			<QuestionCard
 				card="{generated}"
-				flashcard="{true}"
 				showDescription="{true}"
 				bind:correction
 				bind:interactive
