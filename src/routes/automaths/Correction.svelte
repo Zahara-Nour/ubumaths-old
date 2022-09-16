@@ -6,7 +6,7 @@
 	import { Svg } from '@smui/common/elements'
 	import { onMount } from 'svelte'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
-
+	import { Confetti } from 'svelte-confetti'
 	import { getLogger } from '$lib/utils'
 	import { goto } from '$app/navigation'
 	import math from 'tinycas'
@@ -32,7 +32,7 @@
 		score +=
 			item.status == STATUS_CORRECT
 				? item.points
-				: item.status == STATUS_UNOPTIMAL_FORM 
+				: item.status == STATUS_UNOPTIMAL_FORM
 				? item.points / 2
 				: 0
 	})
@@ -70,6 +70,32 @@
 </script>
 
 <div>
+	{#if score === total}
+		<div
+			style="
+position: fixed;
+top: -50px;
+left: 0;
+height: 100vh;
+width: 100vw;
+display: flex;
+justify-content: center;
+overflow: hidden;
+pointer-events: none;
+z-index:100"
+		>
+			<Confetti
+				x="{[-5, 5]}"
+				y="{[0, 0.1]}"
+				delay="{[500, 2000]}"
+				infinite
+				size="15"
+				duration="5000"
+				amount="300"
+				fallDistance="100vh"
+			/>
+		</div>
+	{/if}
 	<div class="my-3 flex justify-end">
 		<Fab class="mx-1" color="secondary" on:click="{toggleDetails}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
@@ -96,12 +122,14 @@
 			</div>
 		</div>
 	{:else}
-		<div class="flex flex-col w-full">
-			<CorrectionListItems
-				items="{items}"
-				displayDetails="{displayDetails}"
-				magnify="{classroom ? 2.5 : 1}"
-			/>
+		<div class="flex w-full justify-center">
+			<div style="width:650px">
+				<CorrectionListItems
+					items="{items}"
+					displayDetails="{displayDetails}"
+					magnify="{classroom ? 2.5 : 1}"
+				/>
+			</div>
 		</div>
 	{/if}
 
