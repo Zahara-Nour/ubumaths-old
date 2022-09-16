@@ -32,7 +32,7 @@
 		// console.log('height', height)
 	}
 
-	
+	$: flashcard = !interactive
 
 	$: if (card) {
 		// console.log('changing card')

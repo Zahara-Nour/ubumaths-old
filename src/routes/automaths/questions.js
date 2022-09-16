@@ -109,7 +109,7 @@ const questions = {
 		Apprivoiser: {
 			Ecriture: [
 				{
-					description: 'Essai choix mlultiples',
+					description: 'Essai choix multiples',
 					enounces: ['Choisis les bonnes réponses $$&1$$.'],
 					variables: [
 						{
@@ -130,7 +130,7 @@ const questions = {
 						],
 					
 					],
-					defaultDelay: 5,
+					defaultDelay: 45,
 					grade: CP,
 				},
 				{
@@ -19708,8 +19708,8 @@ const questions = {
 						'sqrt(n)',
 						'1/n',
 						'1/n^&2',
-						'&2^n',
-						'(1/&2)^n',
+						'[(_&2_]^n',
+						'([_1/&2_])^n',
 						'&3^n',
 					],
 					choices: [
@@ -19885,11 +19885,11 @@ const questions = {
 						],
 					],
 					type: 'choice',
-					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3], [3]],
+					solutions: [[4], [2], [0], [0], [0], [3], [3], ['&2>0 ?? 0 : 4'], [3], [3]],
 					variables: [
 						{
 							'&1': '$er[1;9]',
-							'&2': '$e[2;9]',
+							'&2': '$er[2;9]',
 							'&3': '$d{0;1}',
 						},
 					],

@@ -81,10 +81,11 @@
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)
 	$: solution = $formatLatex(getSolution(card))
-	$: details =
-		card.correctionDetails && card.correctionDetails.length
-			? createDetailedCorrection(card)
-			: createCorrection(card).correction
+	$: details = card.detailedCorrection
+		? card.detailedCorrection
+		: card.simpleCorrection
+		? card.simpleCorrection
+		: []
 	$: console.log('details', details)
 </script>
 

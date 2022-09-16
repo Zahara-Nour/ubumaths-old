@@ -273,12 +273,13 @@
 			question.type !== 'choice' &&
 			question.type !== 'choices'
 		) {
-			answerFields = '\\ldots'
+			answerFields = '$$\\ldots$$'
 		}
 		if (answerFields) {
 			answerFields = $formatLatex(
 				answerFields.replace(/\?/g, '\\ldots'),
 			).replace(/…/g, addMathfield)
+			console.log('answerFields', answerFields)
 		}
 		if (expression) {
 			expression = $toMarkup(expression).replace(/…/g, addMathfield)
@@ -537,7 +538,7 @@
 			</div>
 		{/if}
 	{/each}
-	{#if !correction && (interactive || question.type !== 'equation') && answerFields}
+	{#if !correction && interactive && answerFields}
 		<div
 			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"

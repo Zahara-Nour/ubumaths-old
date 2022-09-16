@@ -354,22 +354,24 @@
 			remaining.seconds
 		}`}
 	{/if}
-	{#each cards as card}
-		<div class="card">
-			<div class=" p-2 elevation-{4} rounded-lg">
-				<QuestionCard
-					card="{card}"
-					onChoice="{onChoice}"
-					interactive="{true}"
-					commit="{(() => {
-						const c = {...commit}
-						commits.push(c)
-						return c
-					})()}"
-				/>
+	<div class="flex justify-center">
+		{#each cards as card}
+			<div class="card">
+				<div class=" p-2 elevation-{4} rounded-lg">
+					<QuestionCard
+						card="{card}"
+						onChoice="{onChoice}"
+						interactive="{true}"
+						commit="{(() => {
+							const c = { ...commit }
+							commits.push(c)
+							return c
+						})()}"
+					/>
+				</div>
 			</div>
-		</div>
-	{/each}
+		{/each}
+	</div>
 	<div class="flex justify-center items-center">
 		<Button
 			on:click="{() => {
@@ -420,11 +422,9 @@
 		</div>
 
 		{#if cards}
-			<div id="cards-container">
-				<!-- <div id="cards"> -->
-				{#each [cards[current]] as card (current)}
-					<div class="card">
-						<div class=" p-2 elevation-{4} rounded-lg">
+			<div class="flex justify-center">
+				<div id="cards-container" style="width:600px">
+					{#each [cards[current]] as card (current)}
 							<QuestionCard
 								card="{card}"
 								onChoice="{onChoice}"
@@ -433,10 +433,8 @@
 								magnify="{classroom ? 2.5 : 1}"
 								immediateCommit="{true}"
 							/>
-						</div>
-					</div>
-				{/each}
-				<!-- </div> -->
+					{/each}
+				</div>
 			</div>
 		{/if}
 	</div>
@@ -451,18 +449,10 @@
 		position: relative;
 		/* display: flex; */
 		/* flex-direction: column; */
-		overflow-x: hidden;
+		/* overflow-x: hidden; */
 		/* height: 500px; */
 		/* max-height: 70vh; */
-		width: 100%;
+		/* width: 100%; */
 	}
 
-	.card {
-		/* left:300px; */
-		min-width: calc(100% - 24px);
-		/* min-width: 95%; */
-		/* min-width: 400px; */
-		margin: 12px;
-		/* height: 100%; */
-	}
 </style>
