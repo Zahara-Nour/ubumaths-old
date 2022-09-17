@@ -39,6 +39,8 @@ export function createCorrection(item) {
 
 	let line
 	let lines = []
+	let coms = item.coms || []
+
 	let answerColor = correct_color
 	if (
 		status === STATUS_BAD_FORM ||
@@ -137,7 +139,7 @@ export function createCorrection(item) {
 						.replace(regexAns, replaceAnsCorrect)
 				}
 
-				lines.push(line)
+				lines.push({ html: line })
 			})
 		} else {
 			correctionFormat.uncorrect.forEach((format) => {
@@ -152,19 +154,19 @@ export function createCorrection(item) {
 						.replace(regexSol, replaceSol)
 				}
 
-				lines.push(line)
+				lines.push({ html: line })
 			})
 
 			// le commentaire avec la réponse de l'utilisateur
 			if (status !== STATUS_EMPTY && item.answers) {
 				if (correctionFormat.answer === 'image') {
 					let img = choices[answer_choice].imageBase64
-					item.coms.unshift(
+					coms.unshift(
 						`<img src='${img}' style="padding:2px; border: 2px solid ${incorrect_color} ;max-width:400px;max-height:40vh;" alt='toto'>`,
 					)
-					item.coms.unshift('Ta réponse:')
+					coms.unshift('Ta réponse:')
 				} else {
-					item.coms.unshift(
+					coms.unshift(
 						'Ta réponse : ' +
 							correctionFormat.answer
 								.replace(new RegExp('&exp2', 'g'), expression2_latex)
@@ -194,81 +196,92 @@ export function createCorrection(item) {
 				}}}`
 
 				line += '\\end{align*}$$'
-				lines.push(line)
+				lines.push({ html: line })
 
 				break
 			}
 
 			case 'equation': {
 				// let exp = '$$\\begin{align*}x & =5-3 \\\\  & =2\\end{align*}$$'
-				line = `La solution de $$${expression_latex}$$ est :`
-				lines.push(line)
-				line = `$$\\begin{align*}  ${expression2_latex}`
+				
+				line = `$$\\begin{align*}  x`
 				if (status === STATUS_EMPTY) {
 					line +=
-						`=\\textcolor{green}{${solutions_latex[0]}}` + '\\end{align*}$$'
+						`=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}` + '\\end{align*}$$'
 				} else if (status === STATUS_INCORRECT) {
 					line +=
-						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{red}{${answers_latex[0]}}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
+						`&= \\enclose{updiagonalstrike}[6px solid rgba(205, 0, 11, .4)]{\\textcolor{${incorrect_color}}{${answers_latex[0]}}}` +
+						`\\\\&= \\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}\\end{align*}$$`
 				} else if (
 					status === STATUS_BAD_FORM ||
 					status === STATUS_UNOPTIMAL_FORM
 				) {
 					line +=
-						`&= \\textcolor{orange}{${answers_latex[0]}}` +
-						`\\\\&= \\textcolor{green}{${solutions_latex[0]}}\\end{align*}$$`
+						`&= \\textcolor{${unoptimal_color}}{${answers_latex[0]}}` +
+						`\\\\&= \\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}\\end{align*}$$`
 				} else {
-					line += `=\\textcolor{green}{${answers_latex[0]}}\\end{align*}$$`
+					line += `=\\enclose{roundedbox}[3px solid ${correct_color}]{\\textcolor{${correct_color}}{${answers_latex[0]}}}\\end{align*}$$`
 				}
-				lines.push(line)
+				lines.push({ html: line })
 
 				break
 			}
 			case 'choice':
-				line =
-					correction_latex +
-					'<span class="green-text">' +
-					solutions_latex[0] +
-					'</span>'
-
-				lines.push(line)
-				break
-
-			case 'choices':
-				line = '<div class="flex flex-wrap justify-start">'
+			case 'choices': {
+				// line = '<div class="flex flex-wrap justify-start">'
+				let choices = []
 				item.choices.forEach((choice, i) => {
-					let border = 'solid'
-					let color = 'grey'
+					const c= {}
+					
 					if (solutions.includes(i)) {
-						color = correct_color
-						if (!answers || !answers.includes(i)) {
-							border = 'dashed'
+						c.solution = true
+						if (answers && answers.includes(i)) {
+							c.badge = 'correct'
 						}
 					} else if (answers && answers.includes(i)) {
-						color = incorrect_color
+						c.badge = 'incorrect'
 					}
-
-					line += `<span
-					class="rounded-lg  m-2 p-1"
-					style="border: 4px ${border} ${color}"
-				>`
 
 					if (choice.image) {
-						line += `<img src="${choice.base64}" style="max-width:min(400px,80%);max-height:40vh;" alt="choice ${i}"/>`
+						c.image = choice.base64
 					} else {
-						line += `<div class="text-base " style="{font-size:1rem}">`
-						line += choice.text
-						line += '</div>'
+						c.text = choice.text
 					}
-					line += '</span>'
+					if (answers || c.solution) {
+						choices.push(c)
+					}
 				})
 
-				line += '</div>'
+				// item.choices.forEach((choice, i) => {
+				// 	let border = 'solid'
+				// 	let color = 'grey'
+				// 	if (solutions.includes(i)) {
+				// 		color = correct_color
+				// 		if (!answers || !answers.includes(i)) {
+				// 			border = 'dashed'
+				// 		}
+				// 	} else if (answers && answers.includes(i)) {
+				// 		color = incorrect_color
+				// 	}
 
-				console.log('line', line)
-				lines.push(line)
+				// 	line += `<span
+				// 	class="rounded-lg  m-2 p-1"
+				// 	style="border: 4px ${border} ${color}"
+				// >`
+
+				// 	if (choice.image) {
+				// 		line += `<img src="${choice.base64}" style="max-width:min(400px,80%);max-height:40vh;" alt="choice ${i}"/>`
+				// 	} else {
+				// 		line += `<div class="text-base " style="{font-size:1rem}">`
+				// 		line += choice.text
+				// 		line += '</div>'
+				// 	}
+				// 	line += '</span>'
+				// })
+
+				lines.push({ choices })
 				break
+			}
 
 			case 'trou':
 				//TODO : empty ?
@@ -277,7 +290,7 @@ export function createCorrection(item) {
 						'$$' +
 						expression_latex.replace(
 							/\\ldots/,
-							`\\textcolor{green}{${answers_latex[0]}}`,
+							`\\enclose{roundedbox}[2px solid ${correct_color}]{\\textcolor{${correct_color}}{${answers_latex[0]}}}`,
 						) +
 						'$$'
 				} else {
@@ -285,16 +298,16 @@ export function createCorrection(item) {
 						'$$' +
 						expression_latex.replace(
 							/\\ldots/,
-							`\\textcolor{green}{${solutions_latex[0]}}`,
+							`\\enclose{roundedbox}[2px solid ${correct_color}]{\\textcolor{${correct_color}}{${solutions_latex[0]}}}`,
 						) +
 						'$$'
 
 					if (status === STATUS_INCORRECT) {
-						item.coms.unshift(
+						coms.unshift(
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{red}{${answers_latex[0]}}`,
+									`\\textcolor{${incorrect_color}}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)
@@ -302,29 +315,40 @@ export function createCorrection(item) {
 						status === STATUS_BAD_FORM ||
 						status === STATUS_UNOPTIMAL_FORM
 					) {
-						item.coms.unshift(
+						coms.unshift(
 							'Ta réponse : $$' +
 								expression_latex.replace(
 									/\\ldots/,
-									`\\textcolor{orange}{${answers_latex[0]}}`,
+									`\\textcolor{${unoptimal_color}}{${answers_latex[0]}}`,
 								) +
 								'$$',
 						)
 					}
 				}
-				lines.push(line)
+				lines.push({ html: line })
 		}
 	}
 
-	lines = lines.map(get(formatLatex))
+	lines = lines.map((line) => {
+		if (line.html) {
+			return { html: get(formatLatex)(line.html) }
+		} else if (line.choices) {
+			return {
+				choices: line.choices.map((choice) => ({
+					...choice,
+					html: get(formatLatex)(choice.text),
+				})),
+			}
+		}
+	})
 
 	if (item.answers) {
-		item.coms = item.coms.map((com) =>
+		coms = coms.map((com) =>
 			get(formatLatex)(com).replace(/_COLORANSWER_/g, answerColor),
 		)
 	}
-
-	return lines
+	item.coms = coms
+	item.simpleCorrection = lines
 }
 
 export function createDetailedCorrection(item) {
@@ -365,7 +389,7 @@ export function createDetailedCorrection(item) {
 				.replace(new RegExp('&exp2', 'g'), expression2_latex)
 				.replace(new RegExp('&exp', 'g'), expression_latex)
 				.replace(regexSolution, replaceSolution)
-						.replace(regexSol, replaceSol)
+				.replace(regexSol, replaceSol)
 				.replace(
 					'&solution',
 					() =>

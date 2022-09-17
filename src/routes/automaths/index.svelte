@@ -16,8 +16,7 @@
 	import { goto } from '$app/navigation'
 	import { getLogger } from '$lib/utils'
 	import { darkmode, formatLatex } from '$lib/stores'
-	import {dev } from '$app/env'
-	
+	import { dev } from '$app/env'
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -37,6 +36,11 @@
 	let showBasket = false
 	let classroom = false
 	let basket = []
+	let courseAuxNombres = false
+	let correction = false
+
+	// mode interactif pour l'exemple
+	let interactive = true
 
 	$: changeGrade(grade)
 	$: changeTheme(theme)
@@ -79,7 +83,9 @@
 	function changeLevel(subd, l) {
 		subdomain = subd
 		level = l
+		console.log('generate')
 		generated = generateExemple(theme, domain, subdomain, level)
+
 		if (generated.image) {
 			generated.imageBase64P = fetchImage(generated.image)
 		}
@@ -93,6 +99,7 @@
 				}
 			})
 		}
+
 		// console.log('generated', generated)
 	}
 
@@ -145,6 +152,7 @@
 		href += encodeURI(JSON.stringify(questions))
 		console.log('classroom', classroom)
 		if (classroom) href += '&classroom=true'
+		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		goto(href)
 	}
 	function fillBasket() {
@@ -167,6 +175,7 @@
 		let href = base + 'automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
 		if (classroom) href += '&classroom=true'
+		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		navigator.clipboard
 			.writeText(href)
 			.then(function () {
@@ -195,6 +204,13 @@
 			]
 		}
 	}
+
+	$: if (courseAuxNombres) {
+		basket.forEach((item) => {
+			item.count = 1
+		})
+		basket = basket
+	}
 </script>
 
 <h3>Les automaths !</h3>
@@ -203,6 +219,7 @@
 	bind:showBasket
 	bind:classroom
 	bind:displayExemple
+	bind:courseAuxNombres
 	basket="{basket}"
 	launchTest="{launchTest}"
 	fillBasket="{fillBasket}"
@@ -221,7 +238,11 @@
 
 {#if showBasket}
 	<!-- {#if isTeacher && showBasket} -->
-	<Basket bind:basket addToBasket="{addToBasket}" />
+	<Basket
+		bind:basket
+		courseAuxNombres="{courseAuxNombres}"
+		addToBasket="{addToBasket}"
+	/>
 {:else if theme}
 	<TabBar tabs="{themes}" let:tab bind:active="{theme}">
 		<!-- Note: the `tab` property is required! -->
@@ -295,8 +316,14 @@
 			$darkmode ? 'border-radius:5px;background:#fff' : ''
 		};position:sticky; bottom:0; z-index:2;`}"
 	>
-		<div style="{'width:95vw;'}">
-			<QuestionCard card="{generated}" flashcard="{true}" showDescription={true} />
+		<div style="{'width:95vw;max-width:600px;'}">
+			<QuestionCard
+				card="{generated}"
+				showDescription="{true}"
+				bind:correction
+				bind:interactive
+				immediateCommit="{false}"
+			/>
 		</div>
 	</div>
 {/if}

@@ -10,6 +10,7 @@
 	const ids = datas.ids
 
 	export let basket
+	export let courseAuxNombres
 
 	const addItem = (i) => {
 		basket[i].count++
@@ -61,11 +62,13 @@
 			</Paper>
 
 			<div class="ma-2 flex flex-col">
-				<div class="flex flex-row justify-center">
-					<div class="mt-2">
-						répétition: {basket[i].count}
+				{#if !courseAuxNombres}
+					<div class="flex flex-row justify-center">
+						<div class="mt-2">
+							répétition: {basket[i].count}
+						</div>
 					</div>
-				</div>
+				{/if}
 				<div class="ml-2 flex flex-row justify-center">
 					<Fab
 						class="m-2"
@@ -77,40 +80,49 @@
 							<path fill="currentColor" d="{mdiMinus}"></path>
 						</Icon>
 					</Fab>
-					<Fab class="m-2" color="secondary" on:click="{() => addItem(i)}" mini>
-						<Icon component="{Svg}" viewBox="2 2 20 20">
-							<path fill="currentColor" d="{mdiPlus}"></path>
-						</Icon>
-					</Fab>
+					{#if !courseAuxNombres}
+						<Fab
+							class="m-2"
+							color="secondary"
+							on:click="{() => addItem(i)}"
+							mini
+						>
+							<Icon component="{Svg}" viewBox="2 2 20 20">
+								<path fill="currentColor" d="{mdiPlus}"></path>
+							</Icon>
+						</Fab>
+					{/if}
 				</div>
 
-				<div class="flex flex-row justify-center">
-					<div class="mt-2">
-						temps: {basket[i].delay} s
+				{#if !courseAuxNombres}
+					<div class="flex flex-row justify-center">
+						<div class="mt-2">
+							temps: {basket[i].delay} s
+						</div>
 					</div>
-				</div>
-				<div class="ml-2 flex flex-row justify-center">
-					<Fab
-						class="m-2"
-						color="secondary"
-						on:click="{() => lessTime(i)}"
-						mini
-					>
-						<Icon component="{Svg}" viewBox="2 2 20 20">
-							<path fill="currentColor" d="{mdiMinus}"></path>
-						</Icon>
-					</Fab>
-					<Fab
-						class="m-2"
-						color="secondary"
-						on:click="{() => moreTime(i)}"
-						mini
-					>
-						<Icon component="{Svg}" viewBox="2 2 20 20">
-							<path fill="currentColor" d="{mdiPlus}"></path>
-						</Icon>
-					</Fab>
-				</div>
+					<div class="ml-2 flex flex-row justify-center">
+						<Fab
+							class="m-2"
+							color="secondary"
+							on:click="{() => lessTime(i)}"
+							mini
+						>
+							<Icon component="{Svg}" viewBox="2 2 20 20">
+								<path fill="currentColor" d="{mdiMinus}"></path>
+							</Icon>
+						</Fab>
+						<Fab
+							class="m-2"
+							color="secondary"
+							on:click="{() => moreTime(i)}"
+							mini
+						>
+							<Icon component="{Svg}" viewBox="2 2 20 20">
+								<path fill="currentColor" d="{mdiPlus}"></path>
+							</Icon>
+						</Fab>
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/each}

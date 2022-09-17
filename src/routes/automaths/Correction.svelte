@@ -5,18 +5,14 @@
 	import { Icon } from '@smui/common'
 	import { Svg } from '@smui/common/elements'
 	import { onMount } from 'svelte'
-	import { mode } from '$lib/stores'
-	import { assessItems } from './correction'
 	import { correct_color, incorrect_color, unoptimal_color } from '$lib/colors'
-
+	import { Confetti } from 'svelte-confetti'
 	import { getLogger } from '$lib/utils'
 	import { goto } from '$app/navigation'
 	import math from 'tinycas'
+	import { STATUS_CORRECT, STATUS_UNOPTIMAL_FORM } from './correction'
 
-	export let questions
-	export let answerss
-	export let answerss_latex
-	export let times
+	export let items
 	export let restart
 	export let query
 	export let classroom
@@ -27,17 +23,20 @@
 	const toggleDetails = () => (displayDetails = !displayDetails)
 	let colorResult
 	let messageResult
-	let items
-	let score
-	let total
 
-		// inititalisation
-	;({ items, score, total } = assessItems(
-		questions,
-		answerss,
-		answerss_latex,
-		times,
-	))
+	let total = 0
+	let score = 0
+
+	items.forEach((item) => {
+		total += item.points
+		score +=
+			item.status == STATUS_CORRECT
+				? item.points
+				: item.status == STATUS_UNOPTIMAL_FORM
+				? item.points / 2
+				: 0
+	})
+	// inititalisation
 
 	// Quand le composant de correction a fini de s'afficher,
 	// le score a déjà été calculé, on l'enregistre
@@ -71,6 +70,32 @@
 </script>
 
 <div>
+	{#if score === total}
+		<div
+			style="
+position: fixed;
+top: -50px;
+left: 0;
+height: 100vh;
+width: 100vw;
+display: flex;
+justify-content: center;
+overflow: hidden;
+pointer-events: none;
+z-index:100"
+		>
+			<Confetti
+				x="{[-5, 5]}"
+				y="{[0, 0.1]}"
+				delay="{[500, 2000]}"
+				infinite
+				size="15"
+				duration="5000"
+				amount="300"
+				fallDistance="100vh"
+			/>
+		</div>
+	{/if}
 	<div class="my-3 flex justify-end">
 		<Fab class="mx-1" color="secondary" on:click="{toggleDetails}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
@@ -81,14 +106,14 @@
 
 	{#if classroom}
 		<div class="flex  justify-around w-full" style="overflow-x:auto;">
-			<div>
+			<div class="w-full">
 				<CorrectionListItems
 					items="{items.filter((_, i) => i % 2 === 0)}"
 					displayDetails="{displayDetails}"
 					magnify="{classroom ? 2.5 : 1}"
 				/>
 			</div>
-			<div>
+			<div class="ml-12 w-full">
 				<CorrectionListItems
 					items="{items.filter((_, i) => i % 2 === 1)}"
 					displayDetails="{displayDetails}"
@@ -97,12 +122,14 @@
 			</div>
 		</div>
 	{:else}
-		<div class="flex flex-col w-full">
-			<CorrectionListItems
-				items="{items}"
-				displayDetails="{displayDetails}"
-				magnify="{classroom ? 2.5 : 1}"
-			/>
+		<div class="flex w-full justify-center">
+			<div style="width:650px">
+				<CorrectionListItems
+					items="{items}"
+					displayDetails="{displayDetails}"
+					magnify="{classroom ? 2.5 : 1}"
+				/>
+			</div>
 		</div>
 	{/if}
 
@@ -134,10 +161,7 @@
 				</Fab>
 			</div>
 			<div class="flex flex-col items-center" style="color:white">
-				<div
-					class="my-2"
-					style="font-size:2em; font-family:'pacifico'"
-				>
+				<div class="my-2" style="font-size:2em; font-family:'pacifico'">
 					{messageResult}
 				</div>
 				<div class="my-2">

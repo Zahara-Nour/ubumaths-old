@@ -10,6 +10,7 @@ import {
 	CE2,
 	TROISIEME,
 	PREMIERE_SPE_MATHS,
+	TERMINALE_SPE_MATHS
 } from '$lib/grades.js'
 import { color1, color2, color3 } from '$lib/colors'
 import { correct_color } from '../../lib/colors'
@@ -109,8 +110,8 @@ const questions = {
 		Apprivoiser: {
 			Ecriture: [
 				{
-					description: 'Essai choix mlultiples',
-					enounces: ['Choisis les bonnes réponses.'],
+					description: 'Essai choix multiples',
+					enounces: ['Choisis les bonnes réponses $$&1$$.'],
 					variables: [
 						{
 							'&1': '$e[1;9]',
@@ -119,22 +120,18 @@ const questions = {
 						},
 					],
 
-					choices: [[{ text: '1' }, { text: '2' }, { text: '3' }]],
+					choices: [[{ text: '$$1$$' }, { text: '$$2$$' }, { text: '$$3$$' }]],
 					solutions: [[1, 2]],
 					type: 'choices',
-					correctionFormat: [
-						{
-							correct: [
-								'Dans $$[._&4_]$$ le chiffre des dizaines est &answer.',
-							],
-							answer: 'Le chiffre des dizaines est &answer.',
-						},
-						{
-							correct: ['Dans $$[._&4_]$$ le chiffre des unités est &answer.'],
-							answer: 'Le chiffre des unités est &answer.',
-						},
+					correctionDetails: [
+						[
+							{
+								text: 'La correction en détails.',
+							},
+						],
+					
 					],
-					defaultDelay: 60,
+					defaultDelay: 45,
 					grade: CP,
 				},
 				{
@@ -214,7 +211,7 @@ const questions = {
 				},
 				{
 					description: "Parité d'un nombre entier",
-					enounces: ['Ce nombre est-il pair ou impair ?'],
+					enounces: ['Quelle est la parité de ce nombre ?'],
 					expressions: ['&2', '&3'],
 					variables: [
 						{
@@ -224,11 +221,7 @@ const questions = {
 						},
 					],
 					choices: [[{ text: 'pair' }, { text: 'impair' }]],
-					correctionFormat: [
-						{
-							correct: ['Le nombre $$&exp$$ est &answer'],
-						},
-					],
+					
 					correctionDetails: [
 						[
 							{
@@ -244,7 +237,7 @@ const questions = {
 					solutions: [[0], [1]],
 					options: ['no-shuffle-choices'],
 					type: 'choice',
-					defaultDelay: 60,
+					defaultDelay: 10,
 					grade: CE1,
 				},
 				{
@@ -620,14 +613,14 @@ const questions = {
 					],
 					conditions: ['&5!=&6'],
 					choices: [[{ text: '$$[._&5_]$$' }, { text: '$$[._&6_]$$' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est &answer',
-							],
-							answer: 'Le plus petit est &answer',
-						},
-					],
+					// correctionFormat: [
+					// 	{
+					// 		correct: [
+					// 			'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est &answer',
+					// 		],
+					// 		answer: 'Le plus petit est &answer',
+					// 	},
+					// ],
 					// corrections: [
 					//   'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est ',
 					// ],
@@ -1292,23 +1285,6 @@ const questions = {
 					subdescription:
 						'Nombres à 1 chiffre. Nombre plus grand en premier. Somme inférieure ou égale à 10',
 					enounces: ['Complète.'],
-					expressions: ['? + ? + &1= ?'],
-					variables: [
-						{
-							'&1': '$e[3;8]',
-							//  '&3':'$e[2;&2]'
-						},
-					],
-					type: 'trou',
-					solutions: [['&2']],
-					defaultDelay: 120,
-					grade: CP,
-				},
-				{
-					description: 'Compléter une addition à trou',
-					subdescription:
-						'Nombres à 1 chiffre. Nombre plus grand en premier. Somme inférieure ou égale à 10',
-					enounces: ['Complète.'],
 					expressions: ['&1 + ? = [_&2+&1_]'],
 					variables: [
 						{
@@ -1319,7 +1295,7 @@ const questions = {
 					],
 					type: 'trou',
 					solutions: [['&2']],
-					defaultDelay: 120,
+					defaultDelay: 5,
 					grade: CP,
 				},
 				{
@@ -14233,22 +14209,22 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\textcolor{${color1}}{&1} \\times &3 &= \\textcolor{${color1}}{&2} \\times &3 \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} \\textcolor{${color1}}{&1} \\times &3 &= \\textcolor{${color1}}{&2} \\times &3 \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} &3 + \\textcolor{${color1}}{&1} &= &3 + \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} &3 + \\textcolor{${color1}}{&1} &= &3 + \\textcolor{${color1}}{&2} \\\\ &=  &sol   \\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\textcolor{${color1}}{&1} + &3 &= \\textcolor{${color1}}{&2} + &3 \\\\ &=  &sol  \\\\ \\end{align}$$`,
+								text: `$$\\begin{align} \\textcolor{${color1}}{&1} + &3 &= \\textcolor{${color1}}{&2} + &3 \\\\ &=  &sol  \\end{align}$$`,
 							},
 						],
 					],
@@ -17103,7 +17079,7 @@ const questions = {
 					description: 'Addition $$a+x=b$$',
 					enounces: ['Résouds cette équation.'],
 					expressions: ['x+&1=[_&1+&2_]', '&1+x=[_&1+&2_]'],
-					expressions2: ['x'],
+					answerFields: ['$$x=?$$'],
 					variables: [
 						{
 							'&1': '$e[5;9]',
@@ -17554,6 +17530,14 @@ const questions = {
 						},
 					],
 					solutions: [['&1']],
+					correctionFormat: [
+						{
+							correct: [
+								"La solution de l'équation est &answer.",
+							],
+							answer: 'La solution est &answer.',
+						},
+					],
 					correctionDetails: [
 						[
 							{
@@ -19721,12 +19705,12 @@ const questions = {
 						'(-1)^n',
 						'&1',
 						'n',
-						'n^&2',
+						'n^&4',
 						'sqrt(n)',
 						'1/n',
-						'1/n^&2',
-						'&2^n',
-						'(1/&2)^n',
+						'1/n^&4',
+						'[(_&2_]^n',
+						'([_1/(&2)_])^n',
 						'&3^n',
 					],
 					choices: [
@@ -19902,20 +19886,76 @@ const questions = {
 						],
 					],
 					type: 'choice',
-					solutions: [[4], [2], [0], [0], [0], [3], [3], [0], [3], [3]],
+					solutions: [[4], [2], [0], [0], [0], [3], [3], ['&2>0 ?? 0 :: 4'], [3], [3]],
 					variables: [
 						{
 							'&1': '$er[1;9]',
-							'&2': '$e[2;9]',
+							'&2': '$er[2;9]',
 							'&3': '$d{0;1}',
+							'&4': '$e[2;9]',
 						},
 					],
 					correctionFormat: [
 						{
 							correct: [
-								'Limite de la suite de terme général $$&exp$$  : &answer',
+								'&answer',
 							],
-							answer: 'Limite de la suite : &answer',
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'@@ &2>0 ?? La limite est &answer @@',
+								'@@ &2<0 ?? &answer @@',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
+						},
+						{
+							correct: [
+								'La limite est &answer',
+							],
+							answer:'&answer'
 						},
 					],
 					correctionDetails: [
@@ -19941,6 +19981,171 @@ const questions = {
 					options: ['no-shuffle-choices'],
 					defaultDelay: 30,
 					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer la limite d'une suite",
+					subdescription: 'En utilisant les règles de calcul sur les limites',
+					enounces: [
+						'Quelle est la limite obtenue ?',
+					],
+					enounces2: [
+						'$$\\frac{\\infin}{\\infin}$$',
+
+						'$$\\frac{0}{\\infin}$$',
+
+						'$$\\frac{+\\infin}{\\O^+}$$',
+						'$$\\frac{-\\infin}{\\O^+}$$',
+						'$$\\frac{+\\infin}{\\O^-}$$',
+						'$$\\frac{-\\infin}{\\O^-}$$',
+
+						'$$\\frac{&1}{+\\infin}$$',
+						'$$\\frac{-&1}{+\\infin}$$',
+						'$$\\frac{&1}{-\\infin}$$',
+						'$$\\frac{-&1}{-\\infin}$$',
+						
+						'$$\\frac{+\\infin}{&1}$$',
+						'$$\\frac{+\\infin}{-&1}$$',
+						'$$\\frac{-\\infin}{&1}$$',
+						'$$\\frac{-\\infin}{-&1}$$',
+
+						'$$\\infini\\times 0$$',
+						'$$+\\infini \\times \\left( +\\infini  \\right)$$',
+						'$$+\\infini \\times \\left( -\\infini \\right)$$',
+						'$$-\\infini \\times \\left( -\\infini \\right)$$',
+						'$$-\\infini \\times \\left( +\\infini \\right)$$',
+
+						'$$&1 \\times \\left( +\\infini  \\right)$$',
+						'$$&1 \\times \\left( -\\infini \\right)$$',
+						'$$-&1 \\times \\left( -\\infini \\right)$$',
+						'$$-&1 \\times \\left( +\\infini \\right)$$',
+						
+						'$$+\\infini + \\left( +\\infini \\right)$$',
+						'$$+\\infini + \\left( -\\infini \\right)$$',
+						'$$-\\infini + \\left( -\\infini \\right)$$',
+						'$$-\\infini + \\left( +\\infini \\right)$$',
+						'$$+\\infini - \\left( +\\infini \\right)$$',
+						'$$+\\infini - \\left( -\\infini \\right)$$',
+						'$$-\\infini - \\left( -\\infini \\right)$$',
+						'$$-\\infini - \\left( +\\infini \\right)$$',
+						'$$+\\infini[+_&1_]$$',
+						'$$+\\infini[+_&1_]$$',
+						'$$-\\infini[+_&1_]$$',
+						'$$-\\infini[+_&1_]$$',
+					],
+					choices: [
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+						[
+							{
+								text: '$$+\\infin$$',
+							},
+							{
+								text: '$$-\\infin$$',
+							},
+							{
+								text: '$$0$$',
+							},
+							{
+								text: 'Forme indéterminée',
+							},
+					
+						],
+			
+					],
+					type: 'choice',
+					solutions: [[3]],
+					variables: [
+						{
+							'&1': '$er[1;9]',
+							'&2': '$e[2;9]',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: [
+								'&answer',
+							],
+							answer:'&answer'
+						},
+					],
+					options: ['no-shuffle-choices'],
+					defaultDelay: 30,
+					grade: TERMINALE_SPE_MATHS,
 				},
 			],
 		},

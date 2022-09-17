@@ -72,10 +72,9 @@ export default function generateQuestion(
 			e = e.positive()
 		}
 
-		if (modifiers.includes('(') && (e.isOpposite() || e.isPositive() )) {
+		if (modifiers.includes('(') && (e.isOpposite() || e.isPositive())) {
 			e = e.bracket()
 		}
-
 
 		return e
 	}
@@ -123,6 +122,17 @@ export default function generateQuestion(
 				variables[name] = generated
 			})
 		return variables
+	}
+
+	function replacement(_, p1, p2) {
+		const tests = p1.split('&&')
+		let text
+		if (tests.every((t) => math(t).eval().string === 'true')) {
+			text = p2
+		} else {
+			text = ''
+		}
+		return text
 	}
 
 	function replaceVariables(o) {
@@ -530,15 +540,21 @@ export default function generateQuestion(
 	correct = evaluateToLatex(correct)
 	uncorrect = evaluateToLatex(uncorrect)
 	answer = evaluateToLatex(answer)
+
 	if (correctionFormat) {
+		const regex = /@@(.*?)\?\?(.*?)@@/g
+
 		correctionFormat = {
-			correct,
-			uncorrect:
-				uncorrect ||
-				correct.map((c) =>
-					c.replace(/&answer/g, '&solution').replace(/&ans/g, '&sol'),
-				),
-			answer: answer || correct[0],
+			correct: correct.map((c) => c.replace(regex, replacement)),
+			uncorrect: uncorrect
+				? uncorrect.map((u) => u.replace(regex, replacement))
+				: correct.map((c) =>
+						c
+							.replace(regex, replacement)
+							.replace(/&answer/g, '&solution')
+							.replace(/&ans/g, '&sol'),
+				  ),
+			answer: answer || correct.map((c) => c.replace(regex, replacement)).filter(m => !!m)[0],
 		}
 	}
 
@@ -550,9 +566,16 @@ export default function generateQuestion(
 				const found = solution.match(regex)
 				if (found) {
 					const test = math(found[1]).eval()
-					const success = math(replaceVariables(found[2]))
-					const failure = math(replaceVariables(found[3]))
-					return test.isTrue() ? success.string : failure.string
+					let success = math(replaceVariables(found[2]))
+					let failure = math(replaceVariables(found[3]))
+					if (question.type === 'choices' || question.type === 'choice') {
+						success = success.value.toNumber()
+						failure = failure.value.toNumber()
+					} else {
+						success = success.string
+						failure = failure.string
+					}
+					return test.isTrue() ? success : failure
 				}
 			}
 			// if (question.type === 'choice' && typeof solution === 'number') {
@@ -625,16 +648,6 @@ export default function generateQuestion(
 	if (correctionDetails) {
 		correctionDetails = correctionDetails.reduce((acc, d) => {
 			const regex = /@@(.*?)\?\?(.*?)@@/g
-			function replacement(_, p1, p2) {
-				const tests = p1.split('&&')
-				let text
-				if (tests.every((t) => math(t).eval().string === 'true')) {
-					text = p2
-				} else {
-					text = ''
-				}
-				return text
-			}
 
 			if (d.text) {
 				acc.push({ text: d.text.replace(regex, replacement) })
@@ -683,7 +696,6 @@ export default function generateQuestion(
 		],
 	}
 
-	
 	if (choices) generated.choices = choices
 	if (solutions) generated.solutions = solutions
 	if (details) generated.details = details
@@ -699,7 +711,7 @@ export default function generateQuestion(
 	if (expression2) generated.expression2 = expression2
 	if (testAnswer) generated.testAnswer = testAnswer
 	if (answerFields) generated.answerFields = answerFields
-	
+
 	if (image) {
 		generated.image = image
 		// generated.imageBase64P = fetchImage(image)

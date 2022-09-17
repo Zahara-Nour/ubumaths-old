@@ -8,11 +8,17 @@
 	import { afterUpdate, onDestroy, onMount, setContext } from 'svelte'
 	import datas, { getQuestion } from './questions.js'
 	import { getLogger, shuffle } from '$lib/utils'
+	import { createTimer } from '$lib/timer'
 	import { page } from '$app/stores'
 	import { virtualKeyboardMode, touchDevice } from '$lib/stores'
 
 	import math from 'tinycas'
-	import { mdiRocketLaunchOutline, mdiRestart, mdiKeyboard } from '@mdi/js'
+	import {
+		mdiRocketLaunchOutline,
+		mdiRestart,
+		mdiKeyboard,
+		mdiLaunch,
+	} from '@mdi/js'
 	import { fetchImage } from '$lib/images'
 	import Correction from './Correction.svelte'
 	import QuestionCard from '$lib/components/QuestionCard.svelte'
@@ -20,9 +26,6 @@
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
 	let current
-	let answerss
-	let answerss_latex
-	let times = []
 	let delay
 	let elapsed
 	let start
@@ -37,29 +40,27 @@
 	let correct = false
 	let restart = false
 	let classroom
+	let courseAuxNombres
 	let pause = false
 	let previous
 	let showExemple = false
 	let showCorrection = false
 	let alert
-	let slider =0
+	let slider = 0
 	let min = 0,
 		max = 60
 	let cards, card
 	let generatedExemple
 	let basket
 	let go = false
-	const paramsAnswers = {}
-	const commit = {
-		f: function () {
-			if (this.hook) this.hook()
-			change()
-		},
-	}
+	const testParams = {}
+	let commit
 	let ref
 	let fontSize
+	let remaining
+	let commits = []
 
-	setContext('question-params', paramsAnswers)
+	setContext('test-params', testParams)
 
 	onMount(() => {
 		if (ref) {
@@ -80,6 +81,7 @@
 			)
 		}
 	})
+
 	function countDown() {
 		if (!pause) {
 			elapsed = Date.now() - start + previous
@@ -87,13 +89,19 @@
 				percentage = ((delay - elapsed) * 100) / delay
 				alert = delay - elapsed < 5000
 			} else {
-				commit.f()
+				commit.exec()
 			}
 		}
 	}
 
 	onDestroy(() => {
-		if (timer) clearInterval(timer)
+		if (timer) {
+			if (timer.stop) {
+				timer.stop()
+			} else {
+				clearInterval(timer)
+			}
+		}
 		// if (timeout) clearTimeout(timeout)
 	})
 
@@ -102,15 +110,14 @@
 		current = -1
 		restart = false
 		finish = false
+		go = false
 		cards = []
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
-		answerss = classroom ? null : []
-		answerss_latex = classroom ? null : []
-		paramsAnswers.answerss = answerss
-		paramsAnswers.answerss_latex = answerss_latex
-
-		// answerss.splice(0, answerss.length)
-		// answerss_latex.splice(0, answerss_latex.length)
+		courseAuxNombres = JSON.parse(
+			decodeURI($page.url.searchParams.get('courseAuxNombres')),
+		)
+		testParams.courseAuxNombres = courseAuxNombres
+		testParams.classroom = classroom
 
 		basket = JSON.parse(decodeURI($page.url.searchParams.get('questions')))
 
@@ -123,7 +130,7 @@
 			question.delay = q.delay || question.delay || question.defaultDelay
 			//  check that delay is a multiple of five
 			const rest = question.delay % 5
-			question.delay = question.delay + 5 - rest 
+			question.delay = question.delay + 5 - rest
 
 			for (let i = 0; i < q.count; i++) {
 				const generated = generate(question, cards, q.count, offset)
@@ -135,8 +142,7 @@
 		shuffle(cards)
 
 		cards.forEach((q, i) => {
-			if (answerss) answerss.push([])
-			if (answerss_latex) answerss_latex.push([])
+			q.results = {}
 			q.num = i + 1
 			if (q.image) {
 				q.imageBase64P = fetchImage(q.image)
@@ -159,8 +165,6 @@
 		if (classroom && basket.length === 1) {
 			showExemple = true
 			generateExemple()
-		} else {
-			change()
 		}
 
 		info('Begining test with questions :', cards)
@@ -182,7 +186,21 @@
 
 	function beginTest() {
 		showExemple = false
-		change()
+		go = true
+		if (courseAuxNombres) {
+			const tick = () => {
+				remaining = timer.getTime()
+			}
+			if (timer && timer.stop) {
+				timer.stop()
+			}
+			timer = createTimer(7 * 60, tick, commit)
+			remaining = timer.getTime()
+			timer.start()
+		} else {
+			// on passe à la première question
+			change()
+		}
 	}
 
 	// on passe à la question suivante
@@ -194,7 +212,7 @@
 		if (current !== 0) {
 			let time = Math.min(Math.round(elapsed / 1000), delay)
 			if (time === 0) time = 1
-			times.push(time)
+			card.time = time
 		}
 		if (current < cards.length) {
 			card = cards[current]
@@ -209,7 +227,7 @@
 					: 20000
 				slider = delay / 1000
 			}
-
+			slider = Math.min(slider, 60)
 			percentage = 0
 			alert = false
 			start = Date.now()
@@ -255,15 +273,27 @@
 		}
 	}
 
+	initTest()
+
 	// le bouton restart a été appuyé après la correction
 	$: if (restart) {
 		initTest()
 	}
 
 	$: delay = slider * 1000
-
 	$: virtualKeyboardMode.set($touchDevice)
 	$: console.log('slider', slider)
+
+	commit = {
+		exec: function () {
+			if (this.hook) {
+				this.hook()
+			}
+			if (!courseAuxNombres) {
+				change()
+			}
+		},
+	}
 </script>
 
 <svelte:window on:keydown="{handleKeydown}" />
@@ -285,10 +315,7 @@
 {:else if finish}
 	{#if showCorrection}
 		<Correction
-			questions="{cards}"
-			answerss="{answerss}"
-			answerss_latex="{answerss_latex}"
-			times="{times}"
+			items="{cards}"
 			query="{location.search}"
 			classroom="{classroom}"
 			bind:restart
@@ -313,12 +340,48 @@
 	<div style="height:90vh" class="flex justify-center items-center">
 		<Button
 			on:click="{() => {
-				initTest()
-				go = true
+				beginTest()
 			}}"
 			variant="raised"
 		>
 			<Label>Let's go !</Label>
+		</Button>
+	</div>
+{:else if courseAuxNombres}
+	Course aux nombres
+	{#if remaining}
+		{`${remaining.minutes}:${remaining.seconds < 10 ? '0' : ''}${
+			remaining.seconds
+		}`}
+	{/if}
+	<div class="flex justify-center">
+		{#each cards as card}
+			<div class="card">
+				<div class=" p-2 elevation-{4} rounded-lg">
+					<QuestionCard
+						card="{card}"
+						onChoice="{onChoice}"
+						interactive="{true}"
+						commit="{(() => {
+							const c = { ...commit }
+							commits.push(c)
+							return c
+						})()}"
+					/>
+				</div>
+			</div>
+		{/each}
+	</div>
+	<div class="flex justify-center items-center">
+		<Button
+			on:click="{() => {
+				timer.stop()
+				commits.forEach((commit) => commit.exec())
+				finish = true
+			}}"
+			variant="raised"
+		>
+			<Label>Valider</Label>
 		</Button>
 	</div>
 {:else if card}
@@ -359,54 +422,21 @@
 		</div>
 
 		{#if cards}
-			<div id="cards-container">
-				<!-- <div id="cards"> -->
-				{#each [cards[current]] as card (current)}
-					<div class="card">
-						<div class=" p-2 elevation-{4} rounded-lg">
+			<div class="flex justify-center">
+				<div id="cards-container" style="width:600px">
+					{#each [cards[current]] as card (current)}
 							<QuestionCard
 								card="{card}"
 								onChoice="{onChoice}"
 								interactive="{!classroom}"
 								commit="{commit}"
 								magnify="{classroom ? 2.5 : 1}"
+								immediateCommit="{true}"
 							/>
-						</div>
-					</div>
-				{/each}
-				<!-- </div> -->
+					{/each}
+				</div>
 			</div>
 		{/if}
-
-		<!-- {#if !card.choices && !classroom}
-				<div class="flex items-center justify-center " style="width:80%">
-					<span class="mr-4">Ta réponse:</span>
-					<div class="flex-grow-1" style="width:70%">
-						{#if $mathliveReady}
-							<math-field
-								virtual-keyboard-mode="manual"
-								decimal-separator=","
-								on:keystroke="{onKeystroke}"
-								keypress-vibration="off"
-								remove-extraneous-parentheses="off"
-								smart-fence="off"
-								smart-superscript="off"
-								style="width:100%;"
-								class="{correct
-									? 'pa-2 light-green lighten-5'
-									: 'pa-2 deep-orange lighten-5'}"
-								virtual-keyboard-theme="apple"
-								on:input="{onChangeMathField}"
-								on:change="{() => {
-									if (answer !== '') commit()
-								}}"
-								bind:this="{mf}"
-							>
-							</math-field>
-						{/if}
-					</div>
-				</div>
-			{/if} -->
 	</div>
 {:else}
 	Pas de questions
@@ -419,18 +449,10 @@
 		position: relative;
 		/* display: flex; */
 		/* flex-direction: column; */
-		overflow-x: hidden;
+		/* overflow-x: hidden; */
 		/* height: 500px; */
 		/* max-height: 70vh; */
-		width: 100%;
+		/* width: 100%; */
 	}
 
-	.card {
-		/* left:300px; */
-		min-width: calc(100% - 24px);
-		/* min-width: 95%; */
-		/* min-width: 400px; */
-		margin: 12px;
-		/* height: 100%; */
-	}
 </style>

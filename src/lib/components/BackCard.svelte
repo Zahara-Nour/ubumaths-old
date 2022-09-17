@@ -4,22 +4,24 @@
 	import { mdiOrbitVariant } from '@mdi/js'
 	import Fab, { Icon } from '@smui/fab'
 	import { Svg } from '@smui/common/elements'
-	import Paper, { Content } from '@smui/paper'
+	import Paper from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
 	import {
 		createDetailedCorrection,
 		createCorrection,
 	} from '../../routes/automaths/correctionItem'
-	import Question from '../../routes/automaths/Question.svelte'
 	import { correct_color } from '../colors'
+	import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte'
 
 	export let card
 	export let toggleFlip = () => {}
-	export let flashcard = true
 	export let h = 0
+	export let w = 0
 	export let height = 0
+	export let width = 0
 	export let magnify
+	export let correction
 
 	function getSolution(card) {
 		let nSol = -1
@@ -29,7 +31,7 @@
 			nSol += 1
 			return math(card.solutions[nSol]).latex
 		}
-		
+
 		if (card.choices) {
 			if (card.type === 'choices') {
 				s = '<div class="flex flex-wrap justify-start">'
@@ -65,7 +67,7 @@
 				}
 			}
 		} else {
-			if (card.answerFields) {
+			if (card.answerFields && card.type !== 'equation') {
 				s = card.answerFields.replace(/\\ldots/g, replaceSol)
 				console.log('s', s)
 			} else {
@@ -76,41 +78,81 @@
 		return s
 	}
 
+	$: description = $formatLatex(card.description)
+	$: subdescription = $formatLatex(card.subdescription)
 	$: solution = $formatLatex(getSolution(card))
-	$: details = card.correctionDetails && card.correctionDetails.length
-		? createDetailedCorrection(card)
-		: createCorrection(card)
+	$: details = card.detailedCorrection
+		? card.detailedCorrection
+		: card.simpleCorrection
+		? card.simpleCorrection
+		: []
+	$: console.log('details', details)
 </script>
 
-<div bind:clientHeight="{h}">
-	<Paper elevation="{12}" style="{height ? `height:${height}px;` : ''}">
-		<div class="h-full flex flex-col justify-between">
-			<Content class="h-full">
-				<div class="h-full flex flex-col items-center justify-around">
-					<div
-						style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}"
-					>
-						Réponse :
-					</div>
-					<div
-						class="my-5 z-O relative"
-						style="{`font-size:${2 * magnify}rem`}"
-					>
-						{@html solution}
-					</div>
-					{#if details}
-						<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
-							{#each details as detail}
-								<p>
-									{@html detail.text ? detail.text : detail}
-								</p>
-							{/each}
-						</div>
-					{/if}
+<div bind:clientHeight="{h}" bind:clientWidth="{w}">
+	<Paper
+		elevation="{12}"
+		style="{height
+			? `height:${height}px;`
+			: '' + width
+			? `width:${width - 48}px;`
+			: ''}"
+	>
+		<div class="h-full flex flex-col items-center justify-between">
+			<!-- correction des réponses de l'utilisateur -->
+
+			{#if correction}
+				<div
+					class="correction-title"
+					style="{` color:${mdc_colors['lime-500']};  position:absolute;top:1em; left:0px`}"
+				>
+					Détails
 				</div>
-			</Content>
-			{#if flashcard}
-				<div class="buttons flex justify-center">
+				<div class="z-0 relative" style="{`font-size:${magnify}rem`}">
+					<!-- {#each details as detail}
+						<div class="correction-line">
+							{@html detail.text ? detail.text : detail}
+						</div>
+					{/each} -->
+					{#each details as line}
+						<div class="correction-line z-0">
+							<CorrectionLine line="{line}" />
+						</div>
+					{/each}
+				</div>
+
+				<div class=" w-full flex justify-end">
+					<Fab color="secondary" on:click="{toggleFlip}" mini>
+						<Icon component="{Svg}" viewBox="2 2 20 20">
+							<path fill="currentColor" d="{mdiOrbitVariant}"></path>
+						</Icon>
+					</Fab>
+				</div>
+			{:else}
+				<!-- solution générique -->
+				<div
+					style="{` color:${mdc_colors['lime-500']}; font-size:${magnify}rem`}"
+				>
+					Réponse :
+				</div>
+				<div class="my-5 z-O relative" style="{`font-size:${2 * magnify}rem`}">
+					{@html solution}
+				</div>
+				{#if details}
+					<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
+						<!-- {#each details as detail}
+							<p>
+								{@html detail.text ? detail.text : detail}
+							</p>
+						{/each} -->
+						{#each details as line}
+							<div class=" correction-line z-0">
+								<CorrectionLine line="{line}" />
+							</div>
+						{/each}
+					</div>
+				{/if}
+				<div class="mt-3 w-full flex justify-end">
 					<Fab color="secondary" on:click="{toggleFlip}" mini>
 						<Icon component="{Svg}" viewBox="2 2 20 20">
 							<path fill="currentColor" d="{mdiOrbitVariant}"></path>
@@ -135,7 +177,22 @@
 	</div>
 </div> -->
 <style>
-	.buttons {
-		margin-top: 2em;
+	.correction-line {
+		margin-top: 9px;
+		margin-bottom: 9px;
+	}
+
+	.correction-line:first-child {
+		margin-top: 0px;
+		margin-bottom: 9px;
+	}
+
+	.correction-line:last-child {
+		margin-top: 9px;
+		margin-bottom: 0px;
+	}
+
+	.correction-title {
+		transform: rotate(-45deg);
 	}
 </style>

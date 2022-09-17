@@ -1047,3 +1047,13 @@ strong {
   background-color: #cddc39;
   color: rgba(0, 0, 0, 0.87);
 }
+
+.smui-badge.smui-badge--color-custom-correct {
+  background-color: #4caf50;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.smui-badge.smui-badge--color-custom-incorrect {
+  background-color: #ef5350;
+  color: rgba(0, 0, 0, 0.87);
+}

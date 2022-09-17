@@ -2,17 +2,25 @@
 	import { toMarkup } from '$lib/stores'
 	import { formatLatex } from '$lib/stores'
 	import { MathfieldElement } from '$lib/stores'
-	import { afterUpdate, onMount, onDestroy, getContext } from 'svelte'
+	import { afterUpdate, onDestroy } from 'svelte'
 	import { getLogger } from '$lib/utils'
 	import { touchDevice, virtualKeyboardMode } from '$lib/stores.js'
 	import virtualKeyboard from './virtualKeyboard'
 	import Button, { Label } from '@smui/button'
+	import { createDetailedCorrection } from './correctionItem'
+	import { mdc_colors as colors } from '$lib/colors'
+	import CorrectionLine from './CorrectionLine.svelte'
+	import { assessItem } from './correction'
 
 	export let question
 	export let interactive = false
 	export let masked = false
-	export let commit
 	export let magnify = 1
+	export let correction = false
+	export let simpleCorrection = []
+	export let detailedCorrection = null
+	export let commit
+	export let immediateCommit
 
 	let { fail, trace, info } = getLogger('correction', 'trace')
 
@@ -24,48 +32,28 @@
 	let nmfs = 0
 	let answers
 	let answers_latex
-	let choices
-	let selecteds
-
-	let onChoice = (i) => {
-		if (interactive) {
-			if (question.type === 'choices') {
-				selecteds[i] = !selecteds[i]
-				answers.splice(0, answers.length)
-				selecteds.forEach((selected, i) => {
-					if (selected) {
-						answers.push(i)
-					}
-				})
-			} else {
-				answers.push(i)
-				commit.f()
-			}
-		}
-	}
-	let showExp
 	let answerFields
-
 	let keyListeners = []
 	let inputListeners = []
 	let changeListeners = []
 	let fieldsNb = 0
+	let coms
 
-	if (commit) {
-		commit.hook = () => {
-			removeListeners()
-		}
-	}
-
-	const params = getContext('question-params')
 	// console.log('context', params)
 
-	function createMarkup(s) {
-		return s ? $toMarkup(s) : null
-	}
-
-	function createLatex(s) {
-		return s ? $formatLatex(s) : null
+	function onChoice(i) {
+		if (interactive) {
+			if (question.type === 'choices') {
+				if (answers.includes(i)) {
+					answers = answers.filter((a) => a != i)
+				} else {
+					answers = [...answers, i]
+				}
+			} else {
+				answers = answers[0] === i ? [] : [i]
+				if (immediateCommit) commit.exec()
+			}
+		}
 	}
 
 	function recordAnswer(i) {
@@ -74,8 +62,8 @@
 			// on remplace plusieurs espaces par un seul, bizarrz normalement pas besoin
 			.replace(/(\\,){2,}/g, '\\,')
 			.trim()
-		answers[i] = mfs[i].getValue('ascii-math')
-		answers[i] = answers[i]
+		answers[i] = mfs[i]
+			.getValue('ascii-math')
 			// .replace(/xx/g, '*')
 			.replace(/÷/g, ':')
 			.replace(/\((\d+(,\d+)*)\)\//g, (_, p1) => p1 + '/')
@@ -87,28 +75,32 @@
 	}
 
 	function removeListeners() {
-		if (mfs) {
-			mfs.forEach((mfe, i) => {
-				mfe.removeEventListener('keystroke', keyListeners[i])
-				mfe.removeEventListener('input', inputListeners[i])
-				mfe.removeEventListener('change', changeListeners[i])
-				mfe.blur()
-			})
-		}
+		keyListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('key', listener),
+		)
+		inputListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('input', listener),
+		)
+		changeListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('change', listener),
+		)
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
 	}
 
 	// onChange est appelée quand :
 	// - l'utilisateur appuie sur entrée du clavier virtuel ou du clavier physique
 	//  (même si le mathfield est vide)
 	// - quand le mathfield perd le focus et que le contenu a changé
-	// - quand la touche entrée du clavier virtuel
 	function onChange(ev, i) {
-		// removeListeners()
 		if (mfs[i].hasFocus()) {
 			// TODO: empêcher le commit quand le mathfield est vide
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
-			if (mfs.length === 1) {
-				commit.f()
+			if (mfs.length === 1 && immediateCommit) {
+				// removeListeners ????
+				console.log('commit', commit)
+				commit.exec()
 			} else {
 				mfs[(i + 1) % mfs.length].focus()
 			}
@@ -134,16 +126,7 @@
 
 		const keystroke = ev.detail.keystroke
 		const key = ev.detail.event.key
-		// trace('keystroke', keystroke)
-		// trace('key', key)
-		// console.log(i)
-		// console.log(answers_latex[i])
-		// console.log(answers_latex[i].length)
-		// console.log('+' + answers_latex[i].slice(answers_latex[i].length - 2) + '+')
-		// if (keystroke === '[Enter]' || keystroke === '[NumpadEnter]') {
-		// ev.preventDefault()
-		// commit()
-		// } else
+
 		if (
 			keystroke === '[Space]' &&
 			!(
@@ -179,47 +162,225 @@
 	}
 
 	function addMathfield() {
-		nmfs += 1
-		let id = `mf${nmfs}`
+		let id = `mf-${question.num}-${nmfs}`
 		if (masked) id = id + '-masked'
+		nmfs++
 		return `<span id='${id}'}/>`
 	}
 
+	function manageFocus() {
+		mfs.forEach((mfe) => {
+			mfe.virtualKeyboardState =
+				mfe.hasFocus() && $virtualKeyboardMode ? 'visible' : 'hidden'
+		})
+	}
+
+	function initQuestion(question) {
+		const q = question
+		removeListeners()
+
+		mfs = []
+		nmfs = 0
+
+		if (!question.detailedCorrection && question.correctionDetails) {
+			q.detailedCorrection = createDetailedCorrection(question)
+		}
+		detailedCorrection = question.detailedCorrection
+		answers = question.answers
+
+		enounce = question.enounce ? $formatLatex(question.enounce) : null
+		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
+
+		expression = question.expression_latex
+		expression2 = question.expression2_latex
+
+		if (interactive) {
+			if (expression && question.type === 'result') {
+				expression += '=\\ldots'
+			}
+
+			answerFields = question.answerFields
+			if (
+				!answerFields &&
+				!expression &&
+				question.type !== 'choice' &&
+				question.type !== 'choices'
+			) {
+				answerFields = '\\ldots'
+			}
+			if (answerFields) {
+				answerFields = $formatLatex(
+					answerFields.replace(/\?/g, '\\ldots'),
+				).replace(/…/g, addMathfield)
+			}
+		}
+
+		if (expression) {
+			expression = $toMarkup(expression)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+		if (interactive && expression) {
+			expression = expression.replace(/…/g, addMathfield)
+		}
+		if (interactive && !answers) {
+			answers = []
+			answers_latex = []
+		}
+
+		makeCorrection(answers)
+	}
+
+	function makeCorrection(answers) {
+		if (interactive) {
+			const item = { ...question, answers, answers_latex }
+			assessItem(item)
+			coms = item.coms
+			console.log('coms', coms)
+			simpleCorrection = item.simpleCorrection
+		} else if (question.simpleCorrection) {
+			simpleCorrection = question.simpleCorrection
+		} else {
+			const q = question
+			assessItem(q)
+			simpleCorrection = q.simpleCorrection
+		}
+	}
+
+	function commitAnswers() {
+		// pour prévenir un update de question
+		console.log('commitAnswer')
+		const q = question
+		q.answers = answers
+		q.answers_latex = answers_latex
+		assessItem(q)
+	}
+
+	function prepareInteractive() {
+		mfs = []
+		nmfs = 0
+
+		expression = question.expression_latex
+		expression2 = question.expression2_latex
+
+		if (expression && question.type === 'result') {
+			expression += '=\\ldots'
+		}
+
+		answerFields = question.answerFields
+		if (
+			!answerFields &&
+			!expression &&
+			question.type !== 'choice' &&
+			question.type !== 'choices'
+		) {
+			answerFields = '$$\\ldots$$'
+		}
+		if (answerFields) {
+			answerFields = $formatLatex(
+				answerFields.replace(/\?/g, '\\ldots'),
+			).replace(/…/g, addMathfield)
+			console.log('answerFields', answerFields)
+		}
+		if (expression) {
+			expression = $toMarkup(expression).replace(/…/g, addMathfield)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+
+		if (!answers) answers = []
+		if (!answers_latex) answers_latex = []
+	}
+
+	function stopInteractive() {
+		removeListeners()
+
+		mfs = null
+
+		expression = question.expression_latex
+			? $toMarkup(question.expression_latex)
+			: null
+		expression2 = question.expression2_latex
+			? $toMarkup(question.expression2_latex)
+			: null
+	}
+
+	function resetAnswers() {
+		if (!interactive) {
+			answers = null
+			answers_latex = null
+		} else {
+			if (!answers) answers = []
+			if (!answers_latex) answers_latex = []
+		}
+	}
+
+	$: initQuestion(question)
+
+	$: if (!correction && interactive) {
+		prepareInteractive()
+	} else if (!interactive && !correction) {
+		stopInteractive()
+	} else if (correction) {
+		removeListeners()
+
+		mfs = null
+		resetAnswers()
+	}
+
+	$: makeCorrection(answers)
+
 	onDestroy(() => {
 		removeListeners()
+		if (mfs) {
+			mfs.forEach((mfe) => mfe.blur())
+		}
 	})
 
 	afterUpdate(() => {
-		if (interactive) {
+		// il faut créer les mathfields
+		if (!correction && interactive) {
 			const elements = []
-			if (showExp && expression) {
+			if (answerFields) {
 				for (let i of document
-					.querySelector('#expression')
+					.querySelector(
+						`#answerFields-${question.num}${masked ? '-masked' : ''}`,
+					)
 					.querySelectorAll('*')) {
 					if (/^mf/g.test(i.id)) {
 						elements.push(i)
 					}
 				}
+			} else if (expression) {
+				// console.log(`${question.num}${masked ? '-masked' : ''}`)
+				const expressionElements = document.querySelector(
+					`#expression-${question.num}${masked ? '-masked' : ''}`,
+				)
+				if (expressionElements) {
+					for (let i of expressionElements.querySelectorAll('*')) {
+						if (/^mf/g.test(i.id)) {
+							elements.push(i)
+						}
+					}
+				}
 				if (expression2) {
-					for (let i of document
-						.querySelector('#expression2')
-						.querySelectorAll('*')) {
+					const expression2Elements = document.querySelector(
+						`#expression2-${question.num}${masked ? '-masked' : ''}`,
+					)
+					for (let i of expression2Elements.querySelectorAll('*')) {
 						if (/^mf/g.test(i.id)) {
 							elements.push(i)
 						}
 					}
 				}
 			}
-			if (answerFields) {
-				for (let i of document
-					.querySelector('#answerFields' + (masked ? '-masked' : ''))
-					.querySelectorAll('*')) {
-					if (/^mf/g.test(i.id)) {
-						elements.push(i)
-					}
-				}
-			}
-			elements.forEach((elt) => {
+
+			let added
+			elements.forEach((elt, i) => {
 				if (!elt.hasChildNodes()) {
 					const mfe = new $MathfieldElement()
 					mfe.setOptions({
@@ -237,6 +398,10 @@
 						smartFence: false,
 						superscript: false,
 					})
+
+					if (answers_latex[i]) {
+						mfe.value = answers_latex[i]
+					}
 					mfe.addEventListener('focus', manageFocus)
 					mfe.addEventListener('blur', manageFocus)
 					mfs.push(mfe)
@@ -247,10 +412,8 @@
 					elt.style.minWidth = '2em'
 					elt.style.border = '2px dashed grey'
 					elt.style.borderRadius = '5px'
-					const i = mfs.length - 1
+					// const i = mfs.length - 1
 					if (!masked) {
-						answers[i] = null
-						answers_latex[i] = null
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)
 						const changeListener = (ev) => onChange(ev, i)
@@ -261,124 +424,25 @@
 						mfe.addEventListener('input', inputListener)
 						mfe.addEventListener('change', changeListener)
 					}
+					added = true
 				}
 			})
-			if (!masked && mfs?.length) {
-				mfs[0].focus()
+			if (added && !masked) {
+				if (!mfs[0].hasFocus()) {
+					mfs[0].focus()
+				}
 			}
 
 			fieldsNb = mfs?.length || 0
 		}
 	})
 
-	// $: if (question.choices) {
-	// 	choices = question.choices.map((c) => {
-	// 		if (c.text) {
-	// 			c.text = $formatLatex(c.text)
-	// 		}
-	// 		return c
-	// 	})
-	// } else {
-	// 	choices = null
-	// }
-	// test pour vérifier que l'expression est bien formée à chaque frappe
-	// $: if (answer) {
-	// 	correct = !math(answer).isIncorrect()
-	// }
-
-	function manageFocus() {
-		mfs.forEach((mfe) => {
-			mfe.virtualKeyboardState =
-				mfe.hasFocus() && $virtualKeyboardMode
-				 ? "visible" : "hidden"
-		})
+	if (commit) {
+		commit.hook = commitAnswers
+	} else {
+		commit = { exec: commitAnswers }
 	}
-	
-
-
-
-	$: if (question && interactive) {
-		console.log(question)
-		mfs = []
-		nmfs = 0
-		if (!masked) {
-			keyListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('key', listener),
-			)
-			inputListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('input', listener),
-			)
-			changeListeners.forEach((listener, i) =>
-				mfs[i].removeEventListener('change', listener),
-			)
-			keyListeners = []
-			inputListeners = []
-			changeListeners = []
-			selecteds = []
-		}
-		if (params) {
-			answers = params.answerss[question.num - 1]
-			answers_latex = params.answerss_latex[question.num - 1]
-		}
-	}
-
-	// console.log('question', question)
-	$: {
-		showExp =
-			(question.expression_latex &&
-				!(question.options && question.options.includes('no-exp'))) ||
-			(interactive &&
-				question.type === 'result' &&
-				(!question.expression_latex ||
-					(question.options && question.options.includes('no-exp'))))
-	}
-
-	$: enounce = question.enounce ? $formatLatex(question.enounce) : null
-
-	$: enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
-
-	$: {
-		expression = question.expression_latex
-		if (interactive && !question.answerFields) {
-			if (
-				question.type !== 'choice' &&
-				question.type !== 'choices' &&
-				(!question.expression_latex ||
-					(question.options && question.options.includes('no-exp')))
-			) {
-				expression = '\\ldots'
-			} else {
-				if (question.type === 'result') {
-					expression += '=\\ldots'
-				}
-			}
-		} else if (interactive && question.answerFields) {
-			answerFields = question.answerFields
-			answerFields = $formatLatex(answerFields)
-			answerFields = answerFields.replace(/…/g, addMathfield)
-		}
-
-		if (interactive && question.prefix) {
-			expression = question.prefix + expression
-		}
-
-		if (expression) {
-			expression = $toMarkup(expression)
-			if (interactive) {
-				expression = expression.replace(/…/g, addMathfield)
-			}
-		}
-	}
-
-	$: {
-		expression2 = question.expression2_latex
-
-		if (interactive && question.type === 'equation') expression2 += '=\\ldots'
-		expression2 = $toMarkup(expression2 || '')
-		if (interactive) {
-			expression2 = expression2.replace(/…/g, addMathfield)
-		}
-	}
+	console.log('commit', commit)
 </script>
 
 <div class="flex flex-col items-center justify-around">
@@ -386,16 +450,19 @@
 		{#if element === 'enounce' && enounce}
 			<div
 				id="enounce"
-				class="mt-3 mb-3 text-center max-w-4xl leading-normal"
-				style="{`font-size:${magnify}rem`}"
+				class="{(correction ? 'mb-1' : 'my-3') +
+					' text-center max-w-4xl leading-normal'}"
+				style="{`font-size:${correction ? 1 : magnify}rem;` +
+					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce}
 			</div>
 		{:else if element === 'enounce2' && enounce2}
 			<div
 				id="enounce2"
-				class="mt-3 mb-3  text-center max-w-4xl"
-				style="{`font-size:${magnify}rem`}"
+				class="{(correction ? 'my-1' : 'my-3') + ' text-center max-w-4xl'}"
+				style="{`font-size:${correction ? 1 : magnify}rem` +
+					(correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				{@html enounce2}
 			</div>
@@ -412,31 +479,39 @@
 			{:catch error}
 				{error}
 			{/await}
-		{:else if element === 'expression' && expression && showExp}
+		{:else if element === 'expression' && expression && (!correction || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
 			<div
 				id="expressions"
-				class="my-3 flex flex-col items-center justify-center"
+				class=" flex flex-col items-center justify-center"
+				style="{`font-size:${
+					correction ? 1 : magnify === 1 ? 2 : magnify * 1.5
+				}rem;` + (correction ? 'color:' + colors['grey-600'] : '')}"
 			>
-				<div id="expression" class="my-3" style="{`font-size:${magnify}rem`}">
+				<div
+					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
+					class="{correction ? 'my-1' : 'my-3'}"
+				>
 					{@html expression}
 				</div>
 				{#if expression2 && !(!interactive && question.type === 'equation')}
 					<div
-						id="expression2"
-						class="mt-4"
-						style="{`font-size:${magnify}rem`}"
+						id="{`expression2-${question.num}${masked ? '-masked' : ''}`}"
+						class="{correction ? 'my-1' : 'my-3'}"
 					>
 						{@html expression2}
 					</div>
 				{/if}
 			</div>
-		{:else if element === 'choices' && question.choices}
-			<div class="mt-3 flex flex-wrap justify-around">
+		{:else if !correction && element === 'choices' && question.choices}
+			<div
+				class="mt-3 flex flex-wrap justify-around"
+				style="{`font-size:${magnify}rem`}"
+			>
 				{#each question.choices as choice, i}
 					<button
-						class="rounded-lg  m-2 p-1"
-						style="{`min-width:4em;border: 4px solid ${
-							selecteds && i < selecteds.length && selecteds[i]
+						class="rounded-lg  m-2 p-2"
+						style="{`font-size:1em; min-width:2em;border: 4px solid ${
+							interactive && answers.includes(i)
 								? 'var(--mdc-theme-primary)'
 								: 'var(--mdc-theme-secondary)'
 						};`}"
@@ -457,27 +532,22 @@
 							{/await}
 						{/if}
 						{#if choice.text}
-							<div class="text-base " style="{`font-size:${magnify}rem`}">
+							<div>
 								{@html $formatLatex(choice.text)}
 							</div>
 						{/if}
 					</button>
 				{/each}
 			</div>
-			{#if question.type === 'choices'}
-				<Button on:click="{commit.f}" variant="raised">
-					<Label>Valider</Label>
-				</Button>
-			{/if}
 		{/if}
 	{/each}
-	{#if answerFields}
+	{#if !correction && interactive && answerFields}
 		<div
-			id="{'answerFieldss' + (masked ? '-masked' : '')}"
+			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"
 		>
 			<div
-				id="{'answerFields' + (masked ? '-masked' : '')}"
+				id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 				class="my-3"
 				style="{`font-size:${magnify}rem`}"
 			>
@@ -485,11 +555,38 @@
 			</div>
 		</div>
 	{/if}
-	{#if interactive && fieldsNb > 1}
-		<div>
-			<button class="rounded-lg  m-2 p-1" on:click="{commit.f}">
-				Valider
-			</button>
+	{#if !correction && interactive && (question.type === 'choices' || fieldsNb > 1) && immediateCommit}
+		<Button
+			class="mt-3 p-1"
+			on:click="{() => {
+				commit.exec()
+			}}"
+			variant="raised"
+		>
+			<Label>Valider 2</Label>
+		</Button>
+	{/if}
+
+	{#if correction}
+		<div class="mt-3">
+			{#each simpleCorrection as line}
+				<div
+					class=" my-1 z-0 relative"
+					style="{`word-break: break-word ;white-space: normal;font-size:${
+						magnify === 1 ? 1.2 : magnify
+					}rem`}"
+				>
+					<CorrectionLine line="{line}" />
+				</div>
+			{/each}
 		</div>
+		
+		{#if coms && interactive}
+			<div>
+				{#each coms as com}
+					{@html com}
+				{/each}
+			</div>
+		{/if}
 	{/if}
 </div>

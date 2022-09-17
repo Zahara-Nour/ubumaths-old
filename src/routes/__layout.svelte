@@ -15,7 +15,7 @@
 	import { supabaseClient } from '$lib/supabase'
 	import { SupaAuthHelper } from '@supabase/auth-helpers-svelte'
 	import { selectDB } from '$lib/db'
-	import {dev } from '$app/env';
+	import { dev } from '$app/env'
 
 	let { info, fail, warn } = getLogger('Global layout', 'info')
 
@@ -38,7 +38,6 @@
 			},
 			false,
 		)
-		
 
 		import('tinymathlive/dist/mathlive.min.mjs')
 			.then((m) => {
@@ -100,7 +99,6 @@
 					classes: data.classes,
 					teacherId: data.teacherId,
 				}
-
 			} else {
 				fail('User not found.')
 			}
@@ -118,9 +116,6 @@
 
 	// on met à jour le profil utilisateur suivant l'état de connexion
 	$: updateUser($connected)
-	
-	
-	
 </script>
 
 <svelte:head>

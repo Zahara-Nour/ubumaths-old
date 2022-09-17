@@ -7,41 +7,46 @@
 	export let interactive = false
 	export let flashcard = false
 	export let showDescription = false
-	export let commit = {}
+	export let commit = null
 	export let magnify = 1
+	export let correction = false
+	export let immediateCommit = false
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
 
-	let hfront = 0
-	let hback = 0
-	let height
-	let init
+	let hfront_masked = 0 // height front masked
+	let hback_masked = 0 // width back masked
+	
+
+	let height // height for displayed card
+	let width = 0
+
+	let simpleCorrection = null
+	let detailedCorrection = null
 
 	async function updateHeight() {
-		// console.log('updateHeight')npm 
-		height = Math.max(hfront, hback)
+		// console.log('updateHeight')npm
+		height = Math.max(hfront_masked, hback_masked)
+		// console.log('updated height', height)
 		// console.log('height', height)
 	}
+
+	$: flashcard = !interactive
 
 	$: if (card) {
 		// console.log('changing card')
 		flip = false
-
-		// Kludge to trigger an updateHeight
-		// fontSize.update((size) => size + 1)
-		// fontSize.update((size) => size - 1)
 	}
 
-	// $: console.log('hback', hback)
-	// $: console.log('hfront', hfront)
+	// $: console.log('hback_masked', hback_masked)
+	// $: console.log('hfront_masked', hfront_masked)
 	// $: console.log('height', height)
-	// $: console.log('init', init)
-	$: if (flashcard && hfront && hback) {
+	$: if (flashcard && hfront_masked && hback_masked) {
 		updateHeight()
 	}
 
-	$: if (!flashcard && hfront) {
+	$: if (!flashcard && hfront_masked) {
 		updateHeight()
 	}
 
@@ -51,8 +56,8 @@
 	}
 </script>
 
-<div class="card" style="{height ? `height:${height}px` : ''}">
-	<div class="flipper" class:flip style="{height ? 'height:100%' : ''}">
+<div class="card" style="{height ? `height:${height}px;` : ''}">
+	<div class="flipper" class:flip style="{height ? 'height:100%;' : ''}">
 		<div class="front" style="{height ? 'height:100%' : ''}">
 			<FrontCard
 				card="{card}"
@@ -60,40 +65,56 @@
 				flashcard="{flashcard}"
 				showDescription="{showDescription}"
 				height="{height}"
-				interactive="{interactive}"
 				commit="{commit}"
 				magnify="{magnify}"
+				bind:interactive
+				bind:correction
+				bind:w="{width}"
+				bind:simpleCorrection
+				bind:detailedCorrection
+				immediateCommit={immediateCommit}
 			/>
 		</div>
 		{#if flashcard}
-			<div class="back" style="{height ? 'height:100%' : ''}">
+			<div class="back" style="{height ? 'height:100%;' : ''}">
 				<BackCard
 					card="{card}"
 					toggleFlip="{toggleFlip}"
-					flashcard="{flashcard}"
 					height="{height}"
 					magnify="{magnify}"
+					correction="{correction}"
+					showDescription="{showDescription}"
 				/>
 			</div>
 		{/if}
 	</div>
 </div>
 
-<div class="absolute" style="{'width:95vw;top:-100%;left:-100000%;'}">
+<div
+	class="absolute"
+	style="{(width ? `width:${width}px;` : '') + 'top:-100%;left:-100000%;'}"
+>
 	<!-- <div > -->
 	<FrontCard
 		card="{card}"
 		flashcard="{flashcard}"
 		showDescription="{showDescription}"
-		bind:h="{hfront}"
+		bind:h="{hfront_masked}"
 		masked="{true}"
 		interactive="{interactive}"
-		commit="{{}}"
 		magnify="{magnify}"
+		correction="{correction}"
+		immediateCommit={immediateCommit}
 	/>
 
 	{#if flashcard}
-		<BackCard card="{card}" bind:h="{hback}" magnify="{magnify}" />
+		<BackCard
+			card="{card}"
+			bind:h="{hback_masked}"
+			magnify="{magnify}"
+			correction="{correction}"
+			showDescription="{showDescription}"
+		/>
 	{/if}
 </div>
 

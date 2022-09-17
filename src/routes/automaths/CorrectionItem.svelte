@@ -1,41 +1,37 @@
 <script>
-  import {createCorrection, createDetailedCorrection} from './correctionItem'
+	import QuestionCard from '../../lib/components/QuestionCard.svelte'
+	import { createCorrection } from './correctionItem'
 	export let item
-	export let displayDetails
-	
 
-	let number,
-		coms,
-		image,
-		imageBase64P,
-		imageCorrection,
-		imageCorrectionBase64P
+	const { simpleCorrection:correction, coms } = item
+	export let magnify
 
-	let correction = createCorrection(item)
-	let detailedCorrection = item.correctionDetails && item.correctionDetails.length
-		? createDetailedCorrection(item)
-		: correction
-	// const validateFractions = checkFractions()
-
-	// if (seemsCorrect && !validateAnswer) {
-	//   coms.push(FORM)
-	// }
-	function updateItem() {
-		;({	
-			number,
-			coms,
-			image,
-			imageBase64P,
-			imageCorrection,
-			imageCorrectionBase64P,
-		} = item)
-	}
-
-	$: if (item) updateItem()
 </script>
 
 {#if correction}
-	<div
+	<div class="ml-3 grow flex flex-wrap ">
+		<div class="mr-3 mb-4 w-full"  style="word-break: break-word ;min-width: 100px;w-full; white-space: normal;">
+			<QuestionCard
+				card="{item}"
+				correction="{true}"
+				flashcard="{!!item.correctionDetails}"
+				magnify="{magnify}"
+			/>
+		</div>
+		<div>
+			{#if coms.length}
+				{#each coms as com}
+					<div
+						class=" mb-1 z-0 relative"
+						style="font-family: 'Handlee', cursive;"
+					>
+						{@html com}
+					</div>
+				{/each}
+			{/if}
+		</div>
+	</div>
+	<!-- <div
 		id="{`correction${number}`}"
 		style="word-break: break-word ;min-width: 0;white-space: normal;"
 	>
@@ -70,7 +66,7 @@
 		{/if}
 		{#if displayDetails && item.correctionDetails}
 			{#each detailedCorrection as line}
-				<div class="mb-1 z-0 relative" >
+				<div class="mb-1 z-0 relative">
 					{@html line}
 				</div>
 			{/each}
@@ -81,16 +77,7 @@
 				</div>
 			{/each}
 
-			{#if coms.length}
-				{#each coms as com}
-					<div
-						class=" mb-1 z-0 relative"
-						style="font-family: 'Handlee', cursive;"
-					>
-						{@html com}
-					</div>
-				{/each}
-			{/if}
+			
 		{/if}
-	</div>
+	</div> -->
 {/if}
