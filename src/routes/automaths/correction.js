@@ -623,7 +623,7 @@ export function assessItem(item) {
 	}
 
 	item.options = item.options || []
-	item.coms = item.coms || []
+	item.coms =  []
 
 	item.unoptimals = []
 

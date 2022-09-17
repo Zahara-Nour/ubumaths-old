@@ -124,6 +124,17 @@ export default function generateQuestion(
 		return variables
 	}
 
+	function replacement(_, p1, p2) {
+		const tests = p1.split('&&')
+		let text
+		if (tests.every((t) => math(t).eval().string === 'true')) {
+			text = p2
+		} else {
+			text = ''
+		}
+		return text
+	}
+
 	function replaceVariables(o) {
 		function replace(s) {
 			let result = s
@@ -529,15 +540,21 @@ export default function generateQuestion(
 	correct = evaluateToLatex(correct)
 	uncorrect = evaluateToLatex(uncorrect)
 	answer = evaluateToLatex(answer)
+
 	if (correctionFormat) {
+		const regex = /@@(.*?)\?\?(.*?)@@/g
+
 		correctionFormat = {
-			correct,
-			uncorrect:
-				uncorrect ||
-				correct.map((c) =>
-					c.replace(/&answer/g, '&solution').replace(/&ans/g, '&sol'),
-				),
-			answer: answer || correct[0],
+			correct: correct.map((c) => c.replace(regex, replacement)),
+			uncorrect: uncorrect
+				? uncorrect.map((u) => u.replace(regex, replacement))
+				: correct.map((c) =>
+						c
+							.replace(regex, replacement)
+							.replace(/&answer/g, '&solution')
+							.replace(/&ans/g, '&sol'),
+				  ),
+			answer: answer || correct.map((c) => c.replace(regex, replacement)).filter(m => !!m)[0],
 		}
 	}
 
@@ -554,8 +571,7 @@ export default function generateQuestion(
 					if (question.type === 'choices' || question.type === 'choice') {
 						success = success.value.toNumber()
 						failure = failure.value.toNumber()
-					}
-					else {
+					} else {
 						success = success.string
 						failure = failure.string
 					}
@@ -632,16 +648,6 @@ export default function generateQuestion(
 	if (correctionDetails) {
 		correctionDetails = correctionDetails.reduce((acc, d) => {
 			const regex = /@@(.*?)\?\?(.*?)@@/g
-			function replacement(_, p1, p2) {
-				const tests = p1.split('&&')
-				let text
-				if (tests.every((t) => math(t).eval().string === 'true')) {
-					text = p2
-				} else {
-					text = ''
-				}
-				return text
-			}
 
 			if (d.text) {
 				acc.push({ text: d.text.replace(regex, replacement) })

@@ -57,6 +57,4 @@
 			{@html line}
 		</span>
 	{/if}
-{:else}
-	ligne vide
 {/if}

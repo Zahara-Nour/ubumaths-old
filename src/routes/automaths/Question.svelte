@@ -37,6 +37,7 @@
 	let inputListeners = []
 	let changeListeners = []
 	let fieldsNb = 0
+	let coms
 
 	// console.log('context', params)
 
@@ -236,6 +237,8 @@
 		if (interactive) {
 			const item = { ...question, answers, answers_latex }
 			assessItem(item)
+			coms = item.coms
+			console.log('coms', coms)
 			simpleCorrection = item.simpleCorrection
 		} else if (question.simpleCorrection) {
 			simpleCorrection = question.simpleCorrection
@@ -552,8 +555,14 @@
 			</div>
 		</div>
 	{/if}
-	{#if !correction  && interactive && (question.type === 'choices' || fieldsNb > 1) && immediateCommit}
-		<Button class="mt-3 p-1" on:click="{()=> {commit.exec()}}" variant="raised">
+	{#if !correction && interactive && (question.type === 'choices' || fieldsNb > 1) && immediateCommit}
+		<Button
+			class="mt-3 p-1"
+			on:click="{() => {
+				commit.exec()
+			}}"
+			variant="raised"
+		>
 			<Label>Valider 2</Label>
 		</Button>
 	{/if}
@@ -571,5 +580,13 @@
 				</div>
 			{/each}
 		</div>
+		
+		{#if coms && interactive}
+			<div>
+				{#each coms as com}
+					{@html com}
+				{/each}
+			</div>
+		{/if}
 	{/if}
 </div>

@@ -186,6 +186,7 @@ export default {
           {
             class: 'action',
             label: '<b>\u23ce</b>',
+            // label:"<svg><use xlink:href='#svg-commit' /></svg>",
             command: ["performWithFeedback", "commit"]
           },
         ],
