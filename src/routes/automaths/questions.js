@@ -738,7 +738,7 @@ const questions = {
 					expressions: ['&1+1'],
 					variables: [{ '&1': '$e[0;9]' }],
 
-					defaultDelay: 15,
+					defaultDelay: 55,
 					grade: CP,
 				},
 				{

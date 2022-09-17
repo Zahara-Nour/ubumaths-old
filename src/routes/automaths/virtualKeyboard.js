@@ -37,15 +37,15 @@ export default {
           {
             class: 'keycap tex',
             insert: '$$#@^{2}$$',
-            label: '<span><i>x</i>&thinsp;²</span>',
+            latex: '$${#0}^{2}$$',
           },
           {
             class: 'keycap tex',
-            insert: '$$#@^{}$$',
-            label: '<span><i>x</i><sup>&thinsp;<i>n</i></sup></span>',
+            insert: '$$#@^{#0}$$',
+            latex:'x^\\placeholder'
           },
           {
-            class: 'keycap tex',
+            class: 'keycap tex small',
             insert: '$$\\sqrt{#0}$$',
             latex: '\\sqrt{#0}',
           },
@@ -133,9 +133,12 @@ export default {
           },
          
           {
-            class: 'action font-glyph bottom right',
+            // class: 'action font-glyph bottom right',
             command: ['performWithFeedback', 'deleteBackward'],
-            label: '<b>&#x232b;</b>',
+            // label: '<b>&#x232b;</b>',
+            class: 'action svg-glyph',
+            // command: ["performWithFeedback","moveToPreviousChar"],
+            label:"<svg><use xlink:href='#svg-delete-backward' /></svg>"
           },
           {
             class: 'separator w6',
@@ -174,19 +177,19 @@ export default {
             class: 'separator w5',
           },
           {
-            class: 'action',
+            class: 'action svg-glyph',
             command: ["performWithFeedback","moveToPreviousChar"],
             label:"<svg><use xlink:href='#svg-arrow-left' /></svg>"
           },
           {
-            class: 'action',
+            class: 'action svg-glyph',
             command: ["performWithFeedback","moveToNextChar"],
             label:"<svg><use xlink:href='#svg-arrow-right' /></svg>"
           },
           {
-            class: 'action',
-            label: '<b>\u23ce</b>',
-            // label:"<svg><use xlink:href='#svg-commit' /></svg>",
+            class: 'action svg-glyph',
+            // label: '<b>\u23ce</b>',
+            label:"<svg><use xlink:href='#svg-commit' /></svg>",
             command: ["performWithFeedback", "commit"]
           },
         ],

@@ -410,6 +410,8 @@
 					elt.appendChild(mfe)
 					elt.style.display = 'inline-block'
 					elt.style.minWidth = '2em'
+					mfe.style.overflow = 'unset'
+					mfe.style.padding = '10px'
 					elt.style.border = '2px dashed grey'
 					elt.style.borderRadius = '5px'
 					// const i = mfs.length - 1
@@ -490,6 +492,7 @@
 				<div
 					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
 					class="{correction ? 'my-1' : 'my-3'}"
+					style='display:flex; align-items: baseline;'
 				>
 					{@html expression}
 				</div>

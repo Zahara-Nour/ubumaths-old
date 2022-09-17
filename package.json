@@ -64,7 +64,7 @@
 		"svelte-confetti": "^1.2.0",
 		"svelte-viewport-info": "^1.0.0",
 		"tinycas": "^0.8.14",
-		"tinymathlive": "^0.73.8",
+		"tinymathlive": "^0.79.0",
 		"xstate": "^4.33.1"
 	}
 }
