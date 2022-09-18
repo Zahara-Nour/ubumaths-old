@@ -12,19 +12,19 @@
 	export let toggleFlip = () => {}
 	export let card
 	export let showDescription
-	export let flashcard
 	export let height = 0
 	export let width = 0
 	export let h = 0
 	export let w = 0
 	export let masked = false
 	export let interactive
-	export let commit
+	export let commit = null
 	export let magnify
 	export let correction
 	export let simpleCorrection = null
 	export let detailedCorrection = null
 	export let immediateCommit = false
+	export let flashcard
 
 	$: description = $formatLatex(card.description)
 	$: subdescription = $formatLatex(card.subdescription)
@@ -103,7 +103,7 @@
 					
 				/>
 			</Content>
-			{#if !interactive && !(correction && (!card.correctionDetails || !card.correctionDetails.length))}
+			{#if flashcard}
 				<div class=" flex justify-end">
 					<Fab color="secondary" on:click="{toggleFlip}" mini>
 						<Icon component="{Svg}" viewBox="2 2 20 20">

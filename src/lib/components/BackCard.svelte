@@ -7,10 +7,6 @@
 	import Paper from '@smui/paper'
 	import { formatLatex } from '$lib/stores'
 	import { mdc_colors } from '$lib/colors'
-	import {
-		createDetailedCorrection,
-		createCorrection,
-	} from '../../routes/automaths/correctionItem'
 	import { correct_color } from '../colors'
 	import CorrectionLine from '../../routes/automaths/CorrectionLine.svelte'
 
@@ -22,6 +18,8 @@
 	export let width = 0
 	export let magnify
 	export let correction
+	export let detailedCorrection = null
+	export let simpleCorrection =  null
 
 	function getSolution(card) {
 		let nSol = -1
@@ -78,15 +76,10 @@
 		return s
 	}
 
-	$: description = $formatLatex(card.description)
-	$: subdescription = $formatLatex(card.subdescription)
 	$: solution = $formatLatex(getSolution(card))
-	$: details = card.detailedCorrection
-		? card.detailedCorrection
-		: card.simpleCorrection
-		? card.simpleCorrection
-		: []
+	$: details = detailedCorrection ? detailedCorrection : simpleCorrection ? simpleCorrection : []
 	$: console.log('details', details)
+	$: console.log('card modified', {...card})
 </script>
 
 <div bind:clientHeight="{h}" bind:clientWidth="{w}">

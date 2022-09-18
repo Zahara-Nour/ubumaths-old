@@ -71,7 +71,6 @@
 			.replace(/\/\((\d+(,\d+)*)\)/g, (_, p1) => '/' + p1)
 			.replace(/\/\(([a-z])\)/g, (_, p1) => '/' + p1)
 			.trim()
-		trace(`answer latex: ${answers_latex[i]} asccii: ${answers[i]}`, answers)
 	}
 
 	function removeListeners() {
@@ -99,7 +98,6 @@
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
 			if (mfs.length === 1 && immediateCommit) {
 				// removeListeners ????
-				console.log('commit', commit)
 				commit.exec()
 			} else {
 				mfs[(i + 1) % mfs.length].focus()
@@ -195,7 +193,7 @@
 		expression2 = question.expression2_latex
 
 		if (interactive) {
-			if (expression && question.type === 'result') {
+			if (expression && question.type === 'result' && !question.answerFields) {
 				expression += '=\\ldots'
 			}
 
@@ -238,20 +236,21 @@
 			const item = { ...question, answers, answers_latex }
 			assessItem(item)
 			coms = item.coms
-			console.log('coms', coms)
 			simpleCorrection = item.simpleCorrection
+			console.log('make correction')
 		} else if (question.simpleCorrection) {
 			simpleCorrection = question.simpleCorrection
 		} else {
 			const q = question
 			assessItem(q)
 			simpleCorrection = q.simpleCorrection
+			detailedCorrection = q.detailedCorrection
+			console.log('make correction not interactive')
 		}
 	}
 
 	function commitAnswers() {
 		// pour prévenir un update de question
-		console.log('commitAnswer')
 		const q = question
 		q.answers = answers
 		q.answers_latex = answers_latex
@@ -265,7 +264,7 @@
 		expression = question.expression_latex
 		expression2 = question.expression2_latex
 
-		if (expression && question.type === 'result') {
+		if (expression && question.type === 'result' && !question.answerFields) {
 			expression += '=\\ldots'
 		}
 
@@ -411,7 +410,8 @@
 					elt.style.display = 'inline-block'
 					elt.style.minWidth = '2em'
 					mfe.style.overflow = 'unset'
-					mfe.style.padding = '10px'
+					mfe.style.paddingLeft = '2px'
+					mfe.style.paddingRight = '2px'
 					elt.style.border = '2px dashed grey'
 					elt.style.borderRadius = '5px'
 					// const i = mfs.length - 1
@@ -444,11 +444,10 @@
 	} else {
 		commit = { exec: commitAnswers }
 	}
-	console.log('commit', commit)
 </script>
-
 <div class="flex flex-col items-center justify-around">
 	{#each question.order_elements as element}
+
 		{#if element === 'enounce' && enounce}
 			<div
 				id="enounce"
@@ -481,18 +480,18 @@
 			{:catch error}
 				{error}
 			{/await}
-		{:else if element === 'expression' && expression && (!correction || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
+		{:else if element === 'expression' && expression && (!correction || question.answerFields || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
 			<div
 				id="expressions"
 				class=" flex flex-col items-center justify-center"
-				style="{`font-size:${
+				style="{`max-width:100%;font-size:${
 					correction ? 1 : magnify === 1 ? 2 : magnify * 1.5
 				}rem;` + (correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				<div
 					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
 					class="{correction ? 'my-1' : 'my-3'}"
-					style='display:flex; align-items: baseline;'
+					style='display:flex; align-items: baseline;max-width:100%'
 				>
 					{@html expression}
 				</div>
@@ -593,3 +592,9 @@
 		{/if}
 	{/if}
 </div>
+
+<style>
+	math-field {
+		min-height: 200px;
+	}
+</style>

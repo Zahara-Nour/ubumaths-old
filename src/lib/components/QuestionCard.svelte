@@ -17,7 +17,6 @@
 
 	let hfront_masked = 0 // height front masked
 	let hback_masked = 0 // width back masked
-	
 
 	let height // height for displayed card
 	let width = 0
@@ -32,7 +31,9 @@
 		// console.log('height', height)
 	}
 
-	$: flashcard = !interactive
+	$: flashcard =
+		!interactive &&
+		!(correction && (!card.correctionDetails || !card.correctionDetails.length))
 
 	$: if (card) {
 		// console.log('changing card')
@@ -72,7 +73,7 @@
 				bind:w="{width}"
 				bind:simpleCorrection
 				bind:detailedCorrection
-				immediateCommit={immediateCommit}
+				immediateCommit="{immediateCommit}"
 			/>
 		</div>
 		{#if flashcard}
@@ -84,6 +85,8 @@
 					magnify="{magnify}"
 					correction="{correction}"
 					showDescription="{showDescription}"
+					simpleCorrection="{simpleCorrection}"
+					detailedCorrection="{detailedCorrection}"
 				/>
 			</div>
 		{/if}
@@ -104,7 +107,7 @@
 		interactive="{interactive}"
 		magnify="{magnify}"
 		correction="{correction}"
-		immediateCommit={immediateCommit}
+		immediateCommit="{immediateCommit}"
 	/>
 
 	{#if flashcard}
@@ -114,6 +117,8 @@
 			magnify="{magnify}"
 			correction="{correction}"
 			showDescription="{showDescription}"
+			simpleCorrection="{simpleCorrection}"
+			detailedCorrection="{detailedCorrection}"
 		/>
 	{/if}
 </div>

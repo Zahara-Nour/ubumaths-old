@@ -133,8 +133,8 @@ export function createCorrection(item) {
 					line = `<img src='${img}' style="max-width:400px;max-height:40vh;" alt='toto'>`
 				} else {
 					line = format
-						.replace(new RegExp('&exp2', 'g'), expression2_latex)
-						.replace(new RegExp('&exp', 'g'), expression_latex)
+						.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+						.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexAnswer, replaceAnswerCorrect)
 						.replace(regexAns, replaceAnsCorrect)
 				}
@@ -148,8 +148,8 @@ export function createCorrection(item) {
 					line = `<img style="max-width:400px;max-height:40vh;" src='${img}' alt='toto'>`
 				} else {
 					line = format
-						.replace(new RegExp('&exp2', 'g'), expression2_latex)
-						.replace(new RegExp('&exp', 'g'), expression_latex)
+						.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+						.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexSolution, replaceSolution)
 						.replace(regexSol, replaceSol)
 				}
@@ -169,8 +169,8 @@ export function createCorrection(item) {
 					coms.unshift(
 						'Ta réponse : ' +
 							correctionFormat.answer
-								.replace(new RegExp('&exp2', 'g'), expression2_latex)
-								.replace(new RegExp('&exp', 'g'), expression_latex)
+								.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+								.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 
 								.replace(regexAnswer, replaceAnswerUncorrect)
 								.replace(regexAns, replaceAnsUncorrect),
@@ -386,8 +386,8 @@ export function createDetailedCorrection(item) {
 			line = `<img src='${img}' style="max-width:400px;max-height:40vh;" alt='toto'>`
 		} else {
 			line = detail.text
-				.replace(new RegExp('&exp2', 'g'), expression2_latex)
-				.replace(new RegExp('&exp', 'g'), expression_latex)
+				.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+				.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 				.replace(regexSolution, replaceSolution)
 				.replace(regexSol, replaceSol)
 				.replace(

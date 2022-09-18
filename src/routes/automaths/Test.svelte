@@ -176,13 +176,7 @@
 		generatedExemple = generate(question)
 	}
 
-	function onChoice(choice) {
-		change()
-	}
 
-	function onChoices(choice) {
-		change()
-	}
 
 	function beginTest() {
 		showExemple = false
@@ -319,10 +313,6 @@
 			query="{location.search}"
 			classroom="{classroom}"
 			bind:restart
-			theme="{theme}"
-			domain="{domain}"
-			subdomain="{subdomain}"
-			level="{level}"
 		/>
 	{:else}
 		<div style="height:90vh" class="flex justify-center items-center">
@@ -360,7 +350,6 @@
 				<div class=" p-2 elevation-{4} rounded-lg">
 					<QuestionCard
 						card="{card}"
-						onChoice="{onChoice}"
 						interactive="{true}"
 						commit="{(() => {
 							const c = { ...commit }
@@ -427,7 +416,6 @@
 					{#each [cards[current]] as card (current)}
 							<QuestionCard
 								card="{card}"
-								onChoice="{onChoice}"
 								interactive="{!classroom}"
 								commit="{commit}"
 								magnify="{classroom ? 2.5 : 1}"
