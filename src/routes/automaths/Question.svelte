@@ -399,6 +399,7 @@
 						inlineShortcuts: {
 							xx: {},
 						},
+						keypressSound:null,
 						keypressVibration: false,
 						removeExtraneousParentheses: false,
 						smartFence: false,
