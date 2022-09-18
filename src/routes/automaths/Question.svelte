@@ -75,18 +75,25 @@
 
 	function removeListeners() {
 		console.log('removing listeners')
-		// keyListeners.forEach((listener, i) =>
-		// 	mfs[i].removeEventListener('key', listener),
-		// )
-		// inputListeners.forEach((listener, i) =>
-		// 	mfs[i].removeEventListener('input', listener),
-		// )
-		// changeListeners.forEach((listener, i) =>
-		// 	mfs[i].removeEventListener('change', listener),
-		// )
-		// keyListeners = []
-		// inputListeners = []
-		// changeListeners = []
+		keyListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('key', listener),
+		)
+		inputListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('input', listener),
+		)
+		changeListeners.forEach((listener, i) =>
+			mfs[i].removeEventListener('change', listener),
+		)
+		keyListeners = []
+		inputListeners = []
+		changeListeners = []
+		if (mfs) {
+			mfs.forEach((mf) => {
+				if (mf.hasFocus()) {
+					mf.blur()
+				}
+			})
+		}
 	}
 
 	// onChange est appelée quand :
@@ -151,8 +158,8 @@
 		} else if (key === ':') {
 			ev.preventDefault()
 			mf.insert('\\div ')
-		// } 
-		 } else if (
+			// }
+		} else if (
 			!key_allowed.includes(key) &&
 			!key_allowed2.includes(key) &&
 			!keystroke_allowed.includes(keystroke)
@@ -401,7 +408,7 @@
 					if (answers_latex[i]) {
 						mfe.value = answers_latex[i]
 					}
-					
+
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -416,7 +423,7 @@
 					// const i = mfs.length - 1
 					if (!masked) {
 						console.log('creating Listeners')
-						
+
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)
 						const changeListener = (ev) => onChange(ev, i)
@@ -448,9 +455,9 @@
 		commit = { exec: commitAnswers }
 	}
 </script>
+
 <div class="flex flex-col items-center justify-around">
 	{#each question.order_elements as element}
-
 		{#if element === 'enounce' && enounce}
 			<div
 				id="enounce"
@@ -494,7 +501,7 @@
 				<div
 					id="{`expression-${question.num}${masked ? '-masked' : ''}`}"
 					class="{correction ? 'my-1' : 'my-3'}"
-					style='display:flex; align-items: baseline;max-width:100%'
+					style="display:flex; align-items: baseline;max-width:100%"
 				>
 					{@html expression}
 				</div>
@@ -585,7 +592,7 @@
 				</div>
 			{/each}
 		</div>
-		
+
 		{#if coms && interactive}
 			<div>
 				{#each coms as com}
