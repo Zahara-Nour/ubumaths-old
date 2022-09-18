@@ -19426,12 +19426,7 @@ const questions = {
 							'&1': '$er[0;9]',
 						},
 					],
-					correctionFormat: [
-						{
-							correct: ['$$&exp=$$&answer'],
-							answer: " $$&exp=$$&answer'",
-						},
-					],
+			
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -19463,11 +19458,7 @@ const questions = {
 							'&4': '$d{1;1}',
 						},
 					],
-					correctionFormat: [
-						{
-							correct: ['&exp=&answer'],
-						},
-					],
+				
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -19482,11 +19473,7 @@ const questions = {
 							'&2': '$er[1;9]',
 						},
 					],
-					correctionFormat: [
-						{
-							correct: ['&exp=&answer'],
-						},
-					],
+				
 					correctionDetails: [
 						[
 							{
@@ -19515,11 +19502,7 @@ const questions = {
 						},
 					],
 					solutions: [['&1>&2^2 ?? sqrt(&1)-&2 :: &2-sqrt(&1)']],
-					correctionFormat: [
-						{
-							correct: ['&exp$$=$$&answer'],
-						},
-					],
+					
 					correctionDetails: [
 						[
 							{
