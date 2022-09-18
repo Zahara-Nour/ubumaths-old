@@ -75,6 +75,13 @@
 
 	function removeListeners() {
 		console.log('removing listeners')
+		if (mfs) {
+			mfs.forEach((mf) => {
+				if (mf.hasFocus()) {
+					mf.blur()
+				}
+			})
+		}
 		keyListeners.forEach((listener, i) =>
 			mfs[i].removeEventListener('key', listener),
 		)
@@ -87,13 +94,7 @@
 		keyListeners = []
 		inputListeners = []
 		changeListeners = []
-		if (mfs) {
-			mfs.forEach((mf) => {
-				if (mf.hasFocus()) {
-					mf.blur()
-				}
-			})
-		}
+		
 	}
 
 	// onChange est appelée quand :
@@ -107,9 +108,10 @@
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
 			if (mfs.length === 1 && immediateCommit) {
 				// removeListeners ????
+				removeListeners()
 				commit.exec()
 			} else {
-				mfs[(i + 1) % mfs.length].focus()
+				// mfs[(i + 1) % mfs.length].focus()
 			}
 		}
 	}
@@ -342,9 +344,7 @@
 
 	onDestroy(() => {
 		removeListeners()
-		if (mfs) {
-			mfs.forEach((mfe) => mfe.blur())
-		}
+		
 	})
 
 	afterUpdate(() => {

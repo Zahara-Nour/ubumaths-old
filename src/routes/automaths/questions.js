@@ -19497,8 +19497,7 @@ const questions = {
 					],
 					correctionFormat: [
 						{
-							correct: ['$$&exp=$$&answer'],
-							answer: " $$&exp=$$&answer'",
+							correct: ['&exp=&answer'],
 						},
 					],
 					defaultDelay: 20,
@@ -19518,8 +19517,7 @@ const questions = {
 					solutions: [['&1>&2^2 ?? sqrt(&1)-&2 :: &2-sqrt(&1)']],
 					correctionFormat: [
 						{
-							correct: ['$$&exp=$$&answer'],
-							answer: " $$&exp=$$&answer'",
+							correct: ['&exp=&answer'],
 						},
 					],
 					defaultDelay: 20,
