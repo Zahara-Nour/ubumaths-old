@@ -74,18 +74,19 @@
 	}
 
 	function removeListeners() {
-		keyListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('key', listener),
-		)
-		inputListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('input', listener),
-		)
-		changeListeners.forEach((listener, i) =>
-			mfs[i].removeEventListener('change', listener),
-		)
-		keyListeners = []
-		inputListeners = []
-		changeListeners = []
+		console.log('removing listeners')
+		// keyListeners.forEach((listener, i) =>
+		// 	mfs[i].removeEventListener('key', listener),
+		// )
+		// inputListeners.forEach((listener, i) =>
+		// 	mfs[i].removeEventListener('input', listener),
+		// )
+		// changeListeners.forEach((listener, i) =>
+		// 	mfs[i].removeEventListener('change', listener),
+		// )
+		// keyListeners = []
+		// inputListeners = []
+		// changeListeners = []
 	}
 
 	// onChange est appelée quand :
@@ -93,6 +94,7 @@
 	//  (même si le mathfield est vide)
 	// - quand le mathfield perd le focus et que le contenu a changé
 	function onChange(ev, i) {
+		console.log('onChange')
 		if (mfs[i].hasFocus()) {
 			// TODO: empêcher le commit quand le mathfield est vide
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
@@ -106,11 +108,13 @@
 	}
 
 	function onInput(ev, i) {
+		console.log('onInput')
 		recordAnswer(i)
 	}
 
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
+		console.log('onKeystroke', ev)
 		const mf = mfs[i]
 		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
 		const key_allowed2 = [
@@ -120,13 +124,13 @@
 			'ArrowDown',
 			'ArrowUp',
 		]
-		const keystroke_allowed = ['[Enter]', '[NumpadEnter]']
+		const keystroke_allowed = ['Enter', 'NumpadEnter']
 
-		const keystroke = ev.detail.keystroke
-		const key = ev.detail.event.key
+		const keystroke = ev.code
+		const key = ev.key
 
 		if (
-			keystroke === '[Space]' &&
+			keystroke === 'Space' &&
 			!(
 				answers_latex[i] &&
 				answers_latex[i].length >= 2 &&
@@ -147,10 +151,8 @@
 		} else if (key === ':') {
 			ev.preventDefault()
 			mf.insert('\\div ')
-		} else if (key === '<') {
-			ev.preventDefault()
-			mf.insert('<')
-		} else if (
+		// } 
+		 } else if (
 			!key_allowed.includes(key) &&
 			!key_allowed2.includes(key) &&
 			!keystroke_allowed.includes(keystroke)
@@ -237,7 +239,6 @@
 			assessItem(item)
 			coms = item.coms
 			simpleCorrection = item.simpleCorrection
-			console.log('make correction')
 		} else if (question.simpleCorrection) {
 			simpleCorrection = question.simpleCorrection
 		} else {
@@ -245,7 +246,6 @@
 			assessItem(q)
 			simpleCorrection = q.simpleCorrection
 			detailedCorrection = q.detailedCorrection
-			console.log('make correction not interactive')
 		}
 	}
 
@@ -401,8 +401,7 @@
 					if (answers_latex[i]) {
 						mfe.value = answers_latex[i]
 					}
-					mfe.addEventListener('focus', manageFocus)
-					mfe.addEventListener('blur', manageFocus)
+					
 					mfs.push(mfe)
 					// answers.push('')
 					// answers_latex.push('')
@@ -416,15 +415,19 @@
 					elt.style.borderRadius = '5px'
 					// const i = mfs.length - 1
 					if (!masked) {
+						console.log('creating Listeners')
+						
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)
 						const changeListener = (ev) => onChange(ev, i)
 						keyListeners.push(keyListener)
 						inputListeners.push(inputListener)
 						changeListeners.push(changeListener)
-						mfe.addEventListener('keystroke', keyListener)
+						mfe.addEventListener('keydown', keyListener)
 						mfe.addEventListener('input', inputListener)
 						mfe.addEventListener('change', changeListener)
+						mfe.addEventListener('focus', manageFocus)
+						mfe.addEventListener('blur', manageFocus)
 					}
 					added = true
 				}
