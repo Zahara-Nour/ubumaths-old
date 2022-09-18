@@ -19410,7 +19410,6 @@ const questions = {
 								text: "Si $$x$$ est <b>négatif</b>, quand je lui soustrais le nombre $$[_-(&2)_]$$, j'obtiens une expression &solution.",
 							},
 						],
-						
 					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
@@ -19448,25 +19447,13 @@ const questions = {
 						'abs(&4)',
 						'abs(-&4)',
 					],
-					solutions:[
-						 [
-							'[_abs(&1/&2)_]',
-						 ],
-						 [
-							'[_abs(-&1/&2)_]',
-						],
-						[
-							'[_abs(sqrt(&3))_]',
-						],
-						[
-							'[_abs(-sqrt(&3))_]',
-						],
-						[
-							'[._abs(&4)_]',
-						],
-						[
-							'[._abs(-&4)_]',
-						],
+					solutions: [
+						['[_abs(&1/&2)_]'],
+						['[_abs(-&1/&2)_]'],
+						['[_abs(sqrt(&3))_]'],
+						['[_abs(-sqrt(&3))_]'],
+						['[._abs(&4)_]'],
+						['[._abs(-&4)_]'],
 					],
 					variables: [
 						{
@@ -19500,9 +19487,22 @@ const questions = {
 							correct: ['&exp=&answer'],
 						},
 					],
+					correctionDetails: [
+						[
+							{
+								text: '&exp$$=\\left\\lvert [_&1+(&2)_] \\right\\rvert=$$&solution',
+							},
+						],
+						[
+							{
+								text: '&exp$$=\\left\\lvert [_&1*(&2)_] \\right\\rvert=$$&solution',
+							},
+						],
+					],
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
+
 				{
 					description: "Calculer la valeur d'une valeur absolue",
 					subdescription: "D'une expression dont il faut étudier le signe",
@@ -19517,8 +19517,19 @@ const questions = {
 					solutions: [['&1>&2^2 ?? sqrt(&1)-&2 :: &2-sqrt(&1)']],
 					correctionFormat: [
 						{
-							correct: ['&exp=&answer'],
+							correct: ['&exp$$=$$&answer'],
 						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: '@@ &1>&2^2 ?? $$\\sqrt{&1} \\gt &2$$ donc $$\\sqrt{&1}-&2 \\gt 0$$ et &exp$$=$$&solution @@',
+							},
+							{
+								text: '@@ &1<&2^2 ?? $$\\sqrt{&1} \\lt &2$$ donc $$\\sqrt{&1}-&2 \\lt 0$$ et &exp$$=$$&solution @@',
+							},
+						],
+						
 					],
 					defaultDelay: 20,
 					grade: SECONDE,
