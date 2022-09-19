@@ -74,7 +74,6 @@
 	}
 
 	function removeListeners() {
-		console.log('removing listeners')
 		if (mfs) {
 			mfs.forEach((mf) => {
 				if (mf.hasFocus()) {
@@ -102,7 +101,6 @@
 	//  (même si le mathfield est vide)
 	// - quand le mathfield perd le focus et que le contenu a changé
 	function onChange(ev, i) {
-		console.log('onChange')
 		if (mfs[i].hasFocus()) {
 			// TODO: empêcher le commit quand le mathfield est vide
 			// la touche entrée a été appuyée et il n'y a qu'un seul mathfield, on commit
@@ -117,13 +115,11 @@
 	}
 
 	function onInput(ev, i) {
-		console.log('onInput')
 		recordAnswer(i)
 	}
 
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
-		console.log('onKeystroke', ev)
 		const mf = mfs[i]
 		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
 		const key_allowed2 = [
@@ -290,7 +286,6 @@
 			answerFields = $formatLatex(
 				answerFields.replace(/\?/g, '\\ldots'),
 			).replace(/…/g, addMathfield)
-			console.log('answerFields', answerFields)
 		}
 		if (expression) {
 			expression = $toMarkup(expression).replace(/…/g, addMathfield)

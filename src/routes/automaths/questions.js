@@ -19426,7 +19426,7 @@ const questions = {
 							'&1': '$er[0;9]',
 						},
 					],
-			
+
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -19458,7 +19458,7 @@ const questions = {
 							'&4': '$d{1;1}',
 						},
 					],
-				
+
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -19473,7 +19473,7 @@ const questions = {
 							'&2': '$er[1;9]',
 						},
 					],
-				
+
 					correctionDetails: [
 						[
 							{
@@ -19502,7 +19502,7 @@ const questions = {
 						},
 					],
 					solutions: [['&1>&2^2 ?? sqrt(&1)-&2 :: &2-sqrt(&1)']],
-					
+
 					correctionDetails: [
 						[
 							{
@@ -19512,14 +19512,14 @@ const questions = {
 								text: '@@ &1<&2^2 ?? $$\\sqrt{&1} \\lt &2$$ donc $$\\sqrt{&1}-&2 \\lt 0$$ et &exp$$=$$&solution @@',
 							},
 						],
-						
 					],
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
 				{
-					description: "Calculer une valeur absolue",
-					subdescription: "Valeur absolue d'une expression littérale dont il faut étudier le signe",
+					description: 'Calculer une valeur absolue',
+					subdescription:
+						"Valeur absolue d'une expression littérale dont il faut étudier le signe",
 					enounces: [
 						'Calculer cette expression si $$x \\ge 0$$.',
 						'Calculer cette expression si $$x \\le 0$$.',
@@ -19538,7 +19538,7 @@ const questions = {
 						'abs(x+&1)',
 						'abs(x+&1)',
 						'abs(x&2)',
-						'abs(x&2)'
+						'abs(x&2)',
 					],
 					variables: [
 						{
@@ -19546,7 +19546,7 @@ const questions = {
 							'&2': '-$e[1;3]',
 						},
 					],
-				
+
 					solutions: [
 						['[_&1x_]'],
 						['[_-&1x_]'],
@@ -19560,57 +19560,56 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: "@@ &1=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@",
+								text: '@@ &1=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@',
 							},
 							{
-								text: "@@ &1!=1 ?? $$x \\ge 0$$ donc $$&1x \\ge 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@",
+								text: '@@ &1!=1 ?? $$x \\ge 0$$ donc $$&1x \\ge 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@',
 							},
 						],
 						[
 							{
-								text: "@@ &1=1 ?? $$x \\le 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@",
+								text: '@@ &1=1 ?? $$x \\le 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@',
 							},
 							{
-								text: "@@ &1!=1 ?? $$x \\le 0$$ donc $$&1x \\le 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@",
+								text: '@@ &1!=1 ?? $$x \\le 0$$ donc $$&1x \\le 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@',
 							},
 						],
 						[
 							{
-								text: "@@ &2=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@",
+								text: '@@ &2=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@',
 							},
 							{
-								text: "@@ &2!=1 ?? $$x \\ge 0$$ donc $$&2x \\le 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@",
+								text: '@@ &2!=1 ?? $$x \\ge 0$$ donc $$&2x \\le 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@',
 							},
 						],
 						[
 							{
-								text: "@@ &2=-1 ?? $$x \\le 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@",
+								text: '@@ &2=-1 ?? $$x \\le 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@',
 							},
 							{
-								text: "@@ &2!=-1 ?? $$x \\le 0$$ donc $$&2x \\ge 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@",
+								text: '@@ &2!=-1 ?? $$x \\le 0$$ donc $$&2x \\ge 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@',
 							},
 						],
 						[
 							{
-								text: " $$x \\ge -&1$$ donc $$x+&1 \\ge 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution",
+								text: ' $$x \\ge -&1$$ donc $$x+&1 \\ge 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution',
 							},
 						],
 						[
 							{
-								text: " $$x \\le -&1$$ donc $$x+&1 \\le 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution",
+								text: ' $$x \\le -&1$$ donc $$x+&1 \\le 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution',
 							},
 						],
 						[
 							{
-								text: " $$x \\ge [_-(&2)_]$$ donc $$x&2 \\ge 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution",
+								text: ' $$x \\ge [_-(&2)_]$$ donc $$x&2 \\ge 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution',
 							},
 						],
 						[
 							{
-								text: " $$x \\le [_-(&2)_]$$ donc $$x&2 \\le 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution",
+								text: ' $$x \\le [_-(&2)_]$$ donc $$x&2 \\le 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution',
 							},
 						],
-					
 					],
 					defaultDelay: 20,
 					grade: SECONDE,
@@ -19668,6 +19667,145 @@ const questions = {
 					defaultDelay: 20,
 					options: ['solutions-order-not-important'],
 					grade: SECONDE,
+				},
+			],
+		},
+		'Polynôme du second degré': {
+			Apprivoiser: [
+				{
+					description: "Reconnaître la forme d'une expression du second degré",
+					enounces: [
+						'Quelle est la forme de cettre expression du second degré ?',
+					],
+					expressions: [
+						'[_&1x^2_][+_&2x_][+_&3_]',
+						'&1(x[+_&2_])(x[+_&3_])',
+						'&1(x[+_&2_])^2[+_&3_]',
+					],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					choices: [
+						[
+							{ text: 'développée' },
+							{ text: 'factorisée' },
+							{ text: 'canonique' },
+						],
+					],
+					type: 'choice',
+					solutions: [[0], [1], [2]],
+
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: '',
+					enounces: [
+						'Quel est le coefficient du terme de degré 2 dans cette expression  ?',
+					],
+					expressions: [
+						'[_&1x^2_][+_&2x_][+_&3_]',
+						'&1(x[+_&2_])(x[+_&3_])',
+						'&1(x[+_&2_])^2[+_&3_]',
+						'([_&4x_][+_&2_])([_&5x_][+_&3_])',
+						'&1([_&4x_][+_&2_])([_&5x_][+_&3_])',
+					],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+							'&4': '$er[1;5]',
+							'&5': '$er[1;5]',
+						},
+					],
+					correctionFormat: [
+						{
+							correct: ['Le coefficient est &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `L'expression est sous la forme développée. Le coefficient du terme de degré 2 se lit directement dans $$\\bold{\\textcolor{${color1}}{&1}}x^2[+_&2x_][+_&3_]$$. C'est donc &solution`,
+							},
+						],
+						[
+							{
+								text: `L'expression est sous la forme factorisée. Le coefficient du terme de degré 2 se lit directement dans $$\\bold{\\textcolor{${color1}}{&1}}(x[+_&2_])(x[+_&3_])$$. C'est donc &solution`,
+							},
+						],
+						[
+							{
+								text: `L'expression est sous la forme canonique. Le coefficient du terme de degré 2 se lit directement dans $$\\bold{\\textcolor{${color1}}{&1}}(x[+_&2_])^2[+_&3_]$$. C'est donc &solution`,
+							},
+						],
+						[
+							{
+								text: `Attention, l'expression n'est pas complètement sous la forme factorisée. `,
+							},
+							{
+								text: `Le coefficient du terme de degré 2 s'obtient en multipliant les coefficients des termes de degré 1 dans l'expression $$(\\bold{\\textcolor{${color1}}{[_&4x_]}[+_&2_])(\\bold{\\textcolor{${color1}}{[_&5x_]}[+_&3_])$$.`,
+							},
+							{
+								text: "C'est donc $$&4 \\times [(_&5_]=$$&solution",
+							},
+						],
+						[
+							{
+								text: `Attention, l'expression n'est pas complètement sous la forme factorisée. `,
+							},
+							{
+								text: `Le coefficient du terme de degré 2 s'obtient en multipliant le coefficient devant la parenthèse et les coefficients des termes de degré 1 dans l'expression $$\\bold{\\textcolor{${color1}}{&1}}(\\bold{\\textcolor{${color1}}{[_&4x_]}}[+_&2_])(\\bold{\\textcolor{${color1}}{[_&5x_]}}[+_&3_])$$.`,
+							},
+							{
+								text: "C'est donc $$&1 \\times [(_&4_] \\times [(_&5_]=$$&solution",
+							},
+						],
+					],
+					conditions: ['abs(&1) != abs(&2) && abs(&1) != abs(&3)'],
+					answerFields: ['Le coefficient est $$?$$'],
+
+					solutions: [
+						['&1'],
+						['&1'],
+						['&1'],
+						['[_&4*(&5)_]'],
+						['[_&1*(&4)*(&5)_]'],
+					],
+
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer les racines d'un polynôme du second degré",
+					subdescription: "A l'aide de la forme factorisée",
+					enounces: [
+						'Quelles sont les racines de ce polynôme du second degré ?',
+					],
+					expressions: ['&1(x[+_&2_])(x[+_&3_])'],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					conditions:['abs(&2) != abs(&3)'],
+					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
+					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
+					correctionFormat: [
+						{
+							correct: ['Les racines sont &answer1 et &answer2'],
+						},
+					],
+					options: ['solutions-order-not-important'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
 				},
 			],
 		},

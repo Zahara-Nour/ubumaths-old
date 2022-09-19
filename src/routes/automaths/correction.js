@@ -802,4 +802,5 @@ export function assessItem(item) {
 	}
 
 	createCorrection(item)
+	console.log('assess item', item)
 }
