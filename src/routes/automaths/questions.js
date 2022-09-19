@@ -19830,16 +19830,23 @@ const questions = {
 						},
 					],
 					solutions: [
-						['&1>0 ?? 0 : 1'],
-						['&1>0 ?? 0 : 1'],
-						['&1>0 ?? 0 : 1'],
-						['[_&4*(&5)_] >0 ?? 0 : 1'],
-						['[_&1*(&4)*(&5)_] >0 ?? 0 : 1'],
+						['&1>0 ?? 0 :: 1'],
+						['&1>0 ?? 0 :: 1'],
+						['&1>0 ?? 0 :: 1'],
+						['[_&4*(&5)_] >0 ?? 0 :: 1'],
+						['[_&1*(&4)*(&5)_] >0 ?? 0 :: 1'],
+						
 					],
 					choices: [[{ text: 'un minimum' }, { text: 'un maximum' }]],
 					type: 'choice',
 					correctionDetails: [
 						[
+							{
+								text: `@@ &1>0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est positif. @@`,
+							},
+							{
+								text: `@@ &1<0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est négatif. @@`,
+							},
 							{
 								text: 'Le polynôme admet donc &solution.',
 							},
@@ -19874,7 +19881,7 @@ const questions = {
 								text: `@@ &4*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&4 \\times [(_&5_]$$ qui est négatif. @@`,
 							},
 							{
-								text: "C'est donc $$&4 \\times [(_&5_]=$$&solution",
+								text: "Le polynôme admet donc &solution.",
 							},
 						],
 						[
@@ -19885,11 +19892,12 @@ const questions = {
 								text: `@@ &1*(&4)*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&1 \\times [(_&4_]\\times [(_&5_]$$ qui est négatif. @@`,
 							},
 							{
-								text: "C'est donc $$&4 \\times [(_&5_]=$$&solution",
+								text: "Le polynôme admet donc &solution.",
 							},
 						],
 					],
 					conditions: ['abs(&1) != abs(&2) && abs(&1) != abs(&3)'],
+					options:['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
