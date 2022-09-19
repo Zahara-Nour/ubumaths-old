@@ -5,12 +5,12 @@ import {browser} from '$app/env'
 
 
 export async function fetchImage(name) {
-	let img
+	let base64
 
 	if (browser) {
-		const img = sessionStorage.getItem(name)
-
-		if (!img) {
+		 base64 = sessionStorage.getItem(name)
+		
+		if (!base64) {
 			info('fetching image', name)
 			const { data: blob, error } = await supabaseClient.storage
 				.from('public/mental')
@@ -38,6 +38,9 @@ export async function fetchImage(name) {
 			}
 		}
 	}
+	else {
+		console.log('fetch called on server')
+	}
 
-	return Promise.resolve(img)
+	return Promise.resolve(base64)
 }
