@@ -10071,8 +10071,7 @@ const questions = {
 					],
 					// bug de mathlive sur les puissances
 					// qui rajoute des parenthèses à l'exposant
-					// apparemment ça a été corrigé
-					// options: ['no-penalty-for-extraneous-brackets'],
+					options: ['no-penalty-for-extraneous-brackets'],
 
 					defaultDelay: 50,
 					grade: QUATRIEME,
@@ -10227,7 +10226,7 @@ const questions = {
 					],
 					conditions: ['abs(&1-(&2))>1'],
 
-					solutions: [['10^[_&1-(&2)_]']],
+					solutions: [['10^{[_&1-(&2)_]}']],
 					correctionDetails: [
 						[
 							{
@@ -10235,7 +10234,9 @@ const questions = {
 							},
 						],
 					],
-
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},
@@ -19795,7 +19796,7 @@ const questions = {
 							'&3': '$er[1;5]',
 						},
 					],
-					conditions:['abs(&2) != abs(&3)'],
+					conditions: ['abs(&2) != abs(&3)'],
 					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
 					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
 					correctionFormat: [
@@ -19804,6 +19805,91 @@ const questions = {
 						},
 					],
 					options: ['solutions-order-not-important'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer la nature de l'extremum",
+					enounces: [
+						"Quelle est la nature de l'extremum de cette expression du second degré ?",
+					],
+					expressions: [
+						'[_&1x^2_][+_&2x_][+_&3_]',
+						'&1(x[+_&2_])(x[+_&3_])',
+						'&1(x[+_&2_])^2[+_&3_]',
+						'([_&4x_][+_&2_])([_&5x_][+_&3_])',
+						'&1([_&4x_][+_&2_])([_&5x_][+_&3_])',
+					],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+							'&4': '$er[1;5]',
+							'&5': '$er[1;5]',
+						},
+					],
+					solutions: [
+						['&1>0 ?? 0 : 1'],
+						['&1>0 ?? 0 : 1'],
+						['&1>0 ?? 0 : 1'],
+						['[_&4*(&5)_] >0 ?? 0 : 1'],
+						['[_&1*(&4)*(&5)_] >0 ?? 0 : 1'],
+					],
+					choices: [[{ text: 'un minimum' }, { text: 'un maximum' }]],
+					type: 'choice',
+					correctionDetails: [
+						[
+							{
+								text: 'Le polynôme admet donc &solution.',
+							},
+						],
+						[
+							{
+								text: `@@ &1>0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est positif. @@`,
+							},
+							{
+								text: `@@ &1<0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est négatif. @@`,
+							},
+							{
+								text: 'Le polynôme admet donc &solution.',
+							},
+						],
+						[
+							{
+								text: `@@ &1>0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est positif. @@`,
+							},
+							{
+								text: `@@ &1<0 ??  Le coefficient du terme de degré 2 est $$\\bold{\\textcolor{${color1}}{&1}}$$ qui est négatif. @@`,
+							},
+							{
+								text: 'Le polynôme admet donc &solution.',
+							},
+						],
+						[
+							{
+								text: `@@ &4*(&5) >0 ?? Le coefficient du terme de degré 2 est $$&4 \\times [(_&5_]$$ qui est positif. @@`,
+							},
+							{
+								text: `@@ &4*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&4 \\times [(_&5_]$$ qui est négatif. @@`,
+							},
+							{
+								text: "C'est donc $$&4 \\times [(_&5_]=$$&solution",
+							},
+						],
+						[
+							{
+								text: `@@ &1*(&4)*(&5) >0 ?? Le coefficient du terme de degré 2 est $$&1 \\times [(_&4_] \\times [(_&5_]$$ qui est positif. @@`,
+							},
+							{
+								text: `@@ &1*(&4)*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&1 \\times [(_&4_]\\times [(_&5_]$$ qui est négatif. @@`,
+							},
+							{
+								text: "C'est donc $$&4 \\times [(_&5_]=$$&solution",
+							},
+						],
+					],
+					conditions: ['abs(&1) != abs(&2) && abs(&1) != abs(&3)'],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
