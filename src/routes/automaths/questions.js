@@ -19517,6 +19517,104 @@ const questions = {
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
+				{
+					description: "Calculer une valeur absolue",
+					subdescription: "Valeur absolue d'une expression littérale dont il faut étudier le signe",
+					enounces: [
+						'Calculer cette expression si $$x \\ge 0$$.',
+						'Calculer cette expression si $$x \\le 0$$.',
+						'Calculer cette expression si $$x \\ge 0$$.',
+						'Calculer cette expression si $$x \\le 0$$.',
+						'Calculer cette expression si $$x \\ge -&1$$.',
+						'Calculer cette expression si $$x \\le -&1$$.',
+						'Calculer cette expression si $$x \\ge [_-(&2)_]$$.',
+						'Calculer cette expression si $$x \\le [_-(&2)_]$$.',
+					],
+					expressions: [
+						'abs([_&1x_])',
+						'abs([_&1x_])',
+						'abs([_(&2)x_])',
+						'abs([_(&2)x_])',
+						'abs(x+&1)',
+						'abs(x+&1)',
+						'abs(x&2)',
+						'abs(x&2)'
+					],
+					variables: [
+						{
+							'&1': '$e[1;3]',
+							'&2': '-$e[1;3]',
+						},
+					],
+				
+					solutions: [
+						['[_&1x_]'],
+						['[_-&1x_]'],
+						['[_-(&2)x_]'],
+						['[_&2x_]'],
+						['x+&1'],
+						['-x-&1'],
+						['x&2'],
+						['[_-(&2)_]-x'],
+					],
+					correctionDetails: [
+						[
+							{
+								text: "@@ &1=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@",
+							},
+							{
+								text: "@@ &1!=1 ?? $$x \\ge 0$$ donc $$&1x \\ge 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@",
+							},
+						],
+						[
+							{
+								text: "@@ &1=1 ?? $$x \\le 0$$ donc $$\\left \\lvert x \\right \\rvert =$$&solution @@",
+							},
+							{
+								text: "@@ &1!=1 ?? $$x \\le 0$$ donc $$&1x \\le 0$$ et $$\\left \\lvert &1x \\right \\rvert =$$&solution @@",
+							},
+						],
+						[
+							{
+								text: "@@ &2=1 ?? $$x \\ge 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@",
+							},
+							{
+								text: "@@ &2!=1 ?? $$x \\ge 0$$ donc $$&2x \\le 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@",
+							},
+						],
+						[
+							{
+								text: "@@ &2=-1 ?? $$x \\le 0$$ donc $$\\left \\lvert -x \\right \\rvert =$$&solution @@",
+							},
+							{
+								text: "@@ &2!=-1 ?? $$x \\le 0$$ donc $$&2x \\ge 0$$ et $$\\left \\lvert &2x \\right \\rvert =$$&solution @@",
+							},
+						],
+						[
+							{
+								text: " $$x \\ge -&1$$ donc $$x+&1 \\ge 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution",
+							},
+						],
+						[
+							{
+								text: " $$x \\le -&1$$ donc $$x+&1 \\le 0$$ et $$\\left \\lvert x+&1 \\right \\rvert =$$&solution",
+							},
+						],
+						[
+							{
+								text: " $$x \\ge [_-(&2)_]$$ donc $$x&2 \\ge 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution",
+							},
+						],
+						[
+							{
+								text: " $$x \\le [_-(&2)_]$$ donc $$x&2 \\le 0$$ et $$\\left \\lvert x&2 \\right \\rvert =$$&solution",
+							},
+						],
+					
+					],
+					defaultDelay: 20,
+					grade: SECONDE,
+				},
 			],
 			Equations: [
 				{
