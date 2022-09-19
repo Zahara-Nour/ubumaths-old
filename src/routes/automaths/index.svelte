@@ -17,6 +17,7 @@
 	import { getLogger } from '$lib/utils'
 	import { darkmode, formatLatex } from '$lib/stores'
 	import { dev } from '$app/env'
+	import { page } from '$app/stores'
 
 	let { info, fail, warn } = getLogger('Automaths', 'info')
 	const questions = data.questions
@@ -42,6 +43,16 @@
 	// mode interactif pour l'exemple
 	let interactive = true
 
+	const first_theme = decodeURI($page.url.searchParams.get('theme'))
+	const first_domain = decodeURI($page.url.searchParams.get('domain'))
+	const first_subdomain = decodeURI($page.url.searchParams.get('subdomain'))
+	const first_level = parseInt(decodeURI($page.url.searchParams.get('level')), 10)
+
+	$: console.log('theme', theme)
+	$: console.log('domain', domain)
+	$: console.log('subdomain', subdomain)
+	$: console.log('level', level)
+
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
@@ -49,7 +60,11 @@
 	function changeGrade(grade) {
 		availableLevels = getAvailablesLevels(grade)
 		themes = Object.keys(availableLevels)
-		theme = themes[0]
+		if (!theme && first_theme && themes.includes(first_theme)) {
+			theme = first_theme
+		} else {
+			theme = themes[0]
+		}
 		domains = []
 		subdomains = []
 	}
@@ -61,9 +76,13 @@
 			domains.forEach((d) => {
 				panelOpenStatus[d] = false
 			})
-			panelOpenStatus[domains[0]] = true
+			const d =
+				!domain && first_domain && domains.includes(first_domain)
+					? first_domain
+					: domains[0]
+			panelOpenStatus[d] = true
 			if (domains.length) {
-				changeDomain(domains[0])
+				changeDomain(d)
 			}
 		}
 	}
@@ -72,10 +91,15 @@
 		domain = d
 		const subdomains = Object.keys(availableLevels[theme][domain])
 		if (subdomains && subdomains.length) {
-			const subd = subdomains[0]
-			if (availableLevels[theme][domain][subd]) {
-				const level = availableLevels[theme][domain][subd][0]
-				changeLevel(subd, level)
+			const subd =
+				!subdomain && first_subdomain && subdomains.includes(first_subdomain)
+					? first_subdomain
+					: subdomains[0]
+			const levels = availableLevels[theme][domain][subd]
+			console.log('levels', levels)
+			if (levels) {
+				const l= !level && first_level && levels.includes(first_level) ? first_level : levels[0]
+				changeLevel(subd, l)
 			}
 		}
 	}

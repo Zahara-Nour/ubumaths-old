@@ -59,6 +59,7 @@
 	let fontSize
 	let remaining
 	let commits = []
+	let query
 
 	setContext('test-params', testParams)
 
@@ -112,6 +113,7 @@
 		finish = false
 		go = false
 		cards = []
+		
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
 		courseAuxNombres = JSON.parse(
 			decodeURI($page.url.searchParams.get('courseAuxNombres')),
@@ -139,6 +141,12 @@
 			}
 			offset += q.count
 		})
+		if (basket.length===1) {
+			const q = basket[0]
+			;( { theme, domain, subdomain, level } = ids[basket[0].id])
+			query = encodeURI(`?theme=${theme}&domain=${domain}&subdomain=${subdomain}&level=${level}`)
+			
+		}
 		shuffle(cards)
 
 		cards.forEach((q, i) => {
@@ -318,7 +326,7 @@
 	{#if showCorrection}
 		<Correction
 			items="{cards}"
-			query="{location.search}"
+			query="{query}"
 			classroom="{classroom}"
 			bind:restart
 		/>
