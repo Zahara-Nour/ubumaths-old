@@ -496,7 +496,7 @@
 				id="expressions"
 				class=" flex flex-col items-center justify-center"
 				style="{`max-width:100%;font-size:${
-					correction ? 1 : magnify === 1 ? 2 : magnify * 1.5
+					correction ? 1 : magnify * 1.5
 				}rem;` + (correction ? 'color:' + colors['grey-600'] : '')}"
 			>
 				<div
