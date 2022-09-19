@@ -47,7 +47,7 @@
 	let showCorrection = false
 	let alert
 	let slider = 0
-	let min = 0,
+	let min = 5,
 		max = 60
 	let cards, card
 	let generatedExemple
@@ -176,8 +176,6 @@
 		generatedExemple = generate(question)
 	}
 
-
-
 	function beginTest() {
 		showExemple = false
 		go = true
@@ -221,6 +219,7 @@
 					: 20000
 				slider = delay / 1000
 			}
+			slider = Math.max(5, slider)
 			slider = Math.min(slider, 60)
 			percentage = 0
 			alert = false
@@ -273,10 +272,8 @@
 	$: if (restart) {
 		initTest()
 	}
-
-	$: delay = slider * 1000
 	$: virtualKeyboardMode.set($touchDevice)
-	$: console.log('slider', slider)
+	$: delay = slider * 1000
 
 	commit = {
 		exec: function () {
@@ -293,18 +290,29 @@
 <svelte:window on:keydown="{handleKeydown}" />
 
 {#if showExemple}
-	<QuestionCard card="{generatedExemple}" flashcard="{true}" magnify="{2.5}" />
-	<div class="mt-2 flex justify-end">
-		<Fab class="m-2" color="primary" on:click="{generateExemple}" mini>
-			<Icon component="{Svg}" viewBox="2 2 20 20">
-				<path fill="currentColor" d="{mdiRestart}"></path>
-			</Icon>
-		</Fab>
-		<Fab class="m-2" color="primary" on:click="{beginTest}" mini>
-			<Icon component="{Svg}" viewBox="2 2 20 20">
-				<path fill="currentColor" d="{mdiRocketLaunchOutline}"></path>
-			</Icon>
-		</Fab>
+	<div
+		class=" flex flex-col justify-center items-center"
+		style=" min-height: calc(100vh - 146px);"
+	>
+		<div style="width:900px">
+			<QuestionCard
+				card="{generatedExemple}"
+				flashcard="{true}"
+				magnify="{2.5}"
+			/>
+		</div>
+		<div class="mt-2 flex justify-end">
+			<Fab class="m-2" color="primary" on:click="{generateExemple}" mini>
+				<Icon component="{Svg}" viewBox="2 2 20 20">
+					<path fill="currentColor" d="{mdiRestart}"></path>
+				</Icon>
+			</Fab>
+			<Fab class="m-2" color="primary" on:click="{beginTest}" mini>
+				<Icon component="{Svg}" viewBox="2 2 20 20">
+					<path fill="currentColor" d="{mdiRocketLaunchOutline}"></path>
+				</Icon>
+			</Fab>
+		</div>
 	</div>
 {:else if finish}
 	{#if showCorrection}
@@ -376,13 +384,7 @@
 {:else if card}
 	<div bind:this="{ref}">
 		<div class="{' my-1 flex justify-start items-center'}">
-			<CircularProgress
-				number="{current + 1}"
-				fontSize="{classroom ? 2.5 * fontSize : fontSize + 5}"
-				percentage="{percentage}"
-				pulse="{alert}"
-			/>
-			{#if slider && classroom}
+			{#if classroom}
 				<Slider
 					bind:value="{slider}"
 					min="{min}"
@@ -394,33 +396,43 @@
 					style="width:150px;"
 				/>
 			{/if}
-			<Fab
-				class="mx-1"
-				color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
-				on:click="{() => {
-					virtualKeyboardMode.update((state) => {
-						return !state
-					})
-				}}"
-				mini
-			>
-				<Icon component="{Svg}" viewBox="2 2 20 20">
-					<path fill="currentColor" d="{mdiKeyboard}"></path>
-				</Icon>
-			</Fab>
+			{#if !classroom}
+				<Fab
+					class="mx-1"
+					color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
+					on:click="{() => {
+						virtualKeyboardMode.update((state) => {
+							return !state
+						})
+					}}"
+					mini
+				>
+					<Icon component="{Svg}" viewBox="2 2 20 20">
+						<path fill="currentColor" d="{mdiKeyboard}"></path>
+					</Icon>
+				</Fab>
+			{/if}
+			<div class="flex grow"></div>
+
+			<CircularProgress
+				number="{current + 1}"
+				fontSize="{classroom ? 2.5 * fontSize : fontSize * 1.8}"
+				percentage="{percentage}"
+				pulse="{alert}"
+			/>
 		</div>
 
 		{#if cards}
 			<div class="flex justify-center">
-				<div id="cards-container" style="width:600px">
+				<div id="cards-container" style="{`width:${classroom ? 1000 : 600}px`}">
 					{#each [cards[current]] as card (current)}
-							<QuestionCard
-								card="{card}"
-								interactive="{!classroom}"
-								commit="{commit}"
-								magnify="{classroom ? 2.5 : 1}"
-								immediateCommit="{true}"
-							/>
+						<QuestionCard
+							card="{card}"
+							interactive="{!classroom}"
+							commit="{commit}"
+							magnify="{classroom ? 2.5 : 1}"
+							immediateCommit="{true}"
+						/>
 					{/each}
 				</div>
 			</div>
@@ -442,5 +454,4 @@
 		/* max-height: 70vh; */
 		/* width: 100%; */
 	}
-
 </style>

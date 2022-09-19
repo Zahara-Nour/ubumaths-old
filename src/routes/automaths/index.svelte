@@ -316,7 +316,7 @@
 			$darkmode ? 'border-radius:5px;background:#fff' : ''
 		};position:sticky; bottom:0; z-index:2;`}"
 	>
-		<div style="{'width:95vw;max-width:600px;'}">
+		<div style="{`width:95vw;max-width:600px;`}">
 			<QuestionCard
 				card="{generated}"
 				showDescription="{true}"
