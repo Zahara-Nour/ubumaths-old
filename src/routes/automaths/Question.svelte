@@ -418,7 +418,6 @@
 					elt.style.borderRadius = '5px'
 					// const i = mfs.length - 1
 					if (!masked) {
-						console.log('creating Listeners')
 
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)

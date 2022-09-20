@@ -10049,33 +10049,7 @@ const questions = {
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},
-				{
-					description: 'Multiplier 2 puissances de 10.',
-					subdescription: 'Exposants positifs',
-					enounces: ['Complète'],
-					// expressions: ['10^&2*10^&3'],
-					variables: [
-						{
-							'&2': '$e[1;9]',
-							'&3': '$e[1;9]',
-						},
-					],
-					answerFields: ['$$10^&2 \\times 10^&3=10^{?}$$'],
-					solutions: [['[_&2+&3_]']],
-					correctionDetails: [
-						[
-							{
-								text: '$$\\begin{align} 10^&2 \\times 10^&3 &= 10^{&2+&3} \\\\ &= &sol  \\end{align}$$',
-							},
-						],
-					],
-					// bug de mathlive sur les puissances
-					// qui rajoute des parenthèses à l'exposant
-					options: ['no-penalty-for-extraneous-brackets'],
 
-					defaultDelay: 50,
-					grade: QUATRIEME,
-				},
 				{
 					description: "Multiplier 2 puissances d'un même nombre.",
 					subdescription: 'Exposants positifs',
@@ -10399,6 +10373,42 @@ const questions = {
 					options: ['no-penalty-for-extraneous-brackets'],
 					defaultDelay: 20,
 					grade: TROISIEME,
+				},
+			],
+			'Mixer tout ça': [
+				{
+					description: 'Multiplier et diviser des puissances de 10.',
+					subdescription: 'Exposants positifs',
+					enounces: ["Réécris sous la forme d'une seule puissance de 10."],
+					expressions: ['{10^&1*10^&2}/{10^&3}', '{10^&3}/{10^&1*10^&2}'],
+					variables: [
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[2;9]',
+							'&3': '$e[2;&1+&2-2]',
+						},
+						{
+							'&1': '$e[2;4]',
+							'&2': '$e[2;3]',
+							'&3': '$e[&1+&2+2;9]',
+						},
+					],
+					solutions: [['10^[_&1+&2-&3_]'], ['10^[_&3-&1-&2_]']],
+					correctionDetails: [
+						[
+							{
+								text: '$$\\begin{align} \\frac{10^{&1}\\times 10^{&2}}{10^{&3}} &= 10^{&1+&2-&3} \\\\ &= &sol  \\end{align}$$',
+							},
+						],
+						[
+							{
+								text: '$$\\begin{align} \\frac{10^{&3}}{10^{&1} \\times 10^{&2}} &= 10^{&3-(&1+&2)} \\\\ &= &sol  \\end{align}$$',
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: QUATRIEME,
 				},
 			],
 		},
@@ -19835,7 +19845,6 @@ const questions = {
 						['&1>0 ?? 0 :: 1'],
 						['[_&4*(&5)_] >0 ?? 0 :: 1'],
 						['[_&1*(&4)*(&5)_] >0 ?? 0 :: 1'],
-						
 					],
 					choices: [[{ text: 'un minimum' }, { text: 'un maximum' }]],
 					type: 'choice',
@@ -19881,7 +19890,7 @@ const questions = {
 								text: `@@ &4*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&4 \\times [(_&5_]$$ qui est négatif. @@`,
 							},
 							{
-								text: "Le polynôme admet donc &solution.",
+								text: 'Le polynôme admet donc &solution.',
 							},
 						],
 						[
@@ -19892,12 +19901,12 @@ const questions = {
 								text: `@@ &1*(&4)*(&5) <0 ?? Le coefficient du terme de degré 2 est $$&1 \\times [(_&4_]\\times [(_&5_]$$ qui est négatif. @@`,
 							},
 							{
-								text: "Le polynôme admet donc &solution.",
+								text: 'Le polynôme admet donc &solution.',
 							},
 						],
 					],
 					conditions: ['abs(&1) != abs(&2) && abs(&1) != abs(&3)'],
-					options:['no-shuffle-choices'],
+					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},

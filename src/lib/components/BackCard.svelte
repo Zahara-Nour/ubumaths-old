@@ -78,8 +78,6 @@
 
 	$: solution = $formatLatex(getSolution(card))
 	$: details = detailedCorrection ? detailedCorrection : simpleCorrection ? simpleCorrection : []
-	$: console.log('details', details)
-	$: console.log('card modified', {...card})
 </script>
 
 <div bind:clientHeight="{h}" bind:clientWidth="{w}">

@@ -84,7 +84,6 @@
 					height="{height}"
 					magnify="{magnify}"
 					correction="{correction}"
-					showDescription="{showDescription}"
 					simpleCorrection="{simpleCorrection}"
 					detailedCorrection="{detailedCorrection}"
 				/>
@@ -116,7 +115,6 @@
 			bind:h="{hback_masked}"
 			magnify="{magnify}"
 			correction="{correction}"
-			showDescription="{showDescription}"
 			simpleCorrection="{simpleCorrection}"
 			detailedCorrection="{detailedCorrection}"
 		/>
