@@ -71,7 +71,7 @@
 	}
 
 	function changeTheme(t) {
-		console.log('-change theme')
+		console.log('-change theme', t)
 		const domains = Object.keys(availableLevels[t])
 		if (domains) {
 			panelOpenStatus = {}
@@ -90,7 +90,7 @@
 	}
 
 	function changeDomain(d) {
-		console.log('-change domain')
+		console.log('-change domain', d)
 		domain = d
 		const subdomains = Object.keys(availableLevels[theme][domain])
 		if (subdomains && subdomains.length) {
@@ -108,7 +108,7 @@
 	}
 
 	function changeLevel(subd, l) {
-		console.log('-change subd level')
+		console.log('-change subd level', subd, l)
 		subdomain = subd
 		level = l
 		console.log('generate')
