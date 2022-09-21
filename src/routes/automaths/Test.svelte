@@ -10,7 +10,7 @@
 	import { getLogger, shuffle } from '$lib/utils'
 	import { createTimer } from '$lib/timer'
 	import { page } from '$app/stores'
-	import { virtualKeyboardMode, touchDevice } from '$lib/stores'
+	import { virtualKeyboardMode, touchDevice, mathliveReady } from '$lib/stores'
 
 	import math from 'tinycas'
 	import {
@@ -22,6 +22,7 @@
 	import { fetchImage } from '$lib/images'
 	import Correction from './Correction.svelte'
 	import QuestionCard from '$lib/components/QuestionCard.svelte'
+	import Spinner from '$lib/components/Spinner.svelte'
 
 	const ids = datas.ids
 	let { info, fail, trace } = getLogger('Test', 'trace')
@@ -113,7 +114,7 @@
 		finish = false
 		go = false
 		cards = []
-		
+
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
 		courseAuxNombres = JSON.parse(
 			decodeURI($page.url.searchParams.get('courseAuxNombres')),
@@ -141,11 +142,12 @@
 			}
 			offset += q.count
 		})
-		if (basket.length===1) {
-			const q = basket[0]
-			;( { theme, domain, subdomain, level } = ids[basket[0].id])
-			query = encodeURI(`?theme=${theme}&domain=${domain}&subdomain=${subdomain}&level=${level}`)
+		if (basket.length === 1) {
 			
+			;({ theme, domain, subdomain, level } = ids[basket[0].id])
+			query = encodeURI(
+				`?theme=${theme}&domain=${domain}&subdomain=${subdomain}&level=${level}`,
+			)
 		}
 		shuffle(cards)
 
@@ -297,7 +299,11 @@
 
 <svelte:window on:keydown="{handleKeydown}" />
 
-{#if showExemple}
+{#if !$mathliveReady}
+	<div class="flex justify-center items-center" style="height:75vh">
+		<Spinner />
+	</div>
+{:else if showExemple}
 	<div
 		class=" flex flex-col justify-center items-center"
 		style=" min-height: calc(100vh - 146px);"

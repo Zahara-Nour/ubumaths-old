@@ -58,6 +58,7 @@
 	// $ changeDomain(domain)
 
 	function changeGrade(grade) {
+		console.log('-change grade')
 		availableLevels = getAvailablesLevels(grade)
 		themes = Object.keys(availableLevels)
 		if (!theme && first_theme && themes.includes(first_theme)) {
@@ -70,6 +71,7 @@
 	}
 
 	function changeTheme(t) {
+		console.log('-change theme')
 		const domains = Object.keys(availableLevels[t])
 		if (domains) {
 			panelOpenStatus = {}
@@ -88,6 +90,7 @@
 	}
 
 	function changeDomain(d) {
+		console.log('-change domain')
 		domain = d
 		const subdomains = Object.keys(availableLevels[theme][domain])
 		if (subdomains && subdomains.length) {
@@ -105,6 +108,7 @@
 	}
 
 	function changeLevel(subd, l) {
+		console.log('-change subd level')
 		subdomain = subd
 		level = l
 		console.log('generate')
