@@ -93,7 +93,6 @@
 		keyListeners = []
 		inputListeners = []
 		changeListeners = []
-		
 	}
 
 	// onChange est appelée quand :
@@ -218,6 +217,8 @@
 					answerFields.replace(/\?/g, '\\ldots'),
 				).replace(/…/g, addMathfield)
 			}
+		} else {
+			answerFields = null
 		}
 
 		if (expression) {
@@ -339,7 +340,6 @@
 
 	onDestroy(() => {
 		removeListeners()
-		
 	})
 
 	afterUpdate(() => {
@@ -394,7 +394,7 @@
 						inlineShortcuts: {
 							xx: {},
 						},
-						keypressSound:null,
+						keypressSound: null,
 						keypressVibration: false,
 						removeExtraneousParentheses: false,
 						smartFence: false,
@@ -418,7 +418,6 @@
 					elt.style.borderRadius = '5px'
 					// const i = mfs.length - 1
 					if (!masked) {
-
 						const keyListener = (ev) => onKeystroke(ev, i)
 						const inputListener = (ev) => onInput(ev, i)
 						const changeListener = (ev) => onChange(ev, i)

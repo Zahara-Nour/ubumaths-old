@@ -109,30 +109,30 @@ const questions = {
 	Entiers: {
 		Apprivoiser: {
 			Ecriture: [
-				{
-					description: 'Essai choix multiples',
-					enounces: ['Choisis les bonnes réponses $$&1$$.'],
-					variables: [
-						{
-							'&1': '$e[1;9]',
-							'&2': '$e[0;9]\\{&1}',
-							'&4': '[_&1*10+&2_]',
-						},
-					],
+				// {
+				// 	description: 'Essai choix multiples',
+				// 	enounces: ['Choisis les bonnes réponses $$&1$$.'],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;9]',
+				// 			'&2': '$e[0;9]\\{&1}',
+				// 			'&4': '[_&1*10+&2_]',
+				// 		},
+				// 	],
 
-					choices: [[{ text: '$$1$$' }, { text: '$$2$$' }, { text: '$$3$$' }]],
-					solutions: [[1, 2]],
-					type: 'choices',
-					correctionDetails: [
-						[
-							{
-								text: 'La correction en détails.',
-							},
-						],
-					],
-					defaultDelay: 45,
-					grade: CP,
-				},
+				// 	choices: [[{ text: '$$1$$' }, { text: '$$2$$' }, { text: '$$3$$' }]],
+				// 	solutions: [[1, 2]],
+				// 	type: 'choices',
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: 'La correction en détails.',
+				// 			},
+				// 		],
+				// 	],
+				// 	defaultDelay: 45,
+				// 	grade: CP,
+				// },
 				{
 					description: 'Connaître la position décimale',
 					subdescription: "Jusqu'aux dizaines.",
