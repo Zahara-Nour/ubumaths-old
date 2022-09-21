@@ -73,6 +73,7 @@
 	function changeTheme(t) {
 		console.log('-change theme', t)
 		const domains = Object.keys(availableLevels[t])
+		console.log('domains', domains)
 		if (domains) {
 			panelOpenStatus = {}
 			domains.forEach((d) => {
@@ -82,6 +83,7 @@
 				!domain && first_domain && domains.includes(first_domain)
 					? first_domain
 					: domains[0]
+			
 			panelOpenStatus[d] = true
 			if (domains.length) {
 				changeDomain(d)
@@ -93,6 +95,7 @@
 		console.log('-change domain', d)
 		domain = d
 		const subdomains = Object.keys(availableLevels[theme][domain])
+		console.log('subdomains', subdomains)
 		if (subdomains && subdomains.length) {
 			const subd =
 				!subdomain && first_subdomain && subdomains.includes(first_subdomain)
