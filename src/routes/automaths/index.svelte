@@ -284,7 +284,7 @@
 
 	<div class="accordion-container">
 		<Accordion>
-			{#each Object.keys(availableLevels[theme]) as d}
+			{#each Object.keys(availableLevels[theme]) as d (theme+'-'+d)}
 				<Panel
 					bind:open="{panelOpenStatus[d]}"
 					on:click="{() => {
@@ -300,7 +300,7 @@
 					</Header>
 					<Content>
 						<div class="pl-5">
-							{#each Object.keys(availableLevels[theme][d]) as subd}
+							{#each Object.keys(availableLevels[theme][d]) as subd }
 								<div class="my-5 flex items-center">
 									<span>{@html $formatLatex(subd)}</span>
 									<div flex flex-wrap>
