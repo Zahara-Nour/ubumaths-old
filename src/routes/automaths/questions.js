@@ -235,7 +235,6 @@ const questions = {
 					],
 					solutions: [[0], [1]],
 					options: ['no-shuffle-choices'],
-					type: 'choice',
 					defaultDelay: 10,
 					grade: CE1,
 				},
@@ -624,7 +623,6 @@ const questions = {
 					//   'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est ',
 					// ],
 					solutions: [['&5<&6 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 10,
 					grade: CP,
 				},
@@ -658,7 +656,6 @@ const questions = {
 					//   'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est ',
 					// ],
 					solutions: [['&7<&8 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 10,
 					grade: CE1,
 				},
@@ -692,7 +689,6 @@ const questions = {
 					//   'Entre $$[._&5_]$$ et $$[._&6_]$$ le plus petit est ',
 					// ],
 					solutions: [['&7<&8 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 10,
 					grade: CE2,
 				},
@@ -722,7 +718,6 @@ const questions = {
 						},
 					],
 					solutions: [['&6<&7 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -4797,7 +4792,6 @@ const questions = {
 						],
 					],
 					options: ['no-shuffle-choices'],
-					type: 'choice',
 					defaultDelay: 30,
 					grade: CE2,
 				},
@@ -4822,7 +4816,6 @@ const questions = {
 					enounces: ['Le nombre $$[_&1_]$$ est-il divisible par 2 ?'],
 					variables: [{ '&1': '2*$e{3}' }, { '&1': '2*$e{3}+1' }],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					// corrections: [
 					//   'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est ',
@@ -4844,7 +4837,6 @@ const questions = {
 					enounces: ['Le nombre $$[_&1_]$$ est-il divisible par 5 ?'],
 					variables: [{ '&1': '5*$e{3}' }, { '&1': '5*$e{5}+$e[1;4]' }],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					// corrections: [
 					//   'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est ',
@@ -4866,7 +4858,6 @@ const questions = {
 					enounces: ['Le nombre $$[_&1_]$$ est-il divisible par 10 ?'],
 					variables: [{ '&1': '10*$e{3}' }, { '&1': '10*$e{5}+$e[1;9]' }],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					// corrections: [
 					//   'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est ',
@@ -4891,7 +4882,6 @@ const questions = {
 						{ '&1': '3*$e[21;332]+$e[1;2]' },
 					],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					// corrections: [
 					//   'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est ',
@@ -4916,7 +4906,6 @@ const questions = {
 						{ '&1': '9*$e[21;110]+$e[1;8]' },
 					],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					// corrections: [
 					//   'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est ',
@@ -5909,7 +5898,6 @@ const questions = {
 						},
 					],
 					solutions: [['&7<&8 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -7736,7 +7724,6 @@ const questions = {
 					],
 
 					solutions: [[1], [1], [0]],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -7775,7 +7762,6 @@ const questions = {
 						},
 					],
 					solutions: [['&6<&7 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -7913,7 +7899,6 @@ const questions = {
 						},
 					],
 					solutions: [[1], [0], [1], [0], [1]],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: CINQUIEME,
@@ -8022,7 +8007,6 @@ const questions = {
 						},
 					],
 					solutions: [['(&1)*(&2) >0 ?? 0 :: 1']],
-					type: 'choice',
 					options: ['no-shuffle-choices', 'exp-remove-unecessary-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -8053,7 +8037,6 @@ const questions = {
 						"Dans l'égalité $$\\ldots \\times &1 = &2$$, le facteur manquant est ",
 					],
 					solutions: [[1], [0], [1], [0], [1], [0], [1], [0]],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},
@@ -8074,7 +8057,6 @@ const questions = {
 						},
 					],
 					solutions: [['(&1)*(&2)*(&3) >0 ?? 0 :: 1']],
-					type: 'choice',
 					options: ['no-shuffle-choices', 'exp-remove-unecessary-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -8100,7 +8082,6 @@ const questions = {
 						},
 					],
 					solutions: [['(&1)*(&2)*(&3)*(&4) >0 ?? 0 :: 1']],
-					type: 'choice',
 					options: ['no-shuffle-choices', 'exp-remove-unecessary-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -8175,7 +8156,6 @@ const questions = {
 						},
 					],
 					solutions: [['(&1):(&2)>0 ?? 0 :: 1']],
-					type: 'choice',
 					options: ['no-shuffle-choices', 'exp-remove-unecessary-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -8194,7 +8174,6 @@ const questions = {
 						},
 					],
 					solutions: [['(&1)*(&2)>0 ?? 0 :: 1']],
-					type: 'choice',
 					options: ['no-shuffle-choices', 'exp-remove-unecessary-brackets'],
 					defaultDelay: 20,
 					grade: QUATRIEME,
@@ -8899,7 +8878,6 @@ const questions = {
 						],
 					],
 					solutions: [['&4<&5 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -8943,7 +8921,6 @@ const questions = {
 						],
 					],
 					solutions: [['&4<&5 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -8981,7 +8958,6 @@ const questions = {
 							},
 						],
 					],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -9048,7 +9024,6 @@ const questions = {
 					],
 
 					solutions: [['&5<&6 ?? 0 :: 1']],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -12667,7 +12642,6 @@ const questions = {
 						],
 					],
 					solutions: [[0], [0], [0], [1], [1], [1], [0], [1]],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					defaultDelay: 10,
 					grade: QUATRIEME,
@@ -12748,7 +12722,6 @@ const questions = {
 					// ],
 					solutions: [[1], [0]],
 					options: ['no-shuffle-choices'],
-					type: 'choice',
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -12827,7 +12800,6 @@ const questions = {
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					conditions: ['true', '&2+(&3) !=1'],
 					solutions: [[0], [1]],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					correctionFormat: [
 						{
@@ -12972,7 +12944,6 @@ const questions = {
 							},
 						],
 					],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: SIXIEME,
@@ -13040,7 +13011,6 @@ const questions = {
 							},
 						],
 					],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: SIXIEME,
@@ -18227,7 +18197,6 @@ const questions = {
 						},
 					],
 
-					type: 'choice',
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					correctionFormat: [
@@ -18261,7 +18230,6 @@ const questions = {
 						'fonctions-affines/reconnaitre/reconnaitre_fonction_affine-11-600.png',
 					],
 
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					correctionFormat: [
 						{
@@ -18311,7 +18279,6 @@ const questions = {
 							'&2': '$e[1;9]\\{&1;-(&1)}',
 						},
 					],
-					type: 'choice',
 					choices: [
 						[
 							{ text: 'le coefficient directeur' },
@@ -18627,7 +18594,6 @@ const questions = {
 							'&4': '&1*(&3)+(&2)+($er[1;3])',
 						},
 					],
-					type: 'choice',
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					options: ['no-shuffle-choices'],
 					correctionFormat: [
@@ -18781,7 +18747,6 @@ const questions = {
 						},
 					],
 					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
-					type: 'choice',
 					options: ['no-shuffle-choices'],
 					defaultDelay: 10,
 					grade: TROISIEME,
@@ -18808,7 +18773,6 @@ const questions = {
 							'&3': '$er[2;9]',
 						},
 					],
-					type: 'choice',
 					choices: [
 						[{ text: 'parallèles' }, { text: '<b>non</b> parallèles' }],
 					],
@@ -18855,7 +18819,6 @@ const questions = {
 						'f(x)=5x-7',
 					],
 
-					type: 'choice',
 					choices: [
 						[
 							{
@@ -19373,7 +19336,6 @@ const questions = {
 					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
-					type: 'choice',
 					grade: SECONDE,
 				},
 				{
@@ -19424,7 +19386,6 @@ const questions = {
 					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
-					type: 'choice',
 					grade: SECONDE,
 				},
 				{
@@ -19707,7 +19668,6 @@ const questions = {
 							{ text: 'canonique' },
 						],
 					],
-					type: 'choice',
 					solutions: [[0], [1], [2]],
 
 					defaultDelay: 20,
@@ -19847,7 +19807,6 @@ const questions = {
 						['[_&1*(&4)*(&5)_] >0 ?? 0 :: 1'],
 					],
 					choices: [[{ text: 'un minimum' }, { text: 'un maximum' }]],
-					type: 'choice',
 					correctionDetails: [
 						[
 							{
@@ -20382,7 +20341,6 @@ const questions = {
 							},
 						],
 					],
-					type: 'choice',
 					solutions: [
 						[4],
 						[2],
@@ -20608,7 +20566,6 @@ const questions = {
 							},
 						],
 					],
-					type: 'choice',
 					solutions: [[3]],
 					variables: [
 						{
