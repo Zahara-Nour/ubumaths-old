@@ -3,7 +3,7 @@ import {beforeEach, describe, expect, it, vi, test} from 'vitest';
 import questions from '../src/routes/automaths/questions'
 import generate from '../src/routes/automaths/generateQuestion'
 
-describe('generating question', () => {
+describe("testing generate question doesn't throw exception", () => {
 
     // console.log(questions.questions)
     const t = []
@@ -42,9 +42,9 @@ describe('generating question', () => {
             })
         }
         if (promises.length) {
-            console.log('promises', promises)
+            // console.log('promises', promises)
             const result = await Promise.all(promises)
-            console.log('promises resolved', result)
+            // console.log('promises resolved', result)
         }
     })
 })

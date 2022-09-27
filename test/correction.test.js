@@ -3,6 +3,36 @@ import {beforeEach, describe, expect, it, vi, test} from 'vitest';
 import { assessItem, STATUS_BAD_FORM, STATUS_BAD_UNIT, STATUS_CORRECT, STATUS_EMPTY, STATUS_INCORRECT, STATUS_UNOPTIMAL_FORM } from '../src/routes/automaths/correction'
 import generateQuestion from '../src/routes/automaths/generateQuestion'
 
+describe('testing question types', () => {
+    const specs = [[
+        {
+        },
+        {
+            check_type: "result"
+        },
+    ],
+    [
+        {
+            choices:[['1', '2']],
+        },
+        {
+            check_type: "choice"
+        },
+    ]
+]
+
+    test.each(specs)('question has the good type', (q, check) => {
+        const generated = generateQuestion(q)
+        const item = {
+            ...generated,
+            ...check
+        }
+
+        assessItem(item)
+        expect(item.type).toBe(item.check_type)
+    })
+})
+
 describe('testing empty answer', () => {
     const specs = [[
         {

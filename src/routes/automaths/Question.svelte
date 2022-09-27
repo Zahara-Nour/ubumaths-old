@@ -180,6 +180,7 @@
 	}
 
 	function initQuestion(question) {
+		console.log('init question')
 		const q = question
 		removeListeners()
 
@@ -199,7 +200,7 @@
 		expression2 = question.expression2_latex
 
 		if (interactive) {
-			if (expression && question.type === 'result' && !question.answerFields) {
+			if (expression && (question.type === 'result' || question.type === 'rewrite' ) && !question.answerFields) {
 				expression += '=\\ldots'
 			}
 
@@ -210,12 +211,14 @@
 				question.type !== 'choice' &&
 				question.type !== 'choices'
 			) {
-				answerFields = '\\ldots'
+				answerFields = '$$\\ldots$$'
 			}
 			if (answerFields) {
+				console.log('replace answerfields >', answerFields)
 				answerFields = $formatLatex(
 					answerFields.replace(/\?/g, '\\ldots'),
 				).replace(/…/g, addMathfield)
+				console.log('replace answerfields <', answerFields)
 			}
 		} else {
 			answerFields = null
@@ -264,6 +267,7 @@
 	}
 
 	function prepareInteractive() {
+		console.log('prepare interactive')
 		mfs = []
 		nmfs = 0
 
@@ -344,6 +348,7 @@
 
 	afterUpdate(() => {
 		// il faut créer les mathfields
+		console.log('afterUpdate')
 		if (!correction && interactive) {
 			const elements = []
 			if (answerFields) {

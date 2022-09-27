@@ -481,7 +481,7 @@ const questions = {
 						},
 					],
 					options: ['remove-null-terms'],
-					type: 'rewrite',
+					type: 'result',
 					defaultDelay: 20,
 					grade: CM1,
 				},

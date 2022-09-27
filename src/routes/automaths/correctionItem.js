@@ -37,6 +37,8 @@ export function createCorrection(item) {
 		choices,
 	} = item
 
+	if (!solutions) return
+
 	let line
 	let lines = []
 	let coms = item.coms || []

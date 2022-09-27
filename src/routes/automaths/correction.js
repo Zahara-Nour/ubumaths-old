@@ -633,6 +633,8 @@ export function assessItem(item) {
 	// le statut de chaque réponse si il y a plusieurs champs réponses
 	// initialisée à CORRECT ou EMPTY
 	if (!item.answers) {
+		item.answers=[]
+		item.answers_latex=[]
 		item.statuss = [STATUS_EMPTY]
 	} else {
 		item.statuss = item.answers.map((answer) =>
@@ -800,6 +802,7 @@ export function assessItem(item) {
 			}
 		}
 	}
+
 
 	createCorrection(item)
 	// console.log('assess item', item)

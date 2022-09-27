@@ -554,7 +554,9 @@ export default function generateQuestion(
 							.replace(/&answer/g, '&solution')
 							.replace(/&ans/g, '&sol'),
 				  ),
-			answer: answer || correct.map((c) => c.replace(regex, replacement)).filter(m => !!m)[0],
+			answer:
+				answer ||
+				correct.map((c) => c.replace(regex, replacement)).filter((m) => !!m)[0],
 		}
 	}
 
@@ -634,13 +636,15 @@ export default function generateQuestion(
 			shuffle(a)
 
 			choices = choices.map((_, i) => choices[a[i]])
-			solutions = solutions.map((solution) =>
-				typeof solution === 'number'
-					? a.indexOf(solution) // il faut retrouver le nouvel index de la solution
-					: solution,
-			)
-			if (question.type === 'choices') {
-				solutions.sort()
+			if (solutions) {
+				solutions = solutions.map((solution) =>
+					typeof solution === 'number'
+						? a.indexOf(solution) // il faut retrouver le nouvel index de la solution
+						: solution,
+				)
+				if (question.type === 'choices') {
+					solutions.sort()
+				}
 			}
 		}
 	}
