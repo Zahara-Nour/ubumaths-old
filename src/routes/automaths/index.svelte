@@ -48,17 +48,17 @@
 	const first_subdomain = decodeURI($page.url.searchParams.get('subdomain'))
 	const first_level = parseInt(decodeURI($page.url.searchParams.get('level')), 10)
 
-	$: console.log('theme', theme)
-	$: console.log('domain', domain)
-	$: console.log('subdomain', subdomain)
-	$: console.log('level', level)
+	// $: console.log('theme', theme)
+	// $: console.log('domain', domain)
+	// $: console.log('subdomain', subdomain)
+	// $: console.log('level', level)
 
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
 
 	function changeGrade(grade) {
-		console.log('-change grade')
+		// console.log('-change grade')
 		availableLevels = getAvailablesLevels(grade)
 		themes = Object.keys(availableLevels)
 		if (!theme && first_theme && themes.includes(first_theme)) {
@@ -71,9 +71,9 @@
 	}
 
 	function changeTheme(t) {
-		console.log('-change theme', t)
+		// console.log('-change theme', t)
 		const domains = Object.keys(availableLevels[t])
-		console.log('domains', domains)
+		// console.log('domains', domains)
 		if (domains) {
 			panelOpenStatus = {}
 			domains.forEach((d) => {
@@ -92,17 +92,17 @@
 	}
 
 	function changeDomain(d) {
-		console.log('-change domain', d)
+		// console.log('-change domain', d)
 		domain = d
 		const subdomains = Object.keys(availableLevels[theme][domain])
-		console.log('subdomains', subdomains)
+		// console.log('subdomains', subdomains)
 		if (subdomains && subdomains.length) {
 			const subd =
 				!subdomain && first_subdomain && subdomains.includes(first_subdomain)
 					? first_subdomain
 					: subdomains[0]
 			const levels = availableLevels[theme][domain][subd]
-			console.log('levels', levels)
+			// console.log('levels', levels)
 			if (levels) {
 				const l= !level && first_level && levels.includes(first_level) ? first_level : levels[0]
 				changeLevel(subd, l)
@@ -111,10 +111,10 @@
 	}
 
 	function changeLevel(subd, l) {
-		console.log('-change subd level', subd, l)
+		// console.log('-change subd level', subd, l)
 		subdomain = subd
 		level = l
-		console.log('generate')
+		// console.log('generate')
 		generated = generateExemple(theme, domain, subdomain, level)
 
 		if (generated.image) {
@@ -181,7 +181,7 @@
 
 		let href = '/automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
-		console.log('classroom', classroom)
+		// console.log('classroom', classroom)
 		if (classroom) href += '&classroom=true'
 		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		goto(href)
