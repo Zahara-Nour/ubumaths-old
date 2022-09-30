@@ -37,7 +37,7 @@ export function createCorrection(item) {
 		choices,
 	} = item
 
-	if (!solutions) return
+	if (!solutions && !item.testAnswer) return
 
 	let line
 	let lines = []

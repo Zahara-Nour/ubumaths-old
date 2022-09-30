@@ -226,29 +226,10 @@ function checkConstraints(item) {
 }
 
 function checkTermsAndFactors(item) {
-	let sols = item.solutions.map((solution) => math(solution))
-	sols = sols.map((solution) =>
-		solution
-			.removeZerosAndSpaces()
-			.reduceFractions()
-			.simplifyNullProducts()
-			.removeNullTerms()
-			.removeFactorsOne()
-			.removeSigns()
-			.removeUnecessaryBrackets()
-			.removeMultOperator(),
-	)
-
-	item.answers.forEach((answer, i) => {
-		if (
-			item.statuss[i] !== STATUS_EMPTY &&
-			item.statuss[i] !== STATUS_INCORRECT
-		) {
-			let e = math(answer)
-
-			// Les tests de contraintes ont été faits. Il faut simplifier la réponse pour pouvoir
-			// la comparer à la solution : on enlève les parenthèses inutiles, les signes inutiles....
-			e = e
+	if (item.solutions) {
+		let sols = item.solutions.map((solution) => math(solution))
+		sols = sols.map((solution) =>
+			solution
 				.removeZerosAndSpaces()
 				.reduceFractions()
 				.simplifyNullProducts()
@@ -256,93 +237,120 @@ function checkTermsAndFactors(item) {
 				.removeFactorsOne()
 				.removeSigns()
 				.removeUnecessaryBrackets()
-				.removeMultOperator()
+				.removeMultOperator(),
+		)
 
-			// item.cleanedExp = e.string
-			// item.cleanedSolutions = sols.map((s) => s.string)
-			// }
-
+		item.answers.forEach((answer, i) => {
 			if (
-				item.options.includes('disallow-terms-and-factors-permutation') ||
-				item.options.includes('penalty-for-terms-and-factors-permutation')
+				item.statuss[i] !== STATUS_EMPTY &&
+				item.statuss[i] !== STATUS_INCORRECT
 			) {
-				if (!sols[i].strictlyEquals(e)) {
-					if (
-						item.options.includes(
-							'penalty-for-terms-and-factors-permutation',
-						) &&
-						item.statuss[i] !== STATUS_BAD_FORM &&
-						item.statuss[i] !== STATUS_BAD_UNIT
-					) {
-						item.unoptimals.push('terms and factors unordered')
-						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-						item.coms.push(
-							item.answers.length === 1
-								? TERMS_FACTORS_PERMUTATION
-								: TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
-						)
-					} else {
-						item.statuss[i] = STATUS_BAD_FORM
-						item.coms.push(
-							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
-						)
+				let e = math(answer)
+
+				// Les tests de contraintes ont été faits. Il faut simplifier la réponse pour pouvoir
+				// la comparer à la solution : on enlève les parenthèses inutiles, les signes inutiles....
+				e = e
+					.removeZerosAndSpaces()
+					.reduceFractions()
+					.simplifyNullProducts()
+					.removeNullTerms()
+					.removeFactorsOne()
+					.removeSigns()
+					.removeUnecessaryBrackets()
+					.removeMultOperator()
+
+				// item.cleanedExp = e.string
+				// item.cleanedSolutions = sols.map((s) => s.string)
+				// }
+
+				if (
+					item.options.includes('disallow-terms-and-factors-permutation') ||
+					item.options.includes('penalty-for-terms-and-factors-permutation')
+				) {
+					if (!sols[i].strictlyEquals(e)) {
+						if (
+							item.options.includes(
+								'penalty-for-terms-and-factors-permutation',
+							) &&
+							item.statuss[i] !== STATUS_BAD_FORM &&
+							item.statuss[i] !== STATUS_BAD_UNIT
+						) {
+							item.unoptimals.push('terms and factors unordered')
+							item.statuss[i] = STATUS_UNOPTIMAL_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? TERMS_FACTORS_PERMUTATION
+									: TERMS_FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
+							)
+						} else {
+							item.statuss[i] = STATUS_BAD_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? BAD_FORM
+									: BAD_FORM_MULTIPLE_ANSWERS,
+							)
+						}
 					}
-				}
-			} else if (
-				item.options.includes('disallow-terms-permutation') ||
-				item.options.includes('penalty-for-terms-permutation')
-			) {
-				e = e.sortFactors()
-				sols = sols.map((solution) => solution.sortFactors())
-				if (!sols[i].strictlyEquals(e)) {
-					if (
-						item.options.includes('penalty-for-terms-permutation') &&
-						item.statuss[i] !== STATUS_BAD_FORM &&
-						item.statuss[i] !== STATUS_BAD_UNIT
-					) {
-						item.unoptimals.push('terms unordered')
-						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-						item.coms.push(
-							item.answers.length === 1
-								? TERMS_PERMUTATION
-								: TERMS_PERMUTATION_MULTIPLE_ANSWERS,
-						)
-					} else {
-						item.statuss[i] = STATUS_BAD_FORM
-						item.coms.push(
-							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
-						)
+				} else if (
+					item.options.includes('disallow-terms-permutation') ||
+					item.options.includes('penalty-for-terms-permutation')
+				) {
+					e = e.sortFactors()
+					sols = sols.map((solution) => solution.sortFactors())
+					if (!sols[i].strictlyEquals(e)) {
+						if (
+							item.options.includes('penalty-for-terms-permutation') &&
+							item.statuss[i] !== STATUS_BAD_FORM &&
+							item.statuss[i] !== STATUS_BAD_UNIT
+						) {
+							item.unoptimals.push('terms unordered')
+							item.statuss[i] = STATUS_UNOPTIMAL_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? TERMS_PERMUTATION
+									: TERMS_PERMUTATION_MULTIPLE_ANSWERS,
+							)
+						} else {
+							item.statuss[i] = STATUS_BAD_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? BAD_FORM
+									: BAD_FORM_MULTIPLE_ANSWERS,
+							)
+						}
 					}
-				}
-			} else if (
-				item.options.includes('disallow-factors-permutation') ||
-				item.options.includes('penalty-for-factors-permutation')
-			) {
-				e = e.sortTerms()
-				sols = sols.map((solution) => solution.sortTerms())
-				if (!sols[i].strictlyEquals(e)) {
-					if (
-						item.options.includes('penalty-for-factors-permutation') &&
-						item.statuss[i] !== STATUS_BAD_FORM &&
-						item.statuss[i] !== STATUS_BAD_UNIT
-					) {
-						item.unoptimals.push('factors unordered')
-						item.statuss[i] = STATUS_UNOPTIMAL_FORM
-						item.coms.push(
-							item.answers.length === 1
-								? FACTORS_PERMUTATION
-								: FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
-						)
-					} else {
-						item.statuss[i] = STATUS_BAD_FORM
-						item.coms.push(
-							item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
-						)
+				} else if (
+					item.options.includes('disallow-factors-permutation') ||
+					item.options.includes('penalty-for-factors-permutation')
+				) {
+					e = e.sortTerms()
+					sols = sols.map((solution) => solution.sortTerms())
+					if (!sols[i].strictlyEquals(e)) {
+						if (
+							item.options.includes('penalty-for-factors-permutation') &&
+							item.statuss[i] !== STATUS_BAD_FORM &&
+							item.statuss[i] !== STATUS_BAD_UNIT
+						) {
+							item.unoptimals.push('factors unordered')
+							item.statuss[i] = STATUS_UNOPTIMAL_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? FACTORS_PERMUTATION
+									: FACTORS_PERMUTATION_MULTIPLE_ANSWERS,
+							)
+						} else {
+							item.statuss[i] = STATUS_BAD_FORM
+							item.coms.push(
+								item.answers.length === 1
+									? BAD_FORM
+									: BAD_FORM_MULTIPLE_ANSWERS,
+							)
+						}
 					}
 				}
 			}
-		}
-	})
+		})
+	}
 }
 
 function checkUnits(item) {
@@ -565,49 +573,52 @@ function checkZeros(item) {
 }
 
 function checkForm(item) {
-	const result = []
-	item.answers.forEach((answer, i) => {
-		if (
-			item.statuss[i] !== STATUS_EMPTY &&
-			item.statuss[i] !== STATUS_INCORRECT
-		) {
-			const e = math(answer)
-				.removeZerosAndSpaces()
-				.reduceFractions()
-				.simplifyNullProducts()
-				.removeNullTerms()
-				.removeFactorsOne()
-				.removeSigns()
-				.removeUnecessaryBrackets()
-				.removeMultOperator()
-				.sortTermsAndFactors()
+	if (item.solutions) {
+		// const result = []
+		item.answers.forEach((answer, i) => {
+			if (
+				item.statuss[i] !== STATUS_EMPTY &&
+				item.statuss[i] !== STATUS_INCORRECT
+			) {
+				const e = math(answer)
+					.removeZerosAndSpaces()
+					.reduceFractions()
+					.simplifyNullProducts()
+					.removeNullTerms()
+					.removeFactorsOne()
+					.removeSigns()
+					.removeUnecessaryBrackets()
+					.removeMultOperator()
+					.sortTermsAndFactors()
 
-			const indexSolution = item.options?.includes(
-				'solutions-order-not-important',
-			)
-				? item.solutionsIndexs[i]
-				: i
-			const solution = math(item.solutions[indexSolution])
-				.removeZerosAndSpaces()
-				.reduceFractions()
-				.simplifyNullProducts()
-				.removeNullTerms()
-				.removeFactorsOne()
-				.removeSigns()
-				.removeUnecessaryBrackets()
-				.removeMultOperator()
-				.sortTermsAndFactors()
-
-			// il faut trouver une autre solution quand il y a des unités
-			if (!e.unit && !e.strictlyEquals(solution)) {
-				item.statuss[i] = STATUS_BAD_FORM
-				item.coms.push(
-					item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+				const indexSolution = item.options?.includes(
+					'solutions-order-not-important',
 				)
+					? item.solutionsIndexs[i]
+					: i
+				const solution = math(item.solutions[indexSolution])
+					.removeZerosAndSpaces()
+					.reduceFractions()
+					.simplifyNullProducts()
+					.removeNullTerms()
+					.removeFactorsOne()
+					.removeSigns()
+					.removeUnecessaryBrackets()
+					.removeMultOperator()
+					.sortTermsAndFactors()
+
+				// il faut trouver une autre solution quand il y a des unités
+				if (!e.unit && !e.strictlyEquals(solution)) {
+					item.statuss[i] = STATUS_BAD_FORM
+					item.coms.push(
+						item.answers.length === 1 ? BAD_FORM : BAD_FORM_MULTIPLE_ANSWERS,
+					)
+				}
 			}
-		}
-	})
-	return result
+		})
+
+		// return result
+	}
 }
 
 // on évalue la réponse de l'utilisateur en donnant un statut à chaque élément de la réponse,
@@ -623,7 +634,7 @@ export function assessItem(item) {
 	}
 
 	item.options = item.options || []
-	item.coms =  []
+	item.coms = []
 
 	item.unoptimals = []
 
@@ -633,8 +644,8 @@ export function assessItem(item) {
 	// le statut de chaque réponse si il y a plusieurs champs réponses
 	// initialisée à CORRECT ou EMPTY
 	if (!item.answers) {
-		item.answers=[]
-		item.answers_latex=[]
+		item.answers = []
+		item.answers_latex = []
 		item.statuss = [STATUS_EMPTY]
 	} else {
 		item.statuss = item.answers.map((answer) =>
@@ -720,16 +731,17 @@ export function assessItem(item) {
 		) {
 			// Premièrement, vérification que la ou les réponses sont seulement équivalentes à la solution
 			//  ou vérifient le critère de validation
-			if (item.testAnswers) {
+			if (item.testAnswer) {
+				console.log('correction with testAnswer')
 				item.answers.forEach((answer, i) => {
 					if (
-						(item.testAnswers[i] &&
+						(item.testAnswer[i] &&
 							item.statuss[i] !== STATUS_EMPTY &&
 							item.statuss[i] !== STATUS_INCORRECT) ||
 						(item.statuss[0] !== STATUS_EMPTY &&
 							item.statuss[0] !== STATUS_INCORRECT)
 					) {
-						const t = item.testAnswers[i] || item.testAnswers[0]
+						const t = item.testAnswer[i] || item.testAnswer[0]
 						const tests = t.replace(/&answer/g, answer).split('&&')
 						const failed = tests.some((test) => math(test).eval().isFalse())
 						if (failed) {
@@ -742,7 +754,6 @@ export function assessItem(item) {
 			// les solutions sont explicites et sont dans item.solutions
 			else {
 				item.answers.forEach((answer, i) => {
-
 					if (
 						item.statuss[i] !== STATUS_EMPTY &&
 						item.statuss[i] !== STATUS_INCORRECT
@@ -803,7 +814,6 @@ export function assessItem(item) {
 		}
 	}
 
-
 	createCorrection(item)
-	// console.log('assess item', item)
+	console.log('assess item', item)
 }

@@ -181,7 +181,6 @@
 
 		let href = '/automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
-		// console.log('classroom', classroom)
 		if (classroom) href += '&classroom=true'
 		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		goto(href)

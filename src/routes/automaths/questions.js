@@ -151,13 +151,11 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								'Dans $$[._&4_]$$ le chiffre des dizaines est &answer.',
+								'Le chiffre des dizaines est &answer.',
 							],
-							answer: 'Le chiffre des dizaines est &answer.',
 						},
 						{
-							correct: ['Dans $$[._&4_]$$ le chiffre des unités est &answer.'],
-							answer: 'Le chiffre des unités est &answer.',
+							correct: ['Le chiffre des unités est &answer.'],
 						},
 					],
 					options: [
@@ -350,14 +348,13 @@ const questions = {
 						'Je suis un nombre à 3 chiffres. Mon <b>chiffre des unités</b> est $$&1$$. Le <b>nombre</b> de mes dizaines est le double du chiffre des unités. Qui suis-je ?',
 						'Je suis un nombre à 3 chiffres. Mon <b>chiffre des unités</b> est $$&1$$. Le <b>nombre</b> de mes dizaines est le triple du chiffre des unités. Qui suis-je ?',
 					],
-					expressions: ['&1*21', '&1*31'],
+					solutions: [['&1*21'], ['&1*31']],
 					variables: [{ '&1': '$e[5;9]' }],
 					correctionFormat: [
 						{
 							correct: ['Je suis &answer.'],
 						},
 					],
-					options: ['no-exp'],
 
 					defaultDelay: 30,
 					grade: CM2,
@@ -373,6 +370,25 @@ const questions = {
 					variables: [{ '&1': '$e[1;9]', '&2': '$e[1;9]' }],
 					defaultDelay: 20,
 					grade: CP,
+				},
+				{
+					description:
+						"Décomposition décimale -> nombre entier (jusqu'aux centaines)",
+					enounces: [
+						"Réécris cette expression sous la forme d'un nombre entier.",
+					],
+					expressions: ['(&1*100) +  (&2*10) + &3'],
+					variables: [
+						{
+							'&1': '$e[0;9]',
+							'&2': '$e[0;9]',
+							'&3': '$e[0;9]',
+						},
+					],
+					options: ['remove-null-terms'],
+					type: 'result',
+					defaultDelay: 20,
+					grade: CE1,
 				},
 				{
 					description: "Décomposer l'écriture décimale un nombre",
@@ -415,6 +431,26 @@ const questions = {
 					],
 					defaultDelay: 30,
 					grade: CE1,
+				},
+				{
+					description:
+						"Décomposition décimale -> nombre entier (jusqu'aux milliers)",
+					enounces: [
+						"Réécris cette expression sous la forme d'un nombre entier.",
+					],
+					expressions: ['(&1*1000) +  (&2*100) + (&3*10) + &4'],
+					variables: [
+						{
+							'&1': '$e[0;9]',
+							'&2': '$e[0;9]',
+							'&3': '$e[0;9]',
+							'&4': '$e[0;9]',
+						},
+					],
+					options: ['remove-null-terms'],
+					type: 'result',
+					defaultDelay: 20,
+					grade: CE2,
 				},
 				{
 					description: "Décomposer l'écriture décimale un nombre",
@@ -2211,6 +2247,38 @@ const questions = {
 					grade: CE1,
 				},
 				{
+					description: 'Additionner par regroupements',
+					subdescription: '4 Nombres à 2 chiffres.',
+					enounces: ['Calcule de manière astucieuse.'],
+					expressions: ['&4+[_&1*10-&4_]+&8+[_&5*10-&8_]'],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								\\bold{\\textcolor{${color1}}{&4}}+\\bold{\\textcolor{${color1}}{[_&1*10-&4_]}} + \\bold{\\textcolor{${color2}}{&8}}+\\bold{\\textcolor{${color2}}{[_&5*10-&8_]}} \
+								 &= \\bold{\\textcolor{${color1}}{[_&1*10_]}} + \\bold{\\textcolor{${color2}}{[_&5*10_]}} \\\\  \
+								 &=  &sol \
+								 \\end{align}$$`,
+							},
+						],
+					],
+					variables: [
+						{
+							'&1': '$e[3;9]',
+							'&2': '$e[1;&1-2]',
+							'&3': '$e{1}',
+							'&4': '[_&2*10+&3_]',
+							'&5': '$e[3;9]',
+							'&6': '$e[1;&5-2]',
+							'&7': '$e{1}',
+							'&8': '[_&6*10+&7_]',
+						},
+					],
+
+					defaultDelay: 20,
+					grade: CE1,
+				},
+				{
 					description: 'Calculer une somme',
 					subdescription:
 						'Somme d’un nombre ayant au plus quatre chiffres et de 9 ou 19',
@@ -2355,7 +2423,7 @@ const questions = {
 							'&2': '$e[2;9]',
 							'&3': '$e[2;9]',
 							'&4': '$e[1;&2-1]',
-							'&5': '$e[0;&3-1]',
+							'&5': '$e[1;&3-1]',
 						},
 					],
 
@@ -4086,96 +4154,6 @@ const questions = {
 					defaultDelay: 20,
 					grade: CE2,
 				},
-				{
-					description: 'Calculer astucieusement un produit',
-					subdescription:
-						'Utiiser 2 facteurs dont le produit est 10 (avec 0,5)',
-					enounces: ['Calcule de manière astucieuse.'],
-					expressions: [
-						'20*[_2*&1_]*0,5',
-						'0,5*[_2*&1_]*20',
-						'[_2*&1_]*0,5*20',
-						'[_2*&1_]*20*0,5',
-					],
-					variables: [{ '&1': '$e[3;19]' }],
-					correctionDetails: [
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{20}} \\times [_2*&1_] \\times  \\bold{\\textcolor{${color1}}{0,5}} &= \\bold{\\textcolor{${color1}}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{0,5}} \\times [_2*&1_] \\times  \\bold{\\textcolor{${color1}}{20}} &= \\bold{\\textcolor{${color1}}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{${color1}}{20}} \\times  \\bold{\\textcolor{${color1}}{0,5}} &= [_2*&1_] \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{${color1}}{0,5}} \\times  \\bold{\\textcolor{${color1}}{20}} &=   [_2*&1_] \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-					],
-
-					defaultDelay: 15,
-					grade: CM2,
-				},
-				{
-					description: 'Calculer astucieusement un produit',
-					subdescription:
-						'Utiiser 2 facteurs dont le produit est 10 (avec 0,2 ; 0,25 ; 0,5)',
-					enounces: ['Calcule de manière astucieuse.'],
-					expressions: [
-						'&1*&2*&3',
-						'&2*&1*&3',
-						'&2*&3*&1',
-						'&1*&3*&2',
-						'&3*&2*&1',
-						'&3*&1*&2',
-					],
-					variables: [
-						{ '&1': '$l{0,2;0,25;0,5}', '&2': '[_10:&1_]', '&3': '$e[3;19]' },
-					],
-					correctionDetails: [
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}}  \\times  \\bold{\\textcolor{${color1}}{&2}} \\times &3 &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{&2}}  \\times  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &3 &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{&2}}  \\times  &3 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}}  \\times  &3 \\times \\bold{\\textcolor{${color1}}{&2}} &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} &3 \\times \\bold{\\textcolor{${color1}}{&2}} \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &= &3 \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-						[
-							{
-								text: `$$\\begin{align} &3 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \\times \\bold{\\textcolor{${color1}}{&2}} &= &3 \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
-							},
-						],
-					],
-
-					defaultDelay: 20,
-					grade: CM2,
-				},
 			],
 			Distributivité: [
 				{
@@ -4671,7 +4649,7 @@ const questions = {
 					variables: [{ '&1': '$e[2;9]', '&2': '$e[2;9]\\{&1}' }],
 					expressions: ['[_&1*&2_]=&1*&2'],
 					// solutions: [['&1']],
-					testAnswer: [
+					testAnswers: [
 						'&answer!=1 && &answer!=[_&1*&2_] && mod([_&1*&2_]; &answer)=0',
 					],
 					type: 'rewrite',
@@ -4692,7 +4670,7 @@ const questions = {
 						'Trouve un diviseur de $$[_&1*&2_]$$ (autre que $$1$$ et $$[_&1*&2_]$$).',
 					],
 					variables: [{ '&1': '$e[2;9]', '&2': '$e[2;9]\\{&1}' }],
-					testAnswer: [
+					testAnswers: [
 						'&answer!=1 && &answer!=[_&1*&2_] && mod([_&1*&2_]; &answer)=0',
 					],
 					type: 'rewrite',
@@ -4706,108 +4684,6 @@ const questions = {
 					],
 
 					defaultDelay: 15,
-					grade: CE2,
-				},
-				{
-					description:
-						'Reconnaître un quotient et un reste dans une division euclidienne ',
-					enounces: [
-						"En regardant l'égalité ci-dessous, quel est le <b>quotient</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-						"En regardant l'égalité ci-dessous, quel est le <b>reste</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-					],
-					variables: [
-						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
-					],
-					expressions: ['[_&1*&2+&3_]=(&1* &2) +&3'],
-					solutions: [['&1'], ['&3']],
-					correctionFormat: [
-						{
-							correct: [
-								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le quotient est &answer.',
-							],
-							answer: 'Le quotient est &answer.',
-						},
-						{
-							correct: [
-								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le reste est &answer.',
-							],
-							answer: 'Le reste est &answer.',
-						},
-					],
-					correctionDetails: [
-						[
-							{
-								text: `&solution car $$[_&1*&2+&3_]=(\\textcolor{${color1}}{&1} \\times &2) + &3$$`,
-							},
-						],
-						[
-							{
-								text: `&solution car $$[_&1*&2+&3_]=(&1 \\times &2) + \\textcolor{${color1}}{&3}$$`,
-							},
-						],
-					],
-					type: 'rewrite',
-					defaultDelay: 30,
-					grade: CE2,
-				},
-				{
-					description: 'Est-ce bien un reste de division eudlienne ? ',
-					enounces: [
-						"En regardant l'égalité ci-dessous, peut-on dire que $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-						"En regardant l'égalité ci-dessous, peut-on dire que $$[_&3+&2_]$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-					],
-					variables: [
-						{ '&1': '$e[3;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
-					],
-					expressions: [
-						'[_&1*&2+&3_]=(&1* &2) + &3',
-						'[_&1*&2+&3_]=([_&1-1_]* &2) + [_&3+&2_]',
-					],
-					solutions: [[0], [1]],
-					choices: [[{ text: 'oui' }, { text: 'non' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'&answer, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.',
-							],
-							answer: "&answer, $$&3$$ n'est pas le reste.",
-						},
-						{
-							correct: [
-								"&answer, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.",
-							],
-							answer: '&answer, $$[_&3+&2_]$$ est le reste.',
-						},
-					],
-					correctionDetails: [
-						[
-							{
-								text: "&solution, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=(&1 \\times &2) + &3$$, on a bien $$&3<&2$$.",
-							},
-						],
-						[
-							{
-								text: "&solution, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=([_&1-1_] \\times &2) + [_&3+&2_]$$, on n'a <b>pas</b>  $$[_&3+&2_]<&2$$.",
-							},
-						],
-					],
-					options: ['no-shuffle-choices'],
-					defaultDelay: 30,
-					grade: CE2,
-				},
-				{
-					description: 'Effectuer une division euclidienne ',
-					enounces: [
-						"Ecris l'égalité correspondant à la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.",
-					],
-					variables: [
-						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
-					],
-					expressions: ['[_&1*&2+&3_]'],
-					solutions: [['[_(&1*&2)+&3_] =(&1*&2)+&3']],
-					options: ['no-exp'],
-					type: 'rewrite',
-					defaultDelay: 30,
 					grade: CE2,
 				},
 				{
@@ -4920,6 +4796,129 @@ const questions = {
 					options: ['no-shuffle-choices'],
 					defaultDelay: 15,
 					grade: CM2,
+				},
+			],
+			'Division euclidienne': [
+				{
+					description:
+						'Reconnaître un quotient et un reste dans une division euclidienne ',
+					enounces: [
+						"En regardant l'égalité ci-dessous, quel est le <b>quotient</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+						"En regardant l'égalité ci-dessous, quel est le <b>reste</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+					],
+					variables: [
+						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+					],
+					expressions: ['[_&1*&2+&3_]=(&1* &2) +&3'],
+					solutions: [['&1'], ['&3']],
+					correctionFormat: [
+						{
+							correct: [
+								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le quotient est &answer.',
+							],
+							answer: 'Le quotient est &answer.',
+						},
+						{
+							correct: [
+								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le reste est &answer.',
+							],
+							answer: 'Le reste est &answer.',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `&solution car $$[_&1*&2+&3_]=(\\textcolor{${color1}}{&1} \\times &2) + &3$$`,
+							},
+						],
+						[
+							{
+								text: `&solution car $$[_&1*&2+&3_]=(&1 \\times &2) + \\textcolor{${color1}}{&3}$$`,
+							},
+						],
+					],
+					type: 'rewrite',
+					defaultDelay: 30,
+					grade: CE2,
+				},
+				{
+					description: 'Est-ce bien un reste de division eudlienne ? ',
+					enounces: [
+						"En regardant l'égalité ci-dessous, peut-on dire que $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+						"En regardant l'égalité ci-dessous, peut-on dire que $$[_&3+&2_]$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+					],
+					variables: [
+						{ '&1': '$e[3;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+					],
+					expressions: [
+						'[_&1*&2+&3_]=(&1* &2) + &3',
+						'[_&1*&2+&3_]=([_&1-1_]* &2) + [_&3+&2_]',
+					],
+					solutions: [[0], [1]],
+					choices: [[{ text: 'oui' }, { text: 'non' }]],
+					correctionFormat: [
+						{
+							correct: [
+								'&answer, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.',
+							],
+							answer: "&answer, $$&3$$ n'est pas le reste.",
+						},
+						{
+							correct: [
+								"&answer, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.",
+							],
+							answer: '&answer, $$[_&3+&2_]$$ est le reste.',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "&solution, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=(&1 \\times &2) + &3$$, on a bien $$&3<&2$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=([_&1-1_] \\times &2) + [_&3+&2_]$$, on n'a <b>pas</b>  $$[_&3+&2_]<&2$$.",
+							},
+						],
+					],
+					options: ['no-shuffle-choices'],
+					defaultDelay: 30,
+					grade: CE2,
+				},
+				{
+					description: "Compléter l'égalité d'une division euclidienne",
+					enounces: [
+						"Complète l'égalité de la division euclidienne ci-dessous :",
+					],
+					variables: [
+						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+					],
+					answerFields: ['$$[_&1*&2+&3_]=(&1\\times ?) + ?$$'],
+					solutions: [['&2', '&3']],
+					defaultDelay: 30,
+					correctionFormat: [
+						{
+							correct: ['$$[_&1*&2+&3_]=(&1\\times &ans1) + &ans2$$'],
+						},
+					],
+					grade: CE2,
+				},
+
+				{
+					description: 'Effectuer une division euclidienne ',
+					enounces: [
+						"Ecris l'égalité correspondant à la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.",
+					],
+					variables: [
+						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+					],
+					expressions: ['[_&1*&2+&3_]'],
+					solutions: [['[_(&1*&2)+&3_] =(&1*&2)+&3']],
+					options: ['no-exp'],
+					type: 'rewrite',
+					defaultDelay: 30,
+					grade: CE2,
 				},
 			],
 		},
@@ -7033,6 +7032,96 @@ const questions = {
 					defaultDelay: 20,
 					grade: CM2,
 				},
+				{
+					description: 'Calculer astucieusement un produit',
+					subdescription:
+						'Utiiser 2 facteurs dont le produit est 10 (avec 0,5)',
+					enounces: ['Calcule de manière astucieuse.'],
+					expressions: [
+						'20*[_2*&1_]*0,5',
+						'0,5*[_2*&1_]*20',
+						'[_2*&1_]*0,5*20',
+						'[_2*&1_]*20*0,5',
+					],
+					variables: [{ '&1': '$e[3;19]' }],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{20}} \\times [_2*&1_] \\times  \\bold{\\textcolor{${color1}}{0,5}} &= \\bold{\\textcolor{${color1}}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{0,5}} \\times [_2*&1_] \\times  \\bold{\\textcolor{${color1}}{20}} &= \\bold{\\textcolor{${color1}}{10}} \\times [_2*&1_] \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{${color1}}{20}} \\times  \\bold{\\textcolor{${color1}}{0,5}} &= [_2*&1_] \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} [_2*&1_] \\times \\bold{\\textcolor{${color1}}{0,5}} \\times  \\bold{\\textcolor{${color1}}{20}} &=   [_2*&1_] \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+					],
+
+					defaultDelay: 15,
+					grade: CM2,
+				},
+				{
+					description: 'Calculer astucieusement un produit',
+					subdescription:
+						'Utiiser 2 facteurs dont le produit est 10 (avec 0,2 ; 0,25 ; 0,5)',
+					enounces: ['Calcule de manière astucieuse.'],
+					expressions: [
+						'&1*&2*&3',
+						'&2*&1*&3',
+						'&2*&3*&1',
+						'&1*&3*&2',
+						'&3*&2*&1',
+						'&3*&1*&2',
+					],
+					variables: [
+						{ '&1': '$l{0,2;0,25;0,5}', '&2': '[_10:&1_]', '&3': '$e[3;19]' },
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}}  \\times  \\bold{\\textcolor{${color1}}{&2}} \\times &3 &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{&2}}  \\times  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &3 &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{&2}}  \\times  &3 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}}  \\times  &3 \\times \\bold{\\textcolor{${color1}}{&2}} &= \\bold{\\textcolor{${color1}}{10}} \\times &3 \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} &3 \\times \\bold{\\textcolor{${color1}}{&2}} \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &= &3 \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} &3 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \\times \\bold{\\textcolor{${color1}}{&2}} &= &3 \\times \\bold{\\textcolor{${color1}}{10}} \\\\ &= &sol \\end{align}$$`,
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: CM2,
+				},
 			],
 			Distributivité: [
 				{
@@ -7049,22 +7138,102 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: `$$\\begin{align} &2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + [_10-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\
+								\\begin{align} \
+									&2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + [_10-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \
+									&=  \\left( &2 + [_10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\
+								\\begin{align} \
+									\\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2 + [_10-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \
+									&=  \\left( &2 + [_10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} &2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\\begin{align} \
+									&2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_10-&2_] \
+									&=  \\left( &2 + [_10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align}  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2+ \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_10-&2_] &=  10 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\\begin{align}  \
+									\\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2+ \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_10-&2_] \
+									&= \\bold{\\textcolor{${color1}}{[._&1_]}} \\times \\left( &2 + [_10-&2_] \\right)\\\\  \
+									&= \\bold{\\textcolor{${color1}}{[._&1_]}} \\times 10 \\\\  \
+									&= &sol \
+								\\end{align}$$`,
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: 'Utiliser la distributivité',
+					subdescription:
+						'Factorisation pour obternir un facteur égal à 10 (2)',
+					enounces: ['Calcule.'],
+					expressions: [
+						'&2*&1+[._10-&2_]*&1',
+						'&1*&2+[._10-&2_]*&1',
+						'&2*&1+&1*[._10-&2_]',
+						'&1*&2+&1*[._10-&2_]',
+					],
+					variables: [{ '&1': '$e[2;8]', '&2': '$d{1;1}' }],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								  [°&2°] \\times \\bold{\\textcolor{${color1}}{[_&1_]}} + [._10-&2_] \\times \\bold{\\textcolor{${color1}}{[_&1_]}} \
+								  &=  \\left( [°&2°] + [._10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\  \
+								  &=  10 \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\  \
+								  &= &sol \
+								\\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \
+									\\bold{\\textcolor{${color1}}{[_&1_]}} \\times [°&2°] + [._10-&2_] \\times \\bold{\\textcolor{${color1}}{[_&1_]}} \
+									&=  \\left( [°&2°] + [._10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\ \
+									&=  10 \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\ \
+									&= &sol\
+								\\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \
+									[°&2°] \\times \\bold{\\textcolor{${color1}}{[_&1_]}} + \\bold{\\textcolor{${color1}}{[_&1_]}} \\times [._10-&2_] \
+									&=  \\left( [°&2°] + [._10-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\ \
+									&=  10 \\times \\bold{\\textcolor{${color1}}{[_&1_]}}\\\\ \
+									&= &sol \
+								\\end{align}$$`,
+							},
+						],
+						[
+							{
+								text: `$$\\begin{align} \
+									\\bold{\\textcolor{${color1}}{[_&1_]}} \\times [°&2°]+ \\bold{\\textcolor{${color1}}{[_&1_]}} \\times [._10-&2_] \
+									&= \\bold{\\textcolor{${color1}}{[_&1_]}} \\times \\left( [°&2°] + [._10-&2_] \\right) \\\\ \
+									&= \\bold{\\textcolor{${color1}}{[_&1_]}} \\times 10\\\\ \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 					],
@@ -7086,22 +7255,45 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: `$$\\begin{align} &2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + [_100-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\
+								\\begin{align} \
+									&2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + [_100-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \
+									&=  \\left( &2 + [_100-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} &=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\
+								\\begin{align}\
+									\\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2 + [_100-&2_] \\times \\bold{\\textcolor{${color1}}{[._&1_]}} \
+									&=  \\left( &2 + [_100-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align} &2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\
+								\\begin{align} \
+									&2 \\times \\bold{\\textcolor{${color1}}{[._&1_]}} + \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_100-&2_] \
+									&=  \\left( &2 + [_100-&2_] \\right) \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  \
+									&= &sol \
+								\\end{align}$$`,
 							},
 						],
 						[
 							{
-								text: `$$\\begin{align}  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2+ \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_100-&2_] &=  100 \\times \\bold{\\textcolor{${color1}}{[._&1_]}}\\\\  &= &sol \\end{align}$$`,
+								text: `$$\\begin{align}\
+									\\bold{\\textcolor{${color1}}{[._&1_]}} \\times &2+ \\bold{\\textcolor{${color1}}{[._&1_]}} \\times [_100-&2_] \
+										&=  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times \\left( &2 + [_100-&2_] \\right) \\\\ \
+										&=  \\bold{\\textcolor{${color1}}{[._&1_]}} \\times 100 \\\\ \
+										&= &sol \
+									\\end{align}$$`,
 							},
 						],
 					],
@@ -10812,6 +11004,63 @@ const questions = {
 							'&4': '$l{&2 L}',
 						},
 					],
+					answerFields: [
+						'$$&3 + &4 = ? m$$',
+						'$$&3 + &4 = ? g$$',
+						'$$&3 + &4 = ? L$$',
+					],
+					solutions:[
+						["[_(&3+&4)/(1 m)_]"],
+						["[_(&3+&4)/(1 g)_]"],
+						["[_(&3+&4)/(1 L)_]"],
+					],
+
+					// testAnswers: [
+					// 	['&3+&4 = &answer m'],
+					// 	['&3+&4 = &answer g'],
+					// 	['&3+&4 = &answer L'],
+					// ],
+					correctionFormat: [
+						{
+							correct: ["$$&3+&4=$$&answer m"],
+						},
+						{
+							correct: ["$$&3+&4=$$&answer g"],
+						},
+						{
+							correct: ["$$&3+&4=$$&answer L"],
+						},
+					],
+					'result-type': 'decimal',
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: 'Calculer avec des unités',
+					subdescription: "L'unité est choisie par l'utilisateur",
+					enounces: [
+						" Calcule (Tu peux choisir l'unité que tu veux mais tu ne dois pas oublier de la mettre au résultat.)",
+					],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;9]',
+							'&3': '$l{&1 km; &1 hm ; &1 dam ; &1 dm ; &1 cm ; &1 mm}',
+							'&4': '$l{&2 m}',
+						},
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;9]',
+							'&3': '$l{&1 kg; &1 hg ; &1 dag ; &1 dg ; &1 cg ; &1 mg}',
+							'&4': '$l{&2 g}',
+						},
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;9]',
+							'&3': '$l{&1 kL; &1 hL ; &1 daL ; &1 dL ; &1 cL ; &1 mL}',
+							'&4': '$l{&2 L}',
+						},
+					],
 					expressions: ['&3 + &4'],
 
 					'result-type': 'decimal',
@@ -11948,147 +12197,329 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en minutes',
-					enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;10]',
+							'&2': '[_&1 h_min_]'
 						},
 					],
-					expressions: ['&1 h'],
-					correctionDetails: [
-						[{ text: '$$&1\\,h = &1 \\times 60\\,min = &sol$$' }],
+					answerFields: ['$$&1\\,h = ?\\,min$$'],
+					solutions:[['[_&2/(1 min)_]']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$&1\\,h =$$&answer $$min$$",
+							],
+						},
 					],
-					units: ['min'],
-					options: ['require-specific-unit'],
-
+					correctionDetails: [
+						[{ text: '$$&1\\,h = &1 \\times 60\\,min=$$&solution $$min$$' }],
+					],
+					// units: ['min'],
+					// options: ['require-specific-unit'],
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'heures en minutes',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;10]',
+				// 		},
+				// 	],
+				// 	expressions: ['&1 h'],
+				// 	correctionDetails: [
+				// 		[{ text: '$$&1\\,h = &1 \\times 60\\,min = &sol$$' }],
+				// 	],
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en heures',
-					enounces: ["Convertis en heures (n'oublie pas l'unité <i>h</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;10]',
 						},
 					],
-					expressions: ['[_&1*60_] min'],
-					correctionDetails: [
-						[{ text: '$$[_&1*60_]\\,min = &1 \\times 60\\,min = &sol$$' }],
+					answerFields: ['$$[_&1*60_]\\,min= ? h$$'],
+					solutions:[['&1']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$[_&1*60_]\\,min =$$&answer $$h$$",
+							],
+						},
 					],
-					units: ['h'],
-					options: ['require-specific-unit'],
+					correctionDetails: [
+						[{ text: '$$[_&1*60_]\\,min = &1 \\times 60\\,min =$$&solution $$h$$' }],
+					],
+					// units: ['h'],
+					// options: ['require-specific-unit'],
 
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'minutes en heures',
+				// 	enounces: ["Convertis en heures (n'oublie pas l'unité <i>h</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;10]',
+				// 		},
+				// 	],
+				// 	expressions: ['[_&1*60_] min'],
+				// 	correctionDetails: [
+				// 		[{ text: '$$[_&1*60_]\\,min = &1 \\times 60\\,min = &sol$$' }],
+				// 	],
+				// 	units: ['h'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en secondes',
-					enounces: ["Convertis en secondes (n'oublie pas l'unité <i>s</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;10]',
+							'&2': '[_&1 min_s_]'
 						},
 					],
-					expressions: ['&1 min'],
-					correctionDetails: [
-						[{ text: '$$&1\\,min = &1 \\times 60\\,s = &sol$$' }],
+					answerFields: ['$$&1\\,min = ?\\,s$$'],
+					solutions:[['[_&2/(1 s)_]']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$&1\\,min =$$&answer $$s$$",
+							],
+						},
 					],
-					units: ['s'],
-					options: ['require-specific-unit'],
-
+					correctionDetails: [
+						[{ text: '$$&1\\,min = &1 \\times 60\\,s=$$&solution $$s$$' }],
+					],
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'minutes en secondes',
+				// 	enounces: ["Convertis en secondes (n'oublie pas l'unité <i>s</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;10]',
+				// 		},
+				// 	],
+				// 	expressions: ['&1 min'],
+				// 	correctionDetails: [
+				// 		[{ text: '$$&1\\,min = &1 \\times 60\\,s = &sol$$' }],
+				// 	],
+				// 	units: ['s'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
+			
 				{
 					description: 'Convertir des durées',
 					subdescription: 'secondes en minutes',
-					enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;10]',
 						},
 					],
-					expressions: ['[_&1*60_] s'],
-					correctionDetails: [
-						[{ text: '$$[_&1*60_]\\,s = &1 \\times 60\\,s = &sol$$' }],
+					answerFields: ['$$[_&1*60_]\\,s= ? min$$'],
+					solutions:[['&1']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$[_&1*60_]\\,s =$$&answer $$min$$",
+							],
+						},
 					],
-
-					units: ['min'],
-					options: ['require-specific-unit'],
-
+					correctionDetails: [
+						[{ text: '$$[_&1*60_]\\,s = &1 \\times 60\\,s =$$&solution $$min$$' }],
+					],
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'secondes en minutes',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;10]',
+				// 		},
+				// 	],
+				// 	expressions: ['[_&1*60_] s'],
+				// 	correctionDetails: [
+				// 		[{ text: '$$[_&1*60_]\\,s = &1 \\times 60\\,s = &sol$$' }],
+				// 	],
+
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'HMS en minutes',
-					enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;5]*10',
+							'&3': '&1 h [_&2_] min',
+							'&4': '[_&3_min_]'
 						},
 					],
-					expressions: ['&1 h [_&2_] min'],
+					answerFields: ['$$&1\\,h\\,[_&2_]\\,min = ?\\,min$$'],
+					solutions:[['[_&4/(1 min)_]']],
+
+					correctionFormat: [
+						{
+							correct: [
+								"$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$",
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+								text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min =$$&solution $$min$$',
 							},
 						],
 					],
-
-					units: ['min'],
-					options: ['require-specific-unit'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'HMS en minutes',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;5]*10',
+				// 		},
+				// 	],
+				// 	expressions: ['&1 h [_&2_] min'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'HMS en minutes (2)',
-					enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+					enounces: ["Convertis."],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;59]',
+							'&3': '&1 h [_&2_] min',
+							'&4': '[_&3_min_]'
 						},
 					],
-					expressions: ['&1 h [_&2_] min'],
+					answerFields: ['$$&1\\,h\\,[_&2_]\\,min = ?\\,min$$'],
+					solutions:[['[_&4/(1 min)_]']],
+
+					correctionFormat: [
+						{
+							correct: [
+								"$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$",
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+								text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min =$$&solution $$min$$',
 							},
 						],
 					],
-
-					units: ['min'],
-					options: ['require-specific-unit'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'HMS en minutes (2)',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;59]',
+				// 		},
+				// 	],
+				// 	expressions: ['&1 h [_&2_] min'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$&1\\,h\\,[_&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en HMS',
-					enounces: ['Convertis sous la forme ... <i>h</i> ... <i>min</i>'],
+					enounces: ['Convertis'],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;5]*10',
 						},
 					],
-					expressions: ['[_&1*60+&2_] min'],
+					answerFields: ['$$[_&1*60+&2_]\\,min= ?\\,h\\,?\\,min$$'],
+					solutions:[['&1', '[_&2_]']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$",
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
@@ -12096,14 +12527,36 @@ const questions = {
 							},
 						],
 					],
-
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'minutes en HMS',
+				// 	enounces: ['Convertis sous la forme ... <i>h</i> ... <i>min</i>'],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;5]*10',
+				// 		},
+				// 	],
+				// 	expressions: ['[_&1*60+&2_] min'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['HMS'],
+				// 	options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en HMS (2)',
@@ -18196,7 +18649,6 @@ const questions = {
 							'&4': '$e[2;9]\\{cd(&2)}',
 						},
 					],
-
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					correctionFormat: [

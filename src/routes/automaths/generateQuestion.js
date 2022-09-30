@@ -29,6 +29,10 @@ export default function generateQuestion(
 	let unit
 	let tests
 	let answerFields
+	let type
+
+
+	type = type || question.choices ? 'choice' : 'result'
 
 	const { options = [] } = question
 
@@ -47,6 +51,9 @@ export default function generateQuestion(
 
 	// [° °] : simple mise en forme LaTeX
 	const regexLatex = /\[°(.*?)°\]/g
+
+	// [°_ _°] : évaluation et mise en forme LaTeX
+	const regexEvalLatex = /\[([.+(]*)°_([^_]*?)(_(.+?))??_°\]/g
 
 	const replace = (matched, p1, p2, p3, p4) => {
 		const modifiers = p1
@@ -330,7 +337,6 @@ export default function generateQuestion(
 			repeat = generatedEnounces.includes(enounce)
 			if (repeat) warn('même énoncé', enounce)
 		} else if (image) {
-			// console.log('includes generated?', image, generatedImages, generatedImages.includes(image))
 			const test = generatedImages.includes(image)
 			if (test) warn('même image pour la question', image)
 			repeat = repeat || test
@@ -365,16 +371,7 @@ export default function generateQuestion(
 		for (let i = 0; i < n; i++) {
 			question.limits.limits[i] = {}
 			question.limits.limits[i].count = 0
-			// dans certaines questions, il n'y a pas d'aléatoirisation
-			// on fixe la limite à 1
-
-			// const e = question.expressions[i] || ''
-			// console.log('e', e)
-			// if (!(e.includes('$e') || e.includes('$d') || e.includes('$l') || e.includes('&'))) {
-			//   console.log('unique')
-			//   nbuniques += 1
-			//   question.limits.limits[i].limit = 1
-			// }
+			
 			if (question.options && question.options.includes('exhaust')) {
 				nbuniques += 1
 				question.limits.limits[i].limit = 1
@@ -510,7 +507,7 @@ export default function generateQuestion(
 	}
 
 	solutions = getSelectedElement('solutions')
-	testAnswer = getSelectedElement('testAnswer')
+	testAnswer = getSelectedElement('testAnswers')
 	letters = getSelectedElement('letters')
 	imageCorrection = getSelectedElement('imagesCorrection')
 	correctionDetails = getSelectedElement('correctionDetails')
@@ -534,12 +531,17 @@ export default function generateQuestion(
 	answerFields = replaceVariables(answerFields)
 
 	solutions = evaluate(solutions)
+	testAnswer = evaluate(testAnswer)
 	correctionDetails = toLatex(correctionDetails)
 	correctionDetails = evaluateToLatex(correctionDetails)
 	correct = toLatex(correct)
 	correct = evaluateToLatex(correct)
+	uncorrect = toLatex(uncorrect)
 	uncorrect = evaluateToLatex(uncorrect)
+	answer = toLatex(answer)
 	answer = evaluateToLatex(answer)
+	answerFields = toLatex(answerFields)
+	answerFields = evaluateToLatex(answerFields)
 
 	if (correctionFormat) {
 		const regex = /@@(.*?)\?\?(.*?)@@/g
@@ -570,7 +572,7 @@ export default function generateQuestion(
 					const test = math(found[1]).eval()
 					let success = math(replaceVariables(found[2]))
 					let failure = math(replaceVariables(found[3]))
-					if (question.type === 'choices' || question.type === 'choice') {
+					if (type === 'choices' || type === 'choice') {
 						success = success.value.toNumber()
 						failure = failure.value.toNumber()
 					} else {
@@ -583,6 +585,7 @@ export default function generateQuestion(
 			// if (question.type === 'choice' && typeof solution === 'number') {
 			//   solution = choices[solution]
 			// }
+			
 			return solution
 		})
 	}
@@ -642,7 +645,7 @@ export default function generateQuestion(
 						? a.indexOf(solution) // il faut retrouver le nouvel index de la solution
 						: solution,
 				)
-				if (question.type === 'choices') {
+				if (type === 'choices') {
 					solutions.sort()
 				}
 			}
@@ -688,7 +691,7 @@ export default function generateQuestion(
 
 	const generated = {
 		points: 1,
-		type: question.choices ? 'choice' : 'result',
+		type,
 		...question,
 		// TODO: le mettre ailleurs ça alourdit ici
 		order_elements: question.order_elements || [

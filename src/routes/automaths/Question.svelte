@@ -197,28 +197,29 @@
 
 		expression = question.expression_latex
 		expression2 = question.expression2_latex
+		answerFields = question.answerFields
 
-		if (interactive) {
-			if (expression && (question.type === 'result' || question.type === 'rewrite' ) && !question.answerFields) {
-				expression += '=\\ldots'
-			}
+		if (
+			interactive &&
+			!answerFields &&
+			!expression &&
+			question.type !== 'choice' &&
+			question.type !== 'choices'
+		) {
+			answerFields = '$$?$$'
+		}
 
-			answerFields = question.answerFields
-			if (
-				!answerFields &&
-				!expression &&
-				question.type !== 'choice' &&
-				question.type !== 'choices'
-			) {
-				answerFields = '$$\\ldots$$'
-			}
-			if (answerFields) {
-				answerFields = $formatLatex(
-					answerFields.replace(/\?/g, '\\ldots'),
-				).replace(/…/g, addMathfield)
-			}
-		} else {
-			answerFields = null
+		if (answerFields) {
+			answerFields = $formatLatex(answerFields.replace(/\?/g, '\\ldots'))
+		}
+
+		if (
+			interactive &&
+			expression &&
+			(question.type === 'result' || question.type === 'rewrite') &&
+			!question.answerFields
+		) {
+			expression += '=\\ldots'
 		}
 
 		if (expression) {
@@ -230,6 +231,10 @@
 		}
 		if (interactive && expression) {
 			expression = expression.replace(/…/g, addMathfield)
+		}
+
+		if (interactive && answerFields) {
+			answerFields = answerFields.replace(/…/g, addMathfield)
 		}
 		if (interactive && !answers) {
 			answers = []
@@ -281,13 +286,15 @@
 			question.type !== 'choice' &&
 			question.type !== 'choices'
 		) {
-			answerFields = '$$\\ldots$$'
+			answerFields = '$$?$$'
 		}
+
 		if (answerFields) {
 			answerFields = $formatLatex(
 				answerFields.replace(/\?/g, '\\ldots'),
 			).replace(/…/g, addMathfield)
 		}
+
 		if (expression) {
 			expression = $toMarkup(expression).replace(/…/g, addMathfield)
 		}
@@ -296,28 +303,38 @@
 			expression2 = $toMarkup(expression2)
 		}
 
-		if (!answers) answers = []
-		if (!answers_latex) answers_latex = []
+		possiblyResetAnswers()
 	}
 
 	function stopInteractive() {
 		removeListeners()
-
 		mfs = null
 
 		expression = question.expression_latex
-			? $toMarkup(question.expression_latex)
-			: null
 		expression2 = question.expression2_latex
-			? $toMarkup(question.expression2_latex)
-			: null
+		answerFields = question.answerFields
+
+		if (answerFields) {
+			answerFields = $formatLatex(answerFields.replace(/\?/g, '\\ldots'))
+		}
+
+		if (expression) {
+			expression = $toMarkup(expression)
+		}
+
+		if (expression2) {
+			expression2 = $toMarkup(expression2)
+		}
+
+		possiblyResetAnswers()
 	}
 
-	function resetAnswers() {
+	function possiblyResetAnswers() {
 		if (!interactive) {
 			answers = null
 			answers_latex = null
 		} else {
+			// if faut garder les réponses si on sort du mode correction
 			if (!answers) answers = []
 			if (!answers_latex) answers_latex = []
 		}
@@ -325,16 +342,13 @@
 
 	$: initQuestion(question)
 
-	$: if (!correction && interactive) {
+	$: if ( !correction && interactive) {
 		prepareInteractive()
-	} else if (!interactive && !correction) {
+	} else {
 		stopInteractive()
-	} else if (correction) {
-		removeListeners()
-
-		mfs = null
-		resetAnswers()
-	}
+	} 
+	
+	
 
 	$: makeCorrection(answers)
 
@@ -547,7 +561,7 @@
 			</div>
 		{/if}
 	{/each}
-	{#if !correction && interactive && answerFields}
+	{#if (!correction && question.answerFields) || (answerFields && interactive)}
 		<div
 			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"
