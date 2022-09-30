@@ -2,7 +2,7 @@
 	import { toMarkup } from '$lib/stores'
 	import { formatLatex } from '$lib/stores'
 	import { MathfieldElement } from '$lib/stores'
-	import { afterUpdate, onDestroy } from 'svelte'
+	import { afterUpdate, onDestroy, tick } from 'svelte'
 	import { getLogger } from '$lib/utils'
 	import { touchDevice, virtualKeyboardMode } from '$lib/stores.js'
 	import virtualKeyboard from './virtualKeyboard'
@@ -180,74 +180,32 @@
 	}
 
 	function initQuestion(question) {
-		const q = question
+		if (!masked) console.log('init question')
+
 		removeListeners()
 
 		mfs = []
 		nmfs = 0
 
+		// pour  empecher un update
+		const q = question
 		if (!question.detailedCorrection && question.correctionDetails) {
 			q.detailedCorrection = createDetailedCorrection(question)
 		}
 		detailedCorrection = question.detailedCorrection
 		answers = question.answers
+		answers_latex = question.answers_latex
 
 		enounce = question.enounce ? $formatLatex(question.enounce) : null
 		enounce2 = question.enounce2 ? $formatLatex(question.enounce2) : null
-
-		expression = question.expression_latex
-		expression2 = question.expression2_latex
-		answerFields = question.answerFields
-
-		if (
-			interactive &&
-			!answerFields &&
-			!expression &&
-			question.type !== 'choice' &&
-			question.type !== 'choices'
-		) {
-			answerFields = '$$?$$'
-		}
-
-		if (answerFields) {
-			answerFields = $formatLatex(answerFields.replace(/\?/g, '\\ldots'))
-		}
-
-		if (
-			interactive &&
-			expression &&
-			(question.type === 'result' || question.type === 'rewrite') &&
-			!question.answerFields
-		) {
-			expression += '=\\ldots'
-		}
-
-		if (expression) {
-			expression = $toMarkup(expression)
-		}
-
-		if (expression2) {
-			expression2 = $toMarkup(expression2)
-		}
-		if (interactive && expression) {
-			expression = expression.replace(/…/g, addMathfield)
-		}
-
-		if (interactive && answerFields) {
-			answerFields = answerFields.replace(/…/g, addMathfield)
-		}
-		if (interactive && !answers) {
-			answers = []
-			answers_latex = []
-		}
-
-		makeCorrection(answers)
 	}
 
 	function makeCorrection(answers) {
+		if (!masked) console.log('makeCorrection')
 		if (interactive) {
 			const item = { ...question, answers, answers_latex }
 			assessItem(item)
+			if (!masked) console.log('assess item', item)
 			coms = item.coms
 			simpleCorrection = item.simpleCorrection
 		} else if (question.simpleCorrection) {
@@ -255,6 +213,7 @@
 		} else {
 			const q = question
 			assessItem(q)
+			if (!masked) console.log('assess item', q)
 			simpleCorrection = q.simpleCorrection
 			detailedCorrection = q.detailedCorrection
 		}
@@ -266,9 +225,11 @@
 		q.answers = answers
 		q.answers_latex = answers_latex
 		assessItem(q)
+		if (!masked) console.log('assess item', q)
 	}
 
-	function prepareInteractive() {
+	async function prepareInteractive() {
+		if (!masked) console.log('prepare interactive')
 		mfs = []
 		nmfs = 0
 
@@ -308,9 +269,15 @@
 		}
 
 		possiblyResetAnswers()
+
+		if (!masked) console.log('tick')
+		await tick()
+		if (!masked) console.log('ticked')
+		insertMathFields()
 	}
 
 	function stopInteractive() {
+		if (!masked) console.log('stop interactive')
 		removeListeners()
 		mfs = null
 
@@ -346,7 +313,7 @@
 
 	$: initQuestion(question)
 
-	$: if (!correction && interactive) {
+	$: if (question && !correction && interactive) {
 		prepareInteractive()
 	} else {
 		stopInteractive()
@@ -358,106 +325,104 @@
 		removeListeners()
 	})
 
-	afterUpdate(() => {
-		// il faut créer les mathfields
-		if (!correction && interactive) {
-			const elements = []
-			if (answerFields) {
-				for (let i of document
-					.querySelector(
-						`#answerFields-${question.num}${masked ? '-masked' : ''}`,
-					)
-					.querySelectorAll('*')) {
+	function insertMathFields() {
+		if (!masked) console.log('insertathFields', answers, answers_latex)
+		const elements = []
+		if (answerFields) {
+			for (let i of document
+				.querySelector(
+					`#answerFields-${question.num}${masked ? '-masked' : ''}`,
+				)
+				.querySelectorAll('*')) {
+				if (/^mf/g.test(i.id)) {
+					elements.push(i)
+				}
+			}
+		} else if (expression) {
+			// console.log(`${question.num}${masked ? '-masked' : ''}`)
+			const expressionElements = document.querySelector(
+				`#expression-${question.num}${masked ? '-masked' : ''}`,
+			)
+			if (expressionElements) {
+				for (let i of expressionElements.querySelectorAll('*')) {
 					if (/^mf/g.test(i.id)) {
 						elements.push(i)
 					}
 				}
-			} else if (expression) {
-				// console.log(`${question.num}${masked ? '-masked' : ''}`)
-				const expressionElements = document.querySelector(
-					`#expression-${question.num}${masked ? '-masked' : ''}`,
+			}
+			if (expression2) {
+				const expression2Elements = document.querySelector(
+					`#expression2-${question.num}${masked ? '-masked' : ''}`,
 				)
-				if (expressionElements) {
-					for (let i of expressionElements.querySelectorAll('*')) {
-						if (/^mf/g.test(i.id)) {
-							elements.push(i)
-						}
-					}
-				}
-				if (expression2) {
-					const expression2Elements = document.querySelector(
-						`#expression2-${question.num}${masked ? '-masked' : ''}`,
-					)
-					for (let i of expression2Elements.querySelectorAll('*')) {
-						if (/^mf/g.test(i.id)) {
-							elements.push(i)
-						}
+				for (let i of expression2Elements.querySelectorAll('*')) {
+					if (/^mf/g.test(i.id)) {
+						elements.push(i)
 					}
 				}
 			}
-
-			let added
-			elements.forEach((elt, i) => {
-				if (!elt.hasChildNodes()) {
-					const mfe = new $MathfieldElement()
-					mfe.setOptions({
-						soundsDirectory: '/sounds',
-						// virtualKeyboardMode: 'onfocus',
-						virtualKeyboardMode: 'off',
-						// virtualKeyboardMode: 'manual',
-						decimalSeparator: ',',
-						...virtualKeyboard,
-						inlineShortcuts: {
-							xx: {},
-						},
-						keypressSound: null,
-						keypressVibration: false,
-						removeExtraneousParentheses: false,
-						smartFence: false,
-						superscript: false,
-					})
-
-					if (answers_latex[i]) {
-						mfe.value = answers_latex[i]
-					}
-
-					mfs.push(mfe)
-					// answers.push('')
-					// answers_latex.push('')
-					elt.appendChild(mfe)
-					elt.style.display = 'inline-block'
-					elt.style.minWidth = '2em'
-					mfe.style.overflow = 'unset'
-					mfe.style.paddingLeft = '2px'
-					mfe.style.paddingRight = '2px'
-					elt.style.border = '2px dashed grey'
-					elt.style.borderRadius = '5px'
-					// const i = mfs.length - 1
-					if (!masked) {
-						const keyListener = (ev) => onKeystroke(ev, i)
-						const inputListener = (ev) => onInput(ev, i)
-						const changeListener = (ev) => onChange(ev, i)
-						keyListeners.push(keyListener)
-						inputListeners.push(inputListener)
-						changeListeners.push(changeListener)
-						mfe.addEventListener('keydown', keyListener)
-						mfe.addEventListener('input', inputListener)
-						mfe.addEventListener('change', changeListener)
-						mfe.addEventListener('focus', manageFocus)
-						mfe.addEventListener('blur', manageFocus)
-					}
-					added = true
-				}
-			})
-			if (added && !masked) {
-				if (!mfs[0].hasFocus()) {
-					mfs[0].focus()
-				}
-			}
-
-			fieldsNb = mfs?.length || 0
 		}
-	})
+
+		let added
+		elements.forEach((elt, i) => {
+			if (!elt.hasChildNodes()) {
+				const mfe = new $MathfieldElement()
+				mfe.setOptions({
+					soundsDirectory: '/sounds',
+					// virtualKeyboardMode: 'onfocus',
+					virtualKeyboardMode: 'off',
+					// virtualKeyboardMode: 'manual',
+					decimalSeparator: ',',
+					...virtualKeyboard,
+					inlineShortcuts: {
+						xx: {},
+					},
+					keypressSound: null,
+					keypressVibration: false,
+					removeExtraneousParentheses: false,
+					smartFence: false,
+					superscript: false,
+				})
+
+				if (answers_latex[i]) {
+					mfe.value = answers_latex[i]
+				}
+
+				mfs.push(mfe)
+				// answers.push('')
+				// answers_latex.push('')
+				elt.appendChild(mfe)
+				elt.style.display = 'inline-block'
+				elt.style.minWidth = '2em'
+				mfe.style.overflow = 'unset'
+				mfe.style.paddingLeft = '2px'
+				mfe.style.paddingRight = '2px'
+				elt.style.border = '2px dashed grey'
+				elt.style.borderRadius = '5px'
+				// const i = mfs.length - 1
+				if (!masked) {
+					const keyListener = (ev) => onKeystroke(ev, i)
+					const inputListener = (ev) => onInput(ev, i)
+					const changeListener = (ev) => onChange(ev, i)
+					keyListeners.push(keyListener)
+					inputListeners.push(inputListener)
+					changeListeners.push(changeListener)
+					mfe.addEventListener('keydown', keyListener)
+					mfe.addEventListener('input', inputListener)
+					mfe.addEventListener('change', changeListener)
+					mfe.addEventListener('focus', manageFocus)
+					mfe.addEventListener('blur', manageFocus)
+				}
+				added = true
+			}
+		})
+		if (added && !masked) {
+			if (!mfs[0].hasFocus()) {
+				mfs[0].focus()
+			}
+		}
+
+		fieldsNb = mfs?.length || 0
+	}
 
 	if (commit) {
 		commit.hook = commitAnswers

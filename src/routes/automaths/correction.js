@@ -641,179 +641,179 @@ export function assessItem(item) {
 	// le status de la réponse globale
 	item.status = STATUS_CORRECT
 
-	// le statut de chaque réponse si il y a plusieurs champs réponses
-	// initialisée à CORRECT ou EMPTY
 	if (!item.answers) {
-		item.answers = []
-		item.answers_latex = []
+		// mode projection en classe : pas de réponse
 		item.statuss = [STATUS_EMPTY]
+		item.status = STATUS_EMPTY
 	} else {
+		// le statut de chaque réponse si il y a plusieurs champs réponses
+		// initialisée à CORRECT ou EMPTY
 		item.statuss = item.answers.map((answer) =>
 			((item.type === 'choice' || item.type === 'choices') && answer >= 0) ||
 			answer
 				? STATUS_CORRECT
 				: STATUS_EMPTY,
 		)
-	}
-	// si toutes les réponses sont vides, pas besoin d'aller plus loin
-	if (item.statuss.every((status) => status === STATUS_EMPTY)) {
-		if (item.answers) item.coms.push(EMPTY_ANSWER)
-		item.status = STATUS_EMPTY
-	}
-	// le cas simple à traiter des réponses à choix (multiples ou non)
-	else if (
-		item.type === 'choice' &&
-		item.solutions.toString() !== item.answers.toString()
-	) {
-		item.statuss = [STATUS_INCORRECT]
-		item.status = STATUS_INCORRECT
-	}
-	// choix multiples
-	else if (
-		item.type === 'choices' &&
-		item.solutions.toString() !== item.answers.toString()
-	) {
-		// on veut compter une partie des points si la ou les réponses choisies
-		// sont correctes mais qu'il en manque
-		item.answers.forEach((answer, i) => {
-			if (!item.solutions.includes(answer)) {
-				item.statuss[i] = STATUS_INCORRECT
-				item.status = STATUS_INCORRECT
-			}
-		})
-		if (item.status !== STATUS_INCORRECT) {
-			item.status = STATUS_UNOPTIMAL_FORM
-			item.coms.push(INCOMPLETE_CHOICES)
-		}
-	}
-	// cas général
-	else {
-		if (item.statuss.some((status) => status === STATUS_EMPTY)) {
-			item.coms.push(EMPTY_MULTIPLE_ANSWERS)
-		}
 
-		// On vérifie que les réponses sont écrites correctement
-		let incorrectForm = false
-		item.answers.forEach((answer, i) => {
-			if (item.statuss[i] !== STATUS_EMPTY && math(answer).isIncorrect()) {
-				item.statuss[i] = STATUS_INCORRECT
-				item.status = STATUS_INCORRECT
-				incorrectForm = true
-			}
-		})
-
-		if (incorrectForm && item.answers.length === 1) {
-			item.coms.push(MATH_INCORRECT)
-		} else if (incorrectForm) {
-			item.coms.push(MATH_INCORRECT_MULTIPLE_ANSWERS)
+		// si toutes les réponses sont vides, pas besoin d'aller plus loin
+		if (item.statuss.every((status) => status === STATUS_EMPTY)) {
+			if (item.answers) item.coms.push(EMPTY_ANSWER)
+			item.status = STATUS_EMPTY
 		}
-
-		// dans le cas d'une égalité à trou, il faut vérifier que l'expression globale est également
-		// écrite correctement
-		if (item.type === 'trou') {
-			const putAnswers = (() => {
-				let count = 0
-				return () => item.answers[count++]
-			})()
-			const globallyIncorrectForm = math(
-				item.expression.replace(/\?/g, putAnswers),
-			).isIncorrect()
-			if (globallyIncorrectForm) {
-				item.status = STATUS_INCORRECT
-				if (!incorrectForm) item.coms.push(MATH_GLOBALLY_INCORRECT)
-			}
-		}
-
-		if (
-			!item.statuss.every(
-				(status) => status === STATUS_INCORRECT || status === STATUS_EMPTY,
-			)
+		// le cas simple à traiter des réponses à choix (multiples ou non)
+		else if (
+			item.type === 'choice' &&
+			item.solutions.toString() !== item.answers.toString()
 		) {
-			// Premièrement, vérification que la ou les réponses sont seulement équivalentes à la solution
-			//  ou vérifient le critère de validation
-			if (item.testAnswer) {
-				console.log('correction with testAnswer')
-				item.answers.forEach((answer, i) => {
-					if (
-						(item.testAnswer[i] &&
-							item.statuss[i] !== STATUS_EMPTY &&
-							item.statuss[i] !== STATUS_INCORRECT) ||
-						(item.statuss[0] !== STATUS_EMPTY &&
-							item.statuss[0] !== STATUS_INCORRECT)
-					) {
-						const t = item.testAnswer[i] || item.testAnswer[0]
-						const tests = t.replace(/&answer/g, answer).split('&&')
-						const failed = tests.some((test) => math(test).eval().isFalse())
-						if (failed) {
-							item.statuss[i] = STATUS_INCORRECT
-							item.status = STATUS_INCORRECT
-						}
-					}
-				})
+			item.statuss = [STATUS_INCORRECT]
+			item.status = STATUS_INCORRECT
+		}
+		// choix multiples
+		else if (
+			item.type === 'choices' &&
+			item.solutions.toString() !== item.answers.toString()
+		) {
+			// on veut compter une partie des points si la ou les réponses choisies
+			// sont correctes mais qu'il en manque
+			item.answers.forEach((answer, i) => {
+				if (!item.solutions.includes(answer)) {
+					item.statuss[i] = STATUS_INCORRECT
+					item.status = STATUS_INCORRECT
+				}
+			})
+			if (item.status !== STATUS_INCORRECT) {
+				item.status = STATUS_UNOPTIMAL_FORM
+				item.coms.push(INCOMPLETE_CHOICES)
 			}
-			// les solutions sont explicites et sont dans item.solutions
-			else {
-				item.answers.forEach((answer, i) => {
-					if (
-						item.statuss[i] !== STATUS_EMPTY &&
-						item.statuss[i] !== STATUS_INCORRECT
-					) {
-						if (item.options?.includes('solutions-order-not-important')) {
-							if (!item.solutionsUsed) {
-								item.solutionsUsed = []
-							}
-							if (!item.solutionsIndexs) {
-								item.solutionsIndexs = {}
-							}
-							const index = item.solutions.findIndex(
-								(solution, j) =>
-									!item.solutionsUsed.includes(j) &&
-									math(answer).equals(math(solution)),
-							)
-							if (index === -1) {
+		}
+		// cas général
+		else {
+			if (item.statuss.some((status) => status === STATUS_EMPTY)) {
+				item.coms.push(EMPTY_MULTIPLE_ANSWERS)
+			}
+
+			// On vérifie que les réponses sont écrites correctement
+			let incorrectForm = false
+			item.answers.forEach((answer, i) => {
+				if (item.statuss[i] !== STATUS_EMPTY && math(answer).isIncorrect()) {
+					item.statuss[i] = STATUS_INCORRECT
+					item.status = STATUS_INCORRECT
+					incorrectForm = true
+				}
+			})
+
+			if (incorrectForm && item.answers.length === 1) {
+				item.coms.push(MATH_INCORRECT)
+			} else if (incorrectForm) {
+				item.coms.push(MATH_INCORRECT_MULTIPLE_ANSWERS)
+			}
+
+			// dans le cas d'une égalité à trou, il faut vérifier que l'expression globale est également
+			// écrite correctement
+			if (item.type === 'trou') {
+				const putAnswers = (() => {
+					let count = 0
+					return () => item.answers[count++]
+				})()
+				const globallyIncorrectForm = math(
+					item.expression.replace(/\?/g, putAnswers),
+				).isIncorrect()
+				if (globallyIncorrectForm) {
+					item.status = STATUS_INCORRECT
+					if (!incorrectForm) item.coms.push(MATH_GLOBALLY_INCORRECT)
+				}
+			}
+
+			if (
+				!item.statuss.every(
+					(status) => status === STATUS_INCORRECT || status === STATUS_EMPTY,
+				)
+			) {
+				// Premièrement, vérification que la ou les réponses sont seulement équivalentes à la solution
+				//  ou vérifient le critère de validation
+				if (item.testAnswer) {
+					console.log('correction with testAnswer')
+					item.answers.forEach((answer, i) => {
+						if (
+							(item.testAnswer[i] &&
+								item.statuss[i] !== STATUS_EMPTY &&
+								item.statuss[i] !== STATUS_INCORRECT) ||
+							(item.statuss[0] !== STATUS_EMPTY &&
+								item.statuss[0] !== STATUS_INCORRECT)
+						) {
+							const t = item.testAnswer[i] || item.testAnswer[0]
+							const tests = t.replace(/&answer/g, answer).split('&&')
+							const failed = tests.some((test) => math(test).eval().isFalse())
+							if (failed) {
 								item.statuss[i] = STATUS_INCORRECT
 								item.status = STATUS_INCORRECT
-							} else {
-								item.solutionsUsed.push(index)
-								item.solutionsIndexs[i] = index
 							}
-						} else if (!math(answer).equals(math(item.solutions[i]))) {
-							item.statuss[i] = STATUS_INCORRECT
-							item.status = STATUS_INCORRECT
 						}
-					}
-				})
-			}
+					})
+				}
+				// les solutions sont explicites et sont dans item.solutions
+				else {
+					item.answers.forEach((answer, i) => {
+						if (
+							item.statuss[i] !== STATUS_EMPTY &&
+							item.statuss[i] !== STATUS_INCORRECT
+						) {
+							if (item.options?.includes('solutions-order-not-important')) {
+								if (!item.solutionsUsed) {
+									item.solutionsUsed = []
+								}
+								if (!item.solutionsIndexs) {
+									item.solutionsIndexs = {}
+								}
+								const index = item.solutions.findIndex(
+									(solution, j) =>
+										!item.solutionsUsed.includes(j) &&
+										math(answer).equals(math(solution)),
+								)
+								if (index === -1) {
+									item.statuss[i] = STATUS_INCORRECT
+									item.status = STATUS_INCORRECT
+								} else {
+									item.solutionsUsed.push(index)
+									item.solutionsIndexs[i] = index
+								}
+							} else if (!math(answer).equals(math(item.solutions[i]))) {
+								item.statuss[i] = STATUS_INCORRECT
+								item.status = STATUS_INCORRECT
+							}
+						}
+					})
+				}
 
-			//  A ce stade,le status chaque élément de réponse est STATUS_EMPTY, STATUS_CORRECT
-			// ou STATUS_INCORRECT
-			// On vérifie les contraintes de formes
-			checkConstraints(item)
-			checkTermsAndFactors(item)
-			// TODO : tester les formats
-			checkForm(item)
-			if (item.status !== STATUS_EMPTY && item.status !== STATUS_INCORRECT) {
-				if (item.statuss.some((status) => status === STATUS_BAD_FORM)) {
-					item.status = STATUS_BAD_FORM
-				} else if (
-					item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM)
-				) {
-					item.status = STATUS_UNOPTIMAL_FORM
-				} else if (
-					item.type === 'choices' &&
-					item.answers &&
-					item.answers.length &&
-					item.answers.length >= item.solutions.length / 2 &&
-					item.answers.length < item.solutions.length
-				) {
-					// pour les qcm ou on accorde un demi point si au moins la moitié des bonnes
-					//  ont été sélectionnées (sans erreur à côté)
-					item.status = STATUS_UNOPTIMAL_FORM
+				//  A ce stade,le status chaque élément de réponse est STATUS_EMPTY, STATUS_CORRECT
+				// ou STATUS_INCORRECT
+				// On vérifie les contraintes de formes
+				checkConstraints(item)
+				checkTermsAndFactors(item)
+				// TODO : tester les formats
+				checkForm(item)
+				if (item.status !== STATUS_EMPTY && item.status !== STATUS_INCORRECT) {
+					if (item.statuss.some((status) => status === STATUS_BAD_FORM)) {
+						item.status = STATUS_BAD_FORM
+					} else if (
+						item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM)
+					) {
+						item.status = STATUS_UNOPTIMAL_FORM
+					} else if (
+						item.type === 'choices' &&
+						item.answers &&
+						item.answers.length &&
+						item.answers.length >= item.solutions.length / 2 &&
+						item.answers.length < item.solutions.length
+					) {
+						// pour les qcm ou on accorde un demi point si au moins la moitié des bonnes
+						//  ont été sélectionnées (sans erreur à côté)
+						item.status = STATUS_UNOPTIMAL_FORM
+					}
 				}
 			}
 		}
 	}
 
 	createCorrection(item)
-	console.log('assess item', item)
 }

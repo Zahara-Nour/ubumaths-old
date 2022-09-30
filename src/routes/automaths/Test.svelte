@@ -446,6 +446,7 @@
 							commit="{commit}"
 							magnify="{classroom ? 2.5 : 1}"
 							immediateCommit="{true}"
+							flashcard={false}
 						/>
 					{/each}
 				</div>

@@ -21,7 +21,7 @@ import Item from '@smui/list/src/Item.svelte'
 	>
 		<div
 			class="relative mr-0"
-			style="{`font-size:${magnify}rem;font-family:'pacifico';color:white;background:${color}; border-radius: 50%;width:3rem; height:3rem`}"
+			style="{`font-size:${magnify*1.5}rem;font-family:'pacifico';color:white;background:${color}; border-radius: 50%;width:4.5rem; height:4.5rem`}"
 		>
 			<span
 				class="absolute"

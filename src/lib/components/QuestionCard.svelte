@@ -5,12 +5,13 @@
 
 	export let card
 	export let interactive = false
-	export let flashcard = false
+	export let flashcard = null
 	export let showDescription = false
 	export let commit = null
 	export let magnify = 1
 	export let correction = false
 	export let immediateCommit = false
+	let updatedFlashCard
 
 	let flip = false
 	const toggleFlip = () => (flip = !flip)
@@ -31,9 +32,19 @@
 		// console.log('height', height)
 	}
 
-	$: flashcard =
-		!interactive &&
-		!(correction && (!card.correctionDetails || !card.correctionDetails.length))
+	$: if (card) {
+		updatedFlashCard =
+			flashcard === null
+				? (correction &&
+						!!card.correctionDetails &&
+						!!card.correctionDetails.length) ||
+				  (!interactive && !correction)
+				: flashcard
+	}
+
+	// $: console.log('interactive', interactive)
+	// $: console.log('correction', correction)
+	// $: console.log('flashcard', updatedFlashCard)
 
 	$: if (card) {
 		// console.log('changing card')
@@ -43,11 +54,15 @@
 	// $: console.log('hback_masked', hback_masked)
 	// $: console.log('hfront_masked', hfront_masked)
 	// $: console.log('height', height)
-	$: if (flashcard && hfront_masked && hback_masked) {
-		updateHeight()
-	}
+	// $: if (updatedFlashCard && hfront_masked && hback_masked) {
+	// 	updateHeight()
+	// }
 
-	$: if (!flashcard && hfront_masked) {
+	// $: if (!updatedFlashCard && hfront_masked) {
+	// 	updateHeight()
+	// }
+
+	$: if (hfront_masked || hback_masked) {
 		updateHeight()
 	}
 
@@ -63,7 +78,7 @@
 			<FrontCard
 				card="{card}"
 				toggleFlip="{toggleFlip}"
-				flashcard="{flashcard}"
+				flashcard="{updatedFlashCard}"
 				showDescription="{showDescription}"
 				height="{height}"
 				commit="{commit}"
@@ -76,7 +91,7 @@
 				immediateCommit="{immediateCommit}"
 			/>
 		</div>
-		{#if flashcard}
+		{#if updatedFlashCard}
 			<div class="back" style="{height ? 'height:100%;' : ''}">
 				<BackCard
 					card="{card}"
@@ -99,7 +114,7 @@
 	<!-- <div > -->
 	<FrontCard
 		card="{card}"
-		flashcard="{flashcard}"
+		flashcard="{updatedFlashCard}"
 		showDescription="{showDescription}"
 		bind:h="{hfront_masked}"
 		masked="{true}"
@@ -109,7 +124,7 @@
 		immediateCommit="{immediateCommit}"
 	/>
 
-	{#if flashcard}
+	{#if updatedFlashCard}
 		<BackCard
 			card="{card}"
 			bind:h="{hback_masked}"
