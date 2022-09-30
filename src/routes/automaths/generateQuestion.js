@@ -52,8 +52,6 @@ export default function generateQuestion(
 	// [° °] : simple mise en forme LaTeX
 	const regexLatex = /\[°(.*?)°\]/g
 
-	// [°_ _°] : évaluation et mise en forme LaTeX
-	const regexEvalLatex = /\[([.+(]*)°_([^_]*?)(_(.+?))??_°\]/g
 
 	const replace = (matched, p1, p2, p3, p4) => {
 		const modifiers = p1

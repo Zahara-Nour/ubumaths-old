@@ -275,7 +275,11 @@
 		expression = question.expression_latex
 		expression2 = question.expression2_latex
 
-		if (expression && question.type === 'result' && !question.answerFields) {
+		if (
+			expression &&
+			(question.type === 'result' || question.type === 'rewrite') &&
+			!question.answerFields
+		) {
 			expression += '=\\ldots'
 		}
 
@@ -342,13 +346,11 @@
 
 	$: initQuestion(question)
 
-	$: if ( !correction && interactive) {
+	$: if (!correction && interactive) {
 		prepareInteractive()
 	} else {
 		stopInteractive()
-	} 
-	
-	
+	}
 
 	$: makeCorrection(answers)
 

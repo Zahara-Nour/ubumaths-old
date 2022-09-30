@@ -307,7 +307,7 @@ const questions = {
 				},
 				{
 					description: 'Ecrire un grand nombre entier sans les zéros inutiles',
-					enounces: ['Réécris ce nombre entier en enlevant les zéros inuiles.'],
+					enounces: ['Réécris ce nombre entier en enlevant les zéros inutiles.'],
 					expressions: [
 						'00&1&2&3&4',
 						'00&1&2&3&40',
@@ -325,7 +325,6 @@ const questions = {
 						},
 					],
 					options: ['exp-allow-unecessary-zeros'],
-					type: 'rewrite',
 					defaultDelay: 20,
 					grade: CM1,
 				},
@@ -348,7 +347,7 @@ const questions = {
 						'Je suis un nombre à 3 chiffres. Mon <b>chiffre des unités</b> est $$&1$$. Le <b>nombre</b> de mes dizaines est le double du chiffre des unités. Qui suis-je ?',
 						'Je suis un nombre à 3 chiffres. Mon <b>chiffre des unités</b> est $$&1$$. Le <b>nombre</b> de mes dizaines est le triple du chiffre des unités. Qui suis-je ?',
 					],
-					solutions: [['&1*21'], ['&1*31']],
+					solutions: [['[_&1*21_]'], ['[_&1*31_]']],
 					variables: [{ '&1': '$e[5;9]' }],
 					correctionFormat: [
 						{
