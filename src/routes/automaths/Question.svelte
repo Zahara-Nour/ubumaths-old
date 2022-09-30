@@ -306,8 +306,8 @@
 			answers_latex = null
 		} else {
 			// if faut garder les réponses si on sort du mode correction
-			if (!answers) answers = []
-			if (!answers_latex) answers_latex = []
+			if (!answers) answers = question.solutions.map(s =>'')
+			if (!answers_latex) answers_latex = question.solutions.map(s =>'')
 		}
 	}
 
@@ -528,7 +528,7 @@
 			</div>
 		{/if}
 	{/each}
-	{#if (!correction && question.answerFields) || (answerFields && interactive)}
+	{#if (!correction && question.answerFields) || (!correction && answerFields && interactive)}
 		<div
 			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"

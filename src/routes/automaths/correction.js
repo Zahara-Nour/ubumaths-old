@@ -796,9 +796,17 @@ export function assessItem(item) {
 					if (item.statuss.some((status) => status === STATUS_BAD_FORM)) {
 						item.status = STATUS_BAD_FORM
 					} else if (
-						item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM)
+						item.statuss.some((status) => status === STATUS_UNOPTIMAL_FORM) ||
+						(item.statuss.filter((status) => status === STATUS_EMPTY).length >
+							0 &&
+							item.statuss.filter((status) => status === STATUS_EMPTY).length <=
+								item.statuss.length / 2)
 					) {
 						item.status = STATUS_UNOPTIMAL_FORM
+					} else if (
+						item.statuss.filter((status) => status === STATUS_EMPTY).length > 0
+					) {
+						item.status = STATUS_INCORRECT
 					} else if (
 						item.type === 'choices' &&
 						item.answers &&

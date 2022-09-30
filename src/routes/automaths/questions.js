@@ -12522,7 +12522,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+								text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min =$$ &solution1 $$h$$ &solution2 $$min$$',
 							},
 						],
 					],
@@ -12559,29 +12559,59 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en HMS (2)',
-					enounces: ['Convertis sous la forme ... <i>h</i> ... <i>min</i>'],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;59]',
 						},
 					],
-					expressions: ['[_&1*60+&2_] min'],
+					answerFields: ['$$[_&1*60+&2_]\\,min= ?\\,h\\,?\\,min$$'],
+					solutions:[['&1', '&2']],
+					correctionFormat: [
+						{
+							correct: [
+								"$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$",
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+								text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+&2\\,min =$$ &solution1 $$h$$ &solution2 $$min$$',
 							},
 						],
 					],
-
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'minutes en HMS (2)',
+				// 	enounces: ['Convertis sous la forme ... <i>h</i> ... <i>min</i>'],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;59]',
+				// 		},
+				// 	],
+				// 	expressions: ['[_&1*60+&2_] min'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[_&1*60+&2_]\\,min = &1\\times 60\\,min+[_&2_]\\,min = &sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['HMS'],
+				// 	options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en HMS, heures décimales',
