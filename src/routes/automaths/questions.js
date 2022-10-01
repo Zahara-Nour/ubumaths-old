@@ -150,9 +150,7 @@ const questions = {
 					solutions: [['&1'], ['&2']],
 					correctionFormat: [
 						{
-							correct: [
-								'Le chiffre des dizaines est &answer.',
-							],
+							correct: ['Le chiffre des dizaines est &answer.'],
 						},
 						{
 							correct: ['Le chiffre des unités est &answer.'],
@@ -307,7 +305,9 @@ const questions = {
 				},
 				{
 					description: 'Ecrire un grand nombre entier sans les zéros inutiles',
-					enounces: ['Réécris ce nombre entier en enlevant les zéros inutiles.'],
+					enounces: [
+						'Réécris ce nombre entier en enlevant les zéros inutiles.',
+					],
 					expressions: [
 						'00&1&2&3&4',
 						'00&1&2&3&40',
@@ -11008,10 +11008,10 @@ const questions = {
 						'$$&3 + &4 = ? g$$',
 						'$$&3 + &4 = ? L$$',
 					],
-					solutions:[
-						["[_(&3+&4)/(1 m)_]"],
-						["[_(&3+&4)/(1 g)_]"],
-						["[_(&3+&4)/(1 L)_]"],
+					solutions: [
+						['[_(&3+&4)/(1 m)_]'],
+						['[_(&3+&4)/(1 g)_]'],
+						['[_(&3+&4)/(1 L)_]'],
 					],
 
 					// testAnswers: [
@@ -11021,13 +11021,13 @@ const questions = {
 					// ],
 					correctionFormat: [
 						{
-							correct: ["$$&3+&4=$$&answer m"],
+							correct: ['$$&3+&4=$$&answer m'],
 						},
 						{
-							correct: ["$$&3+&4=$$&answer g"],
+							correct: ['$$&3+&4=$$&answer g'],
 						},
 						{
-							correct: ["$$&3+&4=$$&answer L"],
+							correct: ['$$&3+&4=$$&answer L'],
 						},
 					],
 					'result-type': 'decimal',
@@ -11222,16 +11222,13 @@ const questions = {
 					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"Le périmètre d'un carré de côté $$[°&1°]$$ est &answer.",
-							],
-							answer: 'Le périmètre du carré est &answer.',
+							correct: ['Le périmètre du carré est &answer.'],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "Le périmètre d'un carré de côté $$[°&1°]$$  est $$[°&1*4°] = &sol$$.",
+								text: "Le périmètre d'un carré de côté $$[°&1°]$$  est $$[°&1*4°] =$$ &solution.",
 							},
 						],
 					],
@@ -11275,85 +11272,45 @@ const questions = {
 						},
 					],
 					solutions: [['&1']],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_mm_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_cm_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_dm_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_m_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_dam_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_hm_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré de périmètre $$[_4*&1_km_]$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
+							correct: ['La longueur du côté est &answer.'],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_mm_]$$ est &solution car $$[_4*&1_mm_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_mm_]$$ est $$[_4*&1_mm_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_cm_]$$ est &solution car $$[_4*&1_cm_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_cm_]$$ est $$[_4*&1_cm_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_dm_]$$ est &solution car $$[_4*&1_dm_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_dm_]$$ est $$[_4*&1_dm_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_m]$$ est &solution car $$[_4*&1_m_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_m_]$$ est $$[_4*&1_m_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_dam]$$ est &solution car $$[_4*&1_dm_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_dam_]$$ est $$[_4*&1_dam_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_hm]$$ est &solution car $$[_4*&1_hm_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_hm_]$$ est $$[_4*&1_hm_] \\div 4 =$$ &solution.",
 							},
 						],
 						[
 							{
-								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_km]$$ est &solution car $$[_4*&1_km_] \\div 4 = &sol$$.",
+								text: "La longueur du côté d'un carré de périmètre $$[_4*&1_km_]$$ est $$[_4*&1_km_] \\div 4 =$$ &solution.",
 							},
 						],
 					],
@@ -11389,16 +11346,13 @@ const questions = {
 					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"Le périmètre d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$ est &answer.",
-							],
-							answer: 'Le périmètre du rectangle est &answer.',
+							correct: ['Le périmètre du rectangle est &answer.'],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "Le périmètre d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$ est $$[°(&3+&4)*2°] = &sol$$.",
+								text: "Le périmètre d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$ est $$[°(&3+&4)*2°] =$$ &solution.",
 							},
 						],
 					],
@@ -11463,49 +11417,9 @@ const questions = {
 						},
 					],
 					solutions: [['&4']],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_mm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_cm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_dm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_m^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_dam^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_hm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_m^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
+							correct: ['La largeur est de &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -11591,17 +11505,15 @@ const questions = {
 						['[_&1*&1_hm^2_]'],
 						['[_&1*&1_km^2_]'],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: ["L'aire d'un carré de côté $$&1$$ est &answer."],
-							answer: "L'aire du carré est &answer.",
+							correct: ["L'aire du carré est &answer."],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "L'aire d'un carré de côté $$[°&1°]$$  est $$[°&1°] \\times [°&1°] = &sol$$.",
+								text: "L'aire d'un carré de côté $$[°&1°]$$  est $$[°&1°] \\times [°&1°] =$$ &solution.",
 							},
 						],
 					],
@@ -11635,49 +11547,9 @@ const questions = {
 						['&1 hm'],
 						['&1 km'],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,mm^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,cm^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,dm^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,m^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,dam^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,hm^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
-						},
-						{
-							correct: [
-								"La longueur du côté d'un carré d'aire $$[._&1*&1_]\\,km^2$$ est &answer.",
-							],
-							answer: 'La longueur du côté est &answer.',
+							correct: ['La longueur du côté est &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -11778,24 +11650,20 @@ const questions = {
 						['[_&3*&4_mm^2_]'],
 						['[_&3*&4_cm^2_]'],
 						['[_&3*&4_dm^2_]'],
-						['[_&3*&4_mm^2_]'],
+						['[_&3*&4_m^2_]'],
 						['[_&3*&4_dam^2_]'],
 						['[_&3*&4_hm^2_]'],
 						['[_&3*&4_km^2_]'],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"L'aire d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$ est &answer.",
-							],
-							answer: "L'aire du rectangle est &answer.",
+							correct: ["L'aire du rectangle est &answer."],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "L'aire d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$  est $$[°&3°] \\times [°&4°] = &sol$$.",
+								text: "L'aire d'un rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$  est $$[°&3°] \\times [°&4°] =$$ &solution.",
 							},
 						],
 					],
@@ -11860,49 +11728,9 @@ const questions = {
 						},
 					],
 					solutions: [['&4']],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_mm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_cm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_dm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_m^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_dam^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_hm^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
-						},
-						{
-							correct: [
-								"La largeur d'un rectangle de longueur $$[°&3°]$$ et d'aire $$[_&3*&4_km^2_]$$ est &answer.",
-							],
-							answer: 'La largeur du rectangle est &answer.',
+							correct: ['La largeur du rectangle est &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -12007,19 +11835,119 @@ const questions = {
 						['[._&3*&4/2_hm^2_]'],
 						['[._&3*&4/2_km^2_]'],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"L'aire d'un triangle rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$ est &answer.",
-							],
-							answer: "L'aire du triangle rectangle est &answer.",
+							correct: ["L'aire du triangle rectangle est &answer."],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "L'aire d'un triangle rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$  est $$[°{&3*&4}/2°] = &sol$$.",
+								text: "L'aire d'un triangle rectangle de longueur $$[°&3°]$$ et de largeur $$[°&4°]$$  est $$[°{&3*&4}/2°] =$$ &solution.",
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: "Trouver le deuxième côté de l'angle droit.",
+					subdescription:
+						"A partir de son aire et du premier côté de l'angle droit.",
+					enounces: [
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$ ?",
+						"Quelle est la longueur du 2ème côté de l'angle droit d'un <b>triangle rectangle</b> dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$ ?",
+					],
+					variables: [
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 mm',
+							'&4': '&2 mm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 cm',
+							'&4': '&2 cm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dm',
+							'&4': '&2 dm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 m',
+							'&4': '&2 m',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dam',
+							'&4': '&2 dam',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 hm',
+							'&4': '&2 hm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 km',
+							'&4': '&2 km',
+						},
+					],
+					solutions: [['&4']],
+					correctionFormat: [
+						{
+							correct: ['La longueur du 2ème côté est &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_mm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_cm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_m^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dam^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_hm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La longueur du 2ème côté de l'angle droit d'un triangle rectangle dont le premier côté de l'angle droit mesure $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_km^2_]$$.",
 							},
 						],
 					],
@@ -12033,7 +11961,7 @@ const questions = {
 					description: "Calcul de l'aire d'un triangle quelconque.",
 					subdescription: "A partir d'une description",
 					enounces: [
-						"Quelle est l'aire d'un <b>triangle</b> de base $$[°&3°]$$ et de hauteur $$[°&4°]$$ ?",
+						"Quelle est l'aire d'un <b>triangle</b> de base $$[°&3°]$$ et de hauteur associée $$[°&4°]$$ ?",
 					],
 					variables: [
 						{
@@ -12088,19 +12016,221 @@ const questions = {
 						['[._&3*&4/2_hm^2_] '],
 						['[._&3*&4/2_km^2_] '],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [
-								"L'aire d'un triangle de base $$[°&3°]$$ et de hauteur $$[°&4°]$$ est &answer.",
-							],
-							answer: "L'aire du triangle est &answer.",
+							correct: ["L'aire du triangle est &answer."],
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "L'aire d'un triangle de base $$[°&3°]$$ et de hauteur $$[°&4°]$$  est $$[°{&3*&4}/2°] = &sol$$.",
+								text: "L'aire d'un triangle de base $$[°&3°]$$ et de hauteur $$[°&4°]$$  est $$[°{&3*&4}/2°] =$$ &solution.",
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: "Trouver la base d'un triangle quelconque.",
+					subdescription: 'A partir de son aire et de la hauteur associée.',
+					enounces: [
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$ ?",
+						"Quelle est la base d'un <b>triangle</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$ ?",
+					],
+					variables: [
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 mm',
+							'&4': '&2 mm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 cm',
+							'&4': '&2 cm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dm',
+							'&4': '&2 dm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 m',
+							'&4': '&2 m',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dam',
+							'&4': '&2 dam',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 hm',
+							'&4': '&2 hm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 km',
+							'&4': '&2 km',
+						},
+					],
+					solutions: [['&4']],
+					correctionFormat: [
+						{
+							correct: ['La base mesure &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_mm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_cm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_m^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dam^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_hm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un triangle de hauteur asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_km^2_]$$.",
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: "Trouver la hauteur d'un triangle quelconque.",
+					subdescription: 'A partir de son aire et de la base associée.',
+					enounces: [
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>triangle</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$ ?",
+					],
+					variables: [
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 mm',
+							'&4': '&2 mm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 cm',
+							'&4': '&2 cm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dm',
+							'&4': '&2 dm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 m',
+							'&4': '&2 m',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dam',
+							'&4': '&2 dam',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 hm',
+							'&4': '&2 hm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 km',
+							'&4': '&2 km',
+						},
+					],
+					solutions: [['&4']],
+					correctionFormat: [
+						{
+							correct: ['La hauteur mesure &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_mm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_mm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_cm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_cm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_m^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_m^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_dam^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_dam^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_hm^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_hm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un triangle de base asociée $$[°&3°]$$ et d'aire $$[._&3*&4:2_km^2_]$$  est &solution car   $$\\frac{[°&3°] \\times &sol}{2} = [._&3*&4:2_km^2_]$$.",
 							},
 						],
 					],
@@ -12161,27 +12291,25 @@ const questions = {
 						},
 					],
 					solutions: [
-						['[_&3*&4_mm^2_] '],
-						['[_&3*&4_cm^2_] '],
-						['[_&3*&4_dm^2_] '],
-						['[_&3*&4_m^2_] '],
-						['[_&3*&4_dam^2_] '],
-						['[_&3*&4_hm^2_] '],
-						['[_&3*&4_km^2_] '],
+						['[_&3*&4_mm^2_]'],
+						['[_&3*&4_cm^2_]'],
+						['[_&3*&4_dm^2_]'],
+						['[_&3*&4_m^2_]'],
+						['[_&3*&4_dam^2_]'],
+						['[_&3*&4_hm^2_]'],
+						['[_&3*&4_km^2_]'],
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
 							correct: [
-								"L'aire d'un parallélogramme de base $$[°&3°]$$ et de hauteur $$[°&4°]$$ est &answer.",
+								"L'aire du parallélogramme est &answer.",
 							],
-							answer: "L'aire du parallélogramme est &answer.",
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "L'aire d'un parallélogramme de base $$[°&3°]$$ et de hauteur $$[°&4°]$$  est $$[°&3*&4°] = &sol$$.",
+								text: "L'aire d'un parallélogramme de base $$[°&3°]$$ et de hauteur $$[°&4°]$$  est $$[°&3*&4°] =$$ &solution.",
 							},
 						],
 					],
@@ -12189,6 +12317,215 @@ const questions = {
 					defaultDelay: 15,
 					grade: CINQUIEME,
 				},
+				{
+					description: "Trouver la base d'un parallélogramme.",
+					subdescription: 'A partir de son aire et de la hauteur associée .',
+					enounces: [
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_mm^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_cm^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_dm^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_m^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_dam^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_hm^2_]$$ ?",
+						"Quelle est la base d'un <b>parallélogramme</b> de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ ?",
+					],
+					variables: [
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 mm',
+							'&4': '&2 mm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 cm',
+							'&4': '&2 cm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dm',
+							'&4': '&2 dm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 m',
+							'&4': '&2 m',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dam',
+							'&4': '&2 dam',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 hm',
+							'&4': '&2 hm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 km',
+							'&4': '&2 km',
+						},
+					],
+					solutions: [['&4']],
+					correctionFormat: [
+						{
+							correct: ['La base mesure &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_mm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_mm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_cm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_cm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_dm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_dm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_m^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_m^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_dam^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_dam^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_hm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_hm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_km^2_]$$.",
+							},
+						],
+				
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: "Trouver la hauteur d'un parallélogramme.",
+					subdescription: 'A partir de son aire et de la base associée.',
+					enounces: [
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_mm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_cm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_dm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_m^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_dam^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_hm^2_]$$ ?",
+						"Quelle est la hauteur d'un <b>parallélogramme</b> de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ ?",
+					],
+					variables: [
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 mm',
+							'&4': '&2 mm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 cm',
+							'&4': '&2 cm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dm',
+							'&4': '&2 dm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 m',
+							'&4': '&2 m',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 dam',
+							'&4': '&2 dam',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 hm',
+							'&4': '&2 hm',
+						},
+						{
+							'&1': '$e[1;11]',
+							'&2': '$e[1;11]\\{&1}',
+							'&3': '&1 km',
+							'&4': '&2 km',
+						},
+					],
+					solutions: [['&4']],
+					correctionFormat: [
+						{
+							correct: ['La hauteur mesure &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_mm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_mm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_cm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_cm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_dm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_dm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_m^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_m^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_dam^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_dam^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_hm^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_hm^2_]$$.",
+							},
+						],
+						[
+							{
+								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_km^2_]$$.",
+							},
+						],
+				
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				
 			],
 		},
 		Durées: {
@@ -12196,20 +12533,18 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en minutes',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;10]',
-							'&2': '[_&1 h_min_]'
+							'&2': '[_&1 h_min_]',
 						},
 					],
 					answerFields: ['$$&1\\,h = ?\\,min$$'],
-					solutions:[['[_&2/(1 min)_]']],
+					solutions: [['[_&2/(1 min)_]']],
 					correctionFormat: [
 						{
-							correct: [
-								"$$&1\\,h =$$&answer $$min$$",
-							],
+							correct: ['$$&1\\,h =$$&answer $$min$$'],
 						},
 					],
 					correctionDetails: [
@@ -12244,23 +12579,25 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en heures',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;10]',
 						},
 					],
 					answerFields: ['$$[_&1*60_]\\,min= ? h$$'],
-					solutions:[['&1']],
+					solutions: [['&1']],
 					correctionFormat: [
 						{
-							correct: [
-								"$$[_&1*60_]\\,min =$$&answer $$h$$",
-							],
+							correct: ['$$[_&1*60_]\\,min =$$&answer $$h$$'],
 						},
 					],
 					correctionDetails: [
-						[{ text: '$$[_&1*60_]\\,min = &1 \\times 60\\,min =$$&solution $$h$$' }],
+						[
+							{
+								text: '$$[_&1*60_]\\,min = &1 \\times 60\\,min =$$&solution $$h$$',
+							},
+						],
 					],
 					// units: ['h'],
 					// options: ['require-specific-unit'],
@@ -12292,20 +12629,18 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'minutes en secondes',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;10]',
-							'&2': '[_&1 min_s_]'
+							'&2': '[_&1 min_s_]',
 						},
 					],
 					answerFields: ['$$&1\\,min = ?\\,s$$'],
-					solutions:[['[_&2/(1 s)_]']],
+					solutions: [['[_&2/(1 s)_]']],
 					correctionFormat: [
 						{
-							correct: [
-								"$$&1\\,min =$$&answer $$s$$",
-							],
+							correct: ['$$&1\\,min =$$&answer $$s$$'],
 						},
 					],
 					correctionDetails: [
@@ -12335,27 +12670,29 @@ const questions = {
 				// 	defaultDelay: 20,
 				// 	grade: SIXIEME,
 				// },
-			
+
 				{
 					description: 'Convertir des durées',
 					subdescription: 'secondes en minutes',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;10]',
 						},
 					],
 					answerFields: ['$$[_&1*60_]\\,s= ? min$$'],
-					solutions:[['&1']],
+					solutions: [['&1']],
 					correctionFormat: [
 						{
-							correct: [
-								"$$[_&1*60_]\\,s =$$&answer $$min$$",
-							],
+							correct: ['$$[_&1*60_]\\,s =$$&answer $$min$$'],
 						},
 					],
 					correctionDetails: [
-						[{ text: '$$[_&1*60_]\\,s = &1 \\times 60\\,s =$$&solution $$min$$' }],
+						[
+							{
+								text: '$$[_&1*60_]\\,s = &1 \\times 60\\,s =$$&solution $$min$$',
+							},
+						],
 					],
 					'result-type': 'decimal',
 					defaultDelay: 20,
@@ -12385,23 +12722,21 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'HMS en minutes',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;5]*10',
 							'&3': '&1 h [_&2_] min',
-							'&4': '[_&3_min_]'
+							'&4': '[_&3_min_]',
 						},
 					],
 					answerFields: ['$$&1\\,h\\,[_&2_]\\,min = ?\\,min$$'],
-					solutions:[['[_&4/(1 min)_]']],
+					solutions: [['[_&4/(1 min)_]']],
 
 					correctionFormat: [
 						{
-							correct: [
-								"$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$",
-							],
+							correct: ['$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$'],
 						},
 					],
 					correctionDetails: [
@@ -12444,23 +12779,21 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'HMS en minutes (2)',
-					enounces: ["Convertis."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;59]',
 							'&3': '&1 h [_&2_] min',
-							'&4': '[_&3_min_]'
+							'&4': '[_&3_min_]',
 						},
 					],
 					answerFields: ['$$&1\\,h\\,[_&2_]\\,min = ?\\,min$$'],
-					solutions:[['[_&4/(1 min)_]']],
+					solutions: [['[_&4/(1 min)_]']],
 
 					correctionFormat: [
 						{
-							correct: [
-								"$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$",
-							],
+							correct: ['$$&1\\,h\\,[_&2_]\\,min  =$$&answer $$min$$'],
 						},
 					],
 					correctionDetails: [
@@ -12511,11 +12844,11 @@ const questions = {
 						},
 					],
 					answerFields: ['$$[_&1*60+&2_]\\,min= ?\\,h\\,?\\,min$$'],
-					solutions:[['&1', '[_&2_]']],
+					solutions: [['&1', '[_&2_]']],
 					correctionFormat: [
 						{
 							correct: [
-								"$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$",
+								'$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$',
 							],
 						},
 					],
@@ -12567,11 +12900,11 @@ const questions = {
 						},
 					],
 					answerFields: ['$$[_&1*60+&2_]\\,min= ?\\,h\\,?\\,min$$'],
-					solutions:[['&1', '&2']],
+					solutions: [['&1', '&2']],
 					correctionFormat: [
 						{
 							correct: [
-								"$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$",
+								'$$[_&1*60+&2_]\\,min=$$ &answer1 $$h$$ &answer2 $$min$$',
 							],
 						},
 					],
@@ -12615,34 +12948,62 @@ const questions = {
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en HMS, heures décimales',
-					enounces: ['Convertis sous la forme ...<i>h</i>...<i>min</i>.'],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;5]',
 							'&2': '$l{1;5;25}',
-							'&3': '&1,&2',
 						},
 					],
-					expressions: ['[._&3_] h'],
+					answerFields: ['$$&1{,}&2\\,h= ?\\,h\\,?\\,min$$'],
+					solutions: [['&1', '[_0,&2*60_]']],
+					correctionFormat: [
+						{
+							correct: ['$$&1{,}&2\\,h=$$ &answer1 $$h$$ &answer2 $$min$$'],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = &1\\,h + [_0,&2 h;min_] =&sol$$',
+								text: '$$&1{,}&2\\,h = &1\\,h + \\, 0,&2 \\, h = &1\\,h \\, + \\, [_0,&2*60_] \\, min =$$ &solution1 $$h$$ &solution2 $$min$$',
 							},
 						],
 					],
-
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'heures en HMS, heures décimales',
+				// 	enounces: ['Convertis sous la forme ...<i>h</i>...<i>min</i>.'],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;5]',
+				// 			'&2': '$l{1;5;25}',
+				// 			'&3': '&1,&2',
+				// 		},
+				// 	],
+				// 	expressions: ['[._&3_] h'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = &1\\,h + [_0,&2 h;min_] =&sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['HMS'],
+				// 	options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en minutes, heures décimales',
-					enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;5]',
@@ -12650,50 +13011,114 @@ const questions = {
 							'&3': '&1,&2',
 						},
 					],
-					expressions: ['[._&3_] h'],
+					answerFields: ['$$[°&3°]\\,h= ?\\,min$$'],
+					solutions: [['[_&3*60_]']],
+					correctionFormat: [
+						{
+							correct: ['$$[°&3°]\\,h=$$ &answer $$min$$'],
+						},
+					],
+
 					correctionDetails: [
 						[
 							{
-								text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = [_&1 h;min_] + [_0,&2 h;min_] =&sol$$',
+								text: '$$[°&3°]\\,h = &1\\,h +  0,&2\\,h = [_&1 h_min_] + [_0,&2 h_min_] =$$ &solution $$min$$',
 							},
 						],
 					],
-
-					units: ['min'],
-					options: ['require-specific-unit'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'heures en minutes, heures décimales',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;5]',
+				// 			'&2': '$l{1;5;25}',
+				// 			'&3': '&1,&2',
+				// 		},
+				// 	],
+				// 	expressions: ['[._&3_] h'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = [_&1 h;min_] + [_0,&2 h;min_] =&sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 
 				{
 					description: 'Convertir des durées',
-					subdescription: 'heures en HMS (2)',
-					enounces: ['Convertis sous la forme ...<i>h</i>...<i>min</i>.'],
+					subdescription: 'heures en HMS, heures décimales (2)',
+					enounces: ['Convertis.'],
 					variables: [
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;9]',
-							'&3': '&1,&2',
 						},
 					],
-					expressions: ['[._&3_] h'],
+					answerFields: ['$$&1{,}&2\\,h= ?\\,h\\,?\\,min$$'],
+					solutions: [['&1', '[_0,&2*60_]']],
+					correctionFormat: [
+						{
+							correct: ['$$&1{,}&2 \\, h=$$ &answer1 $$h$$ &answer2 $$min$$'],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = &1\\,h + &2 \\times [_0,1 h;min_] = &1\\,h + [_0,&2 h;min_] =&sol$$',
+								text: `$$\\begin{align} \
+								&1{,}&2 \\, h &= &1\\,h + \\, 0{,}&2 \\, h \\\\ \
+								&= &1\\,h \\, + \\, &2 \\times 0,1h \\\\ \
+								&= &1\\,h \\, + \\, &2 \\times 6 \\, min\\\\ \
+								&= &1\\,h \\, + \\, [_0,&2*60_] \\, min \\\\ \
+								&= &sol1 \\, h \\, &sol2 \\, min\
+								\\end{align}$$`,
 							},
 						],
 					],
-
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'heures en HMS (2)',
+				// 	enounces: ['Convertis sous la forme ...<i>h</i>...<i>min</i>.'],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;9]',
+				// 			'&3': '&1,&2',
+				// 		},
+				// 	],
+				// 	expressions: ['[._&3_] h'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = &1\\,h + &2 \\times [_0,1 h;min_] = &1\\,h + [_0,&2 h;min_] =&sol$$',
+				// 			},
+				// 		],
+				// 	],
+
+				// 	units: ['HMS'],
+				// 	options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 				{
 					description: 'Convertir des durées',
 					subdescription: 'heures en minutes, heures décimales (2)',
@@ -12702,32 +13127,64 @@ const questions = {
 						{
 							'&1': '$e[1;2]',
 							'&2': '$e[1;9]',
-							'&3': '&1,&2',
 						},
 					],
-					expressions: ['[._&3_] h'],
+					answerFields: ['$$&1{,}&2\\,h= ?\\,min$$'],
+					solutions: [['[_&1,&2*60_]']],
+					correctionFormat: [
+						{
+							correct: ['$$&1,&2 \\, h=$$ &answer $$min$$'],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = [_&1 h;min_] + [_0,&2 h;min_] = [_&1 h;min_] + &2 \\times [_0,1 h;min_]&sol$$',
+								text: `$$\\begin{align} \
+								&1{,}&2 \\, h &= &1\\,h + \\, 0{,}&2 \\, h \\\\ \
+								&= &1 \\times 60 \\, min \\, + \\, &2 \\times 0,1h \\\\ \
+								&= [_&1*60_] \\, min \\, + \\, &2 \\times 6 \\, min\\\\ \
+								&= [_&1*60_] \\, min \\, + \\, [_0,&2*60_] \\, min \\\\ \
+								&= &sol \\, min\
+								\\end{align}$$`,
 							},
 						],
 					],
-					units: ['min'],
-					options: ['require-specific-unit'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+				// {
+				// 	description: 'Convertir des durées',
+				// 	subdescription: 'heures en minutes, heures décimales (2)',
+				// 	enounces: ["Convertis en minutes (n'oublie pas l'unité <i>min</i>)."],
+				// 	variables: [
+				// 		{
+				// 			'&1': '$e[1;2]',
+				// 			'&2': '$e[1;9]',
+				// 			'&3': '&1,&2',
+				// 		},
+				// 	],
+				// 	expressions: ['[._&3_] h'],
+				// 	correctionDetails: [
+				// 		[
+				// 			{
+				// 				text: '$$[._&3_]\\,h = &1\\,h +  0,&2\\,h = [_&1 h;min_] + [_0,&2 h;min_] = [_&1 h;min_] + &2 \\times [_0,1 h;min_]&sol$$',
+				// 			},
+				// 		],
+				// 	],
+				// 	units: ['min'],
+				// 	options: ['require-specific-unit'],
+
+				// 	'result-type': 'decimal',
+				// 	defaultDelay: 20,
+				// 	grade: SIXIEME,
+				// },
 			],
 			Calculer: [
 				{
 					description: 'Ajouter des durées',
 					subdescription: 'en HMS',
-					enounces: [
-						'Calcule et écris la réponse sous la forme ...<i>h</i>...<i>min</i> .',
-					],
+					enounces: ['Calcule.'],
 					variables: [
 						{
 							'&1': '$e[1;4]',
@@ -12735,29 +13192,124 @@ const questions = {
 							'&3': '$e[1;59]',
 						},
 					],
-					expressions: ['&1 h [_&2_] min + [_&3_] min'],
+					answerFields: [
+						'$$[°&1°] \\, h \\, [°&2°] \\, min \\, + \\, [°&3°] \\, min = ? \\, h \\, ? \\, min$$',
+					],
+					solutions: [
+						[
+							'&2+&3>59 ?? [_&1+1_] :: &1 ',
+							'&2+&3>59 ?? [_&2+&3-60_] :: [_&2+&3_] ',
+						],
+					],
+					correctionFormat: [
+						{
+							correct: [
+								'$$&1 \\, h \\, &2 \\, min \\, + \\, &3 \\, min=$$ &solution1 h &solution2 min',
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$&1\\,h\\, [_&2_]\\,min + [_&3_]\\,min \
-          @@ &2+&3>59 ?? = &1\\,h + [_&2+&3_]\\,min @@  \
-          = &sol$$',
+								text: `$$\\begin{align} \
+								&1\\,h\\, &2\\,min + &3\\,min \
+          			@@ &2+&3>=60 ?? &= &1 \\, h \\, + \\, &2 \\, min \\, + \\, &3 \\,min \\\\@@  \
+          			@@ &2+&3>=60 ?? &= &1 \\, h \\, + \\, 60 \\, min \\, + \\, [_&3+&2-60_] \\,min \\\\ @@  \
+          			@@ &2+&3>=60 ?? &= &1\\,h + \\, 1 \\, h \\, + \\, [_&2+&3-60_]\\,min \\\\ @@  \
+					  &= &sol1 \\, h \\, &sol2 \\, min \
+					\\end{align}$$`,
 							},
 						],
 					],
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 				{
 					description: 'Ajouter des durées',
-					subdescription: 'en HMS (2)',
-					enounces: [
-						'Calcule et écris la réponse sous la forme ...<i>h</i>...<i>min</i> .',
+					subdescription: "unité choisie par l'utilisateur",
+					enounces: ['Calcule et écris la réponse sous la forme que tu veux.'],
+					variables: [
+						{
+							'&1': '$e[1;4]',
+							'&2': '$e[1;59]',
+							'&3': '$e[1;59]',
+						},
 					],
+					expressions: ['&1 h &2 min + &3 min'],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								&1\\,h\\, &2\\,min + &3\\,min \
+          			@@ &2+&3>=60 ?? &= &1 \\, h \\, + \\, &2 \\, min \\, + \\, &3 \\,min \\\\@@  \
+          			@@ &2+&3>=60 ?? &= &1 \\, h \\, + \\, 60 \\, min \\, + \\, [_&3+&2-60_] \\,min \\\\ @@  \
+          			@@ &2+&3>=60 ?? &= &1\\,h + \\, 1 \\, h \\, + \\, [_&2+&3-60_]\\,min \\\\ @@  \
+					  &= &sol \
+					\\end{align}$$`,
+							},
+						],
+					],
+					units: ['HMS'],
+					options: [
+						'no-penalty-for-extraneous-zeros',
+						'no-penalty-for-not-respected-unit',
+					],
+					'result-type': 'decimal',
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+
+				{
+					description: 'Ajouter des durées (2)',
+					subdescription: 'en HMS (2)',
+					enounces: ['Calcule.'],
+					variables: [
+						{
+							'&1': '$e[1;4]',
+							'&2': '$e[1;4]',
+							'&3': '$e[1;5]',
+							'&4': '($e[1;5]\\{6-&3})',
+						},
+					],
+					answerFields: [
+						'$$&1 \\, h \\, [_&3*10_] \\, min \\, + \\, &2 \\, h \\, [_&4*10_] \\, min=? \\, h \\, ? \\, min$$',
+					],
+					solutions: [
+						[
+							'(&4+&3)*10>59 ?? [_&1+&2+1_] :: [_&1+&2_] ',
+							'(&4+&3)*10>59 ?? [_(&4+&3)*10-60_] :: [_(&4+&3)*10_] ',
+						],
+					],
+					correctionFormat: [
+						{
+							correct: [
+								'$$&1 \\, h \\, [_&3*10_] \\, min \\, + \\, &2 \\, h \\, [_&4*10_] \\, min=$$ &solution1 $$h$$ &solution2 $$min$$',
+							],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								&1 \\, h \\, [_&3*10_] \\, min \\, + \\, &2 \\, h \\, [_&4*10_] \\, min \
+          			@@ (&4+&3)*10>=60 ?? &= &1 \\, h \\, + \\, &2 \\, h \\, + \\, [_&3*10_] \\, min \\, + \\, [_&4*10_] \\,min \\\\@@  \
+          			@@ (&4+&3)*10>=60 ?? &= [_&1+&2_] \\, h \\, + \\, 60 \\, min \\, + \\, [_(&3+&4)*10-60_] \\,min \\\\ @@  \
+          			@@ (&4+&3)*10>=60 ?? &= [_&1+&2_] \\,h + \\, 1 \\, h \\, + \\, [_(&4+&3)*10-60_]\\,min \\\\ @@  \
+					  &= &sol1 \\, h \\, &sol2 \\, min \
+					\\end{align}$$`,
+							},
+						],
+					],
+					options: ['no-penalty-for-extraneous-zeros'],
+					'result-type': 'decimal',
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: 'Ajouter des durées (2)',
+					subdescription: "L'utilisateur choisit l'unité.",
+					enounces: ['Calcule.'],
 					variables: [
 						{
 							'&1': '$e[1;4]',
@@ -12767,28 +13319,40 @@ const questions = {
 						},
 					],
 					expressions: ['&1 h [_&3*10_] min + &2 h [_&4*10_] min'],
+					correctionFormat: [
+						{
+							correct: [
+								'$$&1 \\, h \\, [_&3*10_] \\, min \\, + \\, &2 \\, h \\, [_&4*10_] \\, min=$$ &solution',
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$&1\\,h\\, [_&3*10_]\\,min + &2\\,h [_&4*10_]\\,min \
-          @@ (&3+&4)*10>59 ?? = [_&1+&2_]\\,h + [_(&3+&4)*10_]\\,min @@  \
-          = &sol$$',
+								text: `$$\\begin{align} \
+								&1 \\, h \\, [_&3*10_] \\, min \\, + \\, &2 \\, h \\, [_&4*10_] \\, min \
+          			@@ (&4+&3)*10>=60 ?? &= &1 \\, h \\, + \\, &2 \\, h \\, + \\, [_&3*10_] \\, min \\, + \\, [_&4*10_] \\,min \\\\@@  \
+          			@@ (&4+&3)*10>=60 ?? &= [_&1+&2_] \\, h \\, + \\, 60 \\, min \\, + \\, [_(&3+&4)*10-60_] \\,min \\\\ @@  \
+          			@@ (&4+&3)*10>=60 ?? &= [_&1+&2_] \\,h + \\, 1 \\, h \\, + \\, [_(&4+&3)*10-60_]\\,min \\\\ @@  \
+					  &= &sol \
+					\\end{align}$$`,
 							},
 						],
 					],
 					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
+					options: [
+						'no-penalty-for-extraneous-zeros',
+						'no-penalty-for-not-respected-unit',
+					],
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
+
 				{
-					description: 'Ajouter des durées',
-					subdescription: 'en HMS (3)',
-					enounces: [
-						'Calcule et écris la réponse sous la forme ...<i>h</i>...<i>min</i> .',
-					],
+					description: 'Ajouter des durées (3)',
+					subdescription: 'en HMS',
+					enounces: ['Calcule.'],
 					variables: [
 						{
 							'&1': '$e[1;4]',
@@ -12797,28 +13361,87 @@ const questions = {
 							'&4': '$e[1;59]\\{60-&3}',
 						},
 					],
-					expressions: ['&1 h [_&3_] min + &2 h [_&4_] min'],
+					answerFields: [
+						'$$&1 \\, h \\, &3 \\, min \\, + \\, &2 \\, h \\, &4 \\, min=? \\, h \\, ? \\, min$$',
+					],
+					solutions: [
+						[
+							'&4+&3>59 ?? [_&1+&2+1_] :: [_&1+&2_] ',
+							'&4+&3>59 ?? [_&4+&3-60_] :: [_&4+&3_] ',
+						],
+					],
+					correctionFormat: [
+						{
+							correct: [
+								'$$&1 \\, h \\, &3 \\, min \\, + \\, &2 \\, h \\, &4 \\, min=$$ &solution1 $$h$$ &solution2 $$min$$',
+							],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$&1\\,h\\, &3\\,min + &2\\,h &4\\,min \
-          @@ &3+&4>59 ?? = [_&1+&2_]\\,h + [_&3+&4_]\\,min @@  \
-          = &sol$$',
+								text: `$$\\begin{align} \
+								&1 \\, h \\, &3 \\, min \\, + \\, &2 \\, h \\, &4 \\, min \
+          			@@ &4+&3>=60 ?? &= &1 \\, h \\, + \\, &2 \\, h \\, + \\, &3 \\, min \\, + \\, &4 \\,min \\\\@@  \
+          			@@ &4+&3>=60 ?? &= [_&1+&2_] \\, h \\, + \\, 60 \\, min \\, + \\, [_&3+&4-60_] \\,min \\\\ @@  \
+          			@@ &4+&3>=60 ?? &= [_&1+&2_] \\,h + \\, 1 \\, h \\, + \\, [_&4+&3-60_]\\,min \\\\ @@  \
+					  &= &sol1 \\, h \\, &sol2 \\, min \
+					\\end{align}$$`,
 							},
 						],
 					],
-					units: ['HMS'],
-					options: ['require-specific-unit', 'no-penalty-for-extraneous-zeros'],
-
 					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 				{
+					description: 'Ajouter des durées (3)',
+					subdescription: "L'utilisateur choisit l'unité",
+					enounces: ['Calcule.'],
+					variables: [
+						{
+							'&1': '$e[1;4]',
+							'&2': '$e[1;4]',
+							'&3': '$e[1;59]',
+							'&4': '$e[1;59]\\{60-&3}',
+						},
+					],
+					expressions: ['&1 h &3 min + &2 h &4 min'],
+					correctionFormat: [
+						{
+							correct: [
+								'$$&1 \\, h \\, &3 \\, min \\, + \\, &2 \\, h \\, &4 \\, min=$$ &solution',
+							],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$\\begin{align} \
+								&1 \\, h \\, &3 \\, min \\, + \\, &2 \\, h \\, &4 \\, min \
+          			@@ &4+&3>=60 ?? &= &1 \\, h \\, + \\, &2 \\, h \\, + \\, &3 \\, min \\, + \\, &4 \\,min \\\\@@  \
+          			@@ &4+&3>=60 ?? &= [_&1+&2_] \\, h \\, + \\, 60 \\, min \\, + \\, [_&3+&4-60_] \\,min \\\\ @@  \
+          			@@ &4+&3>=60 ?? &= [_&1+&2_] \\,h + \\, 1 \\, h \\, + \\, [_&4+&3-60_]\\,min \\\\ @@  \
+					  &= &sol \
+					\\end{align}$$`,
+							},
+						],
+					],
+					units: ['HMS'],
+					'result-type': 'decimal',
+					options: [
+						'no-penalty-for-extraneous-zeros',
+						'no-penalty-for-not-respected-unit',
+					],
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+
+				{
 					description: 'Soustraire des durées',
 					subdescription: 'en HMS',
 					enounces: [
-						"J'ai commencé à regarder un épisode d'une série à $$[°&1 h &2 min°]$$, et je l'ai terminé à $$[_&1 h &2 min + &3 min; HMS_]$$. Quelle était la durée de cet épisode ? (n'oublie pas l'unité)",
+						"J'ai commencé à regarder un épisode d'une série à $$[°&1 h &2 min°]$$, et je l'ai terminé à $$[_&1 h &2 min + &3 min_HMS_]$$. Quelle était la durée de cet épisode ? (n'oublie pas l'unité)",
 					],
 					variables: [
 						{
@@ -12827,7 +13450,7 @@ const questions = {
 							'&3': '$e[1;59]',
 						},
 					],
-					expressions: ['&3 min'],
+					solutions: [['&3 min']],
 					units: ['min'],
 
 					'result-type': 'decimal',
@@ -12840,21 +13463,24 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '@@&2+&3<60 ?? $$[_&1 h &2 min; HMS_] + &sol = [_&1 h &2 min + &3 min; HMS_]$$ @@\
-              @@&2+&3>59 ?? $$\\begin{align}[_&1 h &2 min + &3 min; HMS_] &= [_&1 h &2 min; HMS_] + [_60-&2_]\\,min + [_&3+&2-60_]\\,min\\\\ \
-                 &= [_&1 h &2 min; HMS_] + &sol\\end{align}$$ @@',
+								text: '@@&2+&3<60 ?? $$[_&1 h &2 min_HMS_] + &sol = [_&1 h &2 min + &3 min_HMS_]$$ @@\
+              @@&2+&3>59 ?? $$\\begin{align}[_&1 h &2 min + &3 min_HMS_] &= [_&1 h &2 min_HMS_] + [_60-&2_]\\,min + [_&3+&2-60_]\\,min\\\\ \
+                 &= [_&1 h &2 min_HMS_] + &sol\\end{align}$$ @@',
 							},
 						],
 					],
-					options: ['no-exp'],
+					options: [
+						'no-penalty-for-extraneous-zeros',
+						'no-penalty-for-not-respected-unit',
+					],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 				{
-					description: 'Soustraire des durées',
-					subdescription: 'en HMS (2)',
+					description: 'Soustraire des durées (2)',
+					subdescription: 'en HMS',
 					enounces: [
-						"J'ai commencé à regarder un film  à $$[°&1 h &3 min°]$$, et je l'ai terminé à $$[_&1 h &3 min + &2 h &4 min; HMS_]$$. Quelle était la durée de ce film ? (n'oublie pas l'unité)",
+						"J'ai commencé à regarder un film  à $$[°&1 h &3 min°]$$, et je l'ai terminé à $$[_&1 h &3 min + &2 h &4 min_HMS_]$$. Quelle était la durée de ce film ? (n'oublie pas l'unité)",
 					],
 					variables: [
 						{
@@ -12864,29 +13490,28 @@ const questions = {
 							'&4': '$e[1;59]\\{60-&3}',
 						},
 					],
-					expressions: ['&2 h &4 min'],
-					correctionDetails: [
-						[
-							{
-								text: '@@&3+&4<60 ?? $$[_&1 h &3 min; HMS_] + &sol = [_&1 h &3 min + &2 h &4 min; HMS_]$$ @@\
-              @@&3+&4>59 ?? $$\\begin{align}[_&1 h &3 min + &2 h &4 min; HMS_] &= [_&1 h &3 min; HMS_] + [_60-&3_]\\,min + [_&2_]\\,h + [_&3+&4-60_]\\,min \\\\ \
-                 &= [_&1 h &3 min; HMS_] + &sol\\end{align}$$ @@',
-							},
-						],
-					],
-					units: ['HMS'],
-
-					'result-type': 'decimal',
+					solutions: [['&2 h &4 min']],
 					correctionFormat: [
 						{
 							correct: ["La durée de l'épisode est de &answer."],
 							answer: 'La durée est de &answer.',
 						},
 					],
+					correctionDetails: [
+						[
+							{
+								text: '@@&3+&4<60 ?? $$[_&1 h &3 min_HMS_] + &sol = [_&1 h &3 min + &2 h &4 min_HMS_]$$ @@\
+              @@&3+&4>59 ?? $$\\begin{align}[_&1 h &3 min + &2 h &4 min_HMS_] &= [_&1 h &3 min_HMS_] + [_60-&3_]\\,min + [_&2_]\\,h + [_&3+&4-60_]\\,min \\\\ \
+                 &= [_&1 h &3 min_HMS_] + &sol\\end{align}$$ @@',
+							},
+						],
+					],
+					units: ['HMS'],
+
+					'result-type': 'decimal',
 					options: [
-						'no-exp',
-						'require-specific-unit',
 						'no-penalty-for-extraneous-zeros',
+						'no-penalty-for-not-respected-unit',
 					],
 					defaultDelay: 20,
 					grade: SIXIEME,
@@ -12935,7 +13560,24 @@ const questions = {
 						['[._&1*1000_]'],
 					],
 					correctionDetails: [
-						[{ text: '$$&1\\,h = &1 \\times 60\\,min = &sol$$' }],
+						[
+							{ text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1*1000_]\\,m}{1\\,h} =$$ &solution $$m.h^{-1}$$' }
+						],
+						[
+							{ text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1_]\\,km}{3\\,600\\,s} =$$ &solution $$km.s^{-1}$$' }
+						],
+						[
+							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1:1000_]\\,km}{1\\,s} =$$ &solution $$km.s^{-1}$$' }
+						],
+						[
+							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{\\frac{1}{3\\,600}\\,h} = \\frac{[_&1_] \\times 3\\,600\\,m}{1\\,h}=$$ &solution $$m.h^{-1}$$' }
+						],
+						[
+							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{1\\,000\\,ms} =$$ &solution $$m.ms^{-1}$$' }
+						],
+						[
+							{ text: '$$[_&1_] \\, m.ms^{-1} = \\frac{[_&1_]\\,m}{1\\,ms} = \\frac{[_&1_]\\,m}{0,001\\,s} =$$ &solution $$m.s^{-1}$$' }
+						],
 					],
 					// units: ['min'],
 					// options: ['require-specific-unit'],
@@ -12962,21 +13604,18 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"La vitesse d'une voiture parcourant $$[_{&2}*{&3}_km_]$$ en $$[°&3°]$$ est de &answer.",
+								"La vitesse est de &answer.",
 							],
-							answer: 'La vitesse est de &answer.',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "La vitesse d'une voiture parcourant $$[_{&2}*{&3}_km_]$$ en $$[°&3°]$$ est de &answer.",
+								text: "La vitesse d'une voiture parcourant $$[_{&2}*{&3}_km_]$$ en $$[°&3°]$$ est de $$\\frac{[_{&2}*{&3}_km_]}{[_&3_h_]}$$=&solution.",
 							},
 						],
 					],
-					// units: ['km.h^{-1}'],
-
-					// 'result-type': 'decimal',
+					'result-type': 'decimal',
 					defaultDelay: 20,
 					grade: QUATRIEME,
 				},

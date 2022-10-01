@@ -120,7 +120,7 @@
 	// keystroke on physical keyboard
 	function onKeystroke(ev, i) {
 		const mf = mfs[i]
-		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,=<>/*-+()^%€L'
+		const key_allowed = 'azertyuiopsdfghjklmwxcvbn0123456789,.=<>/*-+()^%€L'
 		const key_allowed2 = [
 			'Backspace',
 			'ArrowLeft',

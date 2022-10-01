@@ -47,7 +47,9 @@ export default function generateQuestion(
 	const generatedImages = generateds ? generateds.map((g) => g.image) : []
 
 	// les regex correpondant aux expressions à évaluer
-	const regexEval = /\[([.+(]*)_([^_]*?)(_(.+?))??_\]/g
+	// const regexEval = /\[([.+(]*)_([^_]*?)(_(.+?))??_\]/g
+	const regexEval = /\[([.+(]*)_([^_]*?)(_([^_]*))??_\]/g
+	// const regexEval = /\[([.+(]*)_([^_]+)_(([^_])_)??\]/g
 
 	// [° °] : simple mise en forme LaTeX
 	const regexLatex = /\[°(.*?)°\]/g
