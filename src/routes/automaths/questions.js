@@ -10183,6 +10183,53 @@ const questions = {
 					grade: QUATRIEME,
 				},
 			],
+			'Notation scientifique': [
+				{
+					description: "Ecrire un nombre décimal à l'aide de la notation scientifique",
+					enounces: ["Ecris ce nombre en notation scientifique."],
+					expressions: ['[._&1,&3*10^{&4}_]'],
+					solutions:[['&1,&3*10^{&4}']],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;3]',
+							'&3': '$e{&2;&2}',
+							'&4': '$er[2;4]',
+						},
+					],
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
+					defaultDelay: 20,
+					grade: QUATRIEME,
+				},
+				{
+					description: "Ecrire un nombre écrit avec une puissance de 10 à l'aide de la notation scientifique",
+					enounces: ["Ecris ce nombre en notation scientifique."],
+					expressions: ['[._&1,&3*10^{&4}_]*10^{&5}'],
+					solutions:[['&1,&3*10^{[_&4+(&5)_]}']],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;3]',
+							'&3': '$e{&2;&2}\\{m(10)}',
+							'&4': '$er[2;4]',
+							'&5': '$er[2;4]\\{-(&4)}',
+						},
+					],
+					correctionDetails:[[
+						{
+						text:'$$[._&1,&3*10^{&4}_] \\times 10^{&5}=&1,&3 \\times 10^{&4} \\times 10^{&5}=$$ &solution'
+						}
+					]],
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
+					defaultDelay: 20,
+					grade: QUATRIEME,
+				},
+				
+			],
 		},
 		Calculer: {
 			Multiplier: [
@@ -10209,7 +10256,7 @@ const questions = {
 					],
 					// bug de mathlive sur les puissances
 					// qui rajoute des parenthèses à l'exposant
-					// apparemment ça a été corrigé
+					
 					options: ['no-penalty-for-extraneous-brackets'],
 
 					defaultDelay: 20,
