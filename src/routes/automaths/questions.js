@@ -19503,15 +19503,7 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: [
-								"Est-ce la courbe représentative d'une fonction affine ? &answer",
-							],
-							answer: ' &answer',
-						},
-					],
-
+		
 					solutions: [
 						[0],
 						[0],
@@ -19526,8 +19518,22 @@ const questions = {
 						[1],
 						[1],
 					],
+					correctionDetails: [
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+					],
 					options: ['no-shuffle-choices'],
-					defaultDelay: 20,
+					defaultDelay: 120,
 					grade: TROISIEME,
 				},
 				{

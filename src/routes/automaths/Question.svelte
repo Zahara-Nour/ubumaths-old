@@ -456,12 +456,14 @@
 			{#await question.imageBase64P}
 				loading image
 			{:then base64}
+			<div style='background-color:white;'>
 				<img
 					src="{base64}"
 					class="my-3 w-full max-w-lg"
 					style="max-height:40vh; object-fit: contain;"
 					alt="Alright Buddy!"
 				/>
+			</div>
 			{:catch error}
 				{error}
 			{/await}
