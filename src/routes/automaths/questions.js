@@ -19448,7 +19448,7 @@ const questions = {
 						'f(x)=[_&1x_][+_&2_]',
 						'f(x)=&2[+_&1x_]',
 						'f(x)={[_&1/&3_]}x[+_&2/&4_]',
-						'f(x)=&2/&4+{[_abs(&1)/&3_]}x',
+						'f(x)=[_&2/&4_]+{[_abs(&1)/&3_]}x',
 						'f(x)=[_&1x_]',
 						'f(x)=&2',
 						'f(x)=[_&1x^2_][+_&2_]',
@@ -19465,11 +19465,17 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: ['&exp est-elle une fonction affine ? &answer'],
-							answer: " C'est une fonction affine ? &answer",
-						},
+					
+					correctionDetails: [
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_&1/&3_]$$ et $$b=[_&2/&4_]$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_abs(&1)/&3_]$$ et $$b=[_&2/&4_]$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=0$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=0$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
 					],
 
 					solutions: [[0], [0], [0], [0], [0], [0], [1], [1], [1]],

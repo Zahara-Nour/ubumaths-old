@@ -459,7 +459,7 @@
 				<img
 					src="{base64}"
 					class="my-3 w-full max-w-lg"
-					style="max-height:40vh;"
+					style="max-height:40vh; object-fit: contain;"
 					alt="Alright Buddy!"
 				/>
 			{:catch error}
