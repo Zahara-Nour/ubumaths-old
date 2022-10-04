@@ -456,7 +456,7 @@
 			{#await question.imageBase64P}
 				loading image
 			{:then base64}
-			<div style='background-color:white;'>
+			<div style='display:inline-block;background-color:white;'>
 				<img
 					src="{base64}"
 					class="my-3 w-full max-w-lg"
