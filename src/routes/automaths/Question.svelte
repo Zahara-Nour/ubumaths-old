@@ -132,17 +132,20 @@
 
 		const keystroke = ev.code
 		const key = ev.key
-
+		console.log('onKeyStroke')
+		console.log('answers_latex', answers_latex[i])
 		if (
-			keystroke === 'Space' &&
-			!(
-				answers_latex[i] &&
-				answers_latex[i].length >= 2 &&
-				answers_latex[i].slice(answers_latex[i].length - 2) === '\\,'
-			)
+			keystroke === 'Space'
+			//  &&
+			// !(
+			// 	answers_latex[i] &&
+			// 	answers_latex[i].length >= 2 &&
+			// 	answers_latex[i].slice(answers_latex[i].length - 2) === '\\,'
+			// )
 		) {
-			ev.preventDefault()
-			mfs[i].insert('\\,')
+			console.log('prevent space')
+			// ev.preventDefault()
+			mfs[i].insert('2\\,3')
 		} else if (key === '%') {
 			ev.preventDefault()
 			mf.insert('\\%')
@@ -306,8 +309,8 @@
 			answers_latex = null
 		} else {
 			// if faut garder les réponses si on sort du mode correction
-			if (!answers) answers = question.solutions.map(s =>'')
-			if (!answers_latex) answers_latex = question.solutions.map(s =>'')
+			if (!answers) answers = question.solutions.map((s) => '')
+			if (!answers_latex) answers_latex = question.solutions.map((s) => '')
 		}
 	}
 
@@ -381,6 +384,7 @@
 					removeExtraneousParentheses: false,
 					smartFence: false,
 					superscript: false,
+					mathModeSpace: '\\,',
 				})
 
 				if (answers_latex[i]) {
@@ -453,20 +457,37 @@
 				{@html enounce2}
 			</div>
 		{:else if element === 'enounce-image' && question.image}
-			{#await question.imageBase64P}
-				loading image
-			{:then base64}
-			<div style='display:inline-block;background-color:white;'>
-				<img
-					src="{base64}"
-					class="my-3 w-full max-w-lg"
-					style="max-height:40vh; object-fit: contain;"
-					alt="Alright Buddy!"
-				/>
-			</div>
-			{:catch error}
-				{error}
-			{/await}
+			{#if correction && question.imageCorrection}
+				{#await question.imageCorrectionBase64P}
+					loading image
+				{:then base64}
+					<div style="display:inline-block;background-color:white;">
+						<img
+							src="{base64}"
+							class="my-3 w-full max-w-lg"
+							style="max-height:40vh; object-fit: contain;"
+							alt="Alright Buddy!"
+						/>
+					</div>
+				{:catch error}
+					{error}
+				{/await}
+			{:else}
+				{#await question.imageBase64P}
+					loading image
+				{:then base64}
+					<div style="display:inline-block;background-color:white;">
+						<img
+							src="{base64}"
+							class="my-3 w-full max-w-lg"
+							style="max-height:40vh; object-fit: contain;"
+							alt="Alright Buddy!"
+						/>
+					</div>
+				{:catch error}
+					{error}
+				{/await}
+			{/if}
 		{:else if element === 'expression' && expression && (!correction || question.answerFields || (question.type !== 'result' && question.type !== 'trou' && question.type !== 'rewrite'))}
 			<div
 				id="expressions"

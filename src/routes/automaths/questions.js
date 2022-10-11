@@ -1288,18 +1288,15 @@ const questions = {
 					enounces: [
 						'Combien faut-il ajouter à $$[_10000-(&3)_]$$ pour obtenir $$10\\,000$$ ?',
 					],
-					expressions: ['?+[_10000-(&3)_]=10000', '[_10000-(&3)_]+?=10000'],
 					solutions: [['[_&3_]']],
 					variables: [
 						{ '&1': '$e[1;9]', '&2': '$e[1;9]', '&3': '&1*1000+&2*100' },
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
 							correct: [
-								'Il faut ajouter &answer à $$[_10000-(&3)_]$$ pour obtenir $$10\\,000$$.',
+								'Il faut ajouter &answer.',
 							],
-							answer: 'Il faut ajouter &answer',
 						},
 					],
 					type: 'rewrite',
@@ -1727,8 +1724,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -1749,8 +1745,7 @@ const questions = {
 						'Quel est le double de $$&2$$ ?',
 						'Quel est le résultat de $$&2+&2$$ ?',
 					],
-					expressions: ['2*&2'],
-					options: ['no-exp'],
+					solutions: [['[_2*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -1773,8 +1768,7 @@ const questions = {
 					description: 'Trouver la moitié',
 					subdescription: 'Nombre pair inférieur à 20',
 					enounces: ['Quelle est la moitié de $$[_2*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -1784,7 +1778,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1799,8 +1793,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -1821,9 +1814,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 30, 40, 50 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];20;25;50}',
@@ -1838,7 +1830,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1 + &1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1 + &1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1853,8 +1845,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -1875,9 +1866,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 40, 50, 60 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];$e[16;20];25;30;50}',
@@ -1892,7 +1882,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1909,8 +1899,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -1931,8 +1920,7 @@ const questions = {
 						'Quel est le triple de $$&2$$ ?',
 						'Quel est le résultat de $$&2+&2+&2$$ ?',
 					],
-					expressions: ['3*&2'],
-					options: ['no-exp'],
+					solutions: [['[_3*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -1955,8 +1943,7 @@ const questions = {
 					description: 'Trouver le tiers',
 					subdescription: 'Multiples de 3 inférieurs à 30',
 					enounces: ['Quelle est le tiers de $$[_3*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -1981,8 +1968,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -2007,8 +1993,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3208,7 +3193,6 @@ const questions = {
 							answer: 'Le chiffre des unités est &answer.',
 						},
 					],
-					options: ['no-exp'],
 					type: 'rewrite',
 					defaultDelay: 30,
 					grade: SIXIEME,
@@ -3222,8 +3206,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3244,8 +3227,7 @@ const questions = {
 						'Quel est le double de $$&2$$ ?',
 						'Quel est le résultat de $$2*&2$$ ?',
 					],
-					expressions: ['2*&2'],
-					options: ['no-exp'],
+					solutions: [['[_2*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3268,8 +3250,7 @@ const questions = {
 					description: 'Trouver la moitié',
 					subdescription: 'Nombre pair inférieur à 20',
 					enounces: ['Quelle est la moitié de $$[_2*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3279,7 +3260,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$2*&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$2*&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -3294,8 +3275,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3316,9 +3296,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 30, 40, 50 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];20;25;50}',
@@ -3348,8 +3327,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3370,9 +3348,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 40, 50, 60 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];$e[16;20];25;30;50}',
@@ -3404,8 +3381,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3426,8 +3402,7 @@ const questions = {
 						'Quel est le triple de $$&2$$ ?',
 						'Quel est le résultat de $$3*&2$$ ?',
 					],
-					expressions: ['3*&2'],
-					options: ['no-exp'],
+					solutions: [['[_3*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3450,8 +3425,7 @@ const questions = {
 					description: 'Trouver le tiers',
 					subdescription: 'Multiples de 3 inférieurs à 30',
 					enounces: ['Quelle est le tiers de $$[_3*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3476,8 +3450,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3502,8 +3475,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3530,8 +3502,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&1°]$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3552,8 +3523,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&2°]$$ ?',
 						'Quel est le résultat de $$[°4*&2°]$$ ?',
 					],
-					expressions: ['4*&2'],
-					options: ['no-exp'],
+					solutions: [['[_4*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3576,8 +3546,7 @@ const questions = {
 					description: 'Trouver le quart',
 					subdescription: 'Multiples de 4 inférieurs à 40',
 					enounces: ['Quelle est le quart de $$[_4*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3602,8 +3571,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&1°]$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3628,8 +3596,7 @@ const questions = {
 						'Quel est le quadruple de $$&1$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3919,21 +3886,14 @@ const questions = {
 					// expressions: ['?*&2 = [_&1*10*&2_]', '&2*? = [_&2*&1*10_]'],
 					variables: [{ '&1': '$e[3;9]', '&2': '$e[2;9]' }],
 					type: 'rewrite',
-					options: ['no-exp'],
 					solutions: [['[_&1*10_]']],
 					correctionFormat: [
 						{
 							correct: [
-								'Dans $$[_&1*10*&2_]$$, on peut mettre &answer fois $$&2$$.',
+								'On peut mettre &answer fois $$&2$$.',
 							],
-							answer: 'On peut mettre &answer fois $$&2$$.',
 						},
 					],
-					//   correctionDetails: [
-					//     [
-					//     {text:'toto'}
-					//   ],
-					// ],
 					defaultDelay: 15,
 					grade: CM1,
 				},
@@ -8748,7 +8708,7 @@ const questions = {
 						],
 					],
 					type: 'trou',
-					defaultDelay: 20,
+					defaultDelay: 12000,
 					grade: SIXIEME,
 					help: `<section>
           <h3 class="${color2}-text">Compléter une égalité de fractions</h3>
@@ -19519,12 +19479,12 @@ const questions = {
 						[1],
 					],
 					correctionDetails: [
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
 						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
 						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
 						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
@@ -19533,7 +19493,7 @@ const questions = {
 						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
 					],
 					options: ['no-shuffle-choices'],
-					defaultDelay: 120,
+					defaultDelay: 20,
 					grade: TROISIEME,
 				},
 				{
@@ -19544,12 +19504,7 @@ const questions = {
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&1$$ s'appelle ...",
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&2$$ s'appelle ...",
 					],
-					expressions: [
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&2[+_&1_]x',
-						'f(x)=&2[+_&1_]x',
-					],
+				
 
 					variables: [
 						{
@@ -19563,36 +19518,8 @@ const questions = {
 							{ text: "l'ordonnée à l'origine " },
 						],
 					],
-					options: ['no-exp', 'no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-					],
-
+					options: ['no-shuffle-choices'],
 					solutions: [[0], [1], [0], [1]],
-
 					defaultDelay: 10,
 					grade: TROISIEME,
 				},
@@ -19715,7 +19642,6 @@ const questions = {
 					enounces: [
 						'Quel est le coefficient directeur de cette fonction affine ?',
 					],
-					// expressions:['1'],
 					images: [
 						'fonctions-affines/exemples/fonction_affine-0-600.png',
 						'fonctions-affines/exemples/fonction_affine-1-600.png',
@@ -19817,7 +19743,6 @@ const questions = {
 							correct: ['Le coefficent directeur est &answer.'],
 						},
 					],
-					options: ['no-exp'],
 
 					defaultDelay: 20,
 					grade: SECONDE,
@@ -19836,13 +19761,16 @@ const questions = {
 						},
 					],
 					type: 'rewrite',
+					answerFields:['$$f(&3)=?$$'],
 					solutions: [['[_&4_]']],
 
 					correctionFormat: [
 						{
-							correct: ["L'image de $$&3$$ par la fonction &exp est &answer."],
-							answer: "L'image de $$&3$$ est &answer.",
+							correct: ["L'image de $$&3$$ est &answer."],
 						},
+					],
+					correctionDetails: [
+						[{text: "$$f(&3)=&1 \\times [(_&3_][+_&2_]=$$&solution.",},],
 					],
 					defaultDelay: 20,
 					grade: TROISIEME,
@@ -19851,7 +19779,7 @@ const questions = {
 					description:
 						"Déterminer si un point appartient à la courbe représentative d'un fonction affine",
 					enounces: [
-						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentatice de la fonction affine :',
+						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentative de la fonction affine :',
 					],
 					expressions: [
 						'f(x)=&1x[+_&2_]',
@@ -19874,23 +19802,11 @@ const questions = {
 					],
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'&answer, le point $$A(&3;[_&4_])$$ est sur la courbe représentative de la fonction &exp.',
-							],
-							answer: "&answer, le point $$A$$ n'appartient pas à la courbe.",
-						},
-						{
-							correct: [
-								"&answer, le point $$A(&3;[_&4_])$$ n'est pas sur la courbe représentative de la fonction &exp.",
-							],
-							answer: '&answer, le point $$A$$ appartient à la courbe.',
-						},
+					correctionDetails: [
+						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ appartient à la courbe représentative de la fonction affine &expression.`,},],
+						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= [_&1*(&3)+(&2)_] \\bold{\\textcolor{red}{\\ne}} \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ n'appartient pas à la courbe représentative de la fonction affine &expression.`,},],
 					],
-
 					solutions: [[0], [1]],
-
 					defaultDelay: 20,
 					grade: TROISIEME,
 				},
@@ -19974,55 +19890,15 @@ const questions = {
 					],
 
 					choices: [[{ text: 'croissante' }, { text: 'décroissante' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
+					correctionDetails: [
+						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-[°&3°]$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-[°&3$°]$$ est négatif.',},],
 					],
 					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
 					options: ['no-shuffle-choices'],
@@ -20055,17 +19931,15 @@ const questions = {
 						[{ text: 'parallèles' }, { text: '<b>non</b> parallèles' }],
 					],
 					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'Les droites représentatives des fonctions &exp et &exp2 sont &answer.',
-							],
-							answer: 'Les droites sont &answer.',
-						},
+					correctionDetails: [
+						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
+						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
 					],
-
 					solutions: [[0], [0], [1], [1], [1], [1]],
-
 					defaultDelay: 10,
 					grade: TROISIEME,
 				},
@@ -20299,15 +20173,15 @@ const questions = {
 							},
 						],
 					],
-					correctionFormat: [
-						{
-							correct: [
-								'Le tableau de signe de la fonction &exp est :',
-								'image',
-							],
-							answer: 'image',
-						},
-					],
+					// correctionFormat: [
+					// 	{
+					// 		correct: [
+					// 			'Le tableau de signe de la fonction &exp est :',
+					// 			'image',
+					// 		],
+					// 		answer: 'image',
+					// 	},
+					// ],
 
 					solutions: [[0]],
 

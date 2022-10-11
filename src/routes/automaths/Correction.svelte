@@ -27,6 +27,7 @@
 	let total = 0
 	let score = 0
 
+	
 	items.forEach((item) => {
 		total += item.points
 		score +=

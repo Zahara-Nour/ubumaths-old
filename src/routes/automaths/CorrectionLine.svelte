@@ -2,6 +2,10 @@
 	import Badge from '@smui-extra/badge'
 	import { correct_color } from '$lib/colors'
 	export let line
+
+	if (line && line.choices) {
+		console.log('choices', line.choices)
+	}
 </script>
 
 {#if line}
@@ -19,7 +23,12 @@
 					{#if choice.html}
 						{@html choice.html}
 					{:else if choice.image}
-						image
+						<img
+							class="white"
+							src="{choice.image}"
+							style="max-width:min(400px,80%);max-height:40vh;"
+							alt="{`choice ${i}`}"
+						/>
 					{/if}
 					{#if choice.badge}
 						<Badge
@@ -40,7 +49,12 @@
 					{#if choice.html}
 						{@html choice.html}
 					{:else if choice.image}
-						image
+						<img
+							class="white"
+							src="{choice.image}"
+							style="max-width:min(400px,80%);max-height:40vh;"
+							alt="{`choice ${i}`}"
+						/>
 					{/if}
 					{#if choice.badge}
 						<Badge
@@ -53,7 +67,9 @@
 			{/if}
 		{/each}
 	{:else}
-		<span style="display:inline-block;word-break:break-word;white-space:normal;">
+		<span
+			style="display:inline-block;word-break:break-word;white-space:normal;"
+		>
 			{@html line}
 		</span>
 	{/if}

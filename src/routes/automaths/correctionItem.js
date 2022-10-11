@@ -155,10 +155,10 @@ export function createCorrection(item) {
 					line = `<img src='${img}' style="max-width:400px;max-height:40vh;" alt='toto'>`
 				} else {
 					line = format
+					.replace(regexExpression2, replaceExpression2)
 						.replace(regexExpression, replaceExpression)
-						.replace(regexExpression2, replaceExpression2)
-						.replace(regexExp, replaceExp)
 						.replace(regexExp2, replaceExp2)
+						.replace(regexExp, replaceExp)
 						// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
 						// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexAnswer, replaceAnswerCorrect)
@@ -174,10 +174,10 @@ export function createCorrection(item) {
 					line = `<img style="max-width:400px;max-height:40vh;" src='${img}' alt='toto'>`
 				} else {
 					line = format
+					.replace(regexExpression2, replaceExpression2)
 					.replace(regexExpression, replaceExpression)
-						.replace(regexExpression2, replaceExpression2)
+					.replace(regexExp2, replaceExp2)
 						.replace(regexExp, replaceExp)
-						.replace(regexExp2, replaceExp2)
 						// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
 						// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexSolution, replaceSolution)
@@ -201,10 +201,10 @@ export function createCorrection(item) {
 							correctionFormat.answer
 								// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
 								// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
-								.replace(regexExpression, replaceExpression)
 								.replace(regexExpression2, replaceExpression2)
-								.replace(regexExp, replaceExp)
+								.replace(regexExpression, replaceExpression)
 								.replace(regexExp2, replaceExp2)
+								.replace(regexExp, replaceExp)
 								.replace(regexAnswer, replaceAnswerUncorrect)
 								.replace(regexAns, replaceAnsUncorrect),
 					)
@@ -263,7 +263,9 @@ export function createCorrection(item) {
 			case 'choices': {
 				// line = '<div class="flex flex-wrap justify-start">'
 				let choices = []
+				console.log('item.choices', item.choices)
 				item.choices.forEach((choice, i) => {
+					console.log('choice', choice)
 					const c= {}
 					
 					if (solutions.includes(i)) {
@@ -284,6 +286,7 @@ export function createCorrection(item) {
 						choices.push(c)
 					}
 				})
+				console.log('choices', choices)
 
 				// item.choices.forEach((choice, i) => {
 				// 	let border = 'solid'
@@ -441,10 +444,10 @@ export function createDetailedCorrection(item) {
 			line = detail.text
 				// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
 				// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+				.replace(regexExpression2, replaceExpression2)
 				.replace(regexExpression, replaceExpression)
-						.replace(regexExpression2, replaceExpression2)
-						.replace(regexExp, replaceExp)
 						.replace(regexExp2, replaceExp2)
+						.replace(regexExp, replaceExp)
 				.replace(regexSolution, replaceSolution)
 				.replace(regexSol, replaceSol)
 				.replace(
