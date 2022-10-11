@@ -10,3 +10,4 @@ node_modules
 # /src/lib/private/
 .vercel
 .vercel_build_output
+/images
