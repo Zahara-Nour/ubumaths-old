@@ -649,12 +649,11 @@ export function assessItem(item) {
 		// le statut de chaque réponse si il y a plusieurs champs réponses
 		// initialisée à CORRECT ou EMPTY
 		item.statuss = item.answers.map((answer) =>
-			((item.type === 'choice' || item.type === 'choices') && answer >= 0) ||
+			((item.type === 'choice' || item.type === 'choices') && answer !=='' && answer >= 0) ||
 			answer
 				? STATUS_CORRECT
 				: STATUS_EMPTY,
 		)
-
 		// si toutes les réponses sont vides, pas besoin d'aller plus loin
 		if (item.statuss.every((status) => status === STATUS_EMPTY)) {
 			if (item.answers) item.coms.push(EMPTY_ANSWER)
@@ -662,7 +661,7 @@ export function assessItem(item) {
 		}
 		// le cas simple à traiter des réponses à choix (multiples ou non)
 		else if (
-			item.type === 'choice' &&
+			item.type === 'choice'  &&
 			item.solutions.toString() !== item.answers.toString()
 		) {
 			item.statuss = [STATUS_INCORRECT]
@@ -822,6 +821,6 @@ export function assessItem(item) {
 			}
 		}
 	}
-
+	console.log('assessed item', item)
 	createCorrection(item)
 }

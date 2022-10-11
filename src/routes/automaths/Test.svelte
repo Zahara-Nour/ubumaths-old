@@ -134,6 +134,7 @@
 			//  check that delay is a multiple of five
 			const rest = question.delay % 5
 			question.delay = question.delay + 5 - rest
+			console.log('delay:', question.delay)
 
 			for (let i = 0; i < q.count; i++) {
 				const generated = generate(question, cards, q.count, offset)
@@ -230,7 +231,7 @@
 				slider = delay / 1000
 			}
 			slider = Math.max(5, slider)
-			slider = Math.min(slider, 60)
+			// slider = Math.min(slider, 60)
 			percentage = 0
 			alert = false
 			start = Date.now()
@@ -410,7 +411,7 @@
 					style="width:150px;"
 				/>
 			{/if}
-			{#if !classroom}
+			{#if !classroom && card.type !== 'choice' && card.type !== 'choices'}
 				<Fab
 					class="mx-1"
 					color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"

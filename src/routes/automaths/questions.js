@@ -1288,18 +1288,15 @@ const questions = {
 					enounces: [
 						'Combien faut-il ajouter à $$[_10000-(&3)_]$$ pour obtenir $$10\\,000$$ ?',
 					],
-					expressions: ['?+[_10000-(&3)_]=10000', '[_10000-(&3)_]+?=10000'],
 					solutions: [['[_&3_]']],
 					variables: [
 						{ '&1': '$e[1;9]', '&2': '$e[1;9]', '&3': '&1*1000+&2*100' },
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
 							correct: [
-								'Il faut ajouter &answer à $$[_10000-(&3)_]$$ pour obtenir $$10\\,000$$.',
+								'Il faut ajouter &answer.',
 							],
-							answer: 'Il faut ajouter &answer',
 						},
 					],
 					type: 'rewrite',
@@ -1727,8 +1724,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -1749,8 +1745,7 @@ const questions = {
 						'Quel est le double de $$&2$$ ?',
 						'Quel est le résultat de $$&2+&2$$ ?',
 					],
-					expressions: ['2*&2'],
-					options: ['no-exp'],
+					solutions: [['[_2*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -1773,8 +1768,7 @@ const questions = {
 					description: 'Trouver la moitié',
 					subdescription: 'Nombre pair inférieur à 20',
 					enounces: ['Quelle est la moitié de $$[_2*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -1784,7 +1778,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1799,8 +1793,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -1821,9 +1814,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 30, 40, 50 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];20;25;50}',
@@ -1838,7 +1830,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1 + &1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1 + &1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1853,8 +1845,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -1875,9 +1866,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 40, 50, 60 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];$e[16;20];25;30;50}',
@@ -1892,7 +1882,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$&1+&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -1909,8 +1899,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -1931,8 +1920,7 @@ const questions = {
 						'Quel est le triple de $$&2$$ ?',
 						'Quel est le résultat de $$&2+&2+&2$$ ?',
 					],
-					expressions: ['3*&2'],
-					options: ['no-exp'],
+					solutions: [['[_3*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -1955,8 +1943,7 @@ const questions = {
 					description: 'Trouver le tiers',
 					subdescription: 'Multiples de 3 inférieurs à 30',
 					enounces: ['Quelle est le tiers de $$[_3*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -1981,8 +1968,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -2007,8 +1993,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$&1+&1+&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3208,7 +3193,6 @@ const questions = {
 							answer: 'Le chiffre des unités est &answer.',
 						},
 					],
-					options: ['no-exp'],
 					type: 'rewrite',
 					defaultDelay: 30,
 					grade: SIXIEME,
@@ -3222,8 +3206,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3244,8 +3227,7 @@ const questions = {
 						'Quel est le double de $$&2$$ ?',
 						'Quel est le résultat de $$2*&2$$ ?',
 					],
-					expressions: ['2*&2'],
-					options: ['no-exp'],
+					solutions: [['[_2*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3268,8 +3250,7 @@ const questions = {
 					description: 'Trouver la moitié',
 					subdescription: 'Nombre pair inférieur à 20',
 					enounces: ['Quelle est la moitié de $$[_2*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3279,7 +3260,7 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'Le moitié de $$[_2*&1_]$$ est &solution car $$2*&1=[_2*&1_]$$',
+								text: 'La moitié de $$[_2*&1_]$$ est &solution car $$2*&1=[_2*&1_]$$',
 							},
 						],
 					],
@@ -3294,8 +3275,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3316,9 +3296,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 30, 40, 50 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];20;25;50}',
@@ -3348,8 +3327,7 @@ const questions = {
 						'Quel est le double de $$&1$$ ?',
 						'Quel est le résultat de $$2*&1$$ ?',
 					],
-					expressions: ['2*&1'],
-					options: ['no-exp'],
+					solutions: [['[_2*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3370,9 +3348,8 @@ const questions = {
 				{
 					description: 'Trouver la moitié',
 					subdescription: 'Nombres pairs de 1 à 40, 50, 60 et 100',
-					enounces: ['Quel est la moitié de $$&2$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					enounces: ['Quelle est la moitié de $$&2$$ ?'],
+					solutions: [['[_&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];$e[16;20];25;30;50}',
@@ -3404,8 +3381,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3426,8 +3402,7 @@ const questions = {
 						'Quel est le triple de $$&2$$ ?',
 						'Quel est le résultat de $$3*&2$$ ?',
 					],
-					expressions: ['3*&2'],
-					options: ['no-exp'],
+					solutions: [['[_3*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3450,8 +3425,7 @@ const questions = {
 					description: 'Trouver le tiers',
 					subdescription: 'Multiples de 3 inférieurs à 30',
 					enounces: ['Quelle est le tiers de $$[_3*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3476,8 +3450,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3502,8 +3475,7 @@ const questions = {
 						'Quel est le triple de $$&1$$ ?',
 						'Quel est le résultat de $$3*&1$$ ?',
 					],
-					expressions: ['3*&1'],
-					options: ['no-exp'],
+					solutions: [['[_3*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3530,8 +3502,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&1°]$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [{ '&1': '$e[0;9]' }],
 					correctionFormat: [
 						{
@@ -3552,8 +3523,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&2°]$$ ?',
 						'Quel est le résultat de $$[°4*&2°]$$ ?',
 					],
-					expressions: ['4*&2'],
-					options: ['no-exp'],
+					solutions: [['[_4*&2_]']],
 					variables: [
 						{
 							'&1': '$e[1;5]*10',
@@ -3576,8 +3546,7 @@ const questions = {
 					description: 'Trouver le quart',
 					subdescription: 'Multiples de 4 inférieurs à 40',
 					enounces: ['Quelle est le quart de $$[_4*&1_]$$ ?'],
-					expressions: ['&1'],
-					options: ['no-exp'],
+					solutions: [['[_&1_]']],
 					variables: [{ '&1': '$e[0;10]' }],
 					correctionFormat: [
 						{
@@ -3602,8 +3571,7 @@ const questions = {
 						'Quel est le quadruple de $$[°&1°]$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;9];$e[11;15];25;30;40;50;100}',
@@ -3628,8 +3596,7 @@ const questions = {
 						'Quel est le quadruple de $$&1$$ ?',
 						'Quel est le résultat de $$[°4*&1°]$$ ?',
 					],
-					expressions: ['4*&1'],
-					options: ['no-exp'],
+					solutions: [['[_4*&1_]']],
 					variables: [
 						{
 							'&1': '$l{$e[1;10];$e[11;15];$e[15;20];25;30;40;50;60;100}',
@@ -3919,21 +3886,14 @@ const questions = {
 					// expressions: ['?*&2 = [_&1*10*&2_]', '&2*? = [_&2*&1*10_]'],
 					variables: [{ '&1': '$e[3;9]', '&2': '$e[2;9]' }],
 					type: 'rewrite',
-					options: ['no-exp'],
 					solutions: [['[_&1*10_]']],
 					correctionFormat: [
 						{
 							correct: [
-								'Dans $$[_&1*10*&2_]$$, on peut mettre &answer fois $$&2$$.',
+								'On peut mettre &answer fois $$&2$$.',
 							],
-							answer: 'On peut mettre &answer fois $$&2$$.',
 						},
 					],
-					//   correctionDetails: [
-					//     [
-					//     {text:'toto'}
-					//   ],
-					// ],
 					defaultDelay: 15,
 					grade: CM1,
 				},
@@ -4452,6 +4412,26 @@ const questions = {
 				},
 				{
 					description: 'Utiliser la distributivité',
+					subdescription: '99 fois plus 1 fois',
+					enounces: ['Calcule.'],
+					expressions: [
+						'99*&1+&1', '&1+99*&1', '&1*99+&1', '&1+&1*99'
+					],
+					variables: [{ '&1': '$e[50;85]' }],
+					correctionDetails: [
+						[
+							{
+								text: `$$&exp = 100 \\times &1=$$ &solution`,
+							},
+						],
+					
+					],
+
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
+				{
+					description: 'Utiliser la distributivité',
 					subdescription: 'Factorisation pour un facteur 10',
 					enounces: ['Calcule.'],
 					expressions: [
@@ -4802,37 +4782,35 @@ const questions = {
 					description:
 						'Reconnaître un quotient et un reste dans une division euclidienne ',
 					enounces: [
-						"En regardant l'égalité ci-dessous, quel est le <b>quotient</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-						"En regardant l'égalité ci-dessous, quel est le <b>reste</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+						"En regardant l'égalité ci-dessous, quel est le <b>quotient</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
+						"En regardant l'égalité ci-dessous, quel est le <b>reste</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
 					],
+					enounces2:['$$[_&1*&2+&3_]=(&1 \\times &2)+&3$$'],
 					variables: [
-						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+						{ '&1': '$e[2;9]', '&2': '$e[2;10]\\{&1}', '&3': '$e[1;&1-1]\\{&2}' },
 					],
-					expressions: ['[_&1*&2+&3_]=(&1* &2) +&3'],
-					solutions: [['&1'], ['&3']],
+					solutions: [['&2'], ['&3']],
 					correctionFormat: [
 						{
 							correct: [
-								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le quotient est &answer.',
+								'Le quotient est &answer.',
 							],
-							answer: 'Le quotient est &answer.',
 						},
 						{
 							correct: [
-								'Dans la division de $$[_&1*&2+&3_]$$ par $$&2$$, le reste est &answer.',
+								'Le reste est &answer.',
 							],
-							answer: 'Le reste est &answer.',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: `&solution car $$[_&1*&2+&3_]=(\\textcolor{${color1}}{&1} \\times &2) + &3$$`,
+								text: `Le quotient est &solution car $$[_&1*&2+&3_]=(&1 \\times &sol) + &3$$`,
 							},
 						],
 						[
 							{
-								text: `&solution car $$[_&1*&2+&3_]=(&1 \\times &2) + \\textcolor{${color1}}{&3}$$`,
+								text: `Le reste est &solution car $$[_&1*&2+&3_]=(&1 \\times &2) + &sol$$ et $$&3 \\le &1$$`,
 							},
 						],
 					],
@@ -4843,41 +4821,27 @@ const questions = {
 				{
 					description: 'Est-ce bien un reste de division eudlienne ? ',
 					enounces: [
-						"En regardant l'égalité ci-dessous, peut-on dire que $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
-						"En regardant l'égalité ci-dessous, peut-on dire que $$[_&3+&2_]$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$ ?",
+						"En regardant l'égalité ci-dessous, peut-on dire que $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
+						"En regardant l'égalité ci-dessous, peut-on dire que $$[_&3+&1_]$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
 					],
 					variables: [
-						{ '&1': '$e[3;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+						{ '&1': '$e[3;9]', '&2': '$e[2;10]\\{&1}', '&3': '$e[1;&1-1]\\{&2}' },
 					],
 					expressions: [
 						'[_&1*&2+&3_]=(&1* &2) + &3',
-						'[_&1*&2+&3_]=([_&1-1_]* &2) + [_&3+&2_]',
+						'[_&1*&2+&3_]=(&1* [_&2-1_]) + [_&3+&1_]',
 					],
 					solutions: [[0], [1]],
 					choices: [[{ text: 'oui' }, { text: 'non' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'&answer, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.',
-							],
-							answer: "&answer, $$&3$$ n'est pas le reste.",
-						},
-						{
-							correct: [
-								"&answer, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$.",
-							],
-							answer: '&answer, $$[_&3+&2_]$$ est le reste.',
-						},
-					],
 					correctionDetails: [
 						[
 							{
-								text: "&solution, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=(&1 \\times &2) + &3$$, on a bien $$&3<&2$$.",
+								text: "&solution, $$&3$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$, car dans l'égalité $$[_&1*&2+&3_]=(&1 \\times &2) + &3$$, on a bien $$&3<&1$$.",
 							},
 						],
 						[
 							{
-								text: "&solution, $$[_&3+&2_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&2$$, car dans l'égalité $$[_&1*&2+&3_]=([_&1-1_] \\times &2) + [_&3+&2_]$$, on n'a <b>pas</b>  $$[_&3+&2_]<&2$$.",
+								text: "&solution, $$[_&3+&1_]$$ n'est pas le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$, car dans l'égalité $$[_&1*&2+&3_]=(&1 \\times [_&2-1_]) + [_&3+&1_]$$, on n'a <b>pas</b>  $$[_&3+&1_]<&1$$.",
 							},
 						],
 					],
@@ -4888,10 +4852,10 @@ const questions = {
 				{
 					description: "Compléter l'égalité d'une division euclidienne",
 					enounces: [
-						"Complète l'égalité de la division euclidienne ci-dessous :",
+						"Complète l'égalité de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ :",
 					],
 					variables: [
-						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
+						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&1-1]' },
 					],
 					answerFields: ['$$[_&1*&2+&3_]=(&1\\times ?) + ?$$'],
 					solutions: [['&2', '&3']],
@@ -4913,8 +4877,8 @@ const questions = {
 						{ '&1': '$e[2;9]', '&2': '$e[2;10]', '&3': '$e[1;&2-1]' },
 					],
 					expressions: ['[_&1*&2+&3_]'],
-					solutions: [['[_(&1*&2)+&3_] =(&1*&2)+&3']],
-					options: ['no-exp'],
+					solutions: [['(&1*&2)+&3']],
+					options: ['no-penalty-for-extraneous-brackets'],
 					type: 'rewrite',
 					defaultDelay: 30,
 					grade: CE2,
@@ -8744,7 +8708,7 @@ const questions = {
 						],
 					],
 					type: 'trou',
-					defaultDelay: 20,
+					defaultDelay: 12000,
 					grade: SIXIEME,
 					help: `<section>
           <h3 class="${color2}-text">Compléter une égalité de fractions</h3>
@@ -10183,6 +10147,56 @@ const questions = {
 					grade: QUATRIEME,
 				},
 			],
+			'Notation scientifique': [
+				{
+					description:
+						"Ecrire un nombre décimal à l'aide de la notation scientifique",
+					enounces: ['Ecris ce nombre en notation scientifique.'],
+					expressions: ['[._&1,&3*10^{&4}_]'],
+					solutions: [['&1,&3*10^{&4}']],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;3]',
+							'&3': '$e{&2;&2}',
+							'&4': '$er[2;4]',
+						},
+					],
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
+					defaultDelay: 20,
+					grade: QUATRIEME,
+				},
+				{
+					description:
+						"Ecrire un nombre écrit avec une puissance de 10 à l'aide de la notation scientifique",
+					enounces: ['Ecris ce nombre en notation scientifique.'],
+					expressions: ['[._&1,&3*10^{&4}_]*10^{&5}'],
+					solutions: [['&1,&3*10^{[_&4+(&5)_]}']],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+							'&2': '$e[1;3]',
+							'&3': '$e{&2;&2}\\{m(10)}',
+							'&4': '$er[2;4]',
+							'&5': '$er[2;4]\\{-(&4)}',
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: '$$[._&1,&3*10^{&4}_] \\times 10^{&5}=&1,&3 \\times 10^{&4} \\times 10^{&5}=$$ &solution',
+							},
+						],
+					],
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
+					defaultDelay: 20,
+					grade: QUATRIEME,
+				},
+			],
 		},
 		Calculer: {
 			Multiplier: [
@@ -10209,7 +10223,7 @@ const questions = {
 					],
 					// bug de mathlive sur les puissances
 					// qui rajoute des parenthèses à l'exposant
-					// apparemment ça a été corrigé
+
 					options: ['no-penalty-for-extraneous-brackets'],
 
 					defaultDelay: 20,
@@ -10256,7 +10270,7 @@ const questions = {
 							'&2': '$er[2;5]',
 						},
 					],
-					solutions: [['10^{[_&1+(&2)_]}', '10^([_&1+(&2)_])']],
+					solutions: [['10^{[_&1+(&2)_]}']],
 					conditions: ['abs(&1+(&2))>1'],
 					correctionDetails: [
 						[
@@ -10287,7 +10301,7 @@ const questions = {
 						},
 					],
 					conditions: ['abs(&2+(&3))>1'],
-					solutions: [['&1^{[_&2+(&3)_]}', '&1^([_&2+(&3)_])']],
+					solutions: [['&1^{[_&2+(&3)_]}']],
 					correctionDetails: [
 						[
 							{
@@ -12301,9 +12315,7 @@ const questions = {
 					],
 					correctionFormat: [
 						{
-							correct: [
-								"L'aire du parallélogramme est &answer.",
-							],
+							correct: ["L'aire du parallélogramme est &answer."],
 						},
 					],
 					correctionDetails: [
@@ -12415,7 +12427,6 @@ const questions = {
 								text: "La base d'un parallélogramme de hauteur associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_km^2_]$$.",
 							},
 						],
-				
 					],
 
 					defaultDelay: 20,
@@ -12519,13 +12530,49 @@ const questions = {
 								text: "La hauteur d'un parallélogramme de base associée $$[°&3°]$$ et d'aire $$[._&3*&4_km^2_]$$ est &solution car $$[°&3°] \\times &sol = [._&3*&4_km^2_]$$.",
 							},
 						],
-				
 					],
 
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
-				
+			],
+		},
+		Volumes: {
+			conversions: [
+				{
+					description: 'Convertir dans une autre unité',
+					subdescription: 'Unités de volume et de contenance',
+					enounces: ["Convertis dans l'unité demandée."],
+					variables: [
+						{
+							'&1': '$e[1;9]',
+						},
+					],
+					expressions: [
+						'&1 m^3 = ? L',
+						'&1 L = ? m^3',
+						'&1 dm^3 = ? L',
+						'&1 L = ? dm^3',
+						'&1 cm^3 = ? mL',
+						'&1 mL = ? cm^3',
+						'&1 cm^3 = ? L',
+						'&1 L = ? cm^3',
+					],
+					solutions: [
+						['[._&1*1000_]'],
+						['[._&1:1000_]'],
+						['[._&1_]'],
+						['[._&1_]'],
+						['[._&1_]'],
+						['[._&1_]'],
+						['[._&1:1000_]'],
+						['[._&1*1000_]'],
+					],
+					type: 'trou',
+					'result-type': 'decimal',
+					defaultDelay: 20,
+					grade: SIXIEME,
+				},
 			],
 		},
 		Durées: {
@@ -13561,22 +13608,34 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{ text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1*1000_]\\,m}{1\\,h} =$$ &solution $$m.h^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1*1000_]\\,m}{1\\,h} =$$ &solution $$m.h^{-1}$$',
+							},
 						],
 						[
-							{ text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1_]\\,km}{3\\,600\\,s} =$$ &solution $$km.s^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, km.h^{-1} = \\frac{[_&1_]\\,km}{1\\,h} = \\frac{[_&1_]\\,km}{3\\,600\\,s} =$$ &solution $$km.s^{-1}$$',
+							},
 						],
 						[
-							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1:1000_]\\,km}{1\\,s} =$$ &solution $$km.s^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1:1000_]\\,km}{1\\,s} =$$ &solution $$km.s^{-1}$$',
+							},
 						],
 						[
-							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{\\frac{1}{3\\,600}\\,h} = \\frac{[_&1_] \\times 3\\,600\\,m}{1\\,h}=$$ &solution $$m.h^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{\\frac{1}{3\\,600}\\,h} = \\frac{[_&1_] \\times 3\\,600\\,m}{1\\,h}=$$ &solution $$m.h^{-1}$$',
+							},
 						],
 						[
-							{ text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{1\\,000\\,ms} =$$ &solution $$m.ms^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, m.s^{-1} = \\frac{[_&1_]\\,m}{1\\,s} = \\frac{[_&1_]\\,m}{1\\,000\\,ms} =$$ &solution $$m.ms^{-1}$$',
+							},
 						],
 						[
-							{ text: '$$[_&1_] \\, m.ms^{-1} = \\frac{[_&1_]\\,m}{1\\,ms} = \\frac{[_&1_]\\,m}{0,001\\,s} =$$ &solution $$m.s^{-1}$$' }
+							{
+								text: '$$[_&1_] \\, m.ms^{-1} = \\frac{[_&1_]\\,m}{1\\,ms} = \\frac{[_&1_]\\,m}{0,001\\,s} =$$ &solution $$m.s^{-1}$$',
+							},
 						],
 					],
 					// units: ['min'],
@@ -13603,9 +13662,7 @@ const questions = {
 					solutions: [['[_&2_km.h^{-1}_]']],
 					correctionFormat: [
 						{
-							correct: [
-								"La vitesse est de &answer.",
-							],
+							correct: ['La vitesse est de &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -14010,13 +14067,13 @@ const questions = {
 					enounces: ['Ce tableau est-il un tableau de proportionnalité ?'],
 					enounces2: [
 						'$$\\begin{array}{c|c} \
-          &1  &   [_&1*&3_] \\\\ \
-          &2  &   [_&2*&3_] \
-        \\end{array}$$',
+          					&1  &   [_&1*&3_] \\\\ \
+          					&2  &   [_&2*&3_] \
+        				\\end{array}$$',
 						'$$\\begin{array}{c|c} \
-        &1  &   [_&1*&3_] \\\\ \
-        &2  &   [_&2*(&3+1)_] \
-      \\end{array}$$',
+        					&1  &   [_&1*&3_] \\\\ \
+       						&2  &   [_&2*(&3+1)_] \
+      					\\end{array}$$',
 					],
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					variables: [
@@ -14029,20 +14086,12 @@ const questions = {
 					solutions: [[0], [1]],
 					correctionFormat: [
 						{
-							correct: [
-								'&answer, $$\\begin{array}{c|c} \
-            &1  &   [_&1*&3_] \\\\ \
-            &2  &   [_&2*&3_] \
-          \\end{array}$$ est un tableau de proportionnalité.',
-							],
+							correct: ["&answer, c'est un tableau de proportionnalité."],
 							answer: "&answer, ce n'est pas un tableau de proportionnalité.",
 						},
 						{
 							correct: [
-								"&answer, $$\\begin{array}{c|c} \
-            &1  &   [_&1*&3_] \\\\ \
-            &2  &   [_&2*(&3+1)_] \
-          \\end{array}$$ n'est pas un tableau de proportionnalité.",
+								"&answer, ce n'est pas un tableau de proportionnalité.",
 							],
 							answer: "&answer, c'est un tableau de proportionnalité.",
 						},
@@ -14055,14 +14104,18 @@ const questions = {
               &2  &   [_&2*&3_] \
             \\end{array}$$ est un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color1}}{\\times &3}=[_&2*&3_] $$`,
 							},
+							{text: "On a multiplité par le même nombre entre les 2 colonnes."}
 						],
 						[
 							{
 								text: `&solution, $$\\begin{array}{c|c} \
               &1  &   [_&1*&3_] \\\\ \
               &2  &   [_&2*(&3+1)_] \
-            \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$. On n'a <b>pas</b> multiplié par le même nombre entre les 2 colonnes.`,
+            \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$.`,
 							},
+							{
+								text:"On n'a <b>pas</b> multiplié par le même nombre entre les 2 colonnes."
+							}
 						],
 					],
 					options: ['no-shuffle-choices'],
@@ -14096,19 +14149,13 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								'&answer, $$\\begin{array}{c|c} \
-              &1        &   &2 \\\\ \
-              [_&1*&3_]  &  [_&2*&3_] \
-          \\end{array}$$ est un tableau de proportionnalité.',
+								"&answer, c'est un tableau de proportionnalité.",
 							],
 							answer: "&answer, ce n'est pas un tableau de proportionnalité.",
 						},
 						{
 							correct: [
-								"&answer, $$\\begin{array}{c|c} \
-              &1  &  &2  \\\\ \
-              [_&1*&3_]  &   [_&2*(&3+1)_] \
-          \\end{array}$$ n'est pas un tableau de proportionnalité.",
+								"&answer, ce n'est pas un tableau de proportionnalité.",
 							],
 
 							answer: "&answer, c'est un tableau de proportionnalité.",
@@ -14117,19 +14164,23 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '&solution, $$\\begin{array}{c|c} \
+								text: `&solution, $$\\begin{array}{c|c} \
               &1        &   &2 \\\\ \
               [_&1*&3_]  &  [_&2*&3_] \
-            \\end{array}$$ est un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color1}}{\\times &3}=[_&2*&3_] $$',
+            \\end{array}$$ est un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color1}}{\\times &3}=[_&2*&3_] $$`,
 							},
+							{
+								text:"On a multiplié par le même nombre entre les 2 colonnes."
+							}
 						],
 						[
 							{
 								text: `&solution, $$\\begin{array}{c|c} \
               &1  &  &2  \\\\ \
         [_&1*&3_]  &   [_&2*(&3+1)_] \
-            \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$. On n'a <b>pas</b> multiplié par le même nombre entre les 2 lignes.`,
+            \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$.`,
 							},
+							{text: "On n'a <b>pas</b> multiplié par le même nombre entre les 2 lignes."}
 						],
 					],
 					options: ['no-shuffle-choices'],
@@ -14156,17 +14207,12 @@ const questions = {
 							'&3': '$e[2;9]',
 						},
 					],
-					expressions: ['&3'],
+					solutions: [['&3']],
 					correctionFormat: [
 						{
 							correct: [
-								'Le coefficient de proportionnalité du tableau  $$\\begin{array}{c|c} \
-              &1        &   &2 \\\\ \
-              [_&1*&3_]  &  [_&2*&3_] \
-          \\end{array}$$ est &answer.',
+								'Le coefficient de proportionnalité est &answer.',
 							],
-
-							answer: 'Le coefficient de proportionnalité est &answer.',
 						},
 					],
 					correctionDetails: [
@@ -14179,8 +14225,6 @@ const questions = {
 							},
 						],
 					],
-
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14200,17 +14244,12 @@ const questions = {
 					variables: [
 						{ '&1': '$e[2;9]', '&2': '$e[2;9]\\{m(&1)}', '&3': '$e[2;9]' },
 					],
-					expressions: ['&2/&1'],
+					solutions: [['&2/&1']],
 					correctionFormat: [
 						{
 							correct: [
-								'Le coefficient de proportionnalité du tableau  $$\\begin{array}{c|c} \
-              &1  &   [_&1*&3_] \\\\ \
-              &2  &  [_&2*&3_] \
-          \\end{array}$$ est &answer.',
+								'Le coefficient de proportionnalité est &answer.',
 							],
-
-							answer: 'Le coefficient de proportionnalité est &answer.',
 						},
 					],
 					correctionDetails: [
@@ -14223,8 +14262,6 @@ const questions = {
 							},
 						],
 					],
-
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14259,10 +14296,10 @@ const questions = {
 						{
 							'&1': '$e[2;9]',
 							'&2': '$e[2;9]\\{m(&1);d(&1)}',
-							'&3': '$e[2;9]',
+							'&3': '$e[2;9]\\{&1;&2}',
 						},
 					],
-					expressions: ['&1*&3', '&2*&3', '&2', '&1'],
+					solutions: [['[_&1*&3_]'], ['[_&2*&3_]'], ['&2'],['&1']],
 					correctionFormat: [
 						{
 							correct: [
@@ -14300,39 +14337,37 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &   &sol \\\\ \
                 &2  &   [_&2*&3_] \
-              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &   [_&1*&3_] \\\\ \
                 &2  &   &sol \
-              \\end{array}$$ car $$&1\\textcolor{${color1}}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&1\\textcolor{${color1}}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{${color1}}{\\times &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &  [_&1*&3_]  \\\\ \
                 &sol  &   [_&2*&3_] \
-              \\end{array}$$ car $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
+              \\end{array}$$ car $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &sol  &  [_&1*&3_]  \\\\ \
                  &2 &   [_&2*&3_] \
-              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
+              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$`,
 							},
 						],
 					],
-
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14365,104 +14400,83 @@ const questions = {
 						{
 							'&1': '$e[2;9]',
 							'&2': '$e[2;9]\\{m(&1);d(&1)}',
-							'&3': '$e[2;9]',
+							'&3': '$e[2;9]\\{&1;&2}',
 						},
 					],
-					expressions: ['&1*&3', '&2*&3', '&2', '&1'],
+					solutions: [['[_&1*&3_]'], ['[_&2*&3_]'], ['&2'], ['&1']],
 					correctionFormat: [
 						{
 							correct: [
 								'$$\\begin{array}{c|c} \
-            &1  &  &2  \\\\ \
-            &ans  &   [_&2*&3_] \
-          \\end{array}$$',
+            						&1  &  &2  \\\\ \
+            						&ans  &   [_&2*&3_] \
+          						\\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &1  &  &2  \\\\ \
-             &ans  &   [_&2*&3_] \
-            \\end{array}$$',
 						},
 						{
 							correct: [
 								'$$\\begin{array}{c|c} \
-            &1  &  &2  \\\\ \
-            [_&1*&3_]  &  &ans \
-          \\end{array}$$',
+            						&1  &  &2  \\\\ \
+            						[_&1*&3_]  &  &ans \
+          						\\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &1  &  &2  \\\\ \
-              [_&1*&3_]  &  &ans \
-            \\end{array}$$',
 						},
 						{
 							correct: [
 								'$$\\begin{array}{c|c} \
-              &1  &  &ans  \\\\ \
-              [_&1*&3_]   &  [_&2*&3_]  \
-          \\end{array}$$',
+              						&1  &  &ans  \\\\ \
+              						[_&1*&3_]   &  [_&2*&3_]  \
+          						\\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-               &1 & &ans \\\\ \
-               [_&1*&3_] & [_&2*&3_]   \
-            \\end{array}$$',
 						},
 						{
 							correct: [
 								'$$\\begin{array}{c|c} \
-              &ans  &   &2 \\\\ \
-              [_&1*&3_]  &  [_&2*&3_]  \
-          \\end{array}$$',
+              						&ans  &   &2 \\\\ \
+              						[_&1*&3_]  &  [_&2*&3_]  \
+          					\\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-             &ans & &2 \\\\ \
-              [_&1*&3_]  & [_&2*&3_]   \
-            \\end{array}$$',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &  &2  \\\\ \
                 &sol  &   [_&2*&3_] \
-              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &   &2 \\\\ \
                 [_&1*&3_] & &sol \
-              \\end{array}$$ car $$&1\\textcolor{${color1}}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&1\\textcolor{${color1}}{\\times &3} = [_&1*&3_]$$ et $$&2 \\textcolor{${color1}}{\\times &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &  &sol \\\\ \
                 [_&1*&3_]  &   [_&2*&3_] \
-              \\end{array}$$ car $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
+              \\end{array}$$ car $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &1$$ et $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &sol  &  &2  \\\\ \
                 [_&1*&3_] &   [_&2*&3_] \
-              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
+              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$`,
 							},
 						],
 					],
 
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14495,11 +14509,11 @@ const questions = {
 					variables: [
 						{
 							'&1': '$e[2;9]',
-							'&2': '$e[2;9]\\{m(&1);d(&1)}',
-							'&3': '$e[2;9]\\{m(&2)}',
+							'&2': '$e[2;9]\\{cd(&1)}',
+							'&3': '$e[2;9]\\{cd(&2); &1}',
 						},
 					],
-					expressions: ['&1*&3/&2', '&1*&3/&2', '&1', '&1'],
+					solutions: [['[_&1*&3/&2_]'], ['[_&1*&3/&2_]'], ['&1'], ['&1']],
 					correctionFormat: [
 						{
 							correct: [
@@ -14509,11 +14523,6 @@ const questions = {
           \\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &1  &  &2  \\\\ \
-              &ans  &   &3 \
-            \\end{array}$$',
 						},
 						{
 							correct: [
@@ -14523,11 +14532,6 @@ const questions = {
           \\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &2  &  &1  \\\\ \
-              &3 & &ans \
-            \\end{array}$$',
 						},
 						{
 							correct: [
@@ -14537,11 +14541,6 @@ const questions = {
             \\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &2  &  &ans \\\\ \
-              &3 & [_&1*&3/&2_] \
-            \\end{array}$$',
 						},
 						{
 							correct: [
@@ -14551,49 +14550,42 @@ const questions = {
             \\end{array}$$',
 							],
 
-							answer:
-								'$$\\begin{array}{c|c} \
-              &ans  &  &2  \\\\ \
-              [_&1*&3/&2_] &  &3 \
-            \\end{array}$$',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &1  &  &2  \\\\ \
                 &sol  &   &3 \
-              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = &3$$ et $$&1 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} =$$ &solution.`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &2 & &1  \\\\ \
                 &3 & &sol \
-              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times &3} = [_&2*&3_]$$ et $$&1 \\textcolor{${color1}}{\\times &3} = &sol$$ ',
+              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = &3$$ et $$&1 \\textcolor{${color1}}{\\times \\frac{&3}{&2}}} =$ &solution.`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                 &2 &  &sol \\\\ \
                 &3 & [_&1*&3/&2_] \
-              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
+              \\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = &3$$ et $$&sol \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = [_&1*&3/&2_]$$`,
 							},
 						],
 						[
 							{
-								text: '$$\\begin{array}{c|c} \
+								text: `$$\\begin{array}{c|c} \
                  &sol & &2 \\\\ \
                 [_&1*&3/&2_] & &3 \
-              \\end{array}$$ car $$[_&2*&3_] \\textcolor{${color1}}{\\div &3} = &2$$ et $$[_&1*&3_] \\textcolor{${color1}}{\\div &3} = &sol$$ ',
-							},
+				\\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = &3$$ et $$&sol \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = [_&1*&3/&2_]$$`,
+			},
 						],
 					],
-
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14613,13 +14605,13 @@ const questions = {
 					variables: [
 						{ '&1': '$l{2,5;3,5}', '&2': '$l{2;4;6}}', '&3': '$e[2;5]' },
 					],
-					expressions: [
-						'&1*&2*&3 €',
-						'&2*&3',
-						'&1*&2*&3 €',
-						'&2*&3 kg',
-						'&1*&2*&3 L',
-						'&2*&3 h',
+					solutions: [
+						['[_&1*&2*&3_] €'],
+						['[_&2*&3_]'],
+						['[_&1*&2*&3_] €'],
+						['[_&2*&3_] kg'],
+						['[_&1*&2*&3_] L'],
+						['[_&2*&3_] h'],
 					],
 					units: ['€', '', '€', 'kg', 'L', 'h'],
 					correctionFormat: [
@@ -14681,7 +14673,6 @@ const questions = {
 						],
 					],
 
-					options: ['no-exp'],
 					defaultDelay: 20,
 					grade: SIXIEME,
 				},
@@ -14697,7 +14688,6 @@ const questions = {
 					expressions: ['&1%'],
 					variables: [{ '&1': '$e[1;100]' }],
 					solutions: [['&1/100']],
-
 					options: ['no-penalty-for-non-reduced-fractions'],
 					defaultDelay: 10,
 					grade: SIXIEME,
@@ -14730,13 +14720,13 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '@@ &2 = 1 ?? $$ &1\\%=&sol $$ @@ \
+								text: `@@ &2 = 1 ?? $$ &1\\%=&sol $$ @@ \
                 @@ &2 != 1 ?? $$\\begin{align} @@ \
                 @@ &2 != 1 ?? &1\\% &= \\frac{&1}{100}  \\\\ @@ \
                 @@ &2 != 1 ?? &= \\frac{&1 \\textcolor{${color1}}{\\div [_&2_]}}{100 \\textcolor{${color1}}{\\div [_&2_]}} \\\\ @@\
                 @@ &2 != 1 && 100/&2 = 1 ?? &= \\frac{[_&1/&2_]}{1} \\\\  @@ \
                 @@ &2 != 1 ?? &= &sol \\\\ @@ \
-                @@ &2 != 1 ?? \\end{align}$$ @@',
+                @@ &2 != 1 ?? \\end{align}$$ @@`,
 							},
 						],
 					],
@@ -14750,21 +14740,39 @@ const questions = {
 					description: "Calculer le pourcentage d'une quantité",
 					subdescription: '50%',
 					enounces: ['Calcule $$50\\%$$ de $$[_&1*2_]$$.'],
-					expressions: ['50%*[_&1*2_]'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[1;50]' }],
-
+					correctionFormat: [
+						{
+							correct: ['$$50\\%$$ de $$[_&1*2_]$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$50\\%$$ signifie la moitié donc $$50\\%$$ de $$[_&1*2_]$$ est égal à $$[_&1*2_] \\div 2=$$&solution. "
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
 				{
 					description: "Calculer le pourcentage d'une quantité",
-					subdescription: '10%',
+					subdescription: "10% d'un multiple de 10",
 					enounces: ['Calcule $$10\\%$$ de $$[_&1*10_]$$.'],
-					expressions: ['10%*[_&1*10_]'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[1;50]' }],
-
+					correctionFormat: [
+						{
+							correct: ['$$10\\%$$ de $$[_&1*10_]$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$[_&1*10_]$$ est égal à $$[_&1*10_] \\div 10=$$&solution. "
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
@@ -14772,22 +14780,40 @@ const questions = {
 					description: "Calculer le pourcentage d'une quantité",
 					subdescription: "10% d'un nombre non multiple de 10",
 					enounces: ['Calcule $$10\\%$$ de $$[_&1_]$$.'],
-					expressions: ['10%*[_&1_]'],
-					options: ['no-exp'],
+					solutions: [['[._10%*&1_]']],
 					variables: [{ '&1': '$e[1;100]\\{m10}' }],
+					correctionFormat: [
+						{
+							correct: ['$$10\\%$$ de $$&1$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$&1$$ est égal à $$&1 \\div 10=$$&solution. "
+							}
+						],
+					],
 					'result-type': 'decimal',
-
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
 				{
 					description: "Calculer le pourcentage d'une quantité",
-					subdescription: '20%-40%',
+					subdescription: "20%-40% d'un multiple de 10",
 					enounces: ['Calcule $$&1\\%$$ de $$[_&2*10_]$$.'],
-					expressions: ['&1%*[_&2*10_]'],
-					options: ['no-exp'],
+					solutions: [['[_&1%*&2*10_]']],
 					variables: [{ '&1': '$l{20;30;40}', '&2': '$e[1;40]' }],
-
+					correctionFormat: [
+						{
+							correct: ['$$&1\\%$$ de $$[_&2*10_]$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$10\\%$$ de $$[_&2*10_]$$ représente $$&2$$ donc $$&1\\%$$ représente $$[_&1:10_] \\times &2 =$$ &solution. "
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
@@ -14795,10 +14821,19 @@ const questions = {
 					description: "Calculer le pourcentage d'une quantité",
 					subdescription: '25%',
 					enounces: ['Calcule $$25\\%$$ de $$[_&1*4_]$$.'],
-					expressions: ['25%*[_&1*4_]'],
-					options: ['no-exp'],
+					solutions: [['&1']],
 					variables: [{ '&1': '$e[1;15]' }],
-
+					correctionFormat: [
+						{
+							correct: ['$$25\\%$$ de $$[_&1*4_]$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$25\\%$$ signifie $$\\frac{1}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$[_&1*4_] \\div 4=$$&solution. "
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
@@ -14806,10 +14841,19 @@ const questions = {
 					description: "Calculer le pourcentage d'une quantité",
 					subdescription: '75%',
 					enounces: ['Calcule $$75\\%$$ de $$[_&1*4_]$$.'],
-					expressions: ['75%*[_&1*4_]'],
-					options: ['no-exp'],
+					solutions: [['[_75%*&1*4_]']],
 					variables: [{ '&1': '$e[1;12]' }],
-
+					correctionFormat: [
+						{
+							correct: ['$$75\\%$$ de $$[_&1*4_]$$ est égal à &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$25\\%$$ signifie $$\\frac{3}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$\\left([_&1*4_] \\div 4 \\right) \\times 3=$$&solution. "
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SIXIEME,
 				},
@@ -14820,11 +14864,20 @@ const questions = {
 					enounces: [
 						'Un article qui coûtait initialement $$[_&1_]$$ Qr voit son prix augmenter de $$&2\\%$$. Quel est son nouveau prix?',
 					],
-					expressions: ['[_&1_]+[_&1_]*(&2/100)'],
-					options: ['no-exp'],
+					solutions: [['[_&1*(1+&2/100)_]']],
 					variables: [{ '&1': '$e[2;20]*10', '&2': '$l{10;20;50;100;200}' }],
-
-					defaultDelay: 10,
+					correctionFormat: [
+						{
+							correct: ['Le nouveau prix est de &answer Qr.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"L'augmentation est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] + [_&2%*&1_] =$$ &solution Qr. "
+							}
+						],
+					],
+					defaultDelay: 30,
 					grade: SIXIEME,
 				},
 				{
@@ -14832,11 +14885,20 @@ const questions = {
 					enounces: [
 						'Un article qui coûtait initialement $$[_&1_]$$ Qr voit son prix diminuer de $$&2\\%$$. Quel est son nouveau prix?',
 					],
-					expressions: ['[_&1_]-[_&1_]*(&2/100)'],
-					options: ['no-exp'],
+					solutions: [['[_&1*(1-&2/100)_]']],
 					variables: [{ '&1': '$e[2;20]*10', '&2': '$l{10;20;30;50;100}' }],
-
-					defaultDelay: 10,
+					correctionFormat: [
+						{
+							correct: ['Le nouveau prix est de &answer Qr.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"La diminution est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] - [_&2%*&1_] =$$ &solution Qr. "
+							}
+						],
+					],
+					defaultDelay: 30,
 					grade: SIXIEME,
 				},
 				{
@@ -14845,12 +14907,21 @@ const questions = {
 					enounces: [
 						'Quel est le coefficient multiplicateur correspondant à une augmentation de $$&1\\%$$?',
 					],
-					expressions: ['1+&1/100'],
-					options: ['no-exp'],
+					solutions: [['[._1+&1/100_]']],
 					variables: [{ '&1': '$l{$e[1;30];100;200;50}' }],
-
+					correctionFormat: [
+						{
+							correct: ['Le coefficient multiplicateur est &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"Le coefficient multiplicateur est $$1+\\frac{&1}{100}=$$ &solution."
+							}
+						],
+					],
 					'result-type': 'decimal',
-					defaultDelay: 10,
+					defaultDelay: 20,
 					grade: SECONDE,
 				},
 				{
@@ -14859,10 +14930,19 @@ const questions = {
 					enounces: [
 						'Quel est le coefficient multiplicateur correspondant à une diminution de $$&1\\%$$?',
 					],
-					expressions: ['1-&1/100'],
-					options: ['no-exp'],
-					variables: [{ '&1': '$l{$e[1;30];100}' }],
-
+					solutions: [['[._1-&1/100_]']],
+					variables: [{ '&1': '$e[1;100]' }],
+					correctionFormat: [
+						{
+							correct: ['Le coefficient multiplicateur est &answer.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"Le coefficient multiplicateur est $$1-\\frac{&1}{100}=1-[._&1:100_]=$$ &solution."
+							}
+						],
+					],
 					'result-type': 'decimal',
 					defaultDelay: 10,
 					grade: SECONDE,
@@ -14872,11 +14952,19 @@ const questions = {
 					enounces: [
 						"Quel est le pourcentage d'augmentation correspondant à un coefficient multiplicateur de $$[._1+&1/100_]$$?",
 					],
-					expressions: ['[._1+&1/100_]'],
-					options: ['no-exp'],
-					variables: [{ '&1': '$l{$e[1;30];100;200;50}' }],
-
 					solutions: [['&1%']],
+					variables: [{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50;200}' }],
+					correctionFormat: [
+						{
+							correct: ["Le pourcentage d'augmentation est &answer."],
+						},
+					],
+					correctionDetails: [
+						[
+							{text:"$$[._1+&1/100_]=1+\\frac{&1}{100}$$ donc le pourcentage d'augmentation est &solution."
+							}
+						],
+					],
 					defaultDelay: 10,
 					grade: SECONDE,
 				},
@@ -14885,17 +14973,20 @@ const questions = {
 					enounces: [
 						'Quel est le pourcentage de diminution correspondant à un coefficient multiplicateur de $$[._1-&1/100_]$$?',
 					],
-					expressions: ['[._1-&1/100_]'],
-					options: ['no-exp'],
-					variables: [{ '&1': '$l{$e[1;30];100}' }],
+					variables: [{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50}' }],
 					type: 'rewrite',
 					correctionFormat: [
 						{
-							correct: [
-								'Un coefficient de &exp correspond à une diminution de &answer',
-							],
+							correct: ["Le pourcentage de diminution est &answer."],
 						},
 					],
+					correctionDetails: [
+						[
+							{text:"$$[._1-&1/100_]=1-\\frac{&1}{100}$$ donc le pourcentage de diminution est &solution."
+							}
+						],
+					],
+					
 					solutions: [['&1%']],
 					defaultDelay: 10,
 					grade: SECONDE,
@@ -14910,13 +15001,16 @@ const questions = {
 					enounces: [
 						"Quelle est l'échelle d'une carte où $$[°&3°]$$ sur la carte correspond à $$1\\,cm$$ en réalité ?",
 					],
-					expressions: ['(1 cm)/&3'],
+					solutions: [['[_(1 cm)/&3_]']],
 					variables: [
 						{ '&1': '$e[1;9]', '&2': '10^$e[1;6]', '&3': '[_&1*&2_] cm' },
 					],
-
-					options: ['no-exp'],
-					defaultDelay: 10,
+					correctionFormat: [
+						{
+							correct: ["L'échelle est &answer."],
+						},
+					],
+					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 				{
@@ -14925,7 +15019,7 @@ const questions = {
 					enounces: [
 						"Quelle est l'échelle d'une carte où $$[°&1°]$$ sur la carte correspond à $$1\\,cm$$ en réalité ?",
 					],
-					expressions: ['(1 cm)/&1'],
+					solutions: [['[_(1 cm)/&1_]']],
 					variables: [
 						{ '&1': '$e[2;9] dm' },
 						{ '&1': '$e[2;9] m' },
@@ -14933,10 +15027,15 @@ const questions = {
 						{ '&1': '$e[2;9] hm' },
 						{ '&1': '$e[2;9] km' },
 					],
+					correctionFormat: [
+						{
+							correct: ["L'échelle est &answer."],
+						},
+					],
 					correctionDetails: [
 						[
 							{
-								text: '$$\\frac{1\\,cm}{[°&1°]}=\\frac{1\\,cm}{[_&1;cm_]}=&sol$$',
+								text: '$$\\frac{1\\,cm}{[°&1°]}=\\frac{1\\,cm}{[_&1_cm_]}=&sol$$',
 							},
 						],
 					],
@@ -14952,7 +15051,8 @@ const questions = {
 					enounces: [
 						"Sur une carte à l'échelle $$[_&4_]$$, je veux représenter une longueur de $$[°&3°]$$. Quelle est, en $$cm$$, la longueur sur la carte ?",
 					],
-					expressions: ['(&3)/&1'],
+					answerFields: ['$$? cm$$'],
+					solutions:[['[_&5/(&1 cm)_]']],
 					variables: [
 						{ '&1': '10', '&2': '$e[1;9]*10', '&3': '[_&2_] dm', '&4': '1/&1' },
 						{
@@ -14960,79 +15060,87 @@ const questions = {
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] dm',
 							'&4': '1/&1',
+							'&5': '[_&3_cm_]'
 						},
-						{ '&1': '100', '&2': '$e[1;9]*10', '&3': '[_&2_] m', '&4': '1/&1' },
+						{ '&1': '100', '&2': '$e[1;9]*10', '&3': '[_&2_] m', '&4': '1/&1','&5': '[_&3_cm_]' },
 						{
 							'&1': '1000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] m',
 							'&4': '1/&1',
+							'&5': '[_&3_cm_]'
 						},
 						{
 							'&1': '100000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] km',
 							'&4': '1/&1',
+							'&5': '[_&3_cm_]'
 						},
 						{
 							'&1': '1000000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] km',
 							'&4': '1/&1',
+							'&5': '[_&3_cm_]'
 						},
 					],
 					units: ['cm'],
-
-					options: ['no-exp'],
 					correctionFormat: [
 						{
 							correct: [
-								'Avec une échelle de $$[_&4_]$$, $$[°&3°]$$ est représenté par &answer.',
+								'Sur la carte, la longueur est de &answer $$cm$$.',
 							],
-							answer: '$$[°&3°]$$ est représenté par &answer.',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:10_]\\,dm}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:10_]\\,dm}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:10_]\\,dm}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:10_]\\,dm}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100_]\\,m}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100_]\\,m}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100_]\\,m}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100_]\\,m}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100000_]\\,km}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100000_]\\,km}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 						[
 							{
-								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100000_]\\,km}= \\frac{&sol}{[°&3°]}$$',
+								text: '$$[_&4_]=\\frac{1\\,cm}{&1\\,cm}= \\frac{1\\,cm}{[_&1:100000_]\\,km}= \\frac{&sol cm}{[°&3°]}$$',
 							},
 						],
 					],
-					defaultDelay: 10,
+					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 				{
 					description: 'Calculer la longueur réelle',
 					enounces: [
-						"Sur une carte à l'échelle $$[_&4_]$$, je mesure une longueur de $$[°&3°]$$. Quelle est, en $$dm$$, la longueur réelle ?",
+						"Sur une carte à l'échelle $$[_&4_]$$, je mesure une longueur de $$[°&3°]$$. Quelle est la longueur réelle ?",
 					],
-					expressions: ['(&3)*&1'],
+					solutions: [
+						['[_(&3)*&1_dm_]'],
+						['[_(&3)*&1_m_]'],
+						['[_(&3)*&1_m_]'],
+						['[_(&3)*&1_dam_]'],
+						['[_(&3)*&1_km_]'],
+						['[_(&3)*&1_km_]'],
+					],
 					variables: [
 						{
 							'&1': '10',
@@ -15058,13 +15166,12 @@ const questions = {
 					],
 					units: ['dm', 'dm', 'm', 'm', 'km', 'km'],
 
-					// options: ['no-exp'],
+					options: ['no-penalty-for-not-respected-unit'],
 					correctionFormat: [
 						{
 							correct: [
-								'A une échelle de $$[_&4_]$$, $$[°&3°]$$ sur la carte correspond à une longueur réelle de &answer.',
+								'La longueur réelle est de &answer.',
 							],
-							answer: 'La longueur réelle est de &answer.',
 						},
 					],
 					correctionDetails: [
@@ -15099,8 +15206,7 @@ const questions = {
 							},
 						],
 					],
-					options: ['no-exp'],
-					defaultDelay: 10,
+					defaultDelay: 20,
 					grade: SIXIEME,
 				},
 			],
@@ -19302,7 +19408,7 @@ const questions = {
 						'f(x)=[_&1x_][+_&2_]',
 						'f(x)=&2[+_&1x_]',
 						'f(x)={[_&1/&3_]}x[+_&2/&4_]',
-						'f(x)=&2/&4+{[_abs(&1)/&3_]}x',
+						'f(x)=[_&2/&4_]+{[_abs(&1)/&3_]}x',
 						'f(x)=[_&1x_]',
 						'f(x)=&2',
 						'f(x)=[_&1x^2_][+_&2_]',
@@ -19319,11 +19425,17 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: ['&exp est-elle une fonction affine ? &answer'],
-							answer: " C'est une fonction affine ? &answer",
-						},
+					
+					correctionDetails: [
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_&1/&3_]$$ et $$b=[_&2/&4_]$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_abs(&1)/&3_]$$ et $$b=[_&2/&4_]$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=0$$.",},],
+						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=0$$ et $$b=&2$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
+						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
 					],
 
 					solutions: [[0], [0], [0], [0], [0], [0], [1], [1], [1]],
@@ -19351,15 +19463,7 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: [
-								"Est-ce la courbe représentative d'une fonction affine ? &answer",
-							],
-							answer: ' &answer',
-						},
-					],
-
+		
 					solutions: [
 						[0],
 						[0],
@@ -19374,6 +19478,20 @@ const questions = {
 						[1],
 						[1],
 					],
+					correctionDetails: [
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: TROISIEME,
@@ -19386,12 +19504,7 @@ const questions = {
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&1$$ s'appelle ...",
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&2$$ s'appelle ...",
 					],
-					expressions: [
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&1x[+_&2_]',
-						'f(x)=&2[+_&1_]x',
-						'f(x)=&2[+_&1_]x',
-					],
+				
 
 					variables: [
 						{
@@ -19405,36 +19518,8 @@ const questions = {
 							{ text: "l'ordonnée à l'origine " },
 						],
 					],
-					options: ['no-exp', 'no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&1$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-						{
-							correct: [
-								"Dans la fonction affine &exp, le nombre $$&2$$ s'appelle &answer.",
-							],
-							answer: "Le nombre s'appelle &answer.",
-						},
-					],
-
+					options: ['no-shuffle-choices'],
 					solutions: [[0], [1], [0], [1]],
-
 					defaultDelay: 10,
 					grade: TROISIEME,
 				},
@@ -19557,7 +19642,6 @@ const questions = {
 					enounces: [
 						'Quel est le coefficient directeur de cette fonction affine ?',
 					],
-					// expressions:['1'],
 					images: [
 						'fonctions-affines/exemples/fonction_affine-0-600.png',
 						'fonctions-affines/exemples/fonction_affine-1-600.png',
@@ -19659,7 +19743,6 @@ const questions = {
 							correct: ['Le coefficent directeur est &answer.'],
 						},
 					],
-					options: ['no-exp'],
 
 					defaultDelay: 20,
 					grade: SECONDE,
@@ -19678,13 +19761,16 @@ const questions = {
 						},
 					],
 					type: 'rewrite',
+					answerFields:['$$f(&3)=?$$'],
 					solutions: [['[_&4_]']],
 
 					correctionFormat: [
 						{
-							correct: ["L'image de $$&3$$ par la fonction &exp est &answer."],
-							answer: "L'image de $$&3$$ est &answer.",
+							correct: ["L'image de $$&3$$ est &answer."],
 						},
+					],
+					correctionDetails: [
+						[{text: "$$f(&3)=&1 \\times [(_&3_][+_&2_]=$$&solution.",},],
 					],
 					defaultDelay: 20,
 					grade: TROISIEME,
@@ -19693,7 +19779,7 @@ const questions = {
 					description:
 						"Déterminer si un point appartient à la courbe représentative d'un fonction affine",
 					enounces: [
-						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentatice de la fonction affine :',
+						'Le point $$A(&3;[_&4_])$$ appartient-il à la courbe représentative de la fonction affine :',
 					],
 					expressions: [
 						'f(x)=&1x[+_&2_]',
@@ -19716,23 +19802,11 @@ const questions = {
 					],
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'&answer, le point $$A(&3;[_&4_])$$ est sur la courbe représentative de la fonction &exp.',
-							],
-							answer: "&answer, le point $$A$$ n'appartient pas à la courbe.",
-						},
-						{
-							correct: [
-								"&answer, le point $$A(&3;[_&4_])$$ n'est pas sur la courbe représentative de la fonction &exp.",
-							],
-							answer: '&answer, le point $$A$$ appartient à la courbe.',
-						},
+					correctionDetails: [
+						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ appartient à la courbe représentative de la fonction affine &expression.`,},],
+						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= [_&1*(&3)+(&2)_] \\bold{\\textcolor{red}{\\ne}} \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ n'appartient pas à la courbe représentative de la fonction affine &expression.`,},],
 					],
-
 					solutions: [[0], [1]],
-
 					defaultDelay: 20,
 					grade: TROISIEME,
 				},
@@ -19816,55 +19890,15 @@ const questions = {
 					],
 
 					choices: [[{ text: 'croissante' }, { text: 'décroissante' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&1_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&1_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_&3_]$$ est positif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
-						{
-							correct: [
-								'La fonction &exp est &answer car $$[_-&3_]$$ est négatif.',
-							],
-							answer: 'La fonction &exp est &answer.',
-						},
+					correctionDetails: [
+						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-[°&3°]$$ est négatif.',},],
+						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
+						[{text: 'La fonction &expression est &solution car $$-[°&3$°]$$ est négatif.',},],
 					],
 					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
 					options: ['no-shuffle-choices'],
@@ -19897,17 +19931,15 @@ const questions = {
 						[{ text: 'parallèles' }, { text: '<b>non</b> parallèles' }],
 					],
 					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: [
-								'Les droites représentatives des fonctions &exp et &exp2 sont &answer.',
-							],
-							answer: 'Les droites sont &answer.',
-						},
+					correctionDetails: [
+						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
+						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
 					],
-
 					solutions: [[0], [0], [1], [1], [1], [1]],
-
 					defaultDelay: 10,
 					grade: TROISIEME,
 				},
@@ -20141,15 +20173,15 @@ const questions = {
 							},
 						],
 					],
-					correctionFormat: [
-						{
-							correct: [
-								'Le tableau de signe de la fonction &exp est :',
-								'image',
-							],
-							answer: 'image',
-						},
-					],
+					// correctionFormat: [
+					// 	{
+					// 		correct: [
+					// 			'Le tableau de signe de la fonction &exp est :',
+					// 			'image',
+					// 		],
+					// 		answer: 'image',
+					// 	},
+					// ],
 
 					solutions: [[0]],
 

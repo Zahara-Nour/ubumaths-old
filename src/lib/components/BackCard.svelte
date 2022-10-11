@@ -19,7 +19,7 @@
 	export let magnify
 	export let correction
 	export let detailedCorrection = null
-	export let simpleCorrection =  null
+	export let simpleCorrection = null
 
 	function getSolution(card) {
 		let nSol = -1
@@ -66,7 +66,7 @@
 			}
 		} else {
 			if (card.answerFields && card.type !== 'equation') {
-				s = card.answerFields.replace(/\\ldots/g, replaceSol)
+				s = $formatLatex(card.answerFields.replace(/\?/g, replaceSol))
 				console.log('s', s)
 			} else {
 				s = card.solutions[0]
@@ -77,7 +77,11 @@
 	}
 
 	$: solution = $formatLatex(getSolution(card))
-	$: details = detailedCorrection ? detailedCorrection : simpleCorrection ? simpleCorrection : []
+	$: details = detailedCorrection
+		? detailedCorrection
+		: simpleCorrection
+		? simpleCorrection
+		: []
 </script>
 
 <div bind:clientHeight="{h}" bind:clientWidth="{w}">
@@ -129,6 +133,22 @@
 				<div class="my-5 z-O relative" style="{`font-size:${2 * magnify}rem`}">
 					{@html solution}
 				</div>
+				{#if card.imageCorrection}
+					{#await card.imageCorrectionBase64P}
+						loading image
+					{:then base64}
+						<div style="display:inline-block;background-color:white;">
+							<img
+								src="{base64}"
+								class="my-3 w-full max-w-lg"
+								style="max-height:40vh; object-fit: contain;"
+								alt="Alright Buddy!"
+							/>
+						</div>
+					{:catch error}
+						{error}
+					{/await}
+				{/if}
 				{#if details}
 					<div class="my-2 z-0 relative" style="{`font-size:${magnify}rem`}">
 						<!-- {#each details as detail}

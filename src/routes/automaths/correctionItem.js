@@ -17,6 +17,7 @@ function createSolutionsLatex(item) {
 				if (item.type === 'choice') {
 					return item.choices[solution]
 				} else {
+					console.log('solution', solution)
 					const e = math(solution)
 					return e.type === '!! Error !!' ? solution : e.toLatex()
 				}
@@ -26,9 +27,7 @@ function createSolutionsLatex(item) {
 
 export function createCorrection(item) {
 	const {
-		correction: correction_latex,
 		expression_latex,
-		expression2_latex,
 		solutions,
 		answers,
 		answers_latex = [],
@@ -55,6 +54,26 @@ export function createCorrection(item) {
 	}
 
 	let solutions_latex = createSolutionsLatex(item)
+
+	const regexExpression = /&expression/g
+	function replaceExpression() {
+		return get(toMarkup)('$$' + item.expression_latex + '$$')
+	}
+
+	const regexExpression2 = /&expression2/g
+	function replaceExpression2() {
+		return get(toMarkup)('$$' + item.expression2_latex + '$$')
+	}
+
+	const regexExp = /&exp/g
+	function replaceExp() {
+		return item.expression_latex
+	}
+
+	const regexExp2 = /&exp/g
+	function replaceExp2() {
+		return item.expression2_latex
+	}
 
 	const regexAnswer = /&answer([1-9]?)/g
 	function replaceAnswerCorrect(match, p1) {
@@ -97,6 +116,7 @@ export function createCorrection(item) {
 	}
 
 	function replaceAnswerUncorrect(match, p1) {
+		console.log('answers', item.answers)
 		return (
 			`<span style="color:${
 				item.statuss[p1 ? p1 - 1 : 0] === STATUS_UNOPTIMAL_FORM
@@ -135,8 +155,12 @@ export function createCorrection(item) {
 					line = `<img src='${img}' style="max-width:400px;max-height:40vh;" alt='toto'>`
 				} else {
 					line = format
-						.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
-						.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+					.replace(regexExpression2, replaceExpression2)
+						.replace(regexExpression, replaceExpression)
+						.replace(regexExp2, replaceExp2)
+						.replace(regexExp, replaceExp)
+						// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+						// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexAnswer, replaceAnswerCorrect)
 						.replace(regexAns, replaceAnsCorrect)
 				}
@@ -150,8 +174,12 @@ export function createCorrection(item) {
 					line = `<img style="max-width:400px;max-height:40vh;" src='${img}' alt='toto'>`
 				} else {
 					line = format
-						.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
-						.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+					.replace(regexExpression2, replaceExpression2)
+					.replace(regexExpression, replaceExpression)
+					.replace(regexExp2, replaceExp2)
+						.replace(regexExp, replaceExp)
+						// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+						// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
 						.replace(regexSolution, replaceSolution)
 						.replace(regexSol, replaceSol)
 				}
@@ -171,9 +199,12 @@ export function createCorrection(item) {
 					coms.unshift(
 						'Ta réponse : ' +
 							correctionFormat.answer
-								.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
-								.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
-
+								// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+								// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+								.replace(regexExpression2, replaceExpression2)
+								.replace(regexExpression, replaceExpression)
+								.replace(regexExp2, replaceExp2)
+								.replace(regexExp, replaceExp)
 								.replace(regexAnswer, replaceAnswerUncorrect)
 								.replace(regexAns, replaceAnsUncorrect),
 					)
@@ -232,7 +263,9 @@ export function createCorrection(item) {
 			case 'choices': {
 				// line = '<div class="flex flex-wrap justify-start">'
 				let choices = []
+				console.log('item.choices', item.choices)
 				item.choices.forEach((choice, i) => {
+					console.log('choice', choice)
 					const c= {}
 					
 					if (solutions.includes(i)) {
@@ -253,6 +286,7 @@ export function createCorrection(item) {
 						choices.push(c)
 					}
 				})
+				console.log('choices', choices)
 
 				// item.choices.forEach((choice, i) => {
 				// 	let border = 'solid'
@@ -354,12 +388,32 @@ export function createCorrection(item) {
 }
 
 export function createDetailedCorrection(item) {
-	const { expression_latex, expression2_latex, solutions, correctionDetails } =
+	const { solutions, correctionDetails } =
 		item
 
 	let lines = []
 	let line
 	let solutions_latex = createSolutionsLatex(item)
+
+	const regexExpression = /&expression/g
+	function replaceExpression() {
+		return get(toMarkup)('$$' + item.expression_latex + '$$')
+	}
+
+	const regexExpression2 = /&expression2/g
+	function replaceExpression2() {
+		return get(toMarkup)('$$' + item.expression2_latex + '$$')
+	}
+
+	const regexExp = /&exp/g
+	function replaceExp() {
+		return item.expression_latex
+	}
+
+	const regexExp2 = /&exp/g
+	function replaceExp2() {
+		return item.expression2_latex
+	}
 
 	const regexSolution = /&solution([1-9]?)/g
 	function replaceSolution(match, p1) {
@@ -388,8 +442,12 @@ export function createDetailedCorrection(item) {
 			line = `<img src='${img}' style="max-width:400px;max-height:40vh;" alt='toto'>`
 		} else {
 			line = detail.text
-				.replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
-				.replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+				// .replace(new RegExp('&exp2', 'g'), '$$$$'+expression2_latex+'$$$$')
+				// .replace(new RegExp('&exp', 'g'), '$$$$'+expression_latex+'$$$$')
+				.replace(regexExpression2, replaceExpression2)
+				.replace(regexExpression, replaceExpression)
+						.replace(regexExp2, replaceExp2)
+						.replace(regexExp, replaceExp)
 				.replace(regexSolution, replaceSolution)
 				.replace(regexSol, replaceSol)
 				.replace(
