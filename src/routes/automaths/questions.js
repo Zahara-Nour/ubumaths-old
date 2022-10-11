@@ -10270,7 +10270,7 @@ const questions = {
 							'&2': '$er[2;5]',
 						},
 					],
-					solutions: [['10^{[_&1+(&2)_]}', '10^([_&1+(&2)_])']],
+					solutions: [['10^{[_&1+(&2)_]}']],
 					conditions: ['abs(&1+(&2))>1'],
 					correctionDetails: [
 						[
@@ -10301,7 +10301,7 @@ const questions = {
 						},
 					],
 					conditions: ['abs(&2+(&3))>1'],
-					solutions: [['&1^{[_&2+(&3)_]}', '&1^([_&2+(&3)_])']],
+					solutions: [['&1^{[_&2+(&3)_]}']],
 					correctionDetails: [
 						[
 							{
