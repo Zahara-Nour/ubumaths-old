@@ -7926,7 +7926,7 @@ const questions = {
 			'Sur la droite graduée': [
 				{
 					description: 'Calculer une somme ou une différence',
-					subdescription: "A l'aide de la droite graduée",
+					subdescription: "A l'aide de la droite graduée, entre -4 et 4",
 					enounces: ["Calcule en t'aidant de la droite graduée."],
 					expressions: ['(-&1)+&2', '(-&1)-&2', '&1-&2'],
 					variables: [
@@ -7943,7 +7943,7 @@ const questions = {
 				},
 				{
 					description: 'Calculer une somme ou une différence',
-					subdescription: "A l'aide de la droite graduée",
+					subdescription: "A l'aide de la droite graduée, entre -7 et 7",
 					enounces: ["Calcule en t'aidant de la droite graduée."],
 					expressions: ['(-&1)+&2', '(-&1)-&2', '&1-&2'],
 					variables: [
@@ -7988,7 +7988,7 @@ const questions = {
 				{
 					description: 'Compléter une adition à trou',
 					subdescription:
-						"Relatifs entre -4 et 4. A l'aide de la droite graduée.",
+						"Relatifs entre -7 et 7. A l'aide de la droite graduée.",
 					enounces: ["Complète en t'aidant de la droite graduée."],
 					expressions: [
 						'(-&1)+?= [_(-&1)+&2_]',
@@ -8013,6 +8013,88 @@ const questions = {
 				},
 			],
 			'Sommes algébriques': [
+				{
+					description: "Ajouter 1 ou 2 à un nombre négatif",
+					expressions: [
+						'(-&1)+1',
+						'(-&1)+2',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[3;9]' },
+					],
+					
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
+					description: "Enlever 1 ou 2 à un nombre négatif",
+					expressions: [
+						'(-&1)-1',
+						'(-&1)-2',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[1;7]' },
+					],
+					
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
+					description: "Ajouter 2 nombres opposés",
+					expressions: [
+						'(-&1)+&1',
+						'&1+(-&1)',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[1;15]' },
+					],
+					
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
+					description: "Ajouter un nombre positif à un nombre négatif en dépassant 0",
+					expressions: [
+						'(-&1)+[_&1+&2_]',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[1;8]', '&2':'$e[1;9-&1]' },
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$(-&1)+\\bold{\\textcolor{${color1}}{[_&1+&2_]}}=(-&1)+\\textcolor{${color1}}{&1+&2}=0+&2=&2$$`,
+							},
+						],
+					],
+					
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
+					description: "Enlever un nombre positif à un nombre positif en dépassant 0",
+					expressions: [
+						'&1-[_&1+&2_]',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[1;8]', '&2':'$e[1;9-&1]' },
+					],
+					correctionDetails: [
+						[
+							{
+								text: `$$&1\\bold{\\textcolor{${color1}}{-[_&1+&2_]}}=&1\\textcolor{${color1}}{-&1-&2}=0-&2=-&2$$`,
+							},
+						],
+					],
+					
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
 				{
 					description: "Déterminer le signe d'une somme",
 					expressions: [
