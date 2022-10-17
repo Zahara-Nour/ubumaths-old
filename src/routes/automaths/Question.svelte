@@ -132,8 +132,8 @@
 
 		const keystroke = ev.code
 		const key = ev.key
-		console.log('onKeyStroke')
-		console.log('answers_latex', answers_latex[i])
+		// console.log('onKeyStroke')
+		// console.log('answers_latex', answers_latex[i])
 		if (
 			keystroke === 'Space'
 			//  &&
@@ -143,7 +143,7 @@
 			// 	answers_latex[i].slice(answers_latex[i].length - 2) === '\\,'
 			// )
 		) {
-			console.log('prevent space')
+			// console.log('prevent space')
 			// ev.preventDefault()
 			mfs[i].insert('2\\,3')
 		} else if (key === '%') {
@@ -551,7 +551,7 @@
 			</div>
 		{/if}
 	{/each}
-	{#if (!correction && question.answerFields) || (!correction && answerFields && interactive)}
+	{#if (!correction && question.answerFields && question.type==='trou') || (!correction && answerFields && interactive)}
 		<div
 			id="{`answerFields-${question.num}${masked ? '-masked' : ''}`}"
 			class="my-3 flex flex-col items-center justify-center"
