@@ -580,11 +580,15 @@ function checkForm(item) {
 				item.statuss[i] !== STATUS_EMPTY &&
 				item.statuss[i] !== STATUS_INCORRECT
 			) {
-				const e = math(answer)
+				// A REVOIR
+				let e = math(answer)
 					.removeZerosAndSpaces()
 					.reduceFractions()
 					.simplifyNullProducts()
-					.removeNullTerms()
+				if (!item.options.includes('no-penalty-for-null-terms')) {
+					e = e.removeNullTerms()
+				}
+				e = e
 					.removeFactorsOne()
 					.removeSigns()
 					.removeUnecessaryBrackets()
@@ -596,16 +600,24 @@ function checkForm(item) {
 				)
 					? item.solutionsIndexs[i]
 					: i
-				const solution = math(item.solutions[indexSolution])
-					.removeZerosAndSpaces()
-					.reduceFractions()
-					.simplifyNullProducts()
-					.removeNullTerms()
-					.removeFactorsOne()
-					.removeSigns()
-					.removeUnecessaryBrackets()
-					.removeMultOperator()
-					.sortTermsAndFactors()
+
+				// pourquoi le faire pour solutions ?
+				// la solution est censé est écrite sous une forme correcte.
+				let solution = math(item.solutions[indexSolution])
+				// 	.removeZerosAndSpaces()
+				// 	.reduceFractions()
+				// 	.simplifyNullProducts()
+				// if (!item.options.includes('no-penalty-for-null-terms')) {
+				// 	solution = solution.removeNullTerms()
+				// }
+				// solution = solution
+				// 	.removeFactorsOne()
+				// 	.removeSigns()
+				// 	.removeUnecessaryBrackets()
+				// 	.removeMultOperator()
+				// 	.sortTermsAndFactors()
+
+				console.log('answer & solution', e.string, solution.string)
 
 				// il faut trouver une autre solution quand il y a des unités
 				if (!e.unit && !e.strictlyEquals(solution)) {
@@ -649,7 +661,9 @@ export function assessItem(item) {
 		// le statut de chaque réponse si il y a plusieurs champs réponses
 		// initialisée à CORRECT ou EMPTY
 		item.statuss = item.answers.map((answer) =>
-			((item.type === 'choice' || item.type === 'choices') && answer !=='' && answer >= 0) ||
+			((item.type === 'choice' || item.type === 'choices') &&
+				answer !== '' &&
+				answer >= 0) ||
 			answer
 				? STATUS_CORRECT
 				: STATUS_EMPTY,
@@ -661,7 +675,7 @@ export function assessItem(item) {
 		}
 		// le cas simple à traiter des réponses à choix (multiples ou non)
 		else if (
-			item.type === 'choice'  &&
+			item.type === 'choice' &&
 			item.solutions.toString() !== item.answers.toString()
 		) {
 			item.statuss = [STATUS_INCORRECT]

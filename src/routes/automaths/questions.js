@@ -7803,7 +7803,7 @@ const questions = {
 					enounces: ['Comment écrit-on le résultat de : '],
 					expressions: ['0-&1'],
 					variables: [{ '&1': '$e[2;20]' }],
-
+					options:['require-no-null-terms'],
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -7812,8 +7812,7 @@ const questions = {
 					enounces: [
 						'Quelle est la soustraction définissant le nombre $$-&1$$ ?',
 					],
-					expressions: ['0-&1'],
-					options: ['no-exp', 'no-penalty-for-null-terms'],
+					options: ['no-penalty-for-null-terms'],
 					variables: [{ '&1': '$e[2;20]' }],
 					solutions: [['0-&1']],
 					correctionFormat: [
@@ -7831,18 +7830,11 @@ const questions = {
 						"Quel est l'opposé du nombre $$&1$$ ?",
 						"Quel est l'opposé du nombre $$-&1$$ ?",
 					],
-					expressions: ['-&1', '-(-&1)'],
-					options: ['no-exp'],
 					variables: [{ '&1': '$e[1;20]' }],
 					solutions: [['-&1'], ['&1']],
 					correctionFormat: [
 						{
-							correct: ["L'opposé de $$&1$$ est &answer"],
-							answer: "L'opposé est &answer",
-						},
-						{
-							correct: ["L'opposé de $$-&1$$ est &answer"],
-							answer: "L'opposé est &answer",
+							correct: ["L'opposé est &answer"],
 						},
 					],
 					type: 'rewrite',
@@ -7855,29 +7847,12 @@ const questions = {
 					description: 'Comparer deux nombres relatifs.',
 					subdescription: 'Valeurs entières.',
 					enounces: ['Quel est le plus petit de ces 2 nombres ?'],
-					// expressions: ['-&1', '-(-&1)'],
-					options: ['no-exp'],
 					variables: [{ '&1': '$e[1;19]', '&2': '$e[&1+1;20]' }],
 					choices: [
 						[{ text: '$$&1$$' }, { text: '$$-&2$$' }],
 						[{ text: '$$-&1$$' }, { text: '$$-&2$$' }],
 						[{ text: '$$-&2$$' }, { text: '$$-&1$$' }],
 					],
-					correctionFormat: [
-						{
-							correct: ['Entre $$&1$$ et $$-&2$$ le plus petit est &answer'],
-							answer: 'Le plus petit est &answer',
-						},
-						{
-							correct: ['Entre $$-&1$$ et $$-&2$$ le plus petit est &answer'],
-							answer: 'Le plus petit est &answer',
-						},
-						{
-							correct: ['Entre $$-&2$$ et $$-&1$$ le plus petit est &answer'],
-							answer: 'Le plus petit est &answer',
-						},
-					],
-
 					solutions: [[1], [1], [0]],
 					defaultDelay: 20,
 					grade: CINQUIEME,
@@ -7886,8 +7861,6 @@ const questions = {
 					description: 'Comparer deux nombres relatifs.',
 					subdescription: 'Valeurs décimales.',
 					enounces: ['Quel est le plus petit de ces 2 nombres ?'],
-					// expressions: ['-&1', '-(-&1)'],
-					options: ['no-exp'],
 					variables: [
 						{
 							'&1': '$e{1}',
@@ -7908,14 +7881,6 @@ const questions = {
 						},
 					],
 					choices: [[{ text: '$$[._&6_]$$' }, { text: '$$[._&7_]$$' }]],
-					correctionFormat: [
-						{
-							correct: [
-								'Entre $$[._&6_]$$ et $$[._&7_]$$ le plus petit est &answer',
-							],
-							answer: 'Le plus petit est &answer',
-						},
-					],
 					solutions: [['&6<&7 ?? 0 :: 1']],
 					defaultDelay: 20,
 					grade: CINQUIEME,
@@ -8096,6 +8061,18 @@ const questions = {
 					grade: CINQUIEME,
 				},
 				{
+					description: "Ajouter deux nombres négatifs",
+					expressions: [
+						'(-&1)+(-&2)',
+					],
+					enounces: ['Calcule.'],
+					variables: [
+						{ '&1': '$e[1;9]', '&2':'$e[1;9]' },
+					],
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
 					description: "Déterminer le signe d'une somme",
 					expressions: [
 						'(-&1)+&2',
@@ -8113,29 +8090,34 @@ const questions = {
 						{ '&1': '$e[30;99]', '&2': '$e[1;&1-1]' },
 					],
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
-					correctionFormat: [
-						{
-							correct: ['Le résultat de $$(-&1)+&2$$ est &answer'],
-							answer: 'Le résultat est &answer',
-						},
-						{
-							correct: ['Le résultat de $$(-&2)+&1$$ est  &answer'],
-							answer: 'Le résultat est &answer',
-						},
-						{
-							correct: ['Le résultat de $$(-&1)+(-&2)$$ est &answer'],
-							answer: 'Le résultat est &answer',
-						},
-						{
-							correct: ['Le résultat de $$&1+(-&2)$$ est &answer'],
-							answer: 'Le résultat est &answer',
-						},
-						{
-							correct: ['Le résultat de $$&2+(-&1)$$ est &answer'],
-							answer: 'Le résultat est &answer',
-						},
-					],
 					solutions: [[1], [0], [1], [0], [1]],
+					correctionDetails: [
+						[
+							{
+								text: `$$&1>&2$$ donc le résultat de &expression est du signe de $$-&1$$ c'est-à-dire &solution`,
+							},
+						],
+						[
+							{
+								text: `$$&1>&2$$ donc le résultat de &expression est du signe de $$&1$$ c'est-à-dire &solution`,
+							},
+						],
+						[
+							{
+								text: `$$&1>&2$$ donc le résultat de &expression est du signe de $$-&1$$ c'est-à-dire &solution`,
+							},
+						],
+						[
+							{
+								text: `$$&1>&2$$ donc le résultat de &expression est du signe de $$&1$$ c'est-à-dire &solution`,
+							},
+						],
+						[
+							{
+								text: `$$&1>&2$$ donc le résultat de &expression est du signe de $$-&1$$ c'est-à-dire &solution`,
+							},
+						],
+					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: CINQUIEME,
@@ -9756,8 +9738,7 @@ const questions = {
 				{
 					description: "Calculer une fraction d'une quantité",
 					enounces: ['Calculer $$\\dfrac{&2}{&3}$$ de $$[_&1*&3_]$$'],
-					expressions: ['(&2/&3)*[_&1*&3_]'],
-					options: ['no-exp'],
+					solutions:[['[_&1*&2_]']],
 					variables: [
 						{ '&1': '$e[2;9]', '&2': '$e[2;9]', '&3': '$e[2;9]\\{cd(&2)}' },
 					],
@@ -20892,7 +20873,7 @@ const questions = {
 						{
 							'&1': '$er[2;5]',
 							'&2': '$er[1;5]',
-							'&3': '$er[1;5]',
+							'&3': '$er[1;5]\\{&2}',
 						},
 					],
 					choices: [
@@ -20903,7 +20884,17 @@ const questions = {
 						],
 					],
 					solutions: [[0], [1], [2]],
-
+					correctionDetails: [
+						[
+							{text:"C'est la forme &solution $$ax^2+bx+c$$ avec $$a=&1$$, $$b=&2$$ et $$c=&3$$"}
+						],
+						[
+							{text:"C'est la forme &solution $$a(x-x_1)(x-x_2)$$ avec $$a=&1$$, $$x_1=[_-(&2)_]$$,  et $$x_2=[_-(&3)_]$$"}
+						],
+						[
+							{text:"C'est la forme &solution $$a(x-\\alpha)^2+\\beta$$ avec $$a=&1$$, $$\\alpha=[_-(&2)_]$$,et $$\\beta=&3$$"}
+						],
+					],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
@@ -21005,8 +20996,45 @@ const questions = {
 					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
 					correctionFormat: [
 						{
-							correct: ['Les racines sont &answer1 et &answer2'],
+							correct: ['Le polynôme est sous forme factorisée, les racines sont &answer1 et &answer2'],
 						},
+					],
+					options: ['solutions-order-not-important'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer les racines d'un polynôme du second degré",
+					subdescription: "Le polynôme n'est pas complètement factorisé",
+					enounces: [
+						'Quelles sont les racines de ce polynôme du second degré ?',
+					],
+					expressions: [
+						'(&1x[+_&1*(&2)_])(x[+_&3_])',
+						'(x[+_&2_])(&1x[+_&1*(&3)_])',
+					],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					conditions: ['abs(&2) != abs(&3)'],
+					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
+					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
+					correctionFormat: [
+						{
+							correct: [
+								"Les racines sont &answer1 et &answer2",
+							],
+						},
+					],
+					correctionDetails:[
+						[
+							{text:"Le polynôme n'est <b>pas</b> sous forme factorisée. "},
+							{text:"La forme factorisée est $$&1(x[+_&2_])(x[+_&3_])$$, les racines sont donc &solution1 et &solution2"}
+						],
 					],
 					options: ['solutions-order-not-important'],
 					defaultDelay: 20,
@@ -21103,6 +21131,67 @@ const questions = {
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
+			],
+			'Vrai ou Faux': [
+				{
+					description: "Vrai ou Faux sur les polynômes du second degré",
+					enounces: [
+						"La courbe représentative d'un polynôme du second degré est une droite.",
+						'Un polynôme du second degré peut ne pas avoir de racine.',
+						"Un polynôme du second degré peut n'avoir qu'une seule racine.",
+						"Un polynôme du second degré a au maximum deux racines.",
+						"La forme factorisée permet de trouver les racines du polynôme.",
+						"La forme canonique permet de trouver les coordonnées du sommet de la parabole.",
+						"La courbe représentative d'un polynôme du second degré admet un axe de symétrie.",
+					],
+					variables: [
+					],
+					choices: [
+						[
+							{ text: 'Vrai' },
+							{ text: 'Faux' },
+						],
+					],
+					solutions: [
+						[1],
+						[0],
+						[0],
+						[0],
+						[0],
+						[0],
+						[0],
+					],
+					correctionDetails: [
+						[
+							{text:"&solution, la courbe représentative d'un polynôme du second degré est une parabole."}
+						],
+						[
+							{text:"&solution, c'est le cas lorsque la courbe représentative ne coupe ni ne touche l'axe des abscisses. Le discriminant est alors négatif."}
+						],
+						[
+							{text:"&solution, c'est le cas lorsque la courbe représentative touche l'axe des abscisses sans le traverser. Le discriminant est alors nul."}
+						],
+						[
+							{text:"&solution, c'est le nombre de fois maximum où la courbe représentative peut couper l'axe des abscisses. Le discriminant est alors positif."}
+						],
+						[
+							{text:"&solution, dans la forme factorisée $$a(x-x_1)(x-x_2)$$, les racines sont $$x_1$$ et $$x_2$$."}
+						],
+						[
+							{text:"&solution, dans la forme canonique $$a(x-\\alpha)^2+\\beta$$, les coordonnées du sommet de la parabole sont $$(\\alpha; \\beta)$$."}
+						],
+						[
+							{text:"&solution, la courbe représentative admet un axe de symétrie passant par le sommet de la parabole."}
+						],
+						
+
+						
+					],
+					options:['no-shuffle-choices'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				
 			],
 		},
 	},
