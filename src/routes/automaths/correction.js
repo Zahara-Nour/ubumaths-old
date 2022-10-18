@@ -573,7 +573,7 @@ function checkZeros(item) {
 }
 
 function checkForm(item) {
-	if (item.solutions) {
+	if (!item.testAnswer && item.solutions) {
 		// const result = []
 		item.answers.forEach((answer, i) => {
 			if (
@@ -708,7 +708,9 @@ export function assessItem(item) {
 			// On vérifie que les réponses sont écrites correctement
 			let incorrectForm = false
 			item.answers.forEach((answer, i) => {
+				console.log('math(answer)', math(answer).string)
 				if (item.statuss[i] !== STATUS_EMPTY && math(answer).isIncorrect()) {
+					console.log('incorrect')
 					item.statuss[i] = STATUS_INCORRECT
 					item.status = STATUS_INCORRECT
 					incorrectForm = true
@@ -755,8 +757,8 @@ export function assessItem(item) {
 								item.statuss[0] !== STATUS_INCORRECT)
 						) {
 							const t = item.testAnswer[i] || item.testAnswer[0]
-							const tests = t.replace(/&answer/g, answer).split('&&')
-							const failed = tests.some((test) => math(test).eval().isFalse())
+							const tests = t.replace(/&answer/g, answer).replace(/,/g,'.').split('&&')
+							const failed = tests.some((test) => !math(test).isIncorrect() && math(test).eval().isFalse())
 							if (failed) {
 								item.statuss[i] = STATUS_INCORRECT
 								item.status = STATUS_INCORRECT

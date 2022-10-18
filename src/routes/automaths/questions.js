@@ -1294,9 +1294,7 @@ const questions = {
 					],
 					correctionFormat: [
 						{
-							correct: [
-								'Il faut ajouter &answer.',
-							],
+							correct: ['Il faut ajouter &answer.'],
 						},
 					],
 					type: 'rewrite',
@@ -3889,9 +3887,7 @@ const questions = {
 					solutions: [['[_&1*10_]']],
 					correctionFormat: [
 						{
-							correct: [
-								'On peut mettre &answer fois $$&2$$.',
-							],
+							correct: ['On peut mettre &answer fois $$&2$$.'],
 						},
 					],
 					defaultDelay: 15,
@@ -4414,9 +4410,7 @@ const questions = {
 					description: 'Utiliser la distributivité',
 					subdescription: '99 fois plus 1 fois',
 					enounces: ['Calcule.'],
-					expressions: [
-						'99*&1+&1', '&1+99*&1', '&1*99+&1', '&1+&1*99'
-					],
+					expressions: ['99*&1+&1', '&1+99*&1', '&1*99+&1', '&1+&1*99'],
 					variables: [{ '&1': '$e[50;85]' }],
 					correctionDetails: [
 						[
@@ -4424,7 +4418,6 @@ const questions = {
 								text: `$$&exp = 100 \\times &1=$$ &solution`,
 							},
 						],
-					
 					],
 
 					defaultDelay: 20,
@@ -4785,21 +4778,21 @@ const questions = {
 						"En regardant l'égalité ci-dessous, quel est le <b>quotient</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
 						"En regardant l'égalité ci-dessous, quel est le <b>reste</b> de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
 					],
-					enounces2:['$$[_&1*&2+&3_]=(&1 \\times &2)+&3$$'],
+					enounces2: ['$$[_&1*&2+&3_]=(&1 \\times &2)+&3$$'],
 					variables: [
-						{ '&1': '$e[2;9]', '&2': '$e[2;10]\\{&1}', '&3': '$e[1;&1-1]\\{&2}' },
+						{
+							'&1': '$e[2;9]',
+							'&2': '$e[2;10]\\{&1}',
+							'&3': '$e[1;&1-1]\\{&2}',
+						},
 					],
 					solutions: [['&2'], ['&3']],
 					correctionFormat: [
 						{
-							correct: [
-								'Le quotient est &answer.',
-							],
+							correct: ['Le quotient est &answer.'],
 						},
 						{
-							correct: [
-								'Le reste est &answer.',
-							],
+							correct: ['Le reste est &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -4825,7 +4818,11 @@ const questions = {
 						"En regardant l'égalité ci-dessous, peut-on dire que $$[_&3+&1_]$$ est le reste de la division euclidienne de $$[_&1*&2+&3_]$$ par $$&1$$ ?",
 					],
 					variables: [
-						{ '&1': '$e[3;9]', '&2': '$e[2;10]\\{&1}', '&3': '$e[1;&1-1]\\{&2}' },
+						{
+							'&1': '$e[3;9]',
+							'&2': '$e[2;10]\\{&1}',
+							'&3': '$e[1;&1-1]\\{&2}',
+						},
 					],
 					expressions: [
 						'[_&1*&2+&3_]=(&1* &2) + &3',
@@ -7803,7 +7800,7 @@ const questions = {
 					enounces: ['Comment écrit-on le résultat de : '],
 					expressions: ['0-&1'],
 					variables: [{ '&1': '$e[2;20]' }],
-					options:['require-no-null-terms'],
+					options: ['require-no-null-terms'],
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -7979,56 +7976,38 @@ const questions = {
 			],
 			'Sommes algébriques': [
 				{
-					description: "Ajouter 1 ou 2 à un nombre négatif",
-					expressions: [
-						'(-&1)+1',
-						'(-&1)+2',
-					],
+					description: 'Ajouter 1 ou 2 à un nombre négatif',
+					expressions: ['(-&1)+1', '(-&1)+2'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[3;9]' },
-					],
-					
+					variables: [{ '&1': '$e[3;9]' }],
+
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
 				{
-					description: "Enlever 1 ou 2 à un nombre négatif",
-					expressions: [
-						'(-&1)-1',
-						'(-&1)-2',
-					],
+					description: 'Enlever 1 ou 2 à un nombre négatif',
+					expressions: ['(-&1)-1', '(-&1)-2'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[1;7]' },
-					],
-					
+					variables: [{ '&1': '$e[1;7]' }],
+
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
 				{
-					description: "Ajouter 2 nombres opposés",
-					expressions: [
-						'(-&1)+&1',
-						'&1+(-&1)',
-					],
+					description: 'Ajouter 2 nombres opposés',
+					expressions: ['(-&1)+&1', '&1+(-&1)'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[1;15]' },
-					],
-					
+					variables: [{ '&1': '$e[1;15]' }],
+
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
 				{
-					description: "Ajouter un nombre positif à un nombre négatif en dépassant 0",
-					expressions: [
-						'(-&1)+[_&1+&2_]',
-					],
+					description:
+						'Ajouter un nombre positif à un nombre négatif en dépassant 0',
+					expressions: ['(-&1)+[_&1+&2_]'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[1;8]', '&2':'$e[1;9-&1]' },
-					],
+					variables: [{ '&1': '$e[1;8]', '&2': '$e[1;9-&1]' }],
 					correctionDetails: [
 						[
 							{
@@ -8036,19 +8015,16 @@ const questions = {
 							},
 						],
 					],
-					
+
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
 				{
-					description: "Enlever un nombre positif à un nombre positif en dépassant 0",
-					expressions: [
-						'&1-[_&1+&2_]',
-					],
+					description:
+						'Enlever un nombre positif à un nombre positif en dépassant 0',
+					expressions: ['&1-[_&1+&2_]'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[1;8]', '&2':'$e[1;9-&1]' },
-					],
+					variables: [{ '&1': '$e[1;8]', '&2': '$e[1;9-&1]' }],
 					correctionDetails: [
 						[
 							{
@@ -8056,19 +8032,15 @@ const questions = {
 							},
 						],
 					],
-					
+
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
 				{
-					description: "Ajouter deux nombres négatifs",
-					expressions: [
-						'(-&1)+(-&2)',
-					],
+					description: 'Ajouter deux nombres négatifs',
+					expressions: ['(-&1)+(-&2)'],
 					enounces: ['Calcule.'],
-					variables: [
-						{ '&1': '$e[1;9]', '&2':'$e[1;9]' },
-					],
+					variables: [{ '&1': '$e[1;9]', '&2': '$e[1;9]' }],
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
@@ -9738,7 +9710,7 @@ const questions = {
 				{
 					description: "Calculer une fraction d'une quantité",
 					enounces: ['Calculer $$\\dfrac{&2}{&3}$$ de $$[_&1*&3_]$$'],
-					solutions:[['[_&1*&2_]']],
+					solutions: [['[_&1*&2_]']],
 					variables: [
 						{ '&1': '$e[2;9]', '&2': '$e[2;9]', '&3': '$e[2;9]\\{cd(&2)}' },
 					],
@@ -14167,7 +14139,9 @@ const questions = {
               &2  &   [_&2*&3_] \
             \\end{array}$$ est un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color1}}{\\times &3}=[_&2*&3_] $$`,
 							},
-							{text: "On a multiplité par le même nombre entre les 2 colonnes."}
+							{
+								text: 'On a multiplité par le même nombre entre les 2 colonnes.',
+							},
 						],
 						[
 							{
@@ -14177,8 +14151,8 @@ const questions = {
             \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$.`,
 							},
 							{
-								text:"On n'a <b>pas</b> multiplié par le même nombre entre les 2 colonnes."
-							}
+								text: "On n'a <b>pas</b> multiplié par le même nombre entre les 2 colonnes.",
+							},
 						],
 					],
 					options: ['no-shuffle-choices'],
@@ -14211,9 +14185,7 @@ const questions = {
 					solutions: [[0], [1]],
 					correctionFormat: [
 						{
-							correct: [
-								"&answer, c'est un tableau de proportionnalité.",
-							],
+							correct: ["&answer, c'est un tableau de proportionnalité."],
 							answer: "&answer, ce n'est pas un tableau de proportionnalité.",
 						},
 						{
@@ -14233,8 +14205,8 @@ const questions = {
             \\end{array}$$ est un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color1}}{\\times &3}=[_&2*&3_] $$`,
 							},
 							{
-								text:"On a multiplié par le même nombre entre les 2 colonnes."
-							}
+								text: 'On a multiplié par le même nombre entre les 2 colonnes.',
+							},
 						],
 						[
 							{
@@ -14243,7 +14215,9 @@ const questions = {
         [_&1*&3_]  &   [_&2*(&3+1)_] \
             \\end{array}$$ n'est pas un tableau de proportionnalité, car $$ &1 \\textcolor{${color1}}{\\times &3}=[_&1*&3_]$$ et $$ &2 \\textcolor{${color2}}{\\times [_&3+1_]}=[_&2*(&3+1)_]$$.`,
 							},
-							{text: "On n'a <b>pas</b> multiplié par le même nombre entre les 2 lignes."}
+							{
+								text: "On n'a <b>pas</b> multiplié par le même nombre entre les 2 lignes.",
+							},
 						],
 					],
 					options: ['no-shuffle-choices'],
@@ -14273,9 +14247,7 @@ const questions = {
 					solutions: [['&3']],
 					correctionFormat: [
 						{
-							correct: [
-								'Le coefficient de proportionnalité est &answer.',
-							],
+							correct: ['Le coefficient de proportionnalité est &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -14310,9 +14282,7 @@ const questions = {
 					solutions: [['&2/&1']],
 					correctionFormat: [
 						{
-							correct: [
-								'Le coefficient de proportionnalité est &answer.',
-							],
+							correct: ['Le coefficient de proportionnalité est &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -14362,7 +14332,7 @@ const questions = {
 							'&3': '$e[2;9]\\{&1;&2}',
 						},
 					],
-					solutions: [['[_&1*&3_]'], ['[_&2*&3_]'], ['&2'],['&1']],
+					solutions: [['[_&1*&3_]'], ['[_&2*&3_]'], ['&2'], ['&1']],
 					correctionFormat: [
 						{
 							correct: [
@@ -14475,7 +14445,6 @@ const questions = {
             						&ans  &   [_&2*&3_] \
           						\\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14484,7 +14453,6 @@ const questions = {
             						[_&1*&3_]  &  &ans \
           						\\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14493,7 +14461,6 @@ const questions = {
               						[_&1*&3_]   &  [_&2*&3_]  \
           						\\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14502,7 +14469,6 @@ const questions = {
               						[_&1*&3_]  &  [_&2*&3_]  \
           					\\end{array}$$',
 							],
-
 						},
 					],
 					correctionDetails: [
@@ -14585,7 +14551,6 @@ const questions = {
             &ans  &   &3 \
           \\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14594,7 +14559,6 @@ const questions = {
             &3 & &ans \
           \\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14603,7 +14567,6 @@ const questions = {
               &3 & [_&1*&3/&2_] \
             \\end{array}$$',
 							],
-
 						},
 						{
 							correct: [
@@ -14612,7 +14575,6 @@ const questions = {
               [_&1*&3/&2_] &  &3 \
             \\end{array}$$',
 							],
-
 						},
 					],
 					correctionDetails: [
@@ -14646,7 +14608,7 @@ const questions = {
                  &sol & &2 \\\\ \
                 [_&1*&3/&2_] & &3 \
 				\\end{array}$$ car $$&2 \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = &3$$ et $$&sol \\textcolor{${color1}}{\\times \\frac{&3}{&2}} = [_&1*&3/&2_]$$`,
-			},
+							},
 						],
 					],
 					defaultDelay: 20,
@@ -14812,8 +14774,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$50\\%$$ signifie la moitié donc $$50\\%$$ de $$[_&1*2_]$$ est égal à $$[_&1*2_] \\div 2=$$&solution. "
-							}
+							{
+								text: '$$50\\%$$ signifie la moitié donc $$50\\%$$ de $$[_&1*2_]$$ est égal à $$[_&1*2_] \\div 2=$$&solution. ',
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -14832,8 +14795,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$[_&1*10_]$$ est égal à $$[_&1*10_] \\div 10=$$&solution. "
-							}
+							{
+								text: '$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$[_&1*10_]$$ est égal à $$[_&1*10_] \\div 10=$$&solution. ',
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -14852,8 +14816,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$&1$$ est égal à $$&1 \\div 10=$$&solution. "
-							}
+							{
+								text: '$$10\\%$$ signifie $$\\frac{1}{10}$$ donc $$10\\%$$ de $$&1$$ est égal à $$&1 \\div 10=$$&solution. ',
+							},
 						],
 					],
 					'result-type': 'decimal',
@@ -14873,8 +14838,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$10\\%$$ de $$[_&2*10_]$$ représente $$&2$$ donc $$&1\\%$$ représente $$[_&1:10_] \\times &2 =$$ &solution. "
-							}
+							{
+								text: '$$10\\%$$ de $$[_&2*10_]$$ représente $$&2$$ donc $$&1\\%$$ représente $$[_&1:10_] \\times &2 =$$ &solution. ',
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -14893,8 +14859,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$25\\%$$ signifie $$\\frac{1}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$[_&1*4_] \\div 4=$$&solution. "
-							}
+							{
+								text: '$$25\\%$$ signifie $$\\frac{1}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$[_&1*4_] \\div 4=$$&solution. ',
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -14913,8 +14880,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$25\\%$$ signifie $$\\frac{3}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$\\left([_&1*4_] \\div 4 \\right) \\times 3=$$&solution. "
-							}
+							{
+								text: '$$25\\%$$ signifie $$\\frac{3}{4}$$ donc $$25\\%$$ de $$[_&1*4_]$$ est égal à $$\\left([_&1*4_] \\div 4 \\right) \\times 3=$$&solution. ',
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -14936,8 +14904,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"L'augmentation est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] + [_&2%*&1_] =$$ &solution Qr. "
-							}
+							{
+								text: "L'augmentation est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] + [_&2%*&1_] =$$ &solution Qr. ",
+							},
 						],
 					],
 					defaultDelay: 30,
@@ -14957,8 +14926,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"La diminution est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] - [_&2%*&1_] =$$ &solution Qr. "
-							}
+							{
+								text: 'La diminution est de $$&2\\% \\times [_&1_] = [_&2%*&1_]$$ Qr. Le nouveau prix est donc $$[_&1_] - [_&2%*&1_] =$$ &solution Qr. ',
+							},
 						],
 					],
 					defaultDelay: 30,
@@ -14979,8 +14949,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"Le coefficient multiplicateur est $$1+\\frac{&1}{100}=$$ &solution."
-							}
+							{
+								text: 'Le coefficient multiplicateur est $$1+\\frac{&1}{100}=$$ &solution.',
+							},
 						],
 					],
 					'result-type': 'decimal',
@@ -15002,8 +14973,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"Le coefficient multiplicateur est $$1-\\frac{&1}{100}=1-[._&1:100_]=$$ &solution."
-							}
+							{
+								text: 'Le coefficient multiplicateur est $$1-\\frac{&1}{100}=1-[._&1:100_]=$$ &solution.',
+							},
 						],
 					],
 					'result-type': 'decimal',
@@ -15016,7 +14988,9 @@ const questions = {
 						"Quel est le pourcentage d'augmentation correspondant à un coefficient multiplicateur de $$[._1+&1/100_]$$?",
 					],
 					solutions: [['&1%']],
-					variables: [{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50;200}' }],
+					variables: [
+						{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50;200}' },
+					],
 					correctionFormat: [
 						{
 							correct: ["Le pourcentage d'augmentation est &answer."],
@@ -15024,8 +14998,9 @@ const questions = {
 					],
 					correctionDetails: [
 						[
-							{text:"$$[._1+&1/100_]=1+\\frac{&1}{100}$$ donc le pourcentage d'augmentation est &solution."
-							}
+							{
+								text: "$$[._1+&1/100_]=1+\\frac{&1}{100}$$ donc le pourcentage d'augmentation est &solution.",
+							},
 						],
 					],
 					defaultDelay: 10,
@@ -15036,20 +15011,23 @@ const questions = {
 					enounces: [
 						'Quel est le pourcentage de diminution correspondant à un coefficient multiplicateur de $$[._1-&1/100_]$$?',
 					],
-					variables: [{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50}' }],
+					variables: [
+						{ '&1': '$l{$e[1;30];$e[31;49];$e[51;70];$e[71;90];100;50}' },
+					],
 					type: 'rewrite',
 					correctionFormat: [
 						{
-							correct: ["Le pourcentage de diminution est &answer."],
+							correct: ['Le pourcentage de diminution est &answer.'],
 						},
 					],
 					correctionDetails: [
 						[
-							{text:"$$[._1-&1/100_]=1-\\frac{&1}{100}$$ donc le pourcentage de diminution est &solution."
-							}
+							{
+								text: '$$[._1-&1/100_]=1-\\frac{&1}{100}$$ donc le pourcentage de diminution est &solution.',
+							},
 						],
 					],
-					
+
 					solutions: [['&1%']],
 					defaultDelay: 10,
 					grade: SECONDE,
@@ -15115,7 +15093,7 @@ const questions = {
 						"Sur une carte à l'échelle $$[_&4_]$$, je veux représenter une longueur de $$[°&3°]$$. Quelle est, en $$cm$$, la longueur sur la carte ?",
 					],
 					answerFields: ['$$? cm$$'],
-					solutions:[['[_&5/(&1 cm)_]']],
+					solutions: [['[_&5/(&1 cm)_]']],
 					variables: [
 						{ '&1': '10', '&2': '$e[1;9]*10', '&3': '[_&2_] dm', '&4': '1/&1' },
 						{
@@ -15123,37 +15101,41 @@ const questions = {
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] dm',
 							'&4': '1/&1',
-							'&5': '[_&3_cm_]'
+							'&5': '[_&3_cm_]',
 						},
-						{ '&1': '100', '&2': '$e[1;9]*10', '&3': '[_&2_] m', '&4': '1/&1','&5': '[_&3_cm_]' },
+						{
+							'&1': '100',
+							'&2': '$e[1;9]*10',
+							'&3': '[_&2_] m',
+							'&4': '1/&1',
+							'&5': '[_&3_cm_]',
+						},
 						{
 							'&1': '1000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] m',
 							'&4': '1/&1',
-							'&5': '[_&3_cm_]'
+							'&5': '[_&3_cm_]',
 						},
 						{
 							'&1': '100000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] km',
 							'&4': '1/&1',
-							'&5': '[_&3_cm_]'
+							'&5': '[_&3_cm_]',
 						},
 						{
 							'&1': '1000000',
 							'&2': '$e[1;9]*10',
 							'&3': '[_&2_] km',
 							'&4': '1/&1',
-							'&5': '[_&3_cm_]'
+							'&5': '[_&3_cm_]',
 						},
 					],
 					units: ['cm'],
 					correctionFormat: [
 						{
-							correct: [
-								'Sur la carte, la longueur est de &answer $$cm$$.',
-							],
+							correct: ['Sur la carte, la longueur est de &answer $$cm$$.'],
 						},
 					],
 					correctionDetails: [
@@ -15232,9 +15214,7 @@ const questions = {
 					options: ['no-penalty-for-not-respected-unit'],
 					correctionFormat: [
 						{
-							correct: [
-								'La longueur réelle est de &answer.',
-							],
+							correct: ['La longueur réelle est de &answer.'],
 						},
 					],
 					correctionDetails: [
@@ -19488,17 +19468,53 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					
+
 					correctionDetails: [
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.",},],
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_&1/&3_]$$ et $$b=[_&2/&4_]$$.",},],
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_abs(&1)/&3_]$$ et $$b=[_&2/&4_]$$.",},],
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=0$$.",},],
-						[{text: "&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=0$$ et $$b=&2$$.",},],
-						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
-						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
-						[{text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",},],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.',
+							},
+						],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=&2$$.',
+							},
+						],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_&1/&3_]$$ et $$b=[_&2/&4_]$$.',
+							},
+						],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=[_abs(&1)/&3_]$$ et $$b=[_&2/&4_]$$.',
+							},
+						],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=&1$$ et $$b=0$$.',
+							},
+						],
+						[
+							{
+								text: '&solution, $$f$$ est une fonction affine car son expression est de la forme $$ax+b$$ avec $$a=0$$ et $$b=&2$$.',
+							},
+						],
+						[
+							{
+								text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, $$f$$ n'est pas une fonction affine car son expression n'est pas de la forme $$ax+b$$.",
+							},
+						],
 					],
 
 					solutions: [[0], [0], [0], [0], [0], [0], [1], [1], [1]],
@@ -19526,7 +19542,7 @@ const questions = {
 					],
 
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-		
+
 					solutions: [
 						[0],
 						[0],
@@ -19542,18 +19558,66 @@ const questions = {
 						[1],
 					],
 					correctionDetails: [
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe représente une fonction affine car c'est une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
-						[{text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",},],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe représente une fonction affine car c'est une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
+						[
+							{
+								text: "&solution, cette courbe ne représente pas une fonction affine car ce n'est pas une droite.",
+							},
+						],
 					],
 					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
@@ -19567,7 +19631,6 @@ const questions = {
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&1$$ s'appelle ...",
 						"Dans la fonction affine $$f(x)=&2[+_&1_]x$$, le nombre $$&2$$ s'appelle ...",
 					],
-				
 
 					variables: [
 						{
@@ -19824,7 +19887,7 @@ const questions = {
 						},
 					],
 					type: 'rewrite',
-					answerFields:['$$f(&3)=?$$'],
+					answerFields: ['$$f(&3)=?$$'],
 					solutions: [['[_&4_]']],
 
 					correctionFormat: [
@@ -19833,7 +19896,7 @@ const questions = {
 						},
 					],
 					correctionDetails: [
-						[{text: "$$f(&3)=&1 \\times [(_&3_][+_&2_]=$$&solution.",},],
+						[{ text: '$$f(&3)=&1 \\times [(_&3_][+_&2_]=$$&solution.' }],
 					],
 					defaultDelay: 20,
 					grade: TROISIEME,
@@ -19866,8 +19929,16 @@ const questions = {
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
 					options: ['no-shuffle-choices'],
 					correctionDetails: [
-						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ appartient à la courbe représentative de la fonction affine &expression.`,},],
-						[{text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= [_&1*(&3)+(&2)_] \\bold{\\textcolor{red}{\\ne}} \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ n'appartient pas à la courbe représentative de la fonction affine &expression.`,},],
+						[
+							{
+								text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ appartient à la courbe représentative de la fonction affine &expression.`,
+							},
+						],
+						[
+							{
+								text: `$$f(\\bold{\\textcolor{${color1}}{&3}})=&1 \\times \\bold{\\textcolor{${color1}}{[(_&3)_]}} [+_&2_]= [_&1*(&3)+(&2)_] \\bold{\\textcolor{red}{\\ne}} \\bold{\\textcolor{${color2}}{[_&4_]}}$$ donc le point $$A(\\bold{\\textcolor{${color1}}{&3}};\\bold{\\textcolor{${color2}}{[_&4_]}})$$ n'appartient pas à la courbe représentative de la fonction affine &expression.`,
+							},
+						],
 					],
 					solutions: [[0], [1]],
 					defaultDelay: 20,
@@ -19954,14 +20025,46 @@ const questions = {
 
 					choices: [[{ text: 'croissante' }, { text: 'décroissante' }]],
 					correctionDetails: [
-						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
-						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
-						[{text: 'La fonction &expression est &solution car $$&1$$ est positif.',},],
-						[{text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',},],
-						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
-						[{text: 'La fonction &expression est &solution car $$-[°&3°]$$ est négatif.',},],
-						[{text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',},],
-						[{text: 'La fonction &expression est &solution car $$-[°&3$°]$$ est négatif.',},],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$&1$$ est positif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$&1$$ est positif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$-&1$$ est négatif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$-[°&3°]$$ est négatif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$[°&3°]$$ est positif.',
+							},
+						],
+						[
+							{
+								text: 'La fonction &expression est &solution car $$-[°&3$°]$$ est négatif.',
+							},
+						],
 					],
 					solutions: [[0], [1], [0], [1], [0], [1], [0], [1]],
 					options: ['no-shuffle-choices'],
@@ -19995,12 +20098,36 @@ const questions = {
 					],
 					options: ['no-shuffle-choices'],
 					correctionDetails: [
-						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
-						[{text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',},],
-						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
-						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
-						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
-						[{text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",},],
+						[
+							{
+								text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',
+							},
+						],
+						[
+							{
+								text: 'Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles ont le même coefficient directeur $$&1$$.',
+							},
+						],
+						[
+							{
+								text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",
+							},
+						],
+						[
+							{
+								text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",
+							},
+						],
+						[
+							{
+								text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",
+							},
+						],
+						[
+							{
+								text: "Les droites représentatives des fonctions &expression et &expression2 sont &solution car elles n'ont pas le même coefficient directeur.",
+							},
+						],
 					],
 					solutions: [[0], [0], [1], [1], [1], [1]],
 					defaultDelay: 10,
@@ -20860,9 +20987,103 @@ const questions = {
 		'Polynôme du second degré': {
 			Apprivoiser: [
 				{
+					description: "Reconnaître un polynôme du second degré",
+					enounces: [
+						"Cette expression est-elle celle d'un polynôme du second degré ?",
+					],
+					expressions: [
+						'[_&1x^3_][+_&2x^2_][+_&3x_][+_&4_]',
+						'[_&1x^2_][+_&2x_][+_&3_]',
+						'[_&1x^2_][+_&2x_][+_&4sqrt(x)_][+_&3_]',
+						'&1(x[+_&2_])(x[+_&3_])',
+						'&1(x[+_&2_])^2[+_&3_]',
+						'{[_&1x^2_][+_&2x_][+_&3_]}/{x[+_&4_]}',
+					],
+					variables: [
+						{
+							'&1': '$er[1;5]',
+							'&2': '$er[0;5]',
+							'&3': '$er[0;5]',
+							'&4': '$er[0;5]',
+						},
+						{
+							'&1': '$er[1;5]',
+							'&2': '$er[0;5]',
+							'&3': '$er[0;5]',
+						},
+						{
+							'&1': '$er[1;5]',
+							'&2': '$er[0;5]',
+							'&3': '$er[0;5]',
+							'&4': '$er[1;5]',
+						},
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]\\{&2}',
+						},
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+						{
+							'&1': '$er[1;5]',
+							'&2': '$er[0;5]',
+							'&3': '$er[0;5]',
+							'&4': '$er[1;5]',
+						},
+
+						
+					],
+					choices: [
+						[
+							{ text: 'Oui' },
+							{ text: 'Non' },
+						],
+					],
+					solutions: [[1], [0], [1], [0],[0],[1], ],
+					correctionDetails: [
+						[
+							{
+								text: "&solution,  dans l'expression &expression, le terme $$[_&1x^3_]$$ fait que c'est un polynôme du 3ème degré et non du second degré.",
+							},
+						],
+						[
+							{
+								text: "&solution, l'expression &expression est bien de la forme $$ax^2+bx+c$$ avec $$a=&1$$, $$b=&2$$, et $$c=&3$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, dans l'expression &expression, le terme $$[_&4sqrt(x)_]$$ fait que ce n'est pas un polynôme.",
+							},
+						],
+						[
+							{
+								text: "&solution, si on développe l'expression &expression, on trouve bien une expression de la forme $$ax^2+bx+c$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, si on développe l'expression &expression, on trouve bien une expression de la forme $$ax^2+bx+c$$.",
+							},
+						],
+						[
+							{
+								text: "&solution, l'expression &expression est une fraction entre un polynôme du second degré et l'expression d'une fonction affine, ce n'est pas un polynôme.",
+							},
+						],
+					
+					],
+					options:['no-shuffle-choices', 'remove-null-terms'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
 					description: "Reconnaître la forme d'une expression du second degré",
 					enounces: [
-						'Quelle est la forme de cettre expression du second degré ?',
+						'Quelle est la forme de cette expression du second degré ?',
 					],
 					expressions: [
 						'[_&1x^2_][+_&2x_][+_&3_]',
@@ -20886,13 +21107,19 @@ const questions = {
 					solutions: [[0], [1], [2]],
 					correctionDetails: [
 						[
-							{text:"C'est la forme &solution $$ax^2+bx+c$$ avec $$a=&1$$, $$b=&2$$ et $$c=&3$$"}
+							{
+								text: "C'est la forme &solution $$ax^2+bx+c$$ avec $$a=&1$$, $$b=&2$$ et $$c=&3$$",
+							},
 						],
 						[
-							{text:"C'est la forme &solution $$a(x-x_1)(x-x_2)$$ avec $$a=&1$$, $$x_1=[_-(&2)_]$$,  et $$x_2=[_-(&3)_]$$"}
+							{
+								text: "C'est la forme &solution $$a(x-x_1)(x-x_2)$$ avec $$a=&1$$, $$x_1=[_-(&2)_]$$,  et $$x_2=[_-(&3)_]$$",
+							},
 						],
 						[
-							{text:"C'est la forme &solution $$a(x-\\alpha)^2+\\beta$$ avec $$a=&1$$, $$\\alpha=[_-(&2)_]$$,et $$\\beta=&3$$"}
+							{
+								text: "C'est la forme &solution $$a(x-\\alpha)^2+\\beta$$ avec $$a=&1$$, $$\\alpha=[_-(&2)_]$$,et $$\\beta=&3$$",
+							},
 						],
 					],
 					defaultDelay: 20,
@@ -20974,69 +21201,6 @@ const questions = {
 						['[_&1*(&4)*(&5)_]'],
 					],
 
-					defaultDelay: 20,
-					grade: PREMIERE_SPE_MATHS,
-				},
-				{
-					description: "Déterminer les racines d'un polynôme du second degré",
-					subdescription: "A l'aide de la forme factorisée",
-					enounces: [
-						'Quelles sont les racines de ce polynôme du second degré ?',
-					],
-					expressions: ['&1(x[+_&2_])(x[+_&3_])'],
-					variables: [
-						{
-							'&1': '$er[2;5]',
-							'&2': '$er[1;5]',
-							'&3': '$er[1;5]',
-						},
-					],
-					conditions: ['abs(&2) != abs(&3)'],
-					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
-					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
-					correctionFormat: [
-						{
-							correct: ['Le polynôme est sous forme factorisée, les racines sont &answer1 et &answer2'],
-						},
-					],
-					options: ['solutions-order-not-important'],
-					defaultDelay: 20,
-					grade: PREMIERE_SPE_MATHS,
-				},
-				{
-					description: "Déterminer les racines d'un polynôme du second degré",
-					subdescription: "Le polynôme n'est pas complètement factorisé",
-					enounces: [
-						'Quelles sont les racines de ce polynôme du second degré ?',
-					],
-					expressions: [
-						'(&1x[+_&1*(&2)_])(x[+_&3_])',
-						'(x[+_&2_])(&1x[+_&1*(&3)_])',
-					],
-					variables: [
-						{
-							'&1': '$er[2;5]',
-							'&2': '$er[1;5]',
-							'&3': '$er[1;5]',
-						},
-					],
-					conditions: ['abs(&2) != abs(&3)'],
-					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
-					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
-					correctionFormat: [
-						{
-							correct: [
-								"Les racines sont &answer1 et &answer2",
-							],
-						},
-					],
-					correctionDetails:[
-						[
-							{text:"Le polynôme n'est <b>pas</b> sous forme factorisée. "},
-							{text:"La forme factorisée est $$&1(x[+_&2_])(x[+_&3_])$$, les racines sont donc &solution1 et &solution2"}
-						],
-					],
-					options: ['solutions-order-not-important'],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
@@ -21131,67 +21295,359 @@ const questions = {
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
+				{
+					description: "Déterminer les coordonnées du sommet",
+					enounces: [
+						"Quelles sont les coordonnées du sommet S de la courbe représentative de ce polynôme du second degré ?",
+					],
+					expressions: [
+						'&1(x[+_&2_])^2[+_&3_]',
+					],
+					answerFields:['$$S\\left( \\, ? \\, ; \\, ? \\, \\right)$$'],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					solutions: [
+						['[_-(&2)_]', '&3'],
+					],
+					correctionFormat: [
+						{
+							correct: ['Les coordonnées sont $$\\left( \\, &ans1 \\, ; \\, &ans2 \\, \\right)$$.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `\
+								@@ &2 <0 ?? L'expression $$&1(x-\\textcolor{${color1}}{[_-(&2)_]})^2\\textcolor{${color1}}{[+_&3_]}$$ est déjà sous forme canonique, ce qui nous donne directement les coordonnées du sommet $$S\\left( \\, &sol1 \\, ; \\, &sol2 \\, \\right)$$ @@\
+								@@ &2 >0 ?? L'expression &expression se met sous la forme canonique $$&1(x-\\textcolor{${color1}}{[(_-(&2)_]})^2\\textcolor{${color1}}{[+_&3_]}$$ , ce qui nous donne  les coordonnées du sommet $$S\\left( \\, &sol1 \\, ; \\, &sol2 \\, \\right)$$ @@ \
+								`,
+							},
+							
+						],
+						
+					],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer l'équation de l'axe de symétrie de la parabole",
+					enounces: [
+						"Quelle est l'équation de l'axe de symétrie de la courbe représentative de ce polynôme du second degré ?",
+					],
+					expressions: [
+						'&1(x[+_&2_])^2[+_&3_]',
+					],
+					answerFields:["L'équation est $$?$$"],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					solutions: [
+						['x=[_-(&2)_]'],
+					],
+					correctionFormat: [
+						{
+							correct: ["L'équation est  &answer."],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: `\
+								@@ &2 <0 ?? L'expression $$&1(x-\\textcolor{${color1}}{[_-(&2)_]})^2[+_&3_]$$ est déjà sous forme canonique, ce qui nous donne directement l'équation &solution @@\
+								@@ &2 >0 ?? L'expression &expression se met sous la forme canonique $$&1(x-\\textcolor{${color1}}{[(_-(&2)_]})^2[+_&3_]$$ , ce qui nous donne l'équation &solution @@ \
+								`,
+							},
+							
+						],
+						
+					],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer les racines d'un polynôme du second degré.",
+					subdescription: 'Graphiquement',
+					enounces: [
+						"Quelles sont les racines du polynôme représenté par cette parabole ?",
+					],
+					images: [
+						'polynome-second-degre/trouver-racines/trouver_racines-0-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-1-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-2-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-3-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-4-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-5-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-6-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-7-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-8-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-9-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-10-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-11-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-12-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-13-600.png',
+						'polynome-second-degre/trouver-racines/trouver_racines-14-600.png',
+					],
+					imagesCorrection: [
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-0-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-1-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-2-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-3-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-4-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-5-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-6-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-7-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-8-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-9-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-10-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-11-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-12-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-13-600.png',
+						'polynome-second-degre/trouver-racines/correction_trouver_racines-14-600.png',
+					],
+					answerFields:['Les racines sont $$?$$ et $$?$$'],
+					solutions: [["-3","1"],["-3","-1"],["1","3"],["-2","0"],["1","2"],["0","2"],["-1","2"],["2","3"],["0","3"],["0","1"],["-2","1"],["-1","0"],["-1","1"],["-1","3"],["-2","-1"]],
+					correctionFormat: [
+						{
+							correct: ["Les racines sont &answer1 et &answer2."],
+						},
+					],
+					defaultDelay: 15,
+					grade: PREMIERE_SPE_MATHS,
+				},
+			],
+			Racines: [
+				{
+					description: "Vérifier si un nombre est racine d'un polynôme",
+					enounces: ['Est-ce que $$&3$$ est racine de ce polynôme ?'],
+					expressions: ['x^2[+_-(&1+(&2))x_][+_(&1)*(&2)_]'],
+					variables: [
+						{
+							'&1': '$er[1;3]',
+							'&2': '$er[1;3]\\{&1}',
+							'&3': '$er[1;3]\\{&1;&2}',
+						},
+						{
+							'&1': '$er[1;3]',
+							'&2': '$er[1;3]\\{&1}',
+							'&3': '$l{&1;&2}',
+						},
+					],
+					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
+					solutions: [[1], [0]],
+					correctionDetails: [
+						[
+							{
+								text: "&solution, $$&3$$ n'est pas une racine du polynôme &expression car :",
+							},
+							{
+								text: `$$  \\textcolor{${color1}}{[(_&3_]}^2 \
+								@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))_] \\times \\textcolor{${color1}}{[(_&3_]} @@ \
+								@@   &2 + (&1) = 1 ?? -\\textcolor{${color1}}{[(_&3_]} @@ \
+								@@   &2 + (&1) = -1 ?? +\\textcolor{${color1}}{[(_&3_]} @@ \
+								[+_(&1)*(&2)_] = \
+								[_(&3)^2_]\
+								@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))*(&3)_]  @@ \
+									@@   &2 + (&1) = 1 ?? [+_-(&3)_] @@ \
+									@@   &2 + (&1) = -1 ?? [+_&3_] @@ \
+								[+_&1*(&2)_] = [_(&3)^2-(&1+(&2))*(&3)+(&1)*(&2)_] \\textcolor{red}{\\ne} 0$$`,
+							},
+						],
+						[
+							{
+								text: '&solution, $$&3$$ est une racine du polynôme  &expression car :',
+							},
+							{
+								text: `$$\\textcolor{${color1}}{[(_&3_]}^2 \
+									@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))_] \\times \\textcolor{${color1}}{[(_&3_]} @@ \
+										@@   &2 + (&1) = 1 ?? -\\textcolor{${color1}}{[(_&3_]} @@ \
+										@@   &2 + (&1) = -1 ?? +\\textcolor{${color1}}{[(_&3_]} @@ \
+									[+_(&1)*(&2)_] = \
+									[_(&3)^2_]\
+									@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))*(&3)_]  @@ \
+									@@   &2 + (&1) = 1 ?? [+_-(&3)_] @@ \
+									@@   &2 + (&1) = -1 ?? [+_&3_] @@ \
+									[+_&1*(&2)_] = [_(&3)^2-(&1+(&2))*(&3)+(&1)*(&2)_]$$`,
+							},
+						],
+					],
+					options: ['remove-null-terms'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Trouver une racine évidente d'un polynôme",
+					enounces: ['Trouve une racine évidente de ce polynôme :'],
+					expressions: ['x^2[+_-(&1+(&2))x_][+_(&1)*(&2)_]'],
+					answerFields:['Une racine évidente est $$?$$'],
+					solutions:[['&1']],
+					variables: [
+						{
+							'&1': '$er[1;3]',
+							'&2': '$er[1;3]\\{&1}',
+						},
+						
+					],
+					testAnswers:[['(&answer)^2-(&1+(&2))*(&answer)+(&1)*(&2)=0']],
+					correctionFormat: [
+						{
+							correct: ['&answer est une racine évidente.'],
+						},
+					],
+					correctionDetails: [
+						[
+							{
+								text: "&solution est une racine évidente du polynôme &expression car :",
+							},
+							{
+								text: `$$  \\textcolor{${color1}}{[(_&1_]}^2 \
+								@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))_] \\times \\textcolor{${color1}}{[(_&1_]} @@ \
+								@@   &2 + (&1) = 1 ?? -\\textcolor{${color1}}{[(_&1_]} @@ \
+								@@   &2 + (&1) = -1 ?? +\\textcolor{${color1}}{[(_&1_]} @@ \
+								[+_(&1)*(&2)_] = \
+								[_(&1)^2_]\
+								@@ &2 + (&1) != 0  && &2 + (&1) != 1 && &2 + (&1) != -1 ?? [+_-(&1+(&2))*(&1)_]  @@ \
+									@@   &2 + (&1) = 1 ?? [+_-(&1)_] @@ \
+									@@   &2 + (&1) = -1 ?? [+_&1_] @@ \
+								[+_&1*(&2)_] = [_(&1)^2-(&1+(&2))*(&1)+(&1)*(&2)_] $$`,
+							},
+						],
+						
+					],
+					options: ['remove-null-terms'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer les racines d'un polynôme du second degré",
+					subdescription: "A l'aide de la forme factorisée",
+					enounces: [
+						'Quelles sont les racines de ce polynôme du second degré ?',
+					],
+					expressions: ['&1(x[+_&2_])(x[+_&3_])'],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					conditions: ['abs(&2) != abs(&3)'],
+					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
+					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
+					correctionFormat: [
+						{
+							correct: [
+								'Le polynôme est sous forme factorisée, les racines sont &answer1 et &answer2',
+							],
+						},
+					],
+					options: ['solutions-order-not-important'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer les racines d'un polynôme du second degré",
+					subdescription: "Le polynôme n'est pas complètement factorisé",
+					enounces: [
+						'Quelles sont les racines de ce polynôme du second degré ?',
+					],
+					expressions: [
+						'(&1x[+_&1*(&2)_])(x[+_&3_])',
+						'(x[+_&2_])(&1x[+_&1*(&3)_])',
+					],
+					variables: [
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$er[1;5]',
+						},
+					],
+					conditions: ['abs(&2) != abs(&3)'],
+					answerFields: ['Las racines sont $$?$$ et $$?$$.'],
+					solutions: [['[_-(&2)_]', '[_-(&3)_]']],
+					correctionFormat: [
+						{
+							correct: ['Les racines sont &answer1 et &answer2'],
+						},
+					],
+					correctionDetails: [
+						[
+							{ text: "Le polynôme n'est <b>pas</b> sous forme factorisée. " },
+							{
+								text: 'La forme factorisée est $$&1(x[+_&2_])(x[+_&3_])$$, les racines sont donc &solution1 et &solution2',
+							},
+						],
+					],
+					options: ['solutions-order-not-important'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
 			],
 			'Vrai ou Faux': [
 				{
-					description: "Vrai ou Faux sur les polynômes du second degré",
+					description: 'Vrai ou Faux sur les polynômes du second degré',
 					enounces: [
 						"La courbe représentative d'un polynôme du second degré est une droite.",
 						'Un polynôme du second degré peut ne pas avoir de racine.',
 						"Un polynôme du second degré peut n'avoir qu'une seule racine.",
-						"Un polynôme du second degré a au maximum deux racines.",
-						"La forme factorisée permet de trouver les racines du polynôme.",
-						"La forme canonique permet de trouver les coordonnées du sommet de la parabole.",
+						'Un polynôme du second degré a au maximum deux racines.',
+						'La forme factorisée permet de trouver les racines du polynôme.',
+						'La forme canonique permet de trouver les coordonnées du sommet de la parabole.',
 						"La courbe représentative d'un polynôme du second degré admet un axe de symétrie.",
 					],
-					variables: [
-					],
-					choices: [
-						[
-							{ text: 'Vrai' },
-							{ text: 'Faux' },
-						],
-					],
-					solutions: [
-						[1],
-						[0],
-						[0],
-						[0],
-						[0],
-						[0],
-						[0],
-					],
+					variables: [],
+					choices: [[{ text: 'Vrai' }, { text: 'Faux' }]],
+					solutions: [[1], [0], [0], [0], [0], [0], [0]],
 					correctionDetails: [
 						[
-							{text:"&solution, la courbe représentative d'un polynôme du second degré est une parabole."}
+							{
+								text: "&solution, la courbe représentative d'un polynôme du second degré est une parabole.",
+							},
 						],
 						[
-							{text:"&solution, c'est le cas lorsque la courbe représentative ne coupe ni ne touche l'axe des abscisses. Le discriminant est alors négatif."}
+							{
+								text: "&solution, c'est le cas lorsque la courbe représentative ne coupe ni ne touche l'axe des abscisses. Le discriminant est alors négatif.",
+							},
 						],
 						[
-							{text:"&solution, c'est le cas lorsque la courbe représentative touche l'axe des abscisses sans le traverser. Le discriminant est alors nul."}
+							{
+								text: "&solution, c'est le cas lorsque la courbe représentative touche l'axe des abscisses sans le traverser. Le discriminant est alors nul.",
+							},
 						],
 						[
-							{text:"&solution, c'est le nombre de fois maximum où la courbe représentative peut couper l'axe des abscisses. Le discriminant est alors positif."}
+							{
+								text: "&solution, c'est le nombre de fois maximum où la courbe représentative peut couper l'axe des abscisses. Le discriminant est alors positif.",
+							},
 						],
 						[
-							{text:"&solution, dans la forme factorisée $$a(x-x_1)(x-x_2)$$, les racines sont $$x_1$$ et $$x_2$$."}
+							{
+								text: '&solution, dans la forme factorisée $$a(x-x_1)(x-x_2)$$, les racines sont $$x_1$$ et $$x_2$$.',
+							},
 						],
 						[
-							{text:"&solution, dans la forme canonique $$a(x-\\alpha)^2+\\beta$$, les coordonnées du sommet de la parabole sont $$(\\alpha; \\beta)$$."}
+							{
+								text: '&solution, dans la forme canonique $$a(x-\\alpha)^2+\\beta$$, les coordonnées du sommet de la parabole sont $$(\\alpha; \\beta)$$.',
+							},
 						],
 						[
-							{text:"&solution, la courbe représentative admet un axe de symétrie passant par le sommet de la parabole."}
+							{
+								text: '&solution, la courbe représentative admet un axe de symétrie passant par le sommet de la parabole.',
+							},
 						],
-						
-
-						
 					],
-					options:['no-shuffle-choices'],
+					options: ['no-shuffle-choices'],
 					defaultDelay: 20,
 					grade: PREMIERE_SPE_MATHS,
 				},
-				
 			],
 		},
 	},

@@ -67,7 +67,6 @@
 		} else {
 			if (card.answerFields && card.type !== 'equation') {
 				s = $formatLatex(card.answerFields.replace(/\?/g, replaceSol))
-				console.log('s', s)
 			} else {
 				s = card.solutions[0]
 				s = '$$' + math(s).latex + '$$'
