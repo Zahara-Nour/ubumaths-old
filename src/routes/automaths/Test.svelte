@@ -144,7 +144,6 @@
 			offset += q.count
 		})
 		if (basket.length === 1) {
-			
 			;({ theme, domain, subdomain, level } = ids[basket[0].id])
 			query = encodeURI(
 				`?theme=${theme}&domain=${domain}&subdomain=${subdomain}&level=${level}`,
@@ -368,21 +367,23 @@
 		}`}
 	{/if}
 	<div class="flex justify-center">
-		{#each cards as card}
-			<div class="card">
-				<div class=" p-2 elevation-{4} rounded-lg">
-					<QuestionCard
-						card="{card}"
-						interactive="{true}"
-						commit="{(() => {
-							const c = { ...commit }
-							commits.push(c)
-							return c
-						})()}"
-					/>
+		<div id="cards-container" style="{`width:600px`}">
+			{#each cards as card}
+				<div class="card">
+					<div class=" p-2 elevation-{4} rounded-lg">
+						<QuestionCard
+							card="{card}"
+							interactive="{true}"
+							commit="{(() => {
+								const c = { ...commit }
+								commits.push(c)
+								return c
+							})()}"
+						/>
+					</div>
 				</div>
-			</div>
-		{/each}
+			{/each}
+		</div>
 	</div>
 	<div class="flex justify-center items-center">
 		<Button
@@ -447,7 +448,7 @@
 							commit="{commit}"
 							magnify="{classroom ? 2.5 : 1}"
 							immediateCommit="{true}"
-							flashcard={false}
+							flashcard="{false}"
 						/>
 					{/each}
 				</div>
