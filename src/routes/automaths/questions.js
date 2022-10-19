@@ -21423,6 +21423,109 @@ const questions = {
 					defaultDelay: 15,
 					grade: PREMIERE_SPE_MATHS,
 				},
+				{
+					description: "Déterminer le signe d'une expression du second degré",
+					enounces: [
+						"Quel est le signe de cette expression ?",
+					],
+					expressions: [
+						'&1(x[+_&2_])^2[+_&3_]',
+					],
+					variables: [
+						{
+							'&1': '$e[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '$e[1;5]',
+						},
+						{
+							'&1': '-$e[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '-$e[1;5]',
+						},
+						{
+							'&1': '$er[2;5]',
+							'&2': '$er[1;5]',
+							'&3': '-{abs(&1)/(&1)}*$e[1;5]',
+						},
+					],
+					solutions: [
+						[0],
+						[1],
+						[2],
+					],
+					choices: [[{ text: 'positif' }, { text: 'négatif' }, { text: 'son signe dépend de la valeur de $$x$$' } ]],
+					correctionDetails: [
+						[
+							{
+								text: "&solution, car $$&1(x[+_&2_])^2 \\ge 0$$ et donc $$&1(x[+_&2_])^2[+_&3_] \\ge 0$$",
+							},
+						],
+						[
+							{
+								text: "&solution, car $$&1(x[+_&2_])^2 \\le 0$$ et donc $$&1(x[+_&2_])^2[+_&3_] \\le 0$$",
+							},
+						],
+						[
+							{
+								text: "L'expression &expression est une somme d'un nombre positif et d'un nombre négatif, &solution.",
+							},
+						],
+						
+					],
+					options: ['no-shuffle-choices'],
+					defaultDelay: 20,
+					grade: PREMIERE_SPE_MATHS,
+				},
+				{
+					description: "Déterminer la forme canonique.",
+					subdescription: 'Graphiquement',
+					enounces: [
+						"Quelle est la forme canonique du polynôme représenté par cette parabole ?",
+					],
+					images: [
+						'polynome-second-degre/forme-canonique/forme-canonique-0-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-1-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-2-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-3-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-4-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-5-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-6-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-7-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-8-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-9-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-10-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-11-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-12-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-13-600.png',
+						'polynome-second-degre/forme-canonique/forme-canonique-14-600.png',
+					],
+					imagesCorrection: [
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-0-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-1-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-2-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-3-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-4-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-5-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-6-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-7-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-8-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-9-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-10-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-11-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-12-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-13-600.png',
+						'polynome-second-degre/forme-canonique/correction-forme-canonique-14-600.png',
+					],
+					answerFields:['La forme canonique est $$?$$'],
+					solutions: [["{[_-1/2_]}(x[+_-(-2)_])^2[+_-1_]"],["{[_3/4_]}(x[+_-(-2)_])^2[+_-1_]"],["-(x[+_-(-1)_])^2[+_3_]"],["{[_3_]}(x[+_-(-1)_])^2[+_-2_]"],["{[_-5_]}(x[+_-(-1)_])^2[+_2_]"],["{[_4_]}(x[+_-(1)_])^2[+_-1_]"],["{[_1/4_]}(x[+_-(-2)_])^2[+_-2_]"],["{[_-3_]}(x[+_-(-1)_])^2[+_1_]"],["{[_-3/4_]}(x[+_-(-2)_])^2[+_2_]"],["-(x[+_-(2)_])^2[+_3_]"],["{[_4_]}(x[+_-(-1)_])^2[+_-2_]"],["{[_-3/4_]}(x[+_-(2)_])^2[+_1_]"],["-(x[+_-(-1)_])^2[+_2_]"],["(x[+_-(1)_])^2[+_-3_]"],["{[_-1/2_]}(x[+_-(2)_])^2[+_-1_]"]],
+					correctionFormat: [
+						{
+							correct: ["La forme caconique est &answer."],
+						},
+					],
+					defaultDelay: 40,
+					grade: PREMIERE_SPE_MATHS,
+				},
 			],
 			Racines: [
 				{
