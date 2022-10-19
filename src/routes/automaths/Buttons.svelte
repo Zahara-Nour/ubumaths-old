@@ -7,7 +7,8 @@
 		mdiBasket,
 		mdiLink,
 		mdiTrashCanOutline,
-		mdiRunFast
+		mdiRunFast,
+		mdiFlash
 	} from '@mdi/js'
 	import Fab from '@smui/fab'
 	import Badge from '@smui-extra/badge'
@@ -21,6 +22,7 @@
 	export let fillBasket
 	export let launchTest
 	export let classroom
+	export let flash
 	export let displayExemple
 	export let flushBasket
 	export let courseAuxNombres
@@ -28,6 +30,7 @@
 	const toggleExemple = () => (displayExemple = !displayExemple)
 	const toggleBasket = () => (showBasket = !showBasket)
 	const toggleClassroom = () => (classroom = !classroom)
+	const toggleFlash = () => (flash = !flash)
 	const toggleCourseAuxNombres = () => (courseAuxNombres = !courseAuxNombres)
 
 	// $: isLoggedIn = $user.id != 'guest'
@@ -53,6 +56,11 @@
 		<Fab class="mx-1" color="{classroom ? 'primary' : 'secondary'}" on:click="{toggleClassroom}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">
 				<path fill="currentColor" d="{mdiProjectorScreen}"></path>
+			</Icon>
+		</Fab>
+		<Fab class="mx-1" color="{flash ? 'primary' : 'secondary'}" on:click="{toggleFlash}" mini>
+			<Icon component="{Svg}" viewBox="2 2 20 20">
+				<path fill="currentColor" d="{mdiFlash}"></path>
 			</Icon>
 		</Fab>
 

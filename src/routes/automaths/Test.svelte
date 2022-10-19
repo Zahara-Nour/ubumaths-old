@@ -11,6 +11,9 @@
 	import { createTimer } from '$lib/timer'
 	import { page } from '$app/stores'
 	import { virtualKeyboardMode, touchDevice, mathliveReady } from '$lib/stores'
+	import { goto } from '$app/navigation'
+	import { mdiHome } from '@mdi/js'
+
 
 	import math from 'tinycas'
 	import {
@@ -41,6 +44,7 @@
 	let correct = false
 	let restart = false
 	let classroom
+	let flash
 	let courseAuxNombres
 	let pause = false
 	let previous
@@ -113,14 +117,19 @@
 		restart = false
 		finish = false
 		go = false
+
 		cards = []
 
 		classroom = JSON.parse(decodeURI($page.url.searchParams.get('classroom')))
+		flash = JSON.parse(decodeURI($page.url.searchParams.get('flash')))
 		courseAuxNombres = JSON.parse(
 			decodeURI($page.url.searchParams.get('courseAuxNombres')),
 		)
 		testParams.courseAuxNombres = courseAuxNombres
 		testParams.classroom = classroom
+		testParams.flash = flash
+
+		console.log('go', go)
 
 		basket = JSON.parse(decodeURI($page.url.searchParams.get('questions')))
 
@@ -178,6 +187,9 @@
 		}
 
 		info('Begining test with questions :', cards)
+		if (flash) {
+			beginTest()
+		}
 	}
 
 	function generateExemple() {
@@ -205,38 +217,44 @@
 		}
 	}
 
+	function previousCard() {
+		if (current > 0) {
+			current--
+			card = cards[current]
+		}
+	}
 	// on passe à la question suivante
 	async function change() {
-		current++
 		if (timer) clearInterval(timer)
 		// if (timeout) clearTimeout(timeout)
 
-		if (current !== 0) {
-			let time = Math.min(Math.round(elapsed / 1000), delay)
-			if (time === 0) time = 1
-			card.time = time
-		}
-		if (current < cards.length) {
+		if (current < cards.length-1) {
+			current++
 			card = cards[current]
 
-			if (slider && basket.length === 1) {
-				delay = slider * 1000
-			} else {
-				delay = card.delay
-					? card.delay * 1000
-					: card.defaultDelay
-					? card.defaultDelay * 1000
-					: 20000
-				slider = delay / 1000
+			if (!flash) {
+				let time = Math.min(Math.round(elapsed / 1000), delay)
+				if (time === 0) time = 1
+				card.time = time
+				if (slider && basket.length === 1) {
+					delay = slider * 1000
+				} else {
+					delay = card.delay
+						? card.delay * 1000
+						: card.defaultDelay
+						? card.defaultDelay * 1000
+						: 20000
+					slider = delay / 1000
+				}
+				slider = Math.max(5, slider)
+				// slider = Math.min(slider, 60)
+				percentage = 0
+				alert = false
+				start = Date.now()
+				previous = 0
+				timer = setInterval(countDown, 10)
 			}
-			slider = Math.max(5, slider)
-			// slider = Math.min(slider, 60)
-			percentage = 0
-			alert = false
-			start = Date.now()
-			previous = 0
-			timer = setInterval(countDown, 10)
-		} else {
+		} else if (!flash) {
 			finish = true
 		}
 	}
@@ -272,6 +290,17 @@
 				togglePause()
 			} else if (ev.code === 'ArrowRight') {
 				change()
+			}
+		} else if (flash) {
+			ev.preventDefault()
+			switch (ev.code) {
+				case 'ArrowRight':
+					change()
+					break
+
+				case 'ArrowLeft':
+					previousCard()
+					break
 			}
 		}
 	}
@@ -399,61 +428,73 @@
 	</div>
 {:else if card}
 	<div bind:this="{ref}">
-		<div class="{' my-1 flex justify-start items-center'}">
-			{#if classroom}
-				<Slider
-					bind:value="{slider}"
-					min="{min}"
-					max="{max}"
-					step="{5}"
-					discrete
-					tickMarks
-					input$aria-label="Discrete slider"
-					style="width:150px;"
+		{#if !flash}
+			<div class="{' my-1 flex justify-start items-center'}">
+				{#if classroom}
+					<Slider
+						bind:value="{slider}"
+						min="{min}"
+						max="{max}"
+						step="{5}"
+						discrete
+						tickMarks
+						input$aria-label="Discrete slider"
+						style="width:150px;"
+					/>
+				{/if}
+				{#if !classroom && card.type !== 'choice' && card.type !== 'choices'}
+					<Fab
+						class="mx-1"
+						color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
+						on:click="{() => {
+							virtualKeyboardMode.update((state) => {
+								return !state
+							})
+						}}"
+						mini
+					>
+						<Icon component="{Svg}" viewBox="2 2 20 20">
+							<path fill="currentColor" d="{mdiKeyboard}"></path>
+						</Icon>
+					</Fab>
+				{/if}
+				<div class="flex grow"></div>
+
+				<CircularProgress
+					number="{current + 1}"
+					fontSize="{classroom ? 2.5 * fontSize : fontSize * 1.8}"
+					percentage="{percentage}"
+					pulse="{alert}"
 				/>
-			{/if}
-			{#if !classroom && card.type !== 'choice' && card.type !== 'choices'}
-				<Fab
-					class="mx-1"
-					color="{$virtualKeyboardMode ? 'primary' : 'secondary'}"
-					on:click="{() => {
-						virtualKeyboardMode.update((state) => {
-							return !state
-						})
-					}}"
+			</div>
+		{/if}
+
+		<div class="flex justify-center">
+			<div id="cards-container" style="{`width:${classroom ? 1000 : 600}px`}">
+				{#each [cards[current]] as card (current)}
+					<QuestionCard
+						card="{card}"
+						interactive="{!classroom && !flash}"
+						commit="{commit}"
+						magnify="{classroom ? 2.5 : 1}"
+						immediateCommit="{true}"
+						flashcard="{flash}"
+					/>
+				{/each}
+			</div>
+		</div>
+		<div>
+			<Fab
+					class="mx-1 my-3"
+					color="{classroom ? 'primary' : 'secondary'}"
+					on:click="{() => goto('/automaths' + query)}"
 					mini
 				>
 					<Icon component="{Svg}" viewBox="2 2 20 20">
-						<path fill="currentColor" d="{mdiKeyboard}"></path>
+						<path fill="currentColor" d="{mdiHome}"></path>
 					</Icon>
 				</Fab>
-			{/if}
-			<div class="flex grow"></div>
-
-			<CircularProgress
-				number="{current + 1}"
-				fontSize="{classroom ? 2.5 * fontSize : fontSize * 1.8}"
-				percentage="{percentage}"
-				pulse="{alert}"
-			/>
 		</div>
-
-		{#if cards}
-			<div class="flex justify-center">
-				<div id="cards-container" style="{`width:${classroom ? 1000 : 600}px`}">
-					{#each [cards[current]] as card (current)}
-						<QuestionCard
-							card="{card}"
-							interactive="{!classroom}"
-							commit="{commit}"
-							magnify="{classroom ? 2.5 : 1}"
-							immediateCommit="{true}"
-							flashcard="{false}"
-						/>
-					{/each}
-				</div>
-			</div>
-		{/if}
 	</div>
 {:else}
 	Pas de questions

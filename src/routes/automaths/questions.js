@@ -10398,7 +10398,9 @@ const questions = {
 							},
 						],
 					],
-
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
 					defaultDelay: 20,
 					grade: TROISIEME,
 				},
@@ -10452,7 +10454,9 @@ const questions = {
 							},
 						],
 					],
-
+					// bug de mathlive sur les puissances
+					// qui rajoute des parenthèses à l'exposant
+					options: ['no-penalty-for-extraneous-brackets'],
 					defaultDelay: 20,
 					grade: TROISIEME,
 				},
@@ -10469,7 +10473,7 @@ const questions = {
 							'&2': '$e[2;9]',
 						},
 					],
-					solutions: [['10^([_&1*&2_])']],
+					solutions: [['10^{[_&1*&2_]}']],
 					correctionDetails: [
 						[
 							{
@@ -10498,7 +10502,7 @@ const questions = {
 							'&3': '$e[2;9]',
 						},
 					],
-					solutions: [['&1^([_&2*&3_])']],
+					solutions: [['&1^{[_&2*&3_]}']],
 					correctionDetails: [
 						[
 							{
@@ -10569,7 +10573,7 @@ const questions = {
 							'&3': '-$e[2;9]',
 						},
 					],
-					solutions: [['&1^([_&2*(&3)_])']],
+					solutions: [['&1^{[_&2*(&3)_]}']],
 					correctionDetails: [
 						[
 							{

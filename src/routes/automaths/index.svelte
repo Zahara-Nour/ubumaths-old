@@ -36,6 +36,7 @@
 	let generated
 	let showBasket = false
 	let classroom = false
+	let flash = false
 	let basket = []
 	let courseAuxNombres = false
 	let correction = false
@@ -182,6 +183,7 @@
 		let href = '/automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
 		if (classroom) href += '&classroom=true'
+		if (flash) href += '&flash=true'
 		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		goto(href)
 	}
@@ -205,6 +207,7 @@
 		let href = base + 'automaths/Test/?questions='
 		href += encodeURI(JSON.stringify(questions))
 		if (classroom) href += '&classroom=true'
+		if (flash) href += '&flash=true'
 		if (courseAuxNombres) href += '&courseAuxNombres=true'
 		navigator.clipboard
 			.writeText(href)
@@ -248,6 +251,7 @@
 <Buttons
 	bind:showBasket
 	bind:classroom
+	bind:flash
 	bind:displayExemple
 	bind:courseAuxNombres
 	basket="{basket}"
