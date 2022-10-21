@@ -5188,7 +5188,7 @@ const questions = {
 						},
 					],
 					expressions: ['&1+&2', '&1*&2', '&1-&2', '&1:&2'],
-					solutions: [['&1+&2'], ['&1*&2'], ['&1-&2'], ['&1:&2', '&1/&2']],
+					solutions: [['&1+&2'], ['&1*&2'], ['&1-&2'], ['&1:&2 ;; &1/&2']],
 					correctionFormat: [
 						{
 							correct: ["La somme de $$&1$$ et de $$&2$$ s'écrit &answer"],
@@ -7888,7 +7888,7 @@ const questions = {
 			'Sur la droite graduée': [
 				{
 					description: 'Calculer une somme ou une différence',
-					subdescription: "A l'aide de la droite graduée, entre -4 et 4",
+					subdescription: "A l'aide de la droite graduée, entre $$-4$$ et $$4$$.",
 					enounces: ["Calcule en t'aidant de la droite graduée."],
 					expressions: ['(-&1)+&2', '(-&1)-&2', '&1-&2'],
 					variables: [
@@ -7905,7 +7905,7 @@ const questions = {
 				},
 				{
 					description: 'Calculer une somme ou une différence',
-					subdescription: "A l'aide de la droite graduée, entre -7 et 7",
+					subdescription: "A l'aide de la droite graduée, entre $$-7$$ et $$7$$.",
 					enounces: ["Calcule en t'aidant de la droite graduée."],
 					expressions: ['(-&1)+&2', '(-&1)-&2', '&1-&2'],
 					variables: [
@@ -7923,7 +7923,7 @@ const questions = {
 				{
 					description: 'Compléter une adition à trou',
 					subdescription:
-						"Relatifs entre -4 et 4. A l'aide de la droite graduée.",
+						"Relatifs entre $$-4$$ et $$4$$. A l'aide de la droite graduée.",
 					enounces: ["Complète en t'aidant de la droite graduée."],
 					expressions: [
 						'(-&1)+? = [_(-&1)+&2_]',
@@ -7950,7 +7950,7 @@ const questions = {
 				{
 					description: 'Compléter une adition à trou',
 					subdescription:
-						"Relatifs entre -7 et 7. A l'aide de la droite graduée.",
+						"Relatifs entre $$-7$$ et $$7$$. A l'aide de la droite graduée.",
 					enounces: ["Complète en t'aidant de la droite graduée."],
 					expressions: [
 						'(-&1)+?= [_(-&1)+&2_]',
@@ -7974,7 +7974,7 @@ const questions = {
 					grade: CINQUIEME,
 				},
 			],
-			'Sommes algébriques': [
+			'Sommes': [
 				{
 					description: 'Ajouter 1 ou 2 à un nombre négatif',
 					expressions: ['(-&1)+1', '(-&1)+2'],
@@ -7983,16 +7983,7 @@ const questions = {
 
 					defaultDelay: 20,
 					grade: CINQUIEME,
-				},
-				{
-					description: 'Enlever 1 ou 2 à un nombre négatif',
-					expressions: ['(-&1)-1', '(-&1)-2'],
-					enounces: ['Calcule.'],
-					variables: [{ '&1': '$e[1;7]' }],
-
-					defaultDelay: 20,
-					grade: CINQUIEME,
-				},
+				},				
 				{
 					description: 'Ajouter 2 nombres opposés',
 					expressions: ['(-&1)+&1', '&1+(-&1)'],
@@ -8018,24 +8009,7 @@ const questions = {
 
 					defaultDelay: 20,
 					grade: CINQUIEME,
-				},
-				{
-					description:
-						'Enlever un nombre positif à un nombre positif en dépassant 0',
-					expressions: ['&1-[_&1+&2_]'],
-					enounces: ['Calcule.'],
-					variables: [{ '&1': '$e[1;8]', '&2': '$e[1;9-&1]' }],
-					correctionDetails: [
-						[
-							{
-								text: `$$&1\\bold{\\textcolor{${color1}}{-[_&1+&2_]}}=&1\\textcolor{${color1}}{-&1-&2}=0-&2=-&2$$`,
-							},
-						],
-					],
-
-					defaultDelay: 20,
-					grade: CINQUIEME,
-				},
+				},				
 				{
 					description: 'Ajouter deux nombres négatifs',
 					expressions: ['(-&1)+(-&2)'],
@@ -8105,7 +8079,7 @@ const questions = {
 					grade: CINQUIEME,
 				},
 				{
-					description: 'Compléter une égalité',
+					description: 'Compléter une somme',
 					subdescription: 'Cas général',
 					enounces: ["Complète l'égalité avec le nombre manquant."],
 					expressions: [
@@ -8132,10 +8106,40 @@ const questions = {
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
+			],
+			'Différences': [
+				
+				{
+					description: 'Enlever 1 ou 2 à un nombre négatif',
+					expressions: ['(-&1)-1', '(-&1)-2'],
+					enounces: ['Calcule.'],
+					variables: [{ '&1': '$e[1;7]' }],
+
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				
+				{
+					description:
+						'Enlever un nombre positif à un nombre positif en dépassant 0',
+					expressions: ['&1-[_&1+&2_]'],
+					enounces: ['Calcule.'],
+					variables: [{ '&1': '$e[1;8]', '&2': '$e[1;9-&1]' }],
+					correctionDetails: [
+						[
+							{
+								text: `$$&1\\bold{\\textcolor{${color1}}{-[_&1+&2_]}}=&1\\textcolor{${color1}}{-&1-&2}=0-&2=-&2$$`,
+							},
+						],
+					],
+
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
 				{
 					description: 'Transformer une soustraction en addition',
 					enounces: ['Réécris cette soustraction en une addition équivalente.'],
-					expressions: ['-&1-(-&2)', '&1-(-&2)', '&1-&2', '-&1-&2'],
+					expressions: ['(-&1)-(-&2)', '&1-(-&2)', '&1-&2', '(-&1)-&2'],
 					variables: [{ '&1': '$e[2;9]', '&2': '$e[2;9]' }],
 					solutions: [['-&1+&2'], ['&1+&2'], ['&1+(-&2)'], ['-&1+(-&2)']],
 
@@ -8143,6 +8147,17 @@ const questions = {
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
+				{
+					description: 'Soustraire (cas général)',
+					enounces: ['Calcule.'],
+					expressions: ['(-&1)-(-&2)', '&1-(-&2)', '&1-&2', '(-&1)-&2'],
+					variables: [{ '&1': '$e[2;9]', '&2': '$e[2;9]' }],
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+			],
+			'Sommes algébriques': [
+		
 				{
 					description: "Simplifier l'écriture",
 					enounces: ['Simplifie les doubles signes de cette expression.'],
@@ -8165,7 +8180,7 @@ const questions = {
 					grade: CINQUIEME,
 				},
 				{
-					description: 'Compléter une somme algébrique à trou',
+					description: 'Compléter une égalité',
 					subdescription: 'Avec écriture simplifiée',
 					enounces: ['Complète.'],
 					expressions: [
@@ -8176,6 +8191,19 @@ const questions = {
 					variables: [{ '&1': '$e[2;9]', '&2': '$e[2;9]', '&3': '$e[1;&1-1]' }],
 					type: 'trou',
 					solutions: [['&2'], ['&2'], ['&1']],
+					defaultDelay: 20,
+					grade: CINQUIEME,
+				},
+				{
+					description: 'Calculer une somme algébrique',
+					subdescription: 'Avec écriture simplifiée',
+					enounces: ['Calcule.'],
+					expressions: [
+						'[_&1_][+_&2_][+_&3_][+_&4_]',
+						
+					],
+					variables: [{ '&1': '$er[2;9]', '&2': '$er[2;9]', '&3': '$er[2;9]', '&4': '$er[2;9]',  }],
+					conditions:['abs(&1)/(&1)+abs(&2)/(&2)+abs(&3)/(&3)+abs(&4)/(&4)>-4 && abs(&1)/(&1)+abs(&2)/(&2)+abs(&3)/(&3)+abs(&4)/(&4)<4 '],
 					defaultDelay: 20,
 					grade: CINQUIEME,
 				},
