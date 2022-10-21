@@ -185,19 +185,16 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								'Dans $$[._&4_]$$ le chiffre des centaines est &answer.',
+								'Le chiffre des centaines est &answer.',
 							],
-							answer: 'Le chiffre des centaines est &answer.',
 						},
 						{
 							correct: [
-								'Dans $$[._&4_]$$ le chiffre des dizaines est &answer.',
+								'Le chiffre des dizaines est &answer.',
 							],
-							answer: 'Le chiffre des dizaines est &answer.',
 						},
 						{
-							correct: ['Dans $$[._&4_]$$ le chiffre des unités est &answer.'],
-							answer: 'Le chiffre des unités est &answer.',
+							correct: ['Le chiffre des unités est &answer.'],
 						},
 					],
 					type: 'rewrite',
@@ -220,12 +217,12 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '&exp est &solution car il se termine par 0, 2, 4, 6, ou 8.',
+								text: '&expression est &solution car il se termine par 0, 2, 4, 6, ou 8.',
 							},
 						],
 						[
 							{
-								text: '&exp est &solution car il se termine par 1, 3, 5, 7, ou 9.',
+								text: '&expression est &solution car il se termine par 1, 3, 5, 7, ou 9.',
 							},
 						],
 					],
@@ -255,22 +252,18 @@ const questions = {
 					solutions: [['&1'], ['&2'], ['&3'], ['&4']],
 					correctionFormat: [
 						{
-							correct: ['Dans $$[_&5_]$$ le chiffre des milliers est &answer.'],
-							answer: 'Le chiffre des milliers est &answer.',
+							correct: ['Le chiffre des milliers est &answer.'],
 						},
 						{
 							correct: [
-								'Dans $$[_&5_]$$ le chiffre des centaines est &answer.',
+								'Le chiffre des centaines est &answer.',
 							],
-							answer: 'Le chiffre des centaines est &answer.',
 						},
 						{
-							correct: ['Dans $$[_&5_]$$ le chiffre des dizaines est &answer.'],
-							answer: 'Le chiffre des dizaines est &answer.',
+							correct: ['Le chiffre des dizaines est &answer.'],
 						},
 						{
-							correct: ['Dans $$[_&5_]$$ le chiffre des unités est &answer.'],
-							answer: 'Le chiffre des unités est &answer.',
+							correct: ['Le chiffre des unités est &answer.'],
 						},
 					],
 					type: 'rewrite',
@@ -363,7 +356,7 @@ const questions = {
 				{
 					description: "Décomposer l'écriture décimale un nombre",
 					subdescription: 'En dizaines et unités',
-					enounces: ['Décomposer ce nombre en dizaines et unités.'],
+					enounces: ['Décompose ce nombre en dizaines et unités.'],
 					expressions: ['[_&1*10+&2_]'],
 					solutions: [['[_&1*10_]+&2']],
 					variables: [{ '&1': '$e[1;9]', '&2': '$e[1;9]' }],
@@ -392,7 +385,7 @@ const questions = {
 				{
 					description: "Décomposer l'écriture décimale un nombre",
 					subdescription: 'En centaines, dizaines et unités',
-					enounces: ['Décomposer ce nombre en centaines, dizaines et unités.'],
+					enounces: ['Décompose ce nombre en centaines, dizaines et unités.'],
 					expressions: ['[_&1*100+&2*10+&3_]'],
 					solutions: [['[_&1*100_]+[_&2*10_]+&3']],
 					variables: [{ '&1': '$e[1;9]', '&2': '$e[0;9]', '&3': '$e[0;9]' }],
@@ -8193,8 +8186,7 @@ const questions = {
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
 					correctionFormat: [
 						{
-							correct: ['Le résultat de &exp est &answer'],
-							answer: 'Le résultat est &answer',
+							correct: ['Le produit est &answer'],
 						},
 					],
 					solutions: [['(&1)*(&2) >0 ?? 0 :: 1']],
@@ -8243,8 +8235,7 @@ const questions = {
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
 					correctionFormat: [
 						{
-							correct: ['Le résultat de &exp est &answer'],
-							answer: 'Le résultat est &answer',
+							correct: ['Le produit est &answer'],
 						},
 					],
 					solutions: [['(&1)*(&2)*(&3) >0 ?? 0 :: 1']],
@@ -8268,8 +8259,7 @@ const questions = {
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
 					correctionFormat: [
 						{
-							correct: ['Le résultat de &exp est &answer'],
-							answer: 'Le résultat est &answer',
+							correct: ['Le produit est &answer'],
 						},
 					],
 					solutions: [['(&1)*(&2)*(&3)*(&4) >0 ?? 0 :: 1']],
@@ -8342,8 +8332,7 @@ const questions = {
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
 					correctionFormat: [
 						{
-							correct: ['Le résultat de &exp est &answer'],
-							answer: 'Le résultat est &answer',
+							correct: ['Le produit est &answer'],
 						},
 					],
 					solutions: [['(&1):(&2)>0 ?? 0 :: 1']],
@@ -8360,8 +8349,7 @@ const questions = {
 					choices: [[{ text: 'positif' }, { text: 'négatif' }]],
 					correctionFormat: [
 						{
-							correct: ['Dans &exp le facteur manquant est &answer'],
-							answer: 'Le facteur manquant est &answer',
+							correct: ['Le facteur manquant est &answer'],
 						},
 					],
 					solutions: [['(&1)*(&2)>0 ?? 0 :: 1']],
@@ -9954,7 +9942,7 @@ const questions = {
 					solutions: [['1/&1'], ['&1'], ['&2/&1']],
 					correctionFormat: [
 						{
-							correct: ["L'inverse de &exp est &answer"],
+							correct: ["L'inverse de &expression est &answer"],
 						},
 					],
 					type: 'rewrite',
@@ -13770,59 +13758,26 @@ const questions = {
 						{ '&1': 'pi' },
 					],
 					choices: [[{ text: 'Oui' }, { text: 'Non' }]],
-					correctionFormat: [
-						{
-							correct: ['&answer, &exp existe'],
-							answer: "&answer, ce nombre n'existe pas.",
-						},
-						{
-							correct: ['&answer, &exp existe'],
-							answer: "&answer, ce nombre n'existe pas.",
-						},
-						{
-							correct: ['&answer, &exp existe'],
-							answer: "&answer, ce nombre n'existe pas.",
-						},
-						{
-							correct: ["&answer, &exp n'existe pas."],
-							answer: '&answer, ce nombre existe.',
-						},
-						{
-							correct: ["&answer, &exp n'existe pas."],
-							answer: '&answer, ce nombre existe.',
-						},
-						{
-							correct: ["&answer, &exp n'existe pas."],
-							answer: '&answer, ce nombre existe.',
-						},
-						{
-							correct: ['&answer, &exp existe'],
-							answer: "&answer, ce nombre n'existe pas.",
-						},
-						{
-							correct: ["&answer, &exp n'existe pas."],
-							answer: '&answer, ce nombre existe.',
-						},
-					],
+					
 					correctionDetails: [
 						[
 							{
-								text: '&solution, &exp existe car $$[_&1^2_]$$ est positif.',
+								text: '&solution, &expression existe car $$[_&1^2_]$$ est positif.',
 							},
 							{ text: '$$&exp=&1$$ car $$&1 \\times &1 = [_&1^2_]$$.' },
 						],
 						[
 							{
-								text: '&solution, &exp existe car $$[._&1^2_]$$ est positif.',
+								text: '&solution, &expression existe car $$[._&1^2_]$$ est positif.',
 							},
 							{
 								text: '$$&exp=[._&1_]$$ car $$[._&1_] \\times [._&1_] = [._&1^2_]$$.',
 							},
 						],
 						[
-							{ text: '&solution, &exp existe car $$&1$$ est positif.' },
+							{ text: '&solution, &expression existe car $$&1$$ est positif.' },
 							{
-								text: "On ne peut pas mettre &exp sous la forme d'un nombre décimal.",
+								text: "On ne peut pas mettre &expression sous la forme d'un nombre décimal.",
 							},
 							{
 								text: 'On peut seulement écrire que $$&exp \\times &exp=[_&1_]$$, et trouver une <b>valeur approchée</b> à la calculatrice : $$&exp \\simeq [._sqrt(&1)_]$$.',
@@ -13830,23 +13785,23 @@ const questions = {
 						],
 						[
 							{
-								text: "&solution, &exp n'existe pas car $$-[_&1^2_]$$ est négatif.",
+								text: "&solution, &expression n'existe pas car $$-[_&1^2_]$$ est négatif.",
 							},
 						],
 						[
 							{
-								text: "&solution, &exp n'existe pas car $$-[._&1^2_]$$ est négatif.",
+								text: "&solution, &expression n'existe pas car $$-[._&1^2_]$$ est négatif.",
 							},
 						],
 						[
 							{
-								text: "&solution, &exp n'existe pas car $$-&1$$ est négatif.",
+								text: "&solution, &expression n'existe pas car $$-&1$$ est négatif.",
 							},
 						],
 						[
-							{ text: '&solution, &exp existe car $$\\pi$$ est positif.' },
+							{ text: '&solution, &expression existe car $$\\pi$$ est positif.' },
 							{
-								text: "On ne peut pas mettre &exp sous la forme d'un nombre décimal.",
+								text: "On ne peut pas mettre &expression sous la forme d'un nombre décimal.",
 							},
 							{
 								text: 'On peut seulement écrire que $$&exp \\times &exp=\\pi$$, et trouver une <b>valeur approchée</b> à la calculatrice : $$&exp \\simeq [._sqrt(&1)_]$$.',
@@ -13854,7 +13809,7 @@ const questions = {
 						],
 						[
 							{
-								text: "&solution, &exp n'existe pas car $$-\\pi$$ est négatif.",
+								text: "&solution, &expression n'existe pas car $$-\\pi$$ est négatif.",
 							},
 						],
 					],
@@ -14018,16 +13973,7 @@ const questions = {
 					conditions: ['true', '&2+(&3) !=1'],
 					solutions: [[0], [1]],
 					options: ['no-shuffle-choices'],
-					correctionFormat: [
-						{
-							correct: ['&answer, $$&exp=&exp2$$'],
-							answer: '$$&exp \\textcolor{red}{\\ne}&exp2$$',
-						},
-						{
-							correct: ['&answer, $$&exp \\neq &exp2$$'],
-							answer: '$$&exp \\textcolor{red}{=}&exp2$$',
-						},
-					],
+					
 					correctionDetails: [
 						[
 							{
@@ -16485,7 +16431,7 @@ const questions = {
 					options: ['penalty-for-factors-permutation'],
 					correctionFormat: [
 						{
-							correct: ["L'opposé de &exp est &answer"],
+							correct: ["L'opposé de &expression est &answer"],
 						},
 					],
 					defaultDelay: 30,
@@ -16509,7 +16455,7 @@ const questions = {
 					options: ['penalty-for-factors-permutation'],
 					correctionFormat: [
 						{
-							correct: ["L'opposé de &exp est &answer"],
+							correct: ["L'opposé de &expression est &answer"],
 						},
 					],
 					defaultDelay: 30,
@@ -17232,9 +17178,8 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"Dans l'expression &exp un facteur commun aux 2 produits est &answer.",
+								"Un facteur commun est &answer.",
 							],
-							answer: 'Un facteur commun est &answer',
 						},
 					],
 
@@ -17390,9 +17335,8 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"Dans l'expression &exp un facteur commun aux 2 produits est &answer,",
+								"Un facteur commun est &answer,",
 							],
-							answer: 'Un facteur commun est &answer',
 						},
 					],
 					solutions: [
@@ -17605,15 +17549,14 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"Dans l'expression &exp le plus grand facteur commun aux 2 produits est &answer.",
+								"Le plus grand facteur commun est &answer.",
 							],
-							answer: 'Le plus grand facteur commun est &answer',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "Dans l'expression &exp le plus grand facteur commun aux 2 produits est &solution,",
+								text: "Dans l'expression &expression le plus grand facteur commun aux 2 produits est &solution,",
 							},
 							{
 								text: 'car $$&1&3=&sol\\times{&3}$$ et $$[_&1*&2_]&4=&sol\\times{&2&4}$$',
@@ -17718,15 +17661,14 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"Dans l'expression &exp le plus grand facteur commun est &answer,",
+								"Le plus grand facteur commun est &answer,",
 							],
-							answer: 'Le plus grand facteur commun est &answer.',
 						},
 					],
 					correctionDetails: [
 						[
 							{
-								text: "Dans l'expression &exp le plus grand facteur commun aux 2 produits est &solution,",
+								text: "Dans l'expression &expression le plus grand facteur commun aux 2 produits est &solution,",
 							},
 							{
 								text: 'car $$[_&1*&2_]&5=&sol\\times{&2&5}$$ et $$[_&1*&3_]&4=&sol\\times{&3&4}$$',
@@ -20367,15 +20309,7 @@ const questions = {
 							},
 						],
 					],
-					// correctionFormat: [
-					// 	{
-					// 		correct: [
-					// 			'Le tableau de signe de la fonction &exp est :',
-					// 			'image',
-					// 		],
-					// 		answer: 'image',
-					// 	},
-					// ],
+				
 
 					solutions: [[0]],
 
@@ -20399,7 +20333,7 @@ const questions = {
 					type: 'rewrite',
 					correctionFormat: [
 						{
-							correct: ["La fonction &exp s'annule en &answer"],
+							correct: ["La fonction s'annule en &answer"],
 						},
 					],
 					solutions: [['[_-(&2)/(&1)_]']],
@@ -20410,7 +20344,6 @@ const questions = {
 					description: "Résoudre l'équation $$f(x)=k$$",
 					subdescription: 'Graphiquement',
 					enounces: ["Résoudre graphiquement l'équation $$f(x)=&1$$"],
-					expressions: ['f(x)=&1'],
 					variables: [
 						{
 							'&1': '-3',
@@ -20601,12 +20534,9 @@ const questions = {
 					],
 					correctionFormat: [
 						{
-							correct: ["La solution de l'équation &exp est &answer."],
-							answer: 'La solution est &answer.',
+							correct: ["La solution de l'équation est &answer."],
 						},
 					],
-					options: ['no-exp'],
-
 					defaultDelay: 20,
 					grade: SECONDE,
 				},
@@ -20675,8 +20605,8 @@ const questions = {
 							{
 								text: 'Si $$x$$ est <b>positif</b>, quand je lui soustrais $$[_-(&2)_]$$, le résultat peut être positif ou négatif, suivant la valeur de $$x$$.',
 							},
-							{ text: 'Si $$x \\ge [_-(&2)_]$$ , &exp est positif.' },
-							{ text: 'Si $$x \\le [_-(&2)_]$$ , &exp est négatif.' },
+							{ text: 'Si $$x \\ge [_-(&2)_]$$ , &expression est positif.' },
+							{ text: 'Si $$x \\le [_-(&2)_]$$ , &expression est négatif.' },
 							{ text: '&solution' },
 						],
 					],
@@ -20720,8 +20650,8 @@ const questions = {
 							{
 								text: 'Si $$x$$ est <b>négatif</b>, quand je lui ajoute $$&1$$, le résultat peut être positif ou négatif, suivant la valeur de $$x$$.',
 							},
-							{ text: 'Si $$x \\ge -&1$$ , &exp est positif.' },
-							{ text: 'Si $$x \\le -&1$$ , &exp est négatif.' },
+							{ text: 'Si $$x \\ge -&1$$ , &expression est positif.' },
+							{ text: 'Si $$x \\le -&1$$ , &expression est négatif.' },
 							{ text: '&solution' },
 						],
 						[
@@ -20795,12 +20725,12 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '&exp$$=\\left\\lvert [_&1+(&2)_] \\right\\rvert=$$&solution',
+								text: '&expression$$=\\left\\lvert [_&1+(&2)_] \\right\\rvert=$$&solution',
 							},
 						],
 						[
 							{
-								text: '&exp$$=\\left\\lvert [_&1*(&2)_] \\right\\rvert=$$&solution',
+								text: '&expression$$=\\left\\lvert [_&1*(&2)_] \\right\\rvert=$$&solution',
 							},
 						],
 					],
@@ -20824,10 +20754,10 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: '@@ &1>&2^2 ?? $$\\sqrt{&1} \\gt &2$$ donc $$\\sqrt{&1}-&2 \\gt 0$$ et &exp$$=$$&solution @@',
+								text: '@@ &1>&2^2 ?? $$\\sqrt{&1} \\gt &2$$ donc $$\\sqrt{&1}-&2 \\gt 0$$ et &expression$$=$$&solution @@',
 							},
 							{
-								text: '@@ &1<&2^2 ?? $$\\sqrt{&1} \\lt &2$$ donc $$\\sqrt{&1}-&2 \\lt 0$$ et &exp$$=$$&solution @@',
+								text: '@@ &1<&2^2 ?? $$\\sqrt{&1} \\lt &2$$ donc $$\\sqrt{&1}-&2 \\lt 0$$ et &expression$$=$$&solution @@',
 							},
 						],
 					],
@@ -20950,9 +20880,8 @@ const questions = {
 					correctionFormat: [
 						{
 							correct: [
-								"L'équation  &exp a pour solutions $$x=$$&answer1 et $$x=$$&answer2",
+								"Les solutions sont $$x=$$&answer1 et $$x=$$&answer2",
 							],
-							answer: ' Les solutions sont &answer1 et &answer2',
 						},
 					],
 					correctionDetails: [
@@ -21770,9 +21699,7 @@ const questions = {
 						'Calculer $$u_&1$$ pour la suite $$(u_n)$$ définie par $$u_n=&2n^2$$ pour $$n \\ge 0$$',
 						'Calculer $$u_&1$$ pour la suite $$(u_n)$$ définie par $$u_n=(-1)^n$$ pour $$n  \\ge 0$$',
 					],
-					// expressions: ['&2*&1+(&3)'],
 					solutions: [['[_&2*&1+(&3)_]'], ['[_&2*&1^2_]'], ['[_(-1)^&1_]']],
-					prefix: ['u_n='],
 					variables: [
 						{
 							'&1': '$e[2;9]',
@@ -21787,33 +21714,12 @@ const questions = {
 							'&1': '$e[2;9]',
 						},
 					],
-					options: ['no-exp'],
 					correctionFormat: [
 						{
-							correct: [`Avec $$u_n=&2n[+_&3_]$$, $$u_&1=&ans$$`],
-							answer: '$$u_&1=&ans$$',
-						},
-						{
-							correct: [`Avec $$u_n=&2n^2$$, $$u_&1=&ans$$`],
-							answer: '$$u_&1=&ans$$',
-						},
-						{
-							correct: [`Avec $$u_n=(-1)^n$$, $$u_&1=&ans$$`],
-							answer: '$$u_&1=&ans$$',
+							correct: ['$$u_&1=&ans$$'],
 						},
 					],
-					// correctionDetails: [
-					// 	[
-					// 		{
-					// 			text: '&exp est &solution car il se termine par 0, 2, 4, 6, ou 8.',
-					// 		},
-					// 	],
-					// 	[
-					// 		{
-					// 			text: '&exp est &solution car il se termine par 1, 3, 5, 7, ou 9.',
-					// 		},
-					// 	],
-					// ],
+				
 					correctionDetails: [
 						[
 							{
@@ -21832,14 +21738,6 @@ const questions = {
 						],
 					],
 
-					// correctionDetails: [
-					// 	[
-					// 		{
-					// 			text: `$$\\begin{align} &3 \\times \\textcolor{${color1}}{&1} &= &3 \\times \\textcolor{${color1}}{&2} \\\\ &=  &sol  \\\\ \\end{align}$$`,
-					// 		},
-					// 	],
-
-					// ],
 					defaultDelay: 30,
 					grade: PREMIERE_SPE_MATHS,
 				},
@@ -21868,18 +21766,7 @@ const questions = {
 							answer: '$$u_2=&ans$$',
 						},
 					],
-					// correctionDetails: [
-					// 	[
-					// 		{
-					// 			text: '&exp est &solution car il se termine par 0, 2, 4, 6, ou 8.',
-					// 		},
-					// 	],
-					// 	[
-					// 		{
-					// 			text: '&exp est &solution car il se termine par 1, 3, 5, 7, ou 9.',
-					// 		},
-					// 	],
-					// ],
+				
 					correctionDetails: [
 						[
 							{
@@ -22295,12 +22182,12 @@ const questions = {
 					correctionDetails: [
 						[
 							{
-								text: 'La suite de terme général &exp oscille entre les valeurs $$1$$ et $$-1$$ : &solution.',
+								text: 'La suite de terme général &expression oscille entre les valeurs $$1$$ et $$-1$$ : &solution.',
 							},
 						],
 						[
 							{
-								text: 'La suite de terme général &exp est constante donc sa limite est &solution.',
+								text: 'La suite de terme général &expression est constante donc sa limite est &solution.',
 							},
 						],
 						[],

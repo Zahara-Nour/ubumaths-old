@@ -8,7 +8,8 @@
 		mdiLink,
 		mdiTrashCanOutline,
 		mdiRunFast,
-		mdiFlash
+		mdiFlash,
+		mdiNewspaperVariantOutline
 	} from '@mdi/js'
 	import Fab from '@smui/fab'
 	import Badge from '@smui-extra/badge'
@@ -26,6 +27,7 @@
 	export let displayExemple
 	export let flushBasket
 	export let courseAuxNombres
+	export let generateExoLatex
 
 	const toggleExemple = () => (displayExemple = !displayExemple)
 	const toggleBasket = () => (showBasket = !showBasket)
@@ -46,6 +48,13 @@
 				<path fill="currentColor" d="{mdiLink}"></path>
 			</Icon>
 		</Fab>
+
+		<Fab class="mx-1" color="secondary" on:click="{generateExoLatex}" mini>
+			<Icon component="{Svg}" viewBox="2 2 20 20">
+				<path fill="currentColor" d="{mdiNewspaperVariantOutline}"></path>
+			</Icon>
+		</Fab>
+
 		
 		<Fab class="mx-1" color="{courseAuxNombres ? 'primary' : 'secondary'}" on:click="{toggleCourseAuxNombres}" mini>
 			<Icon component="{Svg}" viewBox="2 2 20 20">

@@ -78,8 +78,8 @@
 	$: solution = $formatLatex(getSolution(card))
 	$: details = detailedCorrection
 		? detailedCorrection
-		: simpleCorrection
-		? simpleCorrection
+		// : simpleCorrection
+		// ? simpleCorrection
 		: []
 </script>
 
@@ -95,6 +95,7 @@
 		<div class="h-full flex flex-col items-center justify-between">
 			<!-- correction des réponses de l'utilisateur -->
 
+			<!-- si mode correction, on affiche la correction détaillée -->
 			{#if correction}
 				<div
 					class="correction-title"

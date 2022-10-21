@@ -43,7 +43,7 @@
 
 	// mode interactif pour l'exemple
 	let interactive = true
-
+	const ids = data.ids
 	const first_theme = decodeURI($page.url.searchParams.get('theme'))
 	const first_domain = decodeURI($page.url.searchParams.get('domain'))
 	const first_subdomain = decodeURI($page.url.searchParams.get('subdomain'))
@@ -57,6 +57,44 @@
 	$: changeGrade(grade)
 	$: changeTheme(theme)
 	// $ changeDomain(domain)
+	
+	function generateExoLatex() {
+		let questions = []
+		if (basket.length) {
+			questions = basket
+		} else {
+			const q = getQuestion(theme, domain, subdomain, level)
+			questions.push({ id: q.id, count: 10 })
+		}
+
+
+		let offset = 0
+		let latex ='\\begin{enumerate} \n'
+
+		let generateds =[]
+		questions.forEach((q) => {
+			const { theme, domain, subdomain, level } = ids[q.id]
+			const question = getQuestion(theme, domain, subdomain, level)
+
+			for (let i = 0; i < q.count; i++) {
+				const generated = generateQuestion(question, generateds, q.count, offset)
+				console.log('generated', generated)
+				latex += '\\item ' + generated.enounce.replace(/\$\$/g, '$') + '\n'
+				generateds.push(generated)
+			}
+			offset += q.count
+		})
+		latex += '\\end{enumerate}\n'
+
+		navigator.clipboard
+			.writeText(latex)
+			.then(function () {
+				info('latex to clipboard: ', latex)
+			})
+			.catch(function () {
+				fail('failed to write exercice in latex to clipboard')
+			})
+	}
 
 	function changeGrade(grade) {
 		// console.log('-change grade')
@@ -258,6 +296,7 @@
 	launchTest="{launchTest}"
 	fillBasket="{fillBasket}"
 	copyLink="{copyLink}"
+	generateExoLatex={generateExoLatex}
 	flushBasket="{flushBasket}"
 />
 
